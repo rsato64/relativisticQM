@@ -1,0 +1,4630 @@
+\documentclass[10pt,a4paper]{jarticle}
+\usepackage{amsmath,amssymb,url,ascmac, color, comment}
+%\usepackage{cite}
+\usepackage[dvipdfmx]{hyperref}
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\setlength{\textwidth}{16cm}
+\setlength{\textheight}{21.5cm}
+\setlength{\oddsidemargin}{-0.2cm}
+\setlength{\evensidemargin}{1cm}
+\setlength{\headheight}{0cm}
+\setlength{\headsep}{0cm}
+\setlength{\topmargin}{1cm}
+\setlength{\footskip}{1.5cm}
+
+\author{佐藤亮介}
+\title{相対論的量子力学／場の理論序説}
+\begin{document}
+\maketitle
+
+2023年前期の相対論的量子力学／場の理論序説の講義ノートです。
+誤植や間違いなど見つけた場合は\texttt{rsato@het.phys.sci.osaka-u.ac.jp}までお願いいたします。
+講義に関する情報は\url{http://kabuto.phys.sci.osaka-u.ac.jp/~rsato/}やCLEを見てください。
+教科書は特に指定しませんが、以下の文献、教科書、講義ノートが参考になると思います。
+\begin{itemize}
+\item 相対論的量子力学（西島和彦、培風館）
+\item 場の量子論: 不変性と自由場を中心にして（坂本眞人、裳華房）
+\item 演習　場の量子論（柏太郎、SGC books）
+\item スピンはめぐる（朝永振一郎、みすず書房）
+\item Relativistic quantum physics : from advanced quantum mechanics to introductory quantum field theory (Tommy Ohlsson, Cambridge University Press)
+\item \url{http://www-het.phys.sci.osaka-u.ac.jp/~yamaguch/j/pdf/rqmnote.pdf}
+\item \url{http://www.damtp.cam.ac.uk/user/tong/qft/four.pdf}
+\item \url{http://hep1.c.u-tokyo.ac.jp/~kazama/QFT/qft1lec(kazama)2012.pdf}
+\end{itemize}
+
+
+\tableofcontents
+\setcounter{section}{-1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{講義の概要}
+この講義のおおまかな学習目標は、
+\begin{quote}
+\textbf{特殊相対論と（非相対論的）量子力学を復習しつつ、場の量子論の入口までたどり着く。}
+\end{quote}
+というものである。より具体的なトピックの内容としては、
+\begin{itemize}
+\item ディラック方程式とスピノル、その物理的解釈
+\item ローレンツ対称性、ローレンツ群とその表現
+\item 電磁場との相互作用とゲージ対称性の役割
+\item 量子力学の極限としての場の量子論
+\item 自由スカラー場の量子論
+\end{itemize}
+を学習する。
+ディラック方程式はある意味で相対論版のシュレーディンガー方程式とみなすことができ、スピンという概念が自然にあらわれるなど面白い性質がある。
+また、対称性は理論の性質を調べる道具として非常に重要。ローレンツ対称性とゲージ対称性のはたす役割についても学ぶ。
+自由スカラー場の量子論は、場の量子論の中で一番簡単な例である。
+
+
+
+\subsection{特殊相対論と量子力学を合体させたい}
+\begin{table}[h]
+\centering
+\begin{tabular}{c|cc}
+& $v\ll c$ & $v\sim c$ \\\hline
+マクロ & ニュートン力学 & 特殊相対論 \\
+ミクロ & （非相対論的）量子力学 & \textbf{場の量子論}
+\end{tabular}
+\end{table}
+これまでの物理学科の講義で、
+\begin{itemize}
+\item 原子を始めとするミクロな世界では、古典力学は必ずしも正しい記述を与えることはなく、量子力学を使う必要があること
+\item 光の速さに近い速度があらわれる状況では、ニュートン力学は必ずしも正しい記述を与えることはなく、特殊相対論を使う必要があること
+\end{itemize}
+の2つを学んだ。すると、\textbf{ミクロな世界で光に近い速度が出てきたらどうなるか}、すなわち、\textbf{特殊相対論と量子力学を同時に使うことはあるだろうか}、というのが自然な疑問として浮かび上がるのではないだろうか。
+
+\subsection{どうして特殊相対論と量子力学を合体させたいのか}
+また、相対論的量子力学の必要性は、粒子の生成・消滅といった、粒子の種類や数が変化する反応が自然界で見られることからも分かる。例えば、エネルギーが$1.02$~MeVを超えるガンマ線は、物質と相互作用して電子・陽電子対を生成する。また、原子核のベータ崩壊もそのような例である。放射性炭素年代測定で使用される炭素14は、半減期5730年で${^{14}_{6}{\rm C}}\to {^{14}_{7}{\rm N}} + e^- + \bar\nu_e$という崩壊をするが、この過程で粒子の数は変化している。このような過程では、粒子が生成あるいは消滅するため、エネルギー保存則の観点から、粒子の静止質量エネルギーが費やされたり、他の粒子のエネルギーとして転換されるはずである。そのため、特殊相対論を考慮しないと正しい記述ができないはずだ。また、電子などのミクロな粒子は量子力学に従って記述されるので、特殊相対論を考慮にいれた量子力学が必要となることが期待される。
+
+\subsection{反粒子}
+相対論的量子力学の重要な帰結のひとつに反粒子の存在がある。反粒子は、ある粒子と質量が等しく、電荷の符号が逆で、性質のよく似た\footnote{粒子と反粒子の性質が``同じ''かどうかについては、C対称性、CP対称性がキーワード。}粒子である。たとえば、電子の反粒子は陽電子、陽子の反粒子は反陽子、などである。（反粒子は粒子自分自身でもよいが、その場合は電荷を持たない中性粒子となる。中性パイ中間子、光子、ヒッグス粒子、などがその例。\footnote{
+ニュートリノは電荷を持たない中性粒子であるが、反粒子が自分自身（ニュートリノがマヨラナ粒子）かそうでない（ニュートリノがディラック粒子）かは未だに良く分かっていない！
+それを調べるための実験が阪大でも行われている。\url{https://www.rcnp.osaka-u.ac.jp/candles/}}）
+ディラック方程式の負エネルギー解は、反粒子として解釈される。また、場の量子論では、反粒子の存在は因果律を満たすように相互作用させるために必要である。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{復習と準備}
+相対論的量子力学を学ぶために必要な知識を簡単に復習しつつ準備しよう。
+
+\subsection{自然単位系}
+量子力学の計算にはプランク定数（もしくはディラック定数）$\hbar$、特殊相対論の計算には光の速度$c$が大事だった。\footnote{
+$1~{\rm GeV} = 10^9~{\rm eV}$であり、$1~{\rm eV} = 1.60 \times 10^{-19}~{\rm J}$。1 eVは、素電荷$e = 1.60 \times 10^{-19}~{\rm C}$が1 Vの電位差で得るエネルギーで、$1~{\rm eV} = 1~{\rm C} \times 1~{\rm V}$。}
+\begin{align}
+\hbar &= 6.58 \times 10^{-25}~{\rm GeV} \cdot {\rm s}, \\
+c &= 2.99 \times 10^{8}~{\rm m}/{\rm s}.
+\end{align}
+相対論的量子力学をやると、いろんなところに$\hbar$と$c$が出てきてすごく面倒。思い切って$\hbar = c = 1$という単位系を採用してしまおう。
+これまでは$[質量]$、$[長さ]$、$[時間]$の3つの次元があったが、$\hbar = 1$と$c = 1$を採用したせいで、3つの次元に
+\begin{align}
+[質量] = \frac{1}{[長さ]} = \frac{1}{[時間]}
+\end{align}
+という関係がつく。
+例えば、$c=1$を使うと、
+\begin{align}
+1~{\rm s} = 2.99 \times 10^{8}~{\rm m}
+\end{align}
+例えば、$\hbar=1$を使うと、
+\begin{align}
+1~{\rm s}^{-1} = 6.58 \times 10^{-25}~{\rm GeV}
+\end{align}
+などである。自然単位系を採用したことにより、次元を持つ量が$[質量]$の何乗かで数えられるようになる。これを質量次元(mass dimension)と呼ぶ。
+質量は質量次元$1$、長さは質量次元$-1$、時間は質量次元$-1$、速度は質量次元$0$。
+また、
+\begin{align}
+\hbar c = 0.197~{\rm GeV}~{\rm fm}.
+\end{align}
+という公式を憶えておくと便利。\footnote{
+忘れた時はgoogleで「hbar * c in GeV * fm」と検索すると、「0.197326979 GeV * fm」という結果が返ってくる。この例に限らずgoogleの単位換算機能はすごく便利。}
+
+
+特に、エネルギーは質量次元$1$。自然単位系を導入する前は、粒子の静止エネルギーを$E = mc^2$と書いていたが、自然単位系を導入すると、$E=m$とかける。
+粒子の質量を${\rm keV}$、${\rm MeV}$、${\rm GeV}$といったエネルギーの単位で書くのがならわし。例えば、
+\begin{align}
+m_{電子} = 511~{\rm keV}, \\
+m_{陽子} = 938~{\rm MeV}, \\
+m_{ヒッグス粒子} = 125~{\rm GeV}.
+\end{align}
+などなど。
+他の例は、Particle Data Group(\url{https://pdglive.lbl.gov/})とか、Wikipedia(\url{https://en.wikipedia.org/wiki/List_of_particles})をみてみよう。
+
+
+\subsection{ローレンツ変換}
+まずは座標のローレンツ変換について簡単に復習しておこう。
+
+\subsubsection{$z$軸方向に相対運動する座標系}
+ある慣性系$O$に対し、相対速度$v$で$z$軸方向に等速運動している別の慣性系$O'$を考えよう。学部1年で習う力学（ニュートン力学）では、この二つの慣性系の座標は、
+\begin{align}
+t' = t, \qquad
+x' = x, \qquad
+y' = y, \qquad
+z' = z - v t.
+\end{align}
+という変換で結ばれていた。この変換はガリレイ変換と呼ばれる。一方、特殊相対論では、
+\begin{align}
+t' = \gamma t - \gamma\beta z, \qquad
+x' = x, \qquad
+y' = y, \qquad
+z' = \gamma z - \gamma\beta t.
+\end{align}
+という関係で結ばれる。これがローレンツ変換である。（光速度$c$を1ととる単位系をとっていることに注意！）
+ただし、$\gamma$と$\beta$は、相対速度$v$と光速度$c$を用いて、
+\begin{align}
+\beta \equiv v, \qquad
+\gamma \equiv \frac{1}{\sqrt{1-\beta^2}}
+\end{align}
+と定義した。
+
+行列の形で書くと、
+\begin{align}
+\left(\begin{array}{c}
+t' \\
+x' \\
+y' \\
+z'
+\end{array}\right)
+%
+=
+%
+\left(\begin{array}{cccc}
+\gamma &&& -\gamma\beta\\
+& 1 && \\
+&& 1 & \\
+-\gamma\beta &&& \gamma
+\end{array}\right)
+%
+\left(\begin{array}{c}
+t \\
+x \\
+y \\
+z
+\end{array}\right) \label{eq:lorentz z boost}
+\end{align}
+と書ける。
+
+
+\subsubsection{一般的なローレンツ変換}
+ローレンツ変換の重要な性質は
+\begin{align}
+t'^2 - x'^2 - y'^2 - z'^2 = t^2 - x^2 - y^2 - z^2 \label{eq:lorentz invariance}
+\end{align}
+という性質が成り立っていること。この性質をみたす座標変換について考える。
+時間$t$と空間座標$x,~y,~z$はひとまとめにベクトルとして扱うのが便利。
+\begin{align}
+x^\mu = \left(\begin{array}{c}
+t\\
+x\\
+y\\
+z
+\end{array}\right)
+\end{align}
+このようなベクトルは四元ベクトル(four vector)と呼ばれる。
+%
+座標変換はベクトルに対する行列の演算の形で書くことができる。
+式を簡潔に書くために、アインシュタインの縮約規則
+\begin{align}
+\Lambda^\mu_{~\nu}x^\nu
+=
+\sum_{\nu=0,1,2,3} \Lambda^\mu_{~\nu}x^\nu
+\end{align}
+を導入しよう。
+ひとつの項の中で、上付きの添え字と下付きの添え字で同じ文字がひとつずつある場合は、右辺のような総和の記号が省略されていると思って欲しい。\footnote{上付きの$\mu$がひとつ、下付きの$\mu$がふたつ、とかになってしまうと、どうやって和をとるのか定まらなくなってしまう。書き損じや添え字の文字の使い分けに注意しよう。}
+これにより、座標変換は
+\begin{align}
+x'^{\mu} = \Lambda^\mu_{~\nu}x^\nu \label{eq:coordinate transf}
+\end{align}
+と簡潔に書けるようになった。
+
+式(\ref{eq:lorentz invariance})もアインシュタインの縮約規則を使った形で書いておくのが便利。メトリック$g_{\mu\nu}$を導入する。添え字の$\mu$と$\nu$はそれぞれ0, 1, 2, 3の値をとりうる。
+この講義では、メトリック$g_{\mu\nu}$を
+%\begin{align}
+%g_{\mu\nu} = {\rm diag}(1,-1,-1,-1)
+%=
+%\left(\begin{array}{cccc}
+%1 &&&\\
+%& -1 && \\
+%&& -1 & \\
+%&&& -1
+%\end{array}\right).
+%\end{align}
+\begin{align}
+g_{00} = 1, \qquad
+g_{11} = 
+g_{22} = 
+g_{33} = -1, \qquad
+g_{\mu\nu} = 0~(\mu\neq\nu)
+\end{align}
+と定義しよう。
+（教科書によっては$g_{00} = -1,~g_{11} = g_{22} = g_{33} = 1$のメトリックを採用していることもあるので注意。\footnote{
+矛盾なく使えばどちらのメトリックでもいいのだが、人（と分野？）によって好みはある。\cite{Dreiner:2008tw}のfootnote 2なども参照。
+場の量子論の教科書なら、WeinbergとSrednickiは$(-1,1,1,1)$。Peskin-Schroeder、九後は$(1,-1,-1,-1)$。}）
+このように添え字が複数あるものはテンソルと呼ばれる。（あとでもうちょっとやる。）
+
+このメトリック$g_{\mu\nu}$を使うと、式(\ref{eq:lorentz invariance})を
+\begin{align}
+g_{\mu\nu} x'^\mu x'^\nu = g_{\mu\nu} x^\mu x^\nu
+\end{align}
+と書くことができる。式(\ref{eq:coordinate transf})を代入すると、
+\begin{align}
+g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} x^\alpha x^\beta = g_{\mu\nu} x^\mu x^\nu
+\end{align}
+これが$x^\mu$に依らず成立するので
+\begin{align}
+g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta} \label{eq:g Lam Lam = g}
+\end{align}
+と書かれる。\footnote{この関係式は行列のように書くこともできる。行列$\mathbf\Lambda$と$\mathbf g$を
+\begin{align}
+\mathbf{\Lambda}
+=
+\left(\begin{array}{cccc}
+\Lambda^0_{~0} & \Lambda^0_{~1} & \Lambda^0_{~2} & \Lambda^0_{~3} \\
+\Lambda^1_{~0} & \Lambda^1_{~1} & \Lambda^1_{~2} & \Lambda^1_{~3} \\
+\Lambda^2_{~0} & \Lambda^2_{~1} & \Lambda^2_{~2} & \Lambda^2_{~3} \\
+\Lambda^3_{~0} & \Lambda^3_{~1} & \Lambda^3_{~2} & \Lambda^3_{~3} \\
+\end{array}\right), \qquad
+%
+\mathbf{g}
+=
+\left(\begin{array}{cccc}
+1 &&& \\
+& -1 && \\
+&& -1 & \\
+&&& -1
+\end{array}\right).
+\end{align}
+というふうに定義してみよう。すると、式(\ref{eq:g Lam Lam = g})は
+\begin{align}
+\mathbf{\Lambda}^T
+\mathbf{g}
+\mathbf{\Lambda}
+=
+\mathbf{g}
+\end{align}
+と書くこともできる。}
+（式(\ref{eq:lorentz z boost})のローレンツ変換について確かめてみよう。）
+
+\begin{itembox}[l]{ローレンツ変換}
+ローレンツ変換による座標の変換は
+\begin{align}
+x^\mu \to x'^\mu = \Lambda^\mu_{~\nu} x^\nu
+\end{align}
+と書ける。
+ただし、$\Lambda^\mu_{~\nu}$は
+\begin{align}
+g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta} \label{eq:g Lam Lam = g}
+\end{align}
+を満たす。
+\end{itembox}
+
+\subsection{ベクトル、テンソル、いろいろ}
+4元ベクトルとして書ける例をいくつかみておこう。
+
+\subsubsection{反変ベクトル、共変ベクトル、添え字の上げ下げ}
+添え字が下についている$x_\mu$を以下のように定義する。
+\begin{align}
+x_\mu \equiv g_{\mu\nu} x^\nu \label{eq:shitatsuki x}
+\end{align}
+また、添え字が上についているメトリック$g^{\mu\nu}$を以下のように定義する。
+\begin{align}
+g^{00} = 1, \qquad
+g^{11} = 
+g^{22} = 
+g^{33} = -1, \qquad
+g^{\mu\nu} = 0~(\mu\neq\nu) \label{eq:uetsuki g}
+\end{align}
+$g_{\mu\nu}$と$g^{\mu\nu}$について以下のような関係が成立することがすぐ分かる。
+\begin{align}
+g^{\mu\nu} g_{\nu\lambda} = \delta^\mu_\lambda
+\end{align}
+ここで、$\delta^\mu_\lambda$はクロネッカーのデルタ。
+\begin{align}
+\delta^\mu_\lambda = \begin{cases}
+1 & (\mu = \lambda) \\
+0 & (\mu \neq \lambda)
+\end{cases}
+\end{align}
+式(\ref{eq:shitatsuki x})と式(\ref{eq:uetsuki g})を用いると
+\begin{align}
+x^\mu = g^{\mu\nu} x_\nu
+\end{align}
+が成立することが分かる。
+
+$x_\mu$がローレンツ変換でどのように変換されるかみてみよう。定義により
+\begin{align}
+x_{\mu} \to x'_\mu
+&= g_{\mu\nu} x'^\nu \nonumber\\
+&= g_{\mu\nu} \Lambda^\nu_{~\lambda} x^\lambda \nonumber\\
+&= g_{\mu\nu} \Lambda^\nu_{~\lambda} g^{\lambda\rho} x_\rho \label{eq:shitatsuki x lorentz transf}
+\end{align}
+%
+ここで、$x^\mu$や$x_\mu$と同様に、$\Lambda^\mu_{~\nu}$も添え字の上げ下げをメトリックとの縮約で行うことにしてみる。
+これにより、$\Lambda_{\mu}^{~\nu}$は
+\begin{align}
+\Lambda_\mu^{~\nu} \equiv g_{\mu\alpha} \Lambda^\alpha_{~\beta} g^{\beta\nu}
+\end{align}
+と書け、$x_\mu$のローレンツ変換、式(\ref{eq:shitatsuki x lorentz transf})が簡潔に書けるようになった。
+\begin{align}
+x_\mu \to x'_\mu = \Lambda_\mu^{~\nu} x_\nu
+\end{align}
+
+
+\subsubsection{反変ベクトル、共変ベクトル、テンソル}
+座標$x^\mu$と同じように、ローレンツ変換にしたがって、
+\begin{align}
+A^\mu \to {A'}^\mu = \Lambda^\mu_{~\nu} A^\nu \label{eq:hanpen vector}
+\end{align}
+と変換されるものを\textbf{反変ベクトル}と呼ぶ。
+また、$x_\mu \equiv g_{\mu\nu} x^\nu$と同じように、ローレンツ変換にしたがって、
+\begin{align}
+B_\mu \to {B'}_\mu = \Lambda_\mu^{~\nu} B_\nu \label{eq:kyohen vector}
+\end{align}
+と変換されるものを\textbf{共変ベクトル}と呼ぶ。
+%
+上付き添字の反変ベクトルと、下付き添字の共変ベクトルのローレンツ変換は、
+\begin{align}
+A^\mu \quad\to\quad {A'}^\mu = \Lambda^\mu_{~\nu} A^\nu, \\
+B_\mu \quad\to\quad {B'}_\mu = \Lambda_\mu^{~\nu} B_\nu.
+\end{align}
+%
+反変ベクトルを2つもってきて、メトリックで足をつぶすと定義によりローレンツ不変。
+\begin{align}
+g_{\mu\nu} A^\mu B^\nu = g_{\mu\nu} {A'}^\mu {B'}^\nu
+\end{align}
+また、反変ベクトルと共変ベクトルの足をつぶすと、やはりローレンツ不変。
+\begin{align}
+A^\mu B_\mu = {A'}^\mu {B'}_\mu
+\end{align}
+
+添字を増やした場合にも一般化できる。
+\begin{align}
+T^{\mu_1 \mu_2 \cdots \mu_m}_{\nu_1 \nu_2 \cdots \nu_n}
+\qquad\to\qquad
+{T'}^{\alpha_1 \alpha_2 \cdots \alpha_m}_{\beta_1 \beta_2 \cdots \beta_n}
+=
+\Lambda^{\mu_1}_{~\alpha_1}
+\cdots
+\Lambda^{\mu_m}_{~\alpha_m}
+\Lambda_{\nu_1}^{~\beta_1}
+\cdots
+\Lambda_{\nu_m}^{~\beta_n}
+{T}^{\alpha_1 \alpha_2 \cdots \alpha_m}_{\beta_1 \beta_2 \cdots \beta_n}
+\end{align}
+添字が2つ以上あると、\textbf{テンソル}、と呼ばれるようになる。
+添え字が増えても、もれなく足を潰せばローレンツ不変になる。たとえばこんな感じ。
+\begin{align}
+T^{\mu_1 \mu_2 \cdots \mu_m}_{\nu_1 \nu_2 \cdots \nu_n}
+A^{\nu_1} \cdots A^{\nu_n} B_{\mu_1} \cdots B_{\mu_m}
+\end{align}
+
+
+
+\begin{itembox}[l]{反変ベクトル、共変ベクトル、添え字の上げ下げ（まとめ）}
+
+\begin{itemize}
+\item 反変ベクトル　$x^\mu$　$x^\mu \to x'^\mu = \Lambda^\mu_{~\nu} x^\nu$
+\item 共変ベクトル　$x_\mu$　$x_\mu \to x'_\mu = \Lambda_\mu^{~\nu} x_\nu$
+\end{itemize}
+
+反変ベクトルと共変ベクトルは、メトリックをかけることで移り変わることができる。（添え字の上げ下げができる）
+\begin{align}
+x_\mu = g_{\mu\nu} x^\nu, \qquad
+x^\mu = g^{\mu\nu} x_\nu
+\end{align}
+また、
+\begin{align}
+\Lambda_\mu^{~\nu} = g_{\mu\alpha} \Lambda^\alpha_{~\beta} g^{\beta\nu}
+\end{align}
+
+\end{itembox}
+
+
+
+
+
+\subsubsection{微分演算子}
+合成関数の微分公式を使うと、座標変換により微分演算子は次のように変換される。
+\begin{align}
+\frac{\partial}{\partial x^\mu}
+= \sum_\nu \frac{\partial x'^\nu}{\partial x^\mu} \frac{\partial}{\partial x'^\nu}
+= \sum_\nu \Lambda^\nu_{~\mu} \frac{\partial}{\partial x'^\nu}.
+\end{align}
+両辺に逆行列をかけて、
+\begin{align}
+\frac{\partial}{\partial x'^\mu} = \sum_\nu (\Lambda^{-1})^\nu_{~\mu} \frac{\partial}{\partial x^\nu}
+\end{align}
+を得た。
+ところで、式(\ref{eq:g Lam Lam = g})の両辺に$g^{\lambda\alpha} (\Lambda^{-1})^\beta_{~\rho}$をかけて変形してみよう。
+\begin{align}
+g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} g^{\lambda\alpha} (\Lambda^{-1})^\beta_{~\rho}  &= g_{\alpha\beta} g^{\lambda\alpha} (\Lambda^{-1})^\beta_{~\rho} \nonumber\\
+g_{\mu\rho} \Lambda^\mu_{~\alpha} g^{\lambda\alpha}  &= (\Lambda^{-1})^\lambda_{~\rho} \nonumber\\
+\Lambda_\rho^{~\lambda}  &= (\Lambda^{-1})^\lambda_{~\rho}.
+\end{align}
+これを使うと、微分演算子の変換則は以下のように書くこともできる。
+\begin{align}
+\frac{\partial}{\partial x'^\mu} = \sum_\nu \Lambda_\mu^{~\nu} \frac{\partial}{\partial x^\nu}
+\end{align}
+おもむろに、式(\ref{eq:kyohen vector})と比較してみよう。
+\textbf{微分演算子が共変ベクトルに他ならないことが分かる！}
+というわけで、微分演算子を下付き添え字のベクトルとして
+\begin{align}
+\partial_\mu \equiv \frac{\partial}{\partial x^\mu}, \qquad
+\partial'_\mu \equiv \frac{\partial}{\partial x'^\mu}
+\end{align}
+と書くことにしよう。すると、微分演算子の変換則は、
+\begin{align}
+\partial'_\mu = \Lambda_\mu^{~\nu} \partial_\nu
+\end{align}
+といい感じに書ける。
+
+
+\subsubsection{電荷密度、電流}
+電荷密度$\rho$、電流$\vec j$に対して、連続の方程式が成立することを電磁気学で学んだ。
+\begin{align}
+\frac{\partial \rho}{\partial t} + \vec\nabla \cdot \vec j = 0
+\end{align}
+これは、空間全体で電荷は保存しており、いきなり電荷が現れたり消えたりすることないということ意味する重要な式である。そのため、ローレンツしても、
+\begin{align}
+\frac{\partial \rho'}{\partial t'} + \vec\nabla' \cdot \vec j' = 0
+\end{align}
+が成立するはずだ。
+実は電荷密度と電流は反変ベクトル$j^\mu$として
+\begin{align}
+j^\mu = (\rho, \vec j)
+\end{align}
+のようにまとめることができ、ローレンツ変換に対して、
+\begin{align}
+j^\mu \to j'^\mu = \Lambda^\mu_{~\nu} j^\nu
+\end{align}
+という変換をするとすれば辻褄があう。\footnote{
+時間のある人は、密度と電流密度の定義に立ち返り、なぜ、ローレンツ変換してうつった先の慣性系での$j^\mu$が
+\begin{align}
+j^\mu \to j'^\mu = \Lambda^\mu_{~\nu} j^\nu
+\end{align}
+と書かれるのか、考えてみよう。}これにより、連続の方程式が
+\begin{align}
+\partial_\mu j^\mu = 0
+\end{align}
+という形に書くことができる。脚をつぶした形になっているので、ローレンツ不変であることが一目瞭然。
+
+
+\subsection{マックスウェル方程式（特殊相対論風に）}
+マックスウェル方程式を思い出してみよう。
+\begin{align}
+\vec\nabla \cdot \vec B = 0, \qquad
+\vec\nabla \times \vec E + \frac{\partial}{\partial t}\vec B = 0, \label{eq:bianchi}\\
+\vec\nabla \cdot \vec E = \rho, \qquad
+\vec\nabla \times \vec B - \frac{\partial}{\partial t} \vec E = \vec j. \label{eq:maxwell}
+\end{align}
+真空中の誘電率と透磁率は$1$に取った。これを特殊相対論っぽくいい感じで書き直してみよう。
+
+式(\ref{eq:bianchi})を満たすような電場と磁場は、
+スカラーポテンシャル$\phi(t,\vec x)$とベクトルポテンシャル$\vec A(t,\vec x)$を導入することにより、（少なくとも局所的に）次のように書ける。
+\begin{align}
+\vec E = -\vec\nabla \phi - \frac{\partial}{\partial t}\vec A, \qquad
+\vec B = \vec\nabla \times \vec A
+\label{eq:E and B from A}
+\end{align}
+これを式(\ref{eq:maxwell})に代入すると、
+$\nabla \times (\nabla \times A) = -\nabla^2 A + \nabla (\nabla A) $を使ったのち、
+\begin{align}
+-\nabla^2 \phi - \frac{\partial}{\partial t} \vec \nabla \cdot \vec A &= \rho, \\
+-\nabla^2 \vec A + \vec \nabla (\vec \nabla \cdot \vec A) + \frac{\partial}{\partial t}\vec\nabla\phi + \frac{\partial^2}{\partial t^2} \vec A &= \vec j.
+\end{align}
+をえる。
+もうちょっと整理すると、
+\begin{align}
+-\left(\nabla^2 - \frac{\partial^2}{\partial t^2}\right)\phi + \frac{\partial}{\partial t} \left( -\frac{\partial}{\partial t}\phi - \vec \nabla \cdot \vec A \right) &= \rho, \label{eq:EM eom1}\\
+- \left( \nabla^2 - \frac{\partial^2}{\partial t^2}\right) \vec A
+-\vec\nabla \left( -\frac{\partial}{\partial t}\phi - \vec \nabla \cdot \vec A \right)
+ &= \vec j. \label{eq:EM eom2}
+\end{align}
+（1本目の左辺には$\partial^2\phi/\partial t^2$を足して引いた。2本目は並べ替えただけ。）
+
+式(\ref{eq:EM eom1})と式(\ref{eq:EM eom2})の右辺は反変ベクトルである電流密度$j^\mu$の成分なのが分かる。ここから察するに$\phi$と$\vec A$から、
+\begin{align}
+A^\mu = (\phi, \vec A).
+\end{align}
+という反変ベクトルが定義できそうだ。
+$A^\mu$と$j^\mu$を用いると、式(\ref{eq:EM eom1})と式(\ref{eq:EM eom2})は一本にまとめられる。
+\begin{align}
+\partial^2 A^\nu - \partial^\nu (\partial_\mu A^\mu) = j^\nu \label{eq:maxwell eq in tensor}
+\end{align}
+ここで、$\partial^2$はダランベール(d'Alembert)演算子、ダランベルシアン(d'Alembertian)などと呼ばれ、
+\begin{align}
+\partial^2 \equiv \partial_\mu \partial^\mu = \frac{\partial^2}{\partial t^2} - \vec\nabla^2
+\end{align}
+で定義されている。
+
+さて一本にまとまったマックスウェル方程式(式(\ref{eq:maxwell eq in tensor}))は
+\begin{align}
+\partial_\mu ( \partial^\mu A^\nu - \partial^\nu A^\mu  ) = j^\nu
+\end{align}
+と書ける。二つの添え字を持つ電磁場テンソル$F^{\mu\nu}$を
+\begin{align}
+F^{\mu\nu} \equiv \partial^\mu A^\nu - \partial^\nu A^\mu
+\end{align}
+と定義すると、
+\begin{align}
+\partial_\mu F^{\mu\nu} = j^\nu.
+\end{align}
+と書き直すことができる。
+ということで、式(\ref{eq:maxwell})が一本にまとめられた。
+
+実は、電場$\vec E$や磁場$\vec B$は電磁場テンソルの成分だったのだ。
+確かめてみよう。
+\begin{align}
+F^{01} &= \dot A_x + \partial_x \phi = -E_x, \\
+F^{02} &= \dot A_y + \partial_y \phi = -E_y, \\
+F^{03} &= \dot A_z + \partial_z \phi = -E_z, \\
+F^{12} &= -\partial_x A_y + \partial_y A_x = -B_z, \\
+F^{23} &= -\partial_y A_z + \partial_z A_y = -B_x, \\
+F^{31} &= -\partial_z A_x + \partial_x A_z = -B_y
+\end{align}
+%
+マックスウェル方程式もあらわにチェックできる。
+\begin{align}
+\partial_1 F^{10} + \partial_2 F^{20} + \partial_3 F^{30} &= \rho, \\
+\partial_0 F^{01} + \partial_2 F^{21} + \partial_3 F^{31} &= j^1, \\
+\partial_0 F^{02} + \partial_1 F^{12} + \partial_3 F^{32} &= j^2, \\
+\partial_0 F^{03} + \partial_1 F^{13} + \partial_2 F^{23} &= j^3
+\end{align}
+%
+また、式(\ref{eq:bianchi})を次のように書き直すこともできる。
+\begin{align}
+\epsilon^{\mu\nu\lambda\rho} \partial_\mu F_{\nu\lambda}  = 0.
+\end{align}
+
+ローレンツ変換を考えてみよう。
+4元ベクトルポテンシャルのローレンツ変換は、
+\begin{align}
+A^\mu(x) \to {A'}^\mu(x') = \Lambda^\mu_{~\nu} A^\nu(x)
+\end{align}
+%
+電磁場のローレンツ変換は、
+\begin{align}
+F_{\mu\nu}(x)
+\to
+F'_{\mu\nu}(x') = \partial'_\mu A'_\nu(x') - \partial'_\nu A'_\mu(x') = 
+\Lambda_\mu^{~\alpha} \Lambda_\nu^{~\beta} F_{\alpha\beta}(x)
+\end{align}
+%
+$x$座標では
+\begin{align}
+\partial_\mu F^{\mu\nu} = j^\nu, \qquad
+\epsilon^{\mu\nu\lambda\rho} \partial_\mu F_{\nu\lambda} = 0.
+\end{align}
+が成立していた。
+$x'$座標では、
+\begin{align}
+\partial'_\mu {F'}^{\mu\nu} = {j'}^\nu, \qquad
+\epsilon^{\mu\nu\lambda\rho} \partial'_\mu {F'}_{\nu\lambda} = 0.
+\end{align}
+が成立する！
+
+また、$\phi$と$\vec A$に対するゲージ変換は、
+\begin{align}
+\phi \to \phi' = \phi + \frac{\partial\lambda}{\partial t}, \qquad
+\vec A \to \vec A' = \vec A - \vec\nabla \lambda
+\end{align}
+と与えられる。$\partial^0 \lambda = \partial\lambda/\partial t$と$\partial^i \lambda = -\partial\lambda/\partial x^i$に注意すると、
+$A^\mu$に対するゲージ変換は
+\begin{align}
+A^\mu \to A'^\mu = A^\mu + \partial^\mu \lambda
+\end{align}
+と簡潔に書ける。
+
+
+
+\subsection{まとめ}
+\begin{itembox}[l]{まとめ}
+\begin{itemize}
+\item 添え字が上付きか下付きかで、ベクトルやテンソルがローレンツ変換でどのように変換されるか一発で分かる。
+\item 上下の添え字を全てペアにすれば、ローレンツ不変なものが作れる。
+\end{itemize}
+\end{itembox}
+
+
+
+\subsection{（非相対論的）量子力学}
+量子力学では、波動関数$\psi$を使い、$|\psi|^2$を粒子をその場所に見出す確率の密度と解釈することができた。
+$\psi$の時間発展はシュレーディンガー（Schr\"odinger）方程式で記述できる。
+\begin{align}
+i\frac{\partial}{\partial t} \psi = H \psi.
+\end{align}
+$H$はハミルトニアンである。
+古典的なハミルトニアン$H(x,p)$が得られたとき、上のシュレーディンガー方程式に出てくる演算子としてのハミルトニアンは、
+\begin{align}
+H = H\left( x, p= -i\frac{\partial}{\partial x} \right)
+\end{align}
+という古典ハミルトニアンの中の$p$を$-i(\partial/\partial x)$に置き換えるような操作で得られた。とくに、$H = p^2/2m + V(x)$のとき、シュレーディンガー方程式のハミルトニアンは、
+\begin{align}
+H = -\frac{1}{2m}\nabla^2 + V
+\end{align}
+
+シュレーディンガー方程式をみると、左辺には時間の一階微分。右辺には空間の二階微分。
+ローレンツ変換は時間と空間を線形に混ぜる。シュレーディンガー方程式では時間と空間は対等ではなく、ローレンツ対称性のもとで良い性質を持っていない。
+
+
+確率密度$\rho$は、
+\begin{align}
+\rho = |\psi|^2 \label{eq:probability density NR}
+\end{align}
+と定義される。規格化された波動関数を用いると、
+\begin{align}
+\int d^3x \rho = \int d^3x |\psi|^2 = 1
+\end{align}
+である。
+確率密度の時間発展は
+\begin{align}
+\frac{\partial}{\partial t}|\psi|^2
+=& \frac{\partial \psi}{\partial t} \psi^* + \frac{\partial \psi^*}{\partial t} \psi \nonumber\\
+=& \left( \frac{i}{2m} \nabla^2 \psi \right) \psi^* - \left( \frac{i}{2m} \nabla^2 \psi^* \right) \psi \nonumber\\
+=& \vec\nabla \cdot \left[ \left( \frac{i}{2m} \vec\nabla \psi \right) \psi^* - \left( \frac{i}{2m} \vec\nabla \psi^* \right) \psi \right]
+\end{align}
+と計算される。
+ベクトル$\vec j$を
+\begin{align}
+\vec j \equiv \frac{i}{2m} (\vec\nabla\psi^*) \psi - \frac{i}{2m} (\vec\nabla\psi) \psi^*.
+\end{align}
+と定義すると、
+\begin{align}
+\frac{\partial\rho}{\partial t} + \vec \nabla \cdot \vec j = 0.
+\end{align}
+と綺麗に書くことができる。$\vec j$は確率密度の流れを記述するベクトルと解釈できる。
+この方程式により、確率が各点各点で勝手に湧き出したり吸い込まれたりすることがなく、確率が全体として保存していることが分かる。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{クラインゴルドン（Klein-Gordon）方程式}
+正準量子化における演算子の置き換えルールを思い出してみよう。
+\begin{align}
+H = \frac{p^2}{2m}
+\end{align}
+というハミルトニアン$H$が与えられた時、
+\begin{align}
+E \to i\frac{\partial}{\partial t}, \qquad
+\vec p \to -i \vec \nabla
+\end{align}
+という置き換えを採用すると、シュレーディンガー方程式
+\begin{align}
+i\frac{\partial}{\partial t} \psi =  -\frac{1}{2m} \nabla^2 \psi .
+\end{align}
+がえられたのだった。（自然単位系$\hbar = c =1$をとってしまったことに注意！）
+
+…ということは$E^2 = m^2 + p^2$にこの置き換えルールを適用して、
+\begin{align}
+-\frac{\partial^2}{\partial t^2} \psi = (m^2 - \nabla^2)\psi \label{eq:klein-gordon eq}
+\end{align}
+とすれば良いのでは？\footnote{
+かわりに
+\begin{align}
+i\frac{\partial}{\partial t} \psi = \sqrt{m^2 - \nabla^2} \psi
+\end{align}
+とするのはどうか？
+まず、時間$t$と空間座標$x$の扱われ方が同等でないので良くない。
+次に、右辺の演算子に意味を持たせるために微分演算子の級数展開を考えてみるとどうしても無限階微分をどうしても含んでしまう。
+これは、$\sqrt{m^2 - \nabla^2}$がnon-localな演算子となっていることを示唆しており、ちょっと使えない。
+}この方程式はクラインゴルドン(Klein-Gordon)方程式と呼ばれる。
+
+
+\subsection{クラインゴルドン方程式の平面波解}
+クラインゴルドン方程式(\ref{eq:klein-gordon eq})の平面波解がどんなものか見てみよう。
+\begin{align}
+\psi = \exp\left( i p_x x + i p_y y + i p_z z - i E t \right).
+\end{align}
+と試しにおいてみよう。$E$, $p_x$, $p_y$, $p_z$はクラインゴルドン方程式(\ref{eq:klein-gordon eq})が満たされるように、このあと選べばよい。
+さっそく、クラインゴルドン方程式(\ref{eq:klein-gordon eq})にこの解を代入すると、
+\begin{align}
+E^2 = m^2 + p_x^2 + p_y^2 + p_z^2
+\end{align}
+を得る。$p_x$, $p_y$, $p_z$の値を固定したとき、$E$の解は次の２つ。
+\begin{align}
+E = \sqrt{m^2 + \vec p^2} , \qquad -\sqrt{m^2 + \vec p^2}
+\end{align}
+\textbf{エネルギーが正の解にくわえて、 負となる解もある！}
+（あとで分かるように負エネルギー解の存在は、反粒子の存在と関係している）
+
+\subsection{確率解釈できるか？}
+クラインゴルドン方程式に従う$\psi$は確率解釈できるだろうか？
+確率が保存しているならば、 確率密度$\rho$とその流速$\vec v$が存在して、
+非相対論的量子力学と同様に次のような確率保存の式を満たす。
+\begin{align}
+\frac{\partial\rho}{\partial t} + \vec\nabla \cdot \vec j = 0. \label{eq:KG eq consv}
+\end{align}
+
+さて、おもむろに、$\psi$を使って$\rho$と$\vec j$を次のように定義してみよう。
+\begin{align}
+\rho &= \frac{i}{2m} [ \frac{\partial\psi^*}{\partial t} \psi - \psi^* \frac{\partial\psi}{\partial t} ], \\
+\vec j &= \frac{i}{2m} [ (\vec\nabla\psi^*) \psi - \psi^* (\vec\nabla\psi) ].
+\end{align}
+%
+この$\rho$と$\vec j$は確率保存の式をみたすことが、クラインゴルドン方程式を使ってチェックできる。
+計算してみよう。
+\begin{align}
+\frac{\partial \rho}{\partial t}
+=& \frac{i}{2m} [ \frac{\partial^2\psi^*}{\partial t^2} \psi - \psi^* \frac{\partial^2\psi}{\partial t^2} ] \nonumber\\
+=& \left( \frac{i}{2m} \nabla^2 \psi \right) \psi^* - \left( \frac{i}{2m} \nabla^2 \psi^* \right) \psi \nonumber\\
+=& \vec\nabla \cdot \left[ \left( \frac{i}{2m} \vec\nabla \psi \right) \psi^* - \left( \frac{i}{2m} \vec\nabla \psi^* \right) \psi \right]
+\end{align}
+確かに式(\ref{eq:KG eq consv})が満たされている。
+
+一見良さそうだが、この$\rho$は、非相対論的な場合(\ref{eq:probability density NR})と異なり、$\rho \geq 0$が保証されていない。（positive-definiteではない、とも言う。）
+つまり、負になってしまうこともありうる。具体的には$\psi = e^{-iEt}$みたいな解を考えて$E$が負だと$\rho$も負になってしまう。
+確率が負になってしまったらおかしい。確率密度と解釈するのはなんか無理そう…。
+
+% 2022.4.11ここまで
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ディラック(Dirac)方程式}
+シュレーディンガー方程式を手直しすることを考えてみよう。手直しの結果、次のような条件を満たすようにしたい。
+\begin{itemize}
+\item ローレンツ対称性を保つ。
+\item 確率解釈ができる波動関数$\psi$がある。（クラインゴルドン方程式の場合と違って、非負になることが保証されているような定義の確率密度がほしい。）%\footnote{場の量子論まで行くとこの仮定からは卒業することになる。}
+\end{itemize}
+
+前の章では波動関数は一成分としていたが、一般化して$n$成分あってもいい。
+この場合、固有値が全ての正である$n\times n$エルミート行列$A$を使って
+\begin{align}
+\rho = \psi^\dagger A \psi.
+\end{align}
+と書けたら$\rho \geq 0$が保証できそうだ。ここで$\psi$は成分を$n$個並べたもの。
+ためしに$A$を単位行列にしてみよう。\footnote{
+単位行列じゃない場合も$\psi$を適当に再定義すれば、単位行列にとりなおすことができる。
+}そうすると、
+\begin{align}
+\rho = \sum_{i=1}^n |\psi_i|^2
+\end{align}
+と書ける。このとき、$\rho$の時間微分は、
+\begin{align}
+\frac{\partial\rho}{\partial t} = \sum_{i=1}^n \left( \psi_i^* \frac{\partial\psi_i}{\partial t} + \psi_i \frac{\partial\psi_i^*}{\partial t} \right).
+\end{align}
+
+右辺が、なんらかのベクトル$\vec j$を使って、$\vec \nabla \vec j$という形になってほしい。
+$\psi$は時間についての一階微分方程式を満たしてもらうのがよさそう。きっとこんな形になるはずだ。
+\begin{align}
+i\frac{\partial}{\partial t}\psi = \hat H\psi
+\end{align}
+$\hat H$は空間の一階微分を含む演算子。（一見、シュレーディンガー方程式とほぼ一緒の形だが、$\hat H$は一階微分しか含まないから、$H = p^2/2m$とは違うもの。）
+%
+さらに、$E^2 = m^2 + p^2$の量子論バージョンとして、
+\begin{align}
+\hat H^2 = m^2 - \vec\nabla^2 \label{eq:Hsq}
+\end{align}
+という関係が成り立ってほしい…。
+
+まとめると、
+\begin{itemize}
+\item $\rho = \psi^\dagger \psi$
+\item $i\displaystyle\frac{\partial}{\partial t}\psi = \hat H \psi$
+\item $\hat H^2 = m^2 - \vec\nabla^2$
+\end{itemize}
+を満たしてほしい。
+
+\subsection{$\hat H$を行列にすれば上手くいきそう}
+特殊相対論では時間と空間はほとんど同等の立場。ということは、$H$はきっと空間の一階微分を含むだろう。しかし、適当に
+\begin{align}
+\hat H = m + \frac{\partial}{\partial x} + \frac{\partial}{\partial y} + \frac{\partial}{\partial z}???
+\end{align}
+とかやってしまうと、
+\begin{align}
+\hat H^2 = m^2 + 2m\left( \frac{\partial}{\partial x} + \frac{\partial}{\partial y} + \frac{\partial}{\partial z} \right) + \left( \frac{\partial}{\partial x} + \frac{\partial}{\partial y} + \frac{\partial}{\partial z} \right)^2???
+\end{align}
+みたいな感じになり、どう見ても上手くいっていない。どうしたらいいだろうか？
+
+ディラックは$H$を行列にした。
+$n\times n$の行列$\beta$, $\alpha_x$, $\alpha_y$, $\alpha_z$を使って
+\begin{align}
+\hat H = m \beta - i\partial_x \alpha_x - i\partial_y \alpha_y - i\partial_z \alpha_z \label{eq:Hlinear}
+\end{align}
+と書いてみよう。そうすると、みたすべき式(\ref{eq:Hsq})は
+\begin{align}
+\hat H^2 = (m^2 - \partial_x^2 - \partial_y^2 - \partial_z^2) I \label{eq:Hsq2}
+\end{align}
+と書ける。$I$は$n\times n$の単位行列。ここに式(\ref{eq:Hlinear})の$H$を代入してみよう。
+以下のような行列の間の関係式があれば、式(\ref{eq:Hsq2})は満たされる。
+\begin{align}
+\alpha_x^2 = \alpha_y^2 = \alpha_z^2 = \beta^2 = I, \label{eq:asq bsq}\\
+\alpha_x \alpha_y + \alpha_y \alpha_x = 0, \label{eq:ax ay}\\
+\alpha_y \alpha_z + \alpha_z \alpha_y = 0, \label{eq:ay az}\\
+\alpha_z \alpha_x + \alpha_x \alpha_z = 0, \label{eq:az ax}\\
+\alpha_x \beta + \beta \alpha_x = 0, \label{eq:ax b}\\
+\alpha_y \beta + \beta \alpha_y = 0, \label{eq:ay b}\\
+\alpha_z \beta + \beta \alpha_z = 0. \label{eq:az b}
+\end{align}
+これを満たす解を見つければ、欲しい方程式が手に入るはずだ。
+
+\subsection{$\beta$, $\alpha_x$, $\alpha_y$, $\alpha_z$の解}
+式(\ref{eq:ax b})の両辺左側から$\alpha_x$を掛けてみよう。
+\begin{align}
+\alpha_x^2 \beta + \alpha_x \beta \alpha_x = 0.
+\end{align}
+次に上の式の両辺のトレースをとり、さらに$\alpha_x^2 = I$を使って整理すると、
+\begin{align}
+{\rm tr}\beta = 0.
+\end{align}
+${\rm tr} \alpha_x = 0$, ${\rm tr} \alpha_y = 0$, ${\rm tr} \alpha_z = 0$も同様に示せる。\footnote{時間のある人は示してみてください}
+$\beta^2 = I$かつ${\rm tr}\beta = 0$であることから、
+$\beta$は固有値$+1$が$n$個、$-1$が$n$個の、$2n \times 2n$行列であることが分かる。
+$n=1$($2\times 2$行列)では、式(\ref{eq:asq bsq})から式(\ref{eq:az b})の全てを満たすような$\beta,~\alpha_x,~\alpha_y,~\alpha_z$の組を上手く見つけられない。\footnote{時間のある人は示してみてください}
+ということで、$n=2$($4\times 4$行列)を考えてみよう。$\beta$を対角化して次の形にとる基底で考えてみる。
+\begin{align}
+\beta = \left(\begin{array}{cccc}
+1 &&& \\
+& 1 && \\
+&& -1 & \\
+&&& -1
+\end{array}\right)
+\end{align}
+%
+そうすると、次のような$\alpha_x$, $\alpha_y$, $\alpha_z$が解（の一つ）になっていることが分かる。
+\begin{align}
+\alpha_x = \left(\begin{array}{cc}
+& \sigma_x \\
+\sigma_x & \\
+\end{array}\right), \qquad
+%
+\alpha_y = \left(\begin{array}{cc}
+& \sigma_y \\
+\sigma_y & \\
+\end{array}\right), \qquad
+%
+\alpha_z = \left(\begin{array}{cc}
+& \sigma_z \\
+\sigma_z & \\
+\end{array}\right).
+\end{align}
+ここで、$\sigma_x$, $\sigma_y$, $\sigma_z$はパウリ(Pauli)行列。以下で定義される。
+\begin{align}
+\sigma_x = \left(\begin{array}{cc}
+0 & 1 \\
+1 & 0 
+\end{array}\right), \qquad
+%
+\sigma_y = \left(\begin{array}{cc}
+0 & -i \\
+i & 0 
+\end{array}\right), \qquad
+%
+\sigma_z = \left(\begin{array}{cc}
+1 & 0 \\
+0 & -1 
+\end{array}\right).
+\end{align}
+%
+パウリ行列は
+\begin{align}
+\sigma_x^2 = \sigma_y^2 = \sigma_z^2 = I_2, \\
+\sigma_x \sigma_y + \sigma_y \sigma_x = 0, \\
+\sigma_y \sigma_z + \sigma_z \sigma_y = 0, \\
+\sigma_z \sigma_x + \sigma_x \sigma_z = 0.
+\end{align}
+を満たす。まとめて
+\begin{align}
+\sigma_i \sigma_j = \delta_{ij} I_2 + i\epsilon_{ijk} \sigma_k
+\end{align}
+とも書かれる。
+
+
+例えば、式(\ref{eq:ax b})をチェックしてみよう。
+\begin{align}
+\alpha_x \beta + \beta \alpha_x
+&=
+\left(\begin{array}{cc}
+& \sigma_x \\
+\sigma_x \\ 
+\end{array}\right)
+\left(\begin{array}{cc}
+1 & \\
+ & -1 
+ \end{array}\right)
+ +
+\left(\begin{array}{cc}
+1 & \\
+ & -1 
+ \end{array}\right)
+\left(\begin{array}{cc}
+& \sigma_x \\
+\sigma_x \\ 
+\end{array}\right) \nonumber\\
+&=
+\left(\begin{array}{cc}
+& -\sigma_x \\
+\sigma_x \\ 
+\end{array}\right)
+ +
+\left(\begin{array}{cc}
+& \sigma_x \\
+-\sigma_x \\ 
+\end{array}\right) \nonumber\\
+%
+&=
+0.
+\end{align}
+%
+また、式(\ref{eq:ax ay})もチェックできる。
+\begin{align}
+\alpha_x \alpha_y + \alpha_y \alpha_x
+&=
+\left(\begin{array}{cc}
+& \sigma_x \\
+\sigma_x \\ 
+\end{array}\right)
+\left(\begin{array}{cc}
+& \sigma_y \\
+\sigma_y \\ 
+ \end{array}\right)
+ +
+\left(\begin{array}{cc}
+& \sigma_y \\
+\sigma_y \\ 
+ \end{array}\right)
+\left(\begin{array}{cc}
+& \sigma_x \\
+\sigma_x \\ 
+\end{array}\right) \nonumber\\
+&=
+\left(\begin{array}{cc}
+i\sigma_z & \\
+& i\sigma_z \\
+\end{array}\right)
+ +
+\left(\begin{array}{cc}
+-i\sigma_z & \\
+& -i\sigma_z \\
+\end{array}\right) \nonumber\\
+%
+&=
+0.
+\end{align}
+同様に、
+式(\ref{eq:ay b})、
+式(\ref{eq:az b})、
+式(\ref{eq:ay az})、
+式(\ref{eq:az ax})も確かめることができる。\footnote{時間のある人は示してみてください}
+
+まとめると、次のような方程式が得られた。
+%\begin{screen}
+\begin{itembox}[l]{ディラック(Dirac)方程式}
+\begin{align}
+i \partial_t \psi = (-i\alpha_x \partial_x-i\alpha_y \partial_y-i\alpha_z \partial_z + m \beta)\psi \label{eq:dirac equation}
+\end{align}
+%
+\begin{align}
+\beta = \left(\begin{array}{cc}
+I_2 & \\
+& -I_2
+\end{array}\right), \qquad
+\alpha_i = \left(\begin{array}{cc}
+& \sigma_i \\
+\sigma_i & 
+\end{array}\right) \label{eq:alpha beta matrix}
+\end{align}
+%\end{screen}
+\end{itembox}
+$\psi$は4成分。これがディラック(Dirac)方程式だ。
+ちなみにディラックによる原論文は\cite{Dirac:1928hu}.
+
+
+\subsection{後々のためディラック方程式ちょっと書き直す}
+式(\ref{eq:dirac equation})のままでは、ローレンツ対称性の議論がちょっとやりにくい。
+空間微分のところには行列が掛かっているのに、時間微分のところには行列が掛かっていない（単位行列が掛かっている）ので、
+なんとなく時間と空間が対等に扱えているかどうかが見づらい。
+
+この点はちょっとした手直しで改善できる。
+式(\ref{eq:dirac equation})の両辺に左から$\beta$をかけると、
+\begin{align}
+(i\beta\partial_t + i \beta\alpha_x \partial_x + i \beta\alpha_y \partial_y + i \beta\alpha_z \partial_z) \psi = m \psi
+\end{align}
+と書ける。
+
+次のような行列$\gamma^0,~\gamma^1,~\gamma^2,~\gamma^3$を定義してみよう。
+\begin{align}
+\gamma^0 \equiv \beta = \left(\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}\right), \qquad
+\gamma^i \equiv \beta \alpha_i = \left(\begin{array}{cc}
+0 & \sigma_i \\
+-\sigma_i & 0
+\end{array}\right). \qquad (i = 1,2,3)
+\label{eq:dirac matrix diracpauli}
+\end{align}
+この行列はガンマ行列、あるいは、ディラック行列などと呼ばれる。
+このガンマ行列を使うと、アインシュタインの縮約を上手く使えるようになり、ディラック方程式は以下のように書ける。\footnote{
+式(\ref{eq:alpha beta matrix})で与えられた$\alpha_x$, $\alpha_y$, $\alpha_z$, $\beta$は解のひとつであり、ガンマ行列もひとつには定まらない。
+式(\ref{eq:dirac matrix diracpauli})で与えられたガンマ行列は、Dirac-Pauli表現(Dirac-Pauli representation)とも呼ばれている。
+適当なユニタリ行列$U$を使って、
+\begin{align}
+\alpha_{x,y,z}' = U \alpha_{x,y,z} U^\dagger, \qquad
+\beta' = U \beta U^\dagger.
+\end{align}
+と定義しても$\alpha_{x,y,z}'$と$\beta'$は同様の関係式を満たす。
+%
+例えば、
+\begin{align}
+\beta' = \left(\begin{array}{cc}
+ & 1 \\
+1 & 
+\end{array}\right), \qquad
+\alpha'_i = \left(\begin{array}{cc}
+-\sigma_i &  \\
+ & \sigma_i
+\end{array}\right).
+\end{align}
+というのも別解になっている。
+%
+これを使うと、
+\begin{align}
+\gamma^0 = \left(\begin{array}{cc}
+0 & 1 \\
+1 & 0 \\
+\end{array}\right), \qquad
+\gamma^i = \left(\begin{array}{cc}
+0 & \sigma_i \\
+-\sigma_i & 0 \\
+\end{array}\right).
+\label{eq:dirac matrix weyl}
+\end{align}
+このガンマ行列はWeyl representationもしくはchiral representationなどと呼ばれている。
+%
+教科書によって違う定義を使っていたりするので注意が必要。}
+\begin{itembox}[l]{ディラック(Dirac)方程式}
+\begin{align}
+(i\partial_\mu \gamma^\mu - m )\psi = 0. \label{eq:dirac equation 2}
+\end{align}
+\end{itembox}
+%
+また、式(\ref{eq:asq bsq}, \ref{eq:ax ay}, \ref{eq:ay az}, \ref{eq:az ax}, \ref{eq:ax b}, \ref{eq:ay b}, \ref{eq:az b})とガンマ行列の定義を使うと、
+ガンマ行列の反交換関係は、
+\begin{align}
+\gamma^0 \gamma^0 = \beta^2 &= I_4, \\
+\gamma^0 \gamma^i + \gamma^i \gamma^0 &= \beta^2 \alpha_i + \beta \alpha_i \beta = \alpha_i - \alpha_i = 0,\\
+\gamma^i \gamma^j + \gamma^j \gamma^i &= \beta \alpha_i \beta \alpha_j + \beta \alpha_j \beta \alpha_i = -\alpha_i \alpha_j - \alpha_j \alpha_i = - 2\delta_{ij}.
+\end{align}
+この関係式は、メトリックを使ってまとめることができる。
+\begin{align}
+\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2g^{\mu\nu}. \label{eq:dirac matrix anticommut}
+\end{align}
+簡潔に書けるようになっていい感じ。
+
+
+
+\subsection{連続の方程式をチェックしよう}
+せっかくディラック方程式が導出できたので、連続の方程式を満たすことを確認しよう。
+$\rho = \psi^\dagger \psi$であることから、
+\begin{align}
+\frac{\partial}{\partial t} (\psi^\dagger \psi)
+&= \frac{\partial\psi^\dagger}{\partial t}\psi + \psi^\dagger \frac{\partial\psi}{\partial t} \nonumber\\
+&= -i \psi^\dagger ( -i\alpha_x \partial_x \psi -i\alpha_x \partial_y \psi -i\alpha_x \partial_z \psi +  m\beta \psi)
++ ( i \partial_x \psi^\dagger \alpha_x + i \partial_y \psi^\dagger \alpha_y + i \partial_z \psi^\dagger \alpha_z + m \psi^\dagger \beta) \psi \nonumber\\
+&=
+- \partial_x ( \psi^\dagger \alpha_x \psi )
+- \partial_y ( \psi^\dagger \alpha_y \psi )
+- \partial_z ( \psi^\dagger \alpha_z \psi )
+\end{align}
+%
+ということで、
+\begin{align}
+\vec j = \psi^\dagger \vec\alpha \psi
+\end{align}
+と定義すれば、
+\begin{align}
+\frac{\partial\rho}{\partial t} + \vec\nabla \cdot \vec j = 0.
+\end{align}
+が成り立つ。連続の式が成り立っている。うれしい！
+
+
+\subsection{ディラック方程式の平面波解}
+ディラック方程式の解にはどんなものがあるのだろうか。平面波解を求めてみよう。
+$z$軸方向に運動量を持つと仮定して、次のような形を考えてみる。
+\begin{align}
+\psi = \left(\begin{array}{c}
+u_1 \\
+u_2 \\
+u_3 \\
+u_4
+\end{array}\right) \exp\left( ip_z z - i E t \right).
+\end{align}
+$u_1$, $u_2$, $u_3$, $u_4$は、ディラック方程式を満たすように決める必要がある。
+%
+上の形をディラック方程式(\ref{eq:dirac equation})に代入すると、
+\begin{align}
+\left(\begin{array}{cccc}
+%-E+m && p_z& \\
+%& -E+m && -p_z \\
+%-p_z && E+m & \\
+%& p_z && E+m
+-E+m && p_z& \\
+& -E+m && -p_z \\
+p_z && -E-m & \\
+& -p_z && -E-m
+\end{array}\right)
+\left(\begin{array}{c}
+u_1 \\
+u_2 \\
+u_3 \\
+u_4
+\end{array}\right) = 0.
+\end{align}
+がえられる。
+%
+上の形をディラック方程式(\ref{eq:dirac equation 2})に代入すると、
+\begin{align}
+\left(\begin{array}{cccc}
+%-E+m && p_z& \\
+%& -E+m && -p_z \\
+%-p_z && E+m & \\
+%& p_z && E+m
+E-m && -p_z& \\
+& E-m && p_z \\
+p_z && -E-m & \\
+& -p_z && -E-m
+\end{array}\right)
+\left(\begin{array}{c}
+u_1 \\
+u_2 \\
+u_3 \\
+u_4
+\end{array}\right) = 0.
+\end{align}
+がえられる。
+%
+$u_1 = u_2 = u_3 = u_4 = 0$はいつでも解になるけど、当然そうじゃない解が欲しい！
+そのためには左辺にかかってる$4 \times 4$行列の行列式が$0$にならないといけない。行列式は、
+\begin{align}
+(E^2-m^2-p_z^2)^2
+\end{align}
+なので、
+\begin{align}
+E^2-m^2-p_z^2 = 0.
+\end{align}
+を満たす必要がある。これを$E$についてとくと、
+\begin{align}
+E = \pm \sqrt{m^2 + p_z^2}.
+\end{align}
+エネルギーが正になる解と負になる解の二種類がある！
+
+まず、正のエネルギー解($E = + \sqrt{m^2+p_z^2}$)について考えてみよう。
+\begin{align}
+p_z u_1 - (E+m) u_3 = 0, \\
+-p_z u_2 - (E+m) u_4 = 0
+\end{align}
+を解くと、
+\begin{align}
+\psi =
+\left[ u_1 \left(\begin{array}{cc}
+1 \\ 0 \\ p_z/(E+m) \\ 0
+\end{array}\right)
++
+u_2 \left(\begin{array}{cc}
+0 \\ 1 \\ 0 \\ -p_z/(E+m)
+\end{array}\right) \right] \times \exp(ip_z z - i Et)
+\end{align}
+$u_1$と$u_2$は好きな値にとれるので、独立な解が２つある！
+
+運動量がエネルギーに比べて小さい極限、$p_z \ll E$を考えてみよう。
+このとき、$E = \sqrt{m^2 + p_z^2}$なので、$E \sim m$かつ、$p_z \ll m$。
+運動エネルギーが静止質量エネルギーと比較して無視できる。
+\begin{align}
+\frac{p_z^2}{2m} \ll m
+\end{align}
+こういう極限は、「非相対論的な極限」と呼ばれる。これまでに習った量子力学に近づいていく極限。
+この極限で、
+\begin{align}
+\psi \simeq
+\left(\begin{array}{cc}
+u_1 \\ u_2 \\ 0 \\ 0
+\end{array}\right)
+ \times \exp(ip_z z - i Et)
+\end{align}
+ということで、非相対論的極限でも２つの自由度は残る。これがスピンの自由度。なんでスピンと言えるのか詳しくは後でみる。
+
+同様に、負のエネルギー解($E = - \sqrt{m^2+p_z^2}$)について考えてみよう。
+\begin{align}
+-(|E|+m) u_1 - p_z u_3 = 0, \\
+-(|E|+m) u_2 + p_z u_4 = 0
+\end{align}
+今度は$u_3$, $u_4$について解いてみよう。
+\begin{align}
+\psi =
+\left[ u_3 \left(\begin{array}{cc}
+-p_z/(|E|+m) \\ 0 \\ 1 \\ 0
+\end{array}\right)
++
+u_4 \left(\begin{array}{cc}
+0 \\ p_z/(|E|+m) \\ 0 \\ 1
+\end{array}\right) \right] \times \exp(ip_z z - i Et)
+\end{align}
+$u_3$と$u_4$は好きな値にとれるので、この場合も独立な解が２つある！
+
+結局、同じ$p_z$の値に対して、正のエネルギー解は２つ、負のエネルギー解が２つ、の合計４つの解が現れた。それぞれ、どういった意味を持つか考えていこう。
+
+% 2022.4.18ここまで
+\subsection{ディラック(Dirac)の海、反粒子}
+エネルギーの低い準位があるとエネルギーを放出して遷移が起きる（例：水素原子の$n=2$から$n=1$への遷移に伴うLyman $\alpha$線の放出、など）。
+負のエネルギー解があるので、そっちに遷移していってしまう？しかも、エネルギーに下限がない！電子が安定に存在できなくなるのではないか…。
+
+Diracはこの問題を次のように考えることで回避することを提案した。
+\begin{itemize}
+\item 「真空」では$E=-m$から$-\infty$までのすべての負エネルギー状態が完全に満員になっている。
+\item 真空状態の負エネルギー電子は、観測可能量に影響しない。真空からのズレのみが観測される。
+\end{itemize}
+フェルミオンには排他律があるので、同じ準位にはひとつの粒子しか入ることはできない。ひとつめの仮定により、正のエネルギーを持った粒子がエネルギーを放出して、負のエネルギーに落ち込むことはなくなる。つまり、系が安定して存在できることになる。
+実際、負のエネルギー準位を占める電子がいた方がエネルギーが下げられるので、負のエネルギー準位が満員になっている状態は最もエネルギーの低い状態とみなせる。ということで、「真空」がこのようなものであると考えるのは自然だ。
+これは、Diracの海(Dirac sea)、と呼ばれている。
+
+電子がひとついる状態は、正のエネルギー準位を占める粒子がひとついる状態。確かに真空に比べてエネルギーが増加している。
+負のエネルギー準位から粒子をひとつ抜いてみよう。空孔(hole)ができる。この状態も真空よりエネルギーが高い。負電荷を持つ粒子が一ついなくなったので、真空に比べて電荷が$+1$増加した。これは電荷が正の粒子がひとついる状態と解釈できる。
+このようにディラック方程式を考えると電荷の値が正反対の粒子の存在が必然的に示唆される。このような粒子は反粒子と呼ばれる。電子に対応する反粒子は陽電子(positron)と呼ばれる。
+
+正のエネルギーを持つ電子が、エネルギーを放出して、負のエネルギー準位の空孔に落ち込んだ状況を考えてみよう。これは、電子と陽電子が消えてしまいエネルギーに変わった状況とみなせる。これは対消滅(annihilation)とよばれる。
+逆に、外からエネルギーを与えて、負のエネルギー準位を埋めている電子を正のエネルギー準位に励起させてみよう。これは、エネルギーが電子と陽電子に変わったとみなすことができる。これを対生成(pair creation)と呼ぶ。
+（この状況をきちんと記述するには、電子と光子などとの相互作用を入れる必要があるので、場の量子論が必要。）
+
+\cite{Nielsen:1983rb}
+
+\subsection{積み残した疑問}
+まだ答えてない疑問が残っている。
+\begin{itemize}
+\item なぜ正エネルギーと負エネルギーの解がそれぞれ２つずつ？
+\item ローレンツ不変にちゃんとなってるの？
+\end{itemize}
+次の章で議論するよ！
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ローレンツ変換とディラック方程式}
+特殊相対論をやってるので、座標系に依らず物理法則が同じ、ということを要請したい。
+これはつまり、${x'}^\mu = \Lambda^\mu_{~\nu} x^\nu$という座標間のローレンツ変換が与えられたとき、$x'$座標でも$x$座標でも``同じ形''の方程式が成立していてほしい、ということを意味する。
+
+``同じ形''の方程式が成立する様子を、クラインゴルドン方程式とマクスウェル方程式を例にみてみよう。
+さらに、ディラック方程式にもこの性質を要求することで、スピノルというものが現れるものをみる。
+結果、ディラック方程式にスピンという概念が自然に導入されることをみる。
+
+\subsection{方程式とローレンツ変換}
+どの座標系で見ても、物理法則が一緒。つまり、``同じ''方程式が成立する。
+場や方程式がローレンツ変換に対してどのように振る舞うか、クラインゴルドン方程式とマックスウェル方程式を例に見る。
+そして、ディラック方程式についても議論する。前の章で出てきた4成分の$\psi$が、スカラーでもない、ベクトルでもない、テンソルでもない。スピノルであることを見る。
+
+
+\subsubsection{クラインゴルドン方程式}
+クラインゴルドン方程式がローレンツ変換でどう振る舞うか詳しくみてみよう。
+微分演算子もテンソルっぽく書けたので、クラインゴルドン方程式は、
+\begin{align}
+\left( \frac{\partial^2}{\partial t^2} - \nabla^2 + m^2 \right) \phi(x) = (\partial^2 + m^2) \phi(x) = 0
+\end{align}
+といういい感じで書けるようになった。
+ここで$\partial^2 \equiv g^{\mu\nu} \partial_\mu \partial_\nu$。
+
+$x'$座標で$\phi$はどういう値になるだろう。よくわかんないけど、物理的に同じ点を見れば$x$座標でみた時と同じ値になってる気がする………ので、いったん、
+\begin{align}
+\phi(x) \to \phi'(x') = \phi(x)
+\end{align}
+としてみよう。
+これを認めると、$x'$座標でも、同じ形の方程式が成立することを見てみよう。
+\begin{align}
+(g^{\mu\nu}\partial'_\mu \partial'_\nu - m^2) \phi'(x')
+&= (g^{\mu\nu} \Lambda_{\mu}^{~\alpha} \Lambda_{\nu}^{~\beta} \partial_\alpha \partial_\beta - m^2) \phi(x) \nonumber\\
+&= (g^{\alpha\beta} \partial_\alpha \partial_\beta - m^2) \phi(x) \nonumber\\
+&= 0.
+\end{align}
+確かに
+\begin{align}
+({\partial'}^2 + m^2) \phi' = 0
+\end{align}
+が成立する！$x$座標でも$x'$座標でも「物理法則が同じ」と言えそう。
+
+% 2022.4.25ここまで
+
+
+\subsubsection{ディラック方程式はどう？}
+ローレンツ変換${x'}^\mu = \Lambda^\mu_{~\nu} x^\nu$を考えた時、
+$x'$座標でも、ディラック方程式(\ref{eq:dirac equation 2})が成立してほしい：
+\begin{align}
+(i\partial'_\mu \gamma^\mu - m ) \psi'(x') = 0. \label{eq:dirac equation xprime}
+\end{align}
+スカラー場の場合は$\phi'(x') = \phi(x)$だったし、電磁場に関しては$A'_\mu(x') = \Lambda_\mu^{~\nu} A_\nu(x)$となっていた。$\psi'(x')$と$\psi(x)$とは、どういう関係にあるだろうか？
+\begin{align}
+\psi'(x') = U(\Lambda) \psi(x).
+\end{align}
+のように線形変換で関係づけられるとしよう。ここで$U(\Lambda)$はローレンツ変換$\Lambda$ごとに決まる$4\times 4$行列。
+
+\begin{align}
+(i\gamma^\mu \partial'_\mu - m ) \psi'
+&=
+(i\gamma^\mu \Lambda_\mu^{~\nu} \partial_\nu - m ) U(\Lambda) \psi \nonumber\\
+&=
+i\gamma^\mu \Lambda_\mu^{~\nu} \partial_\nu U(\Lambda) \psi
+- U(\Lambda) i\gamma^\mu \partial^\mu \psi \nonumber\\
+&=
+U(\Lambda) [ U(\Lambda)^{-1} i\gamma^\mu \Lambda_\mu^{~\nu} U(\Lambda) \psi
+- i\gamma^\nu ] \partial_\nu \psi.
+\end{align}
+
+ということで、
+式(\ref{eq:dirac equation 2})と式(\ref{eq:dirac equation xprime})が同時に満たされると要求すると、
+\begin{align}
+U(\Lambda) \gamma^\mu \Lambda_\mu^{~\nu} U(\Lambda)^{-1} &= \gamma^\nu \nonumber\\
+U(\Lambda) \gamma^\mu \Lambda_\mu^{~\nu} U(\Lambda)^{-1} \Lambda^\rho_{~\nu} &= \Lambda^\rho_{~\nu} \gamma^\nu \nonumber\\
+U(\Lambda) \gamma^\mu U(\Lambda)^{-1} &= \Lambda^\mu_{~\nu} \gamma^\nu.
+\end{align}
+ということで、ガンマ行列$\gamma^\mu$と$U(\Lambda)$が次のような関係を満たしていればよいことが分かった。
+\begin{align}
+U(\Lambda)^{-1} \gamma^\mu U(\Lambda) = \Lambda^\mu_{~\nu} \gamma^\nu. \label{eq:dirac matrix lorentz inv}
+\end{align}
+
+
+相対論で出てくる量は、ローレンツ変換のもとでどう振る舞うかで名前がついていた。
+\begin{itemize}
+\item スカラー  : $\phi'(x') = \phi(x)$
+\item ベクトル : $p_\mu'(x') = \Lambda_{\mu}^{~\nu} p_\nu(x)$
+\item テンソル : $F_{\mu\nu}'(x') = \Lambda_{\mu}^{~\alpha} \Lambda_{\nu}^{~\beta} F_{\alpha\beta}(x)$
+\end{itemize}
+結局、$\mu$の足が0個か、1個か、2個以上かの分類だった。
+
+$\psi$はスカラーでもベクトルでもテンソルでもない。ではなんだと…。
+$\psi$はスピノルと呼ばれている。
+\begin{itemize}
+\item スピノル  : $\psi'(x') = U(\Lambda) \psi(x)$
+\end{itemize}
+
+
+\subsection{スピノルの無限小ローレンツ変換}
+$\Lambda$が与えられたとき、式(\ref{eq:dirac matrix lorentz inv})をみたすような$U(\Lambda)$を見つけるのが目標。
+とりあえず、無限小ローレンツ変換について考えてみよう。
+無限小ローレンツ変換とはほぼほぼ恒等変換の変換。ちゃんというと、
+\begin{align}
+\Lambda^\mu_{~\nu} = g^\mu_{~\nu} + \omega^{\mu}_{~\nu}
+\end{align}
+と書いて、$|\omega^{\mu}_{~\nu}| \ll 1$をみたすようなもの。この無限小に対する適切な$U(\Lambda)$を探す。
+
+\subsubsection{無限小ローレンツ変換の性質}
+式(\ref{eq:lorentz 2}) ($g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta}$) の両辺の$\omega$の一次の項を比較すると、
+\begin{align}
+g_{\mu\alpha} \omega^\mu_{~\nu} g^\alpha_{~\beta} + g_{\mu\alpha} g^\mu_{~\nu} \omega^\alpha_{~\beta} &= 0
+\end{align}
+となり、整理すると、
+\begin{align}
+\omega_{\beta\nu} = -\omega_{\nu\beta}
+\end{align}
+が得られる。つまり、無限小ローレンツ変換は、２つの添字を持つ反対称テンソルで指定できる。
+このテンソルの独立な成分の数は、
+\begin{align}
+\frac{4 \times 3}{2} = 6
+\end{align}
+となり、6成分だ。
+あらわに書くとこんな感じ。
+\begin{align}
+\omega^\mu_{~\nu}
+= 
+\left(\begin{array}{cccc}
+0 & \eta_1 & \eta_2 & \eta_3 \\
+\eta_1 & 0 & \theta_3 & -\theta_2 \\
+\eta_2 & -\theta_3 & 0 & \theta_1 \\
+\eta_3 & \theta_2 & -\theta_1 & 0
+\end{array}\right)
+\end{align}
+$\omega_{1,2,3}$は$x,y,z$軸方向のローレンツブースト、$\theta_{1,2,3}$は空間の回転の自由度に対応する。
+
+\subsubsection{無限小ローレンツ変換に対応する$U(\Lambda)$}
+次に無限小ローレンツ変換に対する$U(\Lambda)$の形を考察してみよう。恒等変換($\Lambda = 1$もしくは$\delta\omega_{\mu\nu} = 0$)に対し、$U(\Lambda) = I_4$なので、
+$U(\Lambda)$を$\delta\omega$の一次の項まで残すと、
+\begin{align}
+U(\Lambda) = I_4 - \frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu}.
+\end{align}
+と書けるはず。ここで、$\sigma^{\mu\nu}$は各$\mu,\nu$の組み合わせに対して決まる$4\times 4$行列。
+さきに見たように、$\delta\omega_{\mu\nu} = -\delta\omega_{\nu\mu}$なので$\sigma^{\mu\nu} = -\sigma^{\nu\mu}$としよう。
+
+式(\ref{eq:dirac matrix lorentz inv})の両辺はそれぞれ、以下のように展開できる。
+\begin{align}
+(式(\ref{eq:dirac matrix lorentz inv})の左辺)
+&\simeq
+\left( I_4 + \frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right) \gamma^\mu \left( I_4 - \frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right) \nonumber\\ 
+&\simeq
+\gamma^\mu + \frac{i}{4} \delta\omega_{\alpha\beta} \sigma^{\alpha\beta} \gamma^\mu - \frac{i}{4} \gamma^\mu \delta\omega_{\alpha\beta} \sigma^{\alpha\beta}\\
+%
+(式(\ref{eq:dirac matrix lorentz inv})の右辺)
+&\simeq \gamma^\mu + \delta\omega^\mu_{~\nu} \gamma^\nu
+\end{align}
+%
+ということで、式(\ref{eq:dirac matrix lorentz inv})の両辺を比較すると、
+\begin{align}
+\frac{i}{4} \omega_{\alpha\beta} [ \sigma^{\alpha\beta}, \gamma^\mu ]
+= \omega_{\alpha\beta} g^{\mu\alpha} \gamma^\beta
+\end{align}
+$\omega_{\alpha\beta}$の係数を比較したいが、このままでは上手くいかない。左辺の$\omega_{\alpha\beta}$の係数は、$\alpha$と$\beta$の入れ替えに対して反対称なテンソルだが、右辺はそうなっていない。
+%
+$\omega_{\alpha\beta} = -\omega_{\beta\alpha}$を用いて、上の式の右辺をちょっとお直しする。
+\begin{align}
+\frac{i}{4} \omega_{\alpha\beta} [ \sigma^{\alpha\beta}, \gamma^\mu ]
+&= \omega_{\alpha\beta} g^{\mu\alpha} \gamma^\beta \nonumber\\
+&= \omega_{\alpha\beta} \left( \frac{1}{2} g^{\mu\alpha} \gamma^\beta + \frac{1}{2} g^{\mu\beta} \gamma^\alpha + \frac{1}{2} g^{\mu\alpha} \gamma^\beta - \frac{1}{2} g^{\mu\beta} \gamma^\alpha \right) \nonumber\\
+&= \omega_{\alpha\beta} \left( \frac{1}{2} g^{\mu\alpha} \gamma^\beta + \frac{1}{2} g^{\mu\beta} \gamma^\alpha\right)
+ + \omega_{\alpha\beta} \left( \frac{1}{2} g^{\mu\alpha} \gamma^\beta - \frac{1}{2} g^{\mu\beta} \gamma^\alpha \right) \nonumber\\
+&= \omega_{\alpha\beta} \left( \frac{1}{2} g^{\mu\alpha} \gamma^\beta - \frac{1}{2} g^{\mu\beta} \gamma^\alpha \right)
+\end{align}
+これで、両辺の$\omega_{\alpha\beta}$の係数が、どちらも$\alpha$と$\beta$の入れ替えに対して反対称なテンソルとなった。
+%
+両辺比較すると、
+\begin{align}
+[ \sigma^{\alpha\beta}, \gamma^\mu ] = -2i g^{\mu\alpha} \gamma^\beta + 2i g^{\mu\beta} \gamma^\alpha \label{eq:sigma matrix def}
+\end{align}
+これが$\sigma^{\mu\nu}$の満たすべき式。
+
+実は、式(\ref{eq:sigma matrix def})を満たす$\sigma^{\alpha \beta}$はガンマ行列を使って、
+\begin{itembox}[l]{$\sigma^{\mu\nu}$のかたち}
+\begin{align}
+\sigma^{\alpha\beta} = \frac{i}{2}[\gamma^\alpha, \gamma^\beta]
+\end{align}
+\end{itembox}
+と書ける！
+これが確かに式(\ref{eq:sigma matrix def})の解であることをチェックしてみよう。
+式(\ref{eq:dirac matrix anticommut})を用いて、評価していく。
+\begin{align}
+(式(\ref{eq:sigma matrix def})の左辺)
+&=
+\frac{i}{2} \gamma^\alpha \gamma^\beta \gamma^\mu
+- \frac{i}{2} \gamma^\beta \gamma^\alpha \gamma^\mu
+- \frac{i}{2} \gamma^\mu \gamma^\alpha \gamma^\beta
++ \frac{i}{2} \gamma^\mu \gamma^\beta \gamma^\alpha \nonumber\\
+&=
+\frac{i}{2} \gamma^\alpha (2g^{\beta \mu} - \gamma^\mu \gamma^\beta)
+- \frac{i}{2} \gamma^\beta (2g^{\alpha \mu} - \gamma^\mu \gamma^\alpha)
+- \frac{i}{2} (2g^{\alpha\mu} - \gamma^\alpha \gamma^\mu ) \gamma^\beta
++ \frac{i}{2} (2g^{\beta\mu} - \gamma^\beta \gamma^\mu ) \gamma^\alpha \nonumber\\
+&=
+2i g^{\mu\beta} \gamma^\alpha - 2i g^{\mu\alpha} \gamma^\beta
+\end{align}
+ということで確かにみたされていることが分かった。
+
+$\sigma^{\alpha\beta}$を式(\ref{eq:dirac matrix diracpauli})の$\gamma^\mu$の定義使って書くと、
+\begin{align}
+\sigma^{ij} &= \left(\begin{array}{cc}
+\epsilon_{ijk} \sigma^k & 0 \\
+0 & \epsilon_{ijk} \sigma^k 
+\end{array}\right), \\
+\sigma^{0i} = -\sigma^{0i} &= \left(\begin{array}{cc}
+0 & i\sigma^i \\
+i\sigma^i & 0
+\end{array}\right).
+\end{align}
+
+
+\subsection{スピノルの有限ローレンツ変換}
+無限小ローレンツ変換について式(\ref{eq:dirac matrix lorentz inv})がみたされるようにした。
+\begin{align}
+\left[ \frac{i}{4}\delta\omega_{\alpha\beta} \sigma^{\alpha\beta}, \gamma^\mu \right] = 
+\delta\omega^\mu_{~\nu} \gamma^\nu
+\end{align}
+それはいいけど、ちゃんと有限のローレンツ変換についても式(\ref{eq:dirac matrix lorentz inv})ってみたされるの？
+
+ローレンツ変換に続けて微小ローレンツ変換をやると、ちょびっと違うローレンツ変換ができる。
+\begin{align}
+{\Lambda'}^\mu_{~\nu} = (\delta^\mu_{~\lambda} + \omega^\mu_{~\lambda} ) \Lambda^\lambda_{~\nu} + {\cal O}(\omega^2)
+\end{align}
+%
+差分に書き直すとこんな感じ。
+\begin{align}
+{\Lambda'}^\mu_{~\nu} - {\Lambda}^\mu_{~\nu} = \omega^\mu_{~\lambda} \Lambda^\lambda_{~\nu} + {\cal O}(\omega^2)
+\end{align}
+%
+ということで、ローレンツ変換に対する微分方程式ができる。
+\begin{align}
+\frac{d}{d\tau} {\Lambda}^\mu_{~\nu}(\tau) = \omega^\mu_{~\lambda} {\Lambda}^\mu_{~\nu}(\tau)
+\end{align}
+これにより、連続パラメーター$\tau$でパラメトライズできる一連のローレンツ変換ができる。
+この微分方程式の解は、
+\begin{align}
+\Lambda^\mu_{~\nu}
+&= [\exp(\tau\omega)]^\mu_{~\nu} \nonumber\\
+&= \delta^\mu_{~\nu} + \tau \omega^\mu_{~\nu} + \frac{1}{2} \tau^2 \omega^\mu_{~\lambda}\omega^\lambda_{~\nu} + \cdots.
+\end{align}
+みたいな感じで指数関数にまとまる。
+
+$U(\Lambda)$も指数関数で
+\begin{align}
+U(\Lambda) &= \exp\left( -\frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right).
+\end{align}
+とかける。これが、式(\ref{eq:dirac matrix lorentz inv})をみたすことを確認するには、この公式も便利だよ。\footnote{
+いわゆるCampbell-Baker-Hausdorfの公式。
+%\url{https://en.wikipedia.org/wiki/Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula#An_important_lemma_and_its_application_to_a_special_case_of_the_Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula}
+\url{http://www2.yukawa.kyoto-u.ac.jp/~akio.tomiya/filebox/Campbell-Baker-Hausdorff.pdf}などを参照のこと。
+}
+\begin{align}
+Y + [X,Y] + \frac{1}{2!} [X,[X,Y]] + \frac{1}{3!} [X,[X,[X,Y]]] + \cdots &= e^{-X} Y e^X
+\end{align}
+% 2022.5.9ここまで
+
+ためしに、$z$軸まわりの回転と$z$軸方向のローレンツブーストについて、$U(\Lambda)$を計算してみよう。
+
+
+\subsubsection{$z$軸まわりの回転}
+まず$\Lambda^\mu_{~\nu}$を指数関数の形から評価してみよう。
+$z$軸まわりに角度$\theta$回転させると、
+\begin{align}
+\Lambda^{\mu}_{~\nu}
+=&
+\exp\left(
+\begin{array}{cccc}
+0 & 0 & 0 & 0 \\
+0 & 0 & \theta & 0 \\
+0 & -\theta & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{array}
+\right) \nonumber\\
+%
+=&
+\left(\begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{array}
+\right)
++
+\left( \theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} + \cdots \right) \times
+\left(
+\begin{array}{cccc}
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{array}
+\right)
++
+\left( - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} + \cdots \right) \times
+\left(\begin{array}{cccc}
+0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0
+\end{array}
+\right)
+\nonumber\\
+%
+=&
+\left(\begin{array}{cccc}
+1 &&& \\
+& \cos\theta & \sin\theta &\\
+& -\sin\theta & \cos\theta &\\
+&&& 1
+\end{array}\right)
+\end{align}
+ちなみに、ほぼ同じ計算を量子力学で回転群やったときにやってるはずだ。
+ということで、こういう関係が成立しているはずだ。
+\begin{align}
+\Lambda^0_{~\nu} \gamma^\nu &= \gamma^0 \label{eq:rotation gamma 0}, \\
+\Lambda^1_{~\nu} \gamma^\nu &= \cos\theta \gamma^1 + \sin\theta\gamma^2 \label{eq:rotation gamma 1}, \\
+\Lambda^2_{~\nu} \gamma^\nu &= -\sin\theta \gamma^1 + \cos\theta \gamma^2 \label{eq:rotation gamma 2}, \\
+\Lambda^3_{~\nu} \gamma^\nu &= \gamma^3. \label{eq:rotation gamma 3}
+\end{align}
+%
+さて、$U(\Lambda)$を評価してみよう。
+%\textcolor{magenta}{(符号チェック)}
+\begin{align}
+U(\Lambda)
+=
+\exp\left( -\frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right)
+=
+\exp\left( i \theta \sigma_{12} \right)
+=
+\left(\begin{array}{cccc}
+e^{i\theta/2} &&& \\
+& e^{-i\theta/2} && \\
+&& e^{i\theta/2} & \\
+&&& e^{-i\theta/2} 
+\end{array}\right)
+\end{align}
+%
+
+\begin{align}
+U^{-1}(\Lambda) \gamma^1 U(\Lambda)
+&=
+\left(\begin{array}{cccc}
+e^{-i\theta/2} &&& \\
+& e^{i\theta/2} && \\
+&& e^{-i\theta/2} & \\
+&&& e^{i\theta/2} 
+\end{array}\right)
+%
+\left(\begin{array}{cccc}
+&&&1\\
+&&1&\\
+&-1&&\\
+-1&&&
+\end{array}\right)
+%
+\left(\begin{array}{cccc}
+e^{i\theta/2} &&& \\
+& e^{-i\theta/2} && \\
+&& e^{i\theta/2} & \\
+&&& e^{-i\theta/2} 
+\end{array}\right) \nonumber\\
+%
+&=
+\left(\begin{array}{cccc}
+&&&e^{-i\theta}\\
+&&e^{i\theta}&\\
+&-e^{-i\theta}&&\\
+-e^{i\theta}&&&
+\end{array}\right) \nonumber\\
+&=
+\left(\begin{array}{cccc}
+&&& \cos\theta - i\sin\theta \\
+&&\cos\theta + i\sin\theta&\\
+&-\cos\theta + i\sin\theta&&\\
+-\cos\theta - i\sin\theta&&&
+\end{array}\right) \nonumber\\
+&=
+\cos\theta \gamma^1 + \sin\theta \gamma^2
+\end{align}
+式(\ref{eq:rotation gamma 1})がチェックできた。やったね。
+式(\ref{eq:rotation gamma 2})も同じような計算でチェックできるし、
+$U(\Lambda)$は$\gamma^0, \gamma^3$と交換するので式(\ref{eq:rotation gamma 0}, \ref{eq:rotation gamma 3})も成り立つ。\footnote{時間のある人は示してみてください}
+
+
+\subsubsection{$z$軸方向のブースト}
+$z$軸方向のブーストも計算してみよう。
+\begin{align}
+\Lambda^{\mu}_{~\nu}
+&=
+\exp\left(\begin{array}{cccc}
+0 & 0 & 0 & \eta \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\eta & 0 & 0 & 0
+\end{array}\right) \nonumber\\
+%
+=&
+\left(\begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{array}
+\right)
++
+\left( \eta + \frac{\eta^3}{3!} + \frac{\eta^5}{5!} + \cdots \right) \times
+\left(
+\begin{array}{cccc}
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{array}
+\right)
++
+\left( \frac{\eta^2}{2!} + \frac{\eta^4}{4!} + \cdots \right) \times
+\left(\begin{array}{cccc}
+1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1
+\end{array}
+\right)
+\nonumber\\
+%
+=&
+\left(\begin{array}{cccc}
+\cosh\eta &&& \sinh\eta \\
+& 1 &&\\
+& & 1 &\\
+\sinh\eta &&& \cosh\eta
+\end{array}\right)
+\end{align}
+ちなみに、$\eta$は擬ラピディティ(pseudo-rapidity)とか呼ばれたりするパラメーター。
+ということで、こういう関係が成立しているはずだ。
+\begin{align}
+\Lambda^0_{~\nu} \gamma^\nu &= \cosh\eta \gamma^0 + \sinh\eta \gamma^3, \label{eq:boost gamma 0} \\
+\Lambda^1_{~\nu} \gamma^\nu &= \gamma^1, \label{eq:boost gamma 1}\\
+\Lambda^2_{~\nu} \gamma^\nu &= \gamma^2, \label{eq:boost gamma 2}\\
+\Lambda^3_{~\nu} \gamma^\nu &= \sinh\eta \gamma^0 + \cosh\eta \gamma^3 \label{eq:boost gamma 3}
+\end{align}
+%
+さて、$U(\Lambda)$を評価してみよう。
+\begin{align}
+U(\Lambda)
+=
+\exp\left( -\frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right)
+=
+\exp\left( i \eta \sigma_{03} \right)
+=
+\left(\begin{array}{cccc}
+\cosh\eta/2 & & \sinh\eta/2 & \\
+& \cosh\eta/2 & & -\sinh\eta/2 \\
+\sinh\eta/2 & & \cosh\eta/2 & \\
+& -\sinh\eta/2 & & \cosh\eta/2 \\
+\end{array}\right)
+\end{align}
+
+{\tiny
+\begin{align}
+U(\Lambda)^{-1} \gamma^0 U(\Lambda)
+&=
+\left(\begin{array}{cccc}
+\cosh\eta/2 & & -\sinh\eta/2 & \\
+& \cosh\eta/2 & & +\sinh\eta/2 \\
+-\sinh\eta/2 & & \cosh\eta/2 & \\
+& +\sinh\eta/2 & & \cosh\eta/2 \\
+\end{array}\right)
+%
+\left(\begin{array}{cccc}
+1&&&\\
+&1&&\\
+&&-1&\\
+&&&-1
+\end{array}\right)
+%
+\left(\begin{array}{cccc}
+\cosh\eta/2 & & \sinh\eta/2 & \\
+& \cosh\eta/2 & & -\sinh\eta/2 \\
+\sinh\eta/2 & & \cosh\eta/2 & \\
+& -\sinh\eta/2 & & \cosh\eta/2 \\
+\end{array}\right) \nonumber\\
+%
+&=
+\left(\begin{array}{cccc}
+\cosh\eta/2 & & -\sinh\eta/2 & \\
+& \cosh\eta/2 & & +\sinh\eta/2 \\
+-\sinh\eta/2 & & \cosh\eta/2 & \\
+& +\sinh\eta/2 & & \cosh\eta/2 \\
+\end{array}\right)
+%
+\left(\begin{array}{cccc}
+\cosh\eta/2 & & \sinh\eta/2 & \\
+& \cosh\eta/2 & & -\sinh\eta/2 \\
+-\sinh\eta/2 & & -\cosh\eta/2 & \\
+& \sinh\eta/2 & & -\cosh\eta/2 \\
+\end{array}\right) \nonumber\\
+%
+&=
+\left(\begin{array}{cccc}
+x&&y&\\
+&x&&-y\\
+-y&&-x&\\
+&y&&-x
+\end{array}\right) \nonumber\\
+\end{align}
+}
+$x = \cosh^2\eta / 2 + \sinh^2 \eta/2 = \cosh\eta$と$y = 2\sinh\eta\cosh\eta = \sinh\eta$
+ということで、
+\begin{align}
+U(\Lambda)^{-1} \gamma^0 U(\Lambda) = \cosh\eta \gamma^0 + \sinh\eta \gamma^3
+\end{align}
+式(\ref{eq:boost gamma 0})が確かに満たされている。
+式(\ref{eq:boost gamma 1}, \ref{eq:boost gamma 2}, \ref{eq:boost gamma 3})もチェックできる。\footnote{時間のある人は示してみてください}
+
+というわけで、たしかに
+\begin{align}
+\Lambda^\mu_{~\nu} = [\exp(\omega)]^\mu_{~\nu}
+\end{align}
+に対し、
+\begin{align}
+U(\Lambda) = \exp\left( -\frac{i}{4} \omega^{\mu\nu} \sigma^{\mu\nu} \right)
+\end{align}
+とおくと、
+\begin{align}
+U(\Lambda)^{-1} \gamma^\mu U(\Lambda) = \Lambda^\mu_{~\nu} \gamma^\nu
+\end{align}
+（式(\ref{eq:dirac matrix lorentz inv})）が満たされているのが確かにチェックできる。
+
+
+\subsection{スピン}\label{sec:spin}
+同じ座標における波動関数を比較してみよう。
+ローレンツスカラーの$\phi$について、
+\begin{align}
+\phi'(x') &= \phi(x),\\
+\phi'(x) &= \phi(\Lambda^{-1} x) \nonumber\\
+& \simeq \phi(x^\mu - \omega^{\mu}_{~\nu} x^\nu) \nonumber\\
+& \simeq \phi(x) - \omega^{\mu}_{~\nu} x^\nu \partial_\mu \phi(x)  \nonumber\\
+& \simeq \phi(x) - \omega_{\mu\nu} x^\nu \partial^\mu \phi(x)
+\end{align}
+%
+特に$z$軸まわりの微小回転を考えてみたい。$\omega_{12} = -\omega_{21} = -\theta$とすると、
+\begin{align}
+\phi'(x) - \phi(x)
+\simeq \theta \times -(x^1 \partial^2 - x^2 \partial^1) \phi \nonumber\\
+\simeq \theta \times i( ix^1 \partial^2 - ix^2 \partial^1) \phi
+\end{align}
+角運動量演算子が出てきたのがわかる。
+
+スピノルについても同じ計算をやってみよう。
+\begin{align}
+\psi'(x') &= U(\Lambda) \psi(x), \\
+\psi'(x) &= U(\Lambda) \psi(\Lambda^{-1} x), \nonumber\\
+ &\simeq \left( I_4  - \frac{i}{4} \omega_{\mu\nu} \sigma^{\mu\nu} \right) \psi(x^\mu - \omega^{\mu}_{~\nu} x^\nu), \nonumber\\
+&\simeq \psi(x) + \left( - \omega^{\mu}_{~\nu} x^\nu \partial_\mu - \frac{i}{4} \omega_{\mu\nu} \sigma^{\mu\nu} \right) \psi(x) \nonumber\\
+&\simeq \psi(x) + \omega_{\mu\nu} \left( - x^\nu \partial^\mu - \frac{i}{4} \sigma^{\mu\nu} \right) \psi(x) \nonumber\\
+\end{align}
+%
+\begin{align}
+\psi'(x) - \psi(x)
+&\simeq
+\theta \times i \left( ix^1 \partial^2 - ix^2 \partial^1 + \frac{1}{2}\sigma^{12} \right) \psi
+\end{align}
+%
+微分が入っている項は軌道角運動量と解釈できる。$\sigma^{12}$も角運動量。これがスピン。
+\begin{align}
+\frac{1}{2}\sigma^{12} = \frac{1}{2} \left(\begin{array}{cccc}
+1 &&&\\
+& -1 &&\\
+&& 1 &\\
+&&& -1
+\end{array}\right)
+\end{align}
+この形を見ると$c_1$成分と$c_1'$は$J_z = +1/2$を持ち、$c_2$成分と$c_2'$成分は$J_z = -1/2$を持つことが分かる。
+特に、静止している($p_z = 0$)解を考えたとしても角運動量を持っていることが分かり、これはスピン角運動量と解釈できる。
+つまり、ディラック方程式はスピン$1/2$を表すことができている！
+
+\section{群と表現（スピン角運動量とか昇降演算子とかの復習を添えて）}
+前の章でスピノルというのをみた。このあたりの理解を深めるために、群、表現、という数学の道具を学ぶ。数学と聞いて構える必要はない。なぜならば、群の表現には、実は、量子力学の講義で出会っているはずだ。
+角運動量$1/2$、$1$、$3/2$などといった状態にたいして、$J_x$、$J_y$、$J_z$という演算子がどのような行列の形となるかを学んだ。$J_x$、$J_y$、$J_z$という演算子は回転群（$SO(3)$）の生成子であり、角運動量の値ごとに回転群の表現があると理解できる。
+この章では、まず、量子力学の講義で学んだことを、群、表現、という言葉を使って整理しなおす。
+この講義では、群論の一般論を詳細にやる時間的余裕はないが、以下の講義ノートや書籍を参考にされたい。
+\begin{itemize}
+\item \url{http://cat.phys.s.u-tokyo.ac.jp/lecture/MP3_16/MP3_16.html}
+\item \url{https://member.ipmu.jp/yuji.tachikawa/lectures/2018-butsurisuugaku3/}
+\item 物理学におけるリー代数―アイソスピンから統一理論へ（ジョージァイ、吉岡書店）
+\item 量子力学I（猪木慶治、川合光、講談社）第7章
+\end{itemize}
+
+\subsection{群の定義}
+まず、群とは、次のような性質をみたす元の集合$G$をいう。
+\begin{itemize}
+\item 任意の$g_1 \in G$と$g_2 \in G$に対し、積$g_1 g_2 \in G$が定義されている
+\item 単位元$e \in G$が存在する。（任意の$g\in G$に対し、$eg=ge=g$）
+\item 任意の$g\in G$に対し逆元$g^{-1} \in G$が存在する。（$g g^{-1} = g^{-1} g = e$）
+\item 積に対して結合則が成立する。任意の$g_1,~g_2,~g_3\in G$に対して、$g_1 (g_2 g_3) = (g_1 g_2) g_3$が成立する。
+\end{itemize}
+
+\subsection{群の例}
+\subsubsection{離散群の例}
+\begin{align}
+G = \{e,g\}, \qquad g^2 = e
+\end{align}
+
+
+\begin{align}
+G = \{e,g, g^2, \cdots, g^{n-1}\}, \qquad g^n = e
+\end{align}
+
+
+
+\subsubsection{三次元空間の回転}
+三次元空間の回転は、$3\times 3$行列$R$を使って、
+\begin{align}
+\left(\begin{array}{c}
+x' \\
+y' \\
+z'
+\end{array}\right)
+=
+R
+\left(\begin{array}{c}
+x \\
+y \\
+z
+\end{array}\right)
+\end{align}
+と書ける。原点からの距離が不変($\vec x^2 = \vec x'^2$)を要求すると、$R$は
+\begin{align}
+R^T R = I_3
+\end{align}
+を満たなされなければならない。すなわち、$R$は、実直交行列であることが分かる。
+
+行列の積演算の性質から、直交行列の集合は上の群の四条件をみたしている。
+\begin{itemize}
+\item 実直行行列$R_1$と$R_2$の積$R_1 R_2$も直行行列。
+\item $I_3$は実直行行列のひとつであり、$R I_3 = I_3 R = R$
+\item 実直行行列$R$の逆行列$R^{-1}$も実直行行列であり、$R R^{-1} = R^{-1} R = I_3$
+\item 行列の積は結合則が成立するので、$R_1 (R_2 R_3) = (R_1 R_2) R_3$。
+\end{itemize}
+回転のなす群は回転群とよばれる。$O(3)$とも呼ばれる（直交群ともいう。$O$はOrthgonal groupからきている）。
+
+回転群の元は連続的なパラメーターを使って指定される。このような群を\textbf{連続群}もしくは\textbf{Lie群}と呼ぶ。
+
+\subsection{部分群、$SO(3)$}
+$R^T R = I_3$であることから、$(\det R)^2 = 1$がすぐ分かる。つまり、直交行列は$\det R=1$のものと$\det R=-1$のものに分類できることが分かる。
+
+$\det R=1$を満たす直交行列を集合を考えよう。これも群になっていることが分かる。$SO(3)$と呼ばれる。部分集合で群をなすものは部分群と呼ばれる。$SO(3)$は$O(3)$の部分群である。
+
+
+
+
+\subsection{無限小回転とLie代数}
+無限小回転を議論してみよう。直交行列$R$を
+\begin{align}
+R = I + \delta
+\end{align}
+と書いてみる。直交行列であるという条件$R R^T = I$を$\delta$無限小として展開する。
+両辺の$\delta$の一次の項だけ比較すると、次の関係式をえる。
+\begin{align}
+\delta^T + \delta = 0. \label{eq:SO3 small rotation}
+\end{align}
+このような$\delta$の一般的な解は、$\theta_1$, $\theta_2$, $\theta_3$という3つのパラメーターを使って
+\begin{align}
+\delta = \left(\begin{array}{ccc}
+0 & \theta_3 & -\theta_2 \\
+-\theta_3 & 0 & \theta_1 \\
+\theta_2 & -\theta_1 & 0
+\end{array}\right) \label{eq:SO3 small rotation2}
+\end{align}
+と書ける。
+$J_1$, $J_2$, $J_3$は次のように定義された$3\times 3$行列を定義してみよう。
+\begin{align}
+J_1 = \left(\begin{array}{ccc}
+0 & 0 & 0 \\
+0 & 0 & -i\\
+0 & i & 0
+\end{array}\right), \qquad
+%
+J_2 = \left(\begin{array}{ccc}
+0 & 0 & i\\
+ 0 & 0 & 0 \\
+-i & 0 & 0
+\end{array}\right), \qquad
+%
+J_3 = \left(\begin{array}{ccc}
+0 & -i & 0 \\
+i & 0 & 0 \\
+0 & 0 & 0 
+\end{array}\right).\label{eq:SO3 generator matrix}
+\end{align}
+これを使うと$\delta$は簡単に書ける。
+\begin{align}
+\delta = i \theta_1 J_1 + i \theta_2 J_2 + i \theta_3 J_3 \label{eq:SO3 generator}
+\end{align}
+$J_1$, $J_2$, $J_3$は回転群の生成子と呼ばれる。
+%
+有限の回転も生成子を使って書ける。（無限小とは限らない）$\theta_1, \theta_2, \theta_3$を使って、直交行列$R$を
+\begin{align}
+R = \exp\left( i \theta_1 J_1 + i \theta_2 J_2 + i\theta_3 J_3 \right)
+\end{align}
+と書くことができる。
+
+さて、式(\ref{eq:SO3 generator matrix})で得られた行列を使って、交換関係$[J_i, J_j]\equiv J_i J_j - J_j J_i$を計算してみよう。以下のような交換関係が成り立っていることが確認できる。
+\begin{itembox}[l]{回転群の生成子の交換関係}
+\begin{align}
+[J_1, J_2] = i J_3, \qquad
+[J_2, J_3] = i J_1, \qquad
+[J_3, J_1] = i J_2. \label{eq:SO3 algebra}
+\end{align}
+\end{itembox}
+この交換関係が超重要。\textbf{Lie代数}ともよばれる。以下のような重要な性質がある。
+\begin{itemize}
+\item ベクトル空間。足し算とスカラー倍が定義されている。
+\item 双線形な演算$[,]$が定義されている。
+\item $[X,Y] = -[Y,X]$
+\item Jacobi恒等式 $[X,[Y,Z]] + [Y, [Z,X]] + [Z,[X,Y]] = 0$が成立する。
+\end{itemize}
+
+\subsection{表現}
+一般にある群$G$の各元に対して$n \times n$行列$D(g)$が対応して、
+\begin{align}
+D(g_1) D(g_2) &= D(g_1 g_2), \\
+D(g^{-1}) &= D(g)^{-1}, \\
+D(e) = 1_n
+\end{align}
+を満たすとき、$D(g)$を表現行列という。
+直交行列は回転群の表現行列の一つである。しかし、唯一の表現行列ではない。
+例えば、回転群の全ての元に対して$1\times 1$行列の$1$を割り当てるとこれも表現行列になっていることが分かる。他にもあるだろうか？
+
+この質問に答えるカギが、式(\ref{eq:SO3 algebra})の交換関係である。
+例えば、ある$n\times n$行列の3つ組$J'_1$, $J'_2$, $J'_3$が存在して、
+\begin{align}
+[J'_1, J'_2] = i J'_3, \qquad
+[J'_2, J'_3] = i J'_1, \qquad
+[J'_3, J'_1] = i J'_2.
+\end{align}
+を満たしているとしよう。このとき、
+\begin{align}
+R' = \exp\left( i \theta_1 J'_1 + i \theta_2 J'_2 + i\theta_3 J'_3 \right)
+\end{align}
+は表現行列になっている。
+ということで、式(\ref{eq:SO3 algebra})を満たす行列の3つ組がどれだけバリエーションがあるか、という問題が、表現行列にどれだけバリエーションがあるか、という問題と同じだということが分かる。
+% 2022.5.16ここまで
+
+表現行列はうまいユニタリ変換を選ぶとブロック対角化できるものがある。このような表現を可約表現と呼ぶ。ブロック対角化できるようなユニタリ変換を探せないものを既約表現と呼ぶ。定義により、全ての可約表現は既約表現のいくつかの直和で書ける。そのため、既約表現を分類できれば、ありうる表現の種類は全て分かることになる。
+
+\subsection{回転群の既約表現}
+さて、回転群の表現行列を考えると、無限小回転から生成子が出てきたので、生成子も行列として書くことができる。
+次のような行列を定義してみよう。
+\begin{align}
+J_+ \equiv J_1 + i J_2, \qquad
+J_- \equiv J_1 - i J_2
+\end{align}
+容易に次の交換関係がチェックできる。
+\begin{align}
+[J_3, J_+] = J_+, \qquad
+[J_3, J_-] = -J_-.
+\end{align}
+$J_3$の固有ベクトル$v$について、
+\begin{align}
+J_3 v = \lambda v.
+\end{align}
+%
+$J_+ v$と$J_- v$に$J_3$を作用させてみよう。
+\begin{align}
+J_3 (J_+ v) &= ( J_+ J_3 + J_+ )v = (\lambda + 1) J_+ v, \\
+J_3 (J_- v) &= ( J_- J_3 + J_- )v = (\lambda + 1) J_- v.
+\end{align}
+$J_+$と$J_-$はそれぞれ、$J_3$の固有値を1増やしたり1減らしたりする。
+
+表現が有限次元であることから、$J_3$の固有値には最大値$\lambda_{\rm max}$と最小値$\lambda_{\rm min}$が存在する。
+その固有ベクトル$v_{\rm max}$と$v_{\rm min}$は
+\begin{align}
+J_+ v_{\rm max} = 0, \qquad
+J_- v_{\rm min} = 0.
+\end{align}
+を満たす。（右辺が0じゃないと固有値$\lambda_{\rm max}+1$もしくは$\lambda_{\rm min}-1$の固有ベクトルが作れてしまうので矛盾する。）
+
+代数から次の関係式が作れる。
+\begin{align}
+J_- J_+ &= (J_1^2 + J_2^2 + J_3^3) - J_3^3 - J_3, \\
+J_+ J_- &= (J_1^2 + J_2^2 + J_3^3) - J_3^3 + J_3.
+\end{align}
+これを用いて、以下が示せる。
+\begin{align}
+J_- J_+ v_{\rm max} \qquad \Rightarrow \qquad (J_1^2 + J_2^2 + J_3^3) v_{\rm max} = \lambda_{\rm max} (\lambda_{\rm max}+1) v_{\rm max}, \\
+J_+ J_- v_{\rm min} \qquad \Rightarrow \qquad (J_1^2 + J_2^2 + J_3^3) v_{\rm min} = \lambda_{\rm min} (\lambda_{\rm min}-1) v_{\rm max}.
+\end{align}
+
+ある整数$n$を使って、
+\begin{align}
+(J_-)^n v_{\rm max} \propto v_{\rm min}
+\end{align}
+と書けるとしよう。（既約表現に興味がある！）すると、
+\begin{align}
+\lambda_{\rm min} = \lambda_{\rm max} - n
+\end{align}
+であり、
+\begin{align}
+[J_\pm, J_1^2 + J_2^2 + J_3^2] &= 0
+\end{align}
+を使うと、
+\begin{align}
+\lambda_{\rm max} (\lambda_{\rm max}+1)
+=
+\lambda_{\rm min} (\lambda_{\rm min}-1)
+\end{align}
+代入して整理すると、
+\begin{align}
+(n-2\lambda_{\rm max})(n+1) = 0
+\end{align}
+$n$は自然数なので、結局、以下を得る。
+\begin{align}
+n = 2\lambda_{\rm max}, \qquad
+\lambda_{\rm min} = -\lambda_{\rm max}.
+\end{align}
+こんな感じでスピン$j(=\lambda_{\rm max})$の表現が得られるのが分かる。
+
+スピン$j$の表現について、$J_3$を対角化する基底をとってみよう。
+\begin{align}
+J_3 = \left(\begin{array}{cccc}
+j &&& \\
+& j-1 && \\
+&& \ddots & \\
+&&& j
+\end{array}\right).
+\end{align}
+%
+$J_3 = j$の成分について$J_- J_+ = J_1^2 + J_2^2 + J_3^3 - J_3^2 - J_3 = 0$であることと、
+$J_1^2 + J_2^2 + J_3^3$は$J_\pm$と可換であることから、
+\begin{align}
+J_1^2+J_2^2+J_3^2 = \left(\begin{array}{cccc}
+j(j+1) &&& \\
+& j(j+1) && \\
+&& \ddots & \\
+&&& j(j+1)
+\end{array}\right)
+\end{align}
+%
+$J_- J_+ = J_1^2 + J_2^2 + J_3^3 - J_3^2 - J_3$と
+$J_+ J_- = J_1^2 + J_2^2 + J_3^3 - J_3^2 + J_3$を使うと、
+\begin{align}
+J_+ J_-
+& = \left(\begin{array}{ccccccc}
+ 2j &&&&&& \\
+& 2(2j-1) &&&&& \\
+&& 3(2j-2) &&&& \\
+&&& 4(2j-3) &&& \\
+&&&& 5(2j-4) && \\
+&&&&& \ddots & \\
+&&&&&& 0
+\end{array}\right), \\
+%
+J_- J_+
+& = \left(\begin{array}{ccccccc}
+0 &&&&&& \\
+& 2j &&&&& \\
+&& 2(2j-1) &&&& \\
+&&& 3(2j-2) &&& \\
+&&&& 4(2j-3) && \\
+&&&&& \ddots & \\
+&&&&&& 2j
+\end{array}\right), \quad
+\end{align}
+%
+結局、
+\begin{align}
+J_+ = \left(\begin{array}{ccccc}
+0& \sqrt{2j} &&& \\
+&0& \sqrt{2(2j-1)} && \\
+&&0& \ddots & \\
+&&&\ddots& \sqrt{2j} \\
+&&&&0
+\end{array}\right), \qquad
+J_- = J_+^\dagger
+\end{align}
+%
+$J_\pm = J_1 \pm i J_2$を使うと、
+\begin{align}
+J_1 &= \frac{1}{2} \left(\begin{array}{ccccc}
+0& \sqrt{2j} &&& \\
+\sqrt{2j} &0& \sqrt{2(2j-1)} && \\
+& \sqrt{2(2j-1)} &0& \ddots & \\
+&& \ddots &\ddots& \sqrt{2j} \\
+&&& \sqrt{2j} &0
+\end{array}\right), \\
+%
+J_2 &= \frac{i}{2} \left(\begin{array}{ccccc}
+0& -\sqrt{2j} &&& \\
+\sqrt{2j} &0& -\sqrt{2(2j-1)} && \\
+& \sqrt{2(2j-1)} &0& \ddots & \\
+&& \ddots &\ddots& -\sqrt{2j} \\
+&&& \sqrt{2j} &0
+\end{array}\right).
+\end{align}
+
+ということで、回転群の表現はスピン(or角運動量)の値を指定すると、一意に決まることが分かる。
+
+
+
+\section{ローレンツ群とその表現}
+この章の目的は、スピノルはローレンツ群の表現である、ということを理解することである。
+前の章では、量子力学の講義で学んだことを、回転群、表現、という言葉を使って整理しなおした。
+この章では、同じ議論を、ローレンツ変換のなす群であるローレンツ群について適用してみる。
+スピノルがローレンツ群の表現の一つであることを学ぶ。
+
+\subsection{ローレンツ群の代数}
+回転群でやった議論をローレンツ群にも適用してみよう。
+\begin{align}
+x'^\mu = \Lambda^\mu_{~\nu} x^\nu
+\end{align}
+$\Lambda^\mu_{~\nu}$は次のような性質をみたす。
+\begin{align}
+g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta}.
+\end{align}
+
+ローレンツ変換の行列を$\Lambda^\mu_{~\alpha} = \delta^\mu_{~\nu} + \omega^\mu_{~\nu}$と分解してみよう。
+$\delta$が無限小とすると、次の関係式を得る。
+\begin{align}
+g_{\mu\alpha} \omega^\mu_{~\beta} + g_{\mu\beta} \omega^\mu_{~\alpha} = 0. \label{eq:Lorentz small rotation}
+\end{align}
+[式(\ref{eq:SO3 small rotation})と式(\ref{eq:Lorentz small rotation})を比較]\\
+%
+一般解は6つのパラメーターを使って次のように書ける。
+\begin{align}
+\omega^\mu_{~\nu}
+=
+\left(\begin{array}{cccc}
+0 & \eta_1 & \eta_2 & \eta_3 \\
+\eta_1 & 0 & \theta_3 & -\theta_2 \\
+\eta_2 & -\theta_3 & 0 & \theta_1 \\
+\eta_3 & \theta_2 & -\theta_1 & 0
+\end{array}\right) \label{eq:Lorentz small rotation2}
+\end{align}
+[式(\ref{eq:SO3 small rotation2})と式(\ref{eq:Lorentz small rotation2})を比較]\\
+%
+以下のように分解できる。
+\begin{align}
+\omega^\mu_{~\nu} = i \sum_{k=1}^3 \theta_k (J_k)^\mu_{~\nu} + i \sum_{k=1}^3 \eta_k (K_k)^\mu_{~\nu} \label{eq:Lorentz generator}
+\end{align}
+[式(\ref{eq:SO3 generator})と式(\ref{eq:Lorentz generator})を比較]\\
+%
+$J_i$は回転の生成子。$K_i$は$i$軸方向のローレンツブーストの生成子。
+具体的に書いてみると、
+\begin{align}
+(J_1)^\mu_{~\nu} &= \left(\begin{array}{cccc}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -i \\
+0 & 0 & i & 0 \\
+\end{array}\right), \\
+%
+(J_2)^\mu_{~\nu} &= \left(\begin{array}{cccc}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & i \\
+0 & 0 & 0 & 0 \\
+0 & -i & 0 & 0 \\
+\end{array}\right), \\
+%
+(J_3)^\mu_{~\nu} &= \left(\begin{array}{cccc}
+0 & 0 & 0 & 0 \\
+0 & 0 & -i & 0 \\
+0 & i & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\end{array}\right), \\
+%
+(K_1)^\mu_{~\nu} &= \left(\begin{array}{cccc}
+0 & -i & 0 & 0 \\
+-i & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\end{array}\right), \\
+%
+(K_2)^\mu_{~\nu} &= \left(\begin{array}{cccc}
+0 & 0 & -i & 0 \\
+0 & 0 & 0 & 0 \\
+-i & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\end{array}\right), \\
+%
+(K_3)^\mu_{~\nu} &= \left(\begin{array}{cccc}
+0 & 0 & 0 & -i \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+-i & 0 & 0 & 0 \\
+\end{array}\right)
+\end{align}
+
+$z$軸周りの回転が$\exp(i \theta J_3 )$と書けるように、$z$軸方向のローレンツブーストは$\exp(i\eta K_3)$と書ける！
+
+次の交換関係（代数）を得る。（具体的な計算は省略）
+\begin{align}
+[J_i, J_j] = i\epsilon_{ijk} J_k, \label{eq:Lorentz algebra1}\\
+[J_i, K_j] = i\epsilon_{ijk} K_k, \label{eq:Lorentz algebra2}\\
+[K_i, K_j] = -i\epsilon_{ijk} J_k. \label{eq:Lorentz algebra3}
+\end{align}
+[式(\ref{eq:SO3 algebra})と式(\ref{eq:Lorentz algebra1}, \ref{eq:Lorentz algebra2}, \ref{eq:Lorentz algebra3})を比較]
+
+
+\subsection{ローレンツ群の表現の一般論（Aスピン、Bスピン）}
+ローレンツ群の表現の一般論をやるために、Aスピン、Bスピンを定義してみよう。
+\begin{align}
+A_i \equiv \frac{1}{2}(J_i + i K_i), \\
+B_i \equiv \frac{1}{2}(J_i - i K_i).
+\end{align}
+%
+式(\ref{eq:Lorentz algebra1}, \ref{eq:Lorentz algebra2}, \ref{eq:Lorentz algebra3})を使うと、
+$A_i$と$B_i$について次の交換関係（代数）を得る。
+\begin{align}
+[A_i, A_j] &= i\epsilon_{ijk} A_k, \\
+[B_i, B_j] &= i\epsilon_{ijk} B_k, \\
+[A_i, B_j] &= 0.
+\end{align}
+$A_i$、$B_i$はそれぞれ回転群と同じ代数を為していることが分かり、さらに$A_i$と$B_i$は可換なことも分かる。
+$A$に対する``スピン''と$B$に対する``スピン''を、それぞれ$A$スピン、$B$スピンと呼ぶことにしてみよう。
+$A$スピンと$B$スピンの大きさを指定することにより、ローレンツ群の既約表現が一つ決まる。
+表現の次元は$(2A+1)(2B+1)$になる。
+ということで、ローレンツ群は回転群を２つ組み合わせたものみたいな感じになっている。\footnote{
+ローレンツ群は回転群２つというのはちょっとごまかしがある。
+ローレンツ群は$SO(1,3)$。
+$SO(4)$は$SU(2) \times SU(2)$と同じ代数。
+}
+% 2022.5.23ここまで
+
+まとめると、
+\begin{itemize}
+\item 回転群の既約表現：スピン$j$で指定。$j_z$の値は、$j_z = j, j-1, \cdots, -j$。$2j+1$次元。
+\item ローレンツ群の表現：スピン$A$と$B$で指定。$A_3$の値は、$A, A-1, \cdots, -A$。$B_3$の値は、$B, B-1, \cdots, -B$。結果、$(2A+1)(2B+1)$次元。
+\end{itemize}
+
+
+
+
+
+\subsection{ローレンツ群の既約表現の具体例}
+回転群の表現はスピンの値を半整数で指定すれば一意に決まった。
+ローレンツ群の表現はAスピン、Bスピンの値のそれぞれを半整数で指定すれば決まる。
+
+
+\subsubsection{スカラー}
+$A$スピン、$B$スピンをともに0としてみよう。$(0,0)$と書く。この表現の次元は
+\begin{align}
+(2\times 0 + 1) (2\times 0 + 1) = 1
+\end{align}
+であり、
+\begin{align}
+J_i = 0, \qquad
+K_i = 0.
+\end{align}
+ローレンツ変換に対し不変なことが分かる。これはローレンツスカラー。
+
+
+\subsubsection{ワイルスピノル}
+$(1/2,0)$という表現を考えてみよう。この表現の次元は、
+\begin{align}
+(2\times 1/2 + 1) (2\times 0 + 1) = 2
+\end{align}
+である。$A_i$と$B_i$は具体的には、$2\times 2$行列で、
+\begin{align}
+A_i = \frac{1}{2}\sigma_i, \qquad
+B_i = 0.
+\end{align}
+と書くことができる。$A_i = (J_i + i K_i)/2$、$B_i = (J_i - i K_i)/2$と定義したことから、
+\begin{align}
+J_i = \frac{1}{2}\sigma_i, \qquad
+K_i = -\frac{i}{2}\sigma_i.
+\end{align}
+これは、左手型ワイルスピノル(left-handed Weyl spinor)。あとで詳しくみる。
+
+また、$(0,1/2)$という表現も考えることができる。この表現の次元も同様に$2$であり、
+具体的な$A_i$と$B_i$の形は$2\times 2$行列で、
+\begin{align}
+A_i = 0, \qquad
+B_i = \frac{1}{2}\sigma_i.
+\end{align}
+と書ける。$J_i$と$K_i$は、
+\begin{align}
+J_i = \frac{1}{2}\sigma_i, \qquad
+K_i = \frac{i}{2}\sigma_i.
+\end{align}
+と書ける。
+これは、右手型ワイルスピノル(right-handed Weyl spinor)。これもあとで詳しくみる。
+
+\subsubsection{ベクトル}
+ベクトルは既約表現で、AスピンBスピンの言葉でいうと$(1/2,1/2)$と理解できる。
+これは確かに$2\times 2 = 4$成分。また、回転群の表現としては$1/2 \times 1/2 = 0 +1$となっているので、確かに4成分ベクトルっぽい。\footnote{
+$J_i$と$K_i$を具体的に構成してベクトルになっていることをチェックすることもできるけど省略。腕試しにやってみるのもよいかも。}
+
+\subsection{質量0のフェルミオンとワイルスピノル}
+ローレンツ群の既役表現の作り方を学んだ。
+結局、4成分のディラックスピノルは、どんな表現だったのか？
+ワイルスピノルというのがでてきたが、ディラックスピノルの関係は？
+それを考えるために、質量0のフェルミオンを一旦考えてみよう。
+
+\subsubsection{質量0の時のディラック方程式}
+実は、ワイルスピノルは質量$0$のフェルミオンを記述する。確認してみよう。
+ディラック方程式で$m=0$としてみると、
+\begin{align}
+(i \gamma^\mu \partial_\mu -m )\psi = 0
+\end{align}
+スピノルの上下2成分ずつで分けてみよう。
+\begin{align}
+\left(\begin{array}{cc}
+i\partial_t - m & i \partial_i \sigma^i \\
+-i \partial_i \sigma^i & -i\partial_t - m
+\end{array}\right) \left(
+\begin{array}{c}
+\psi_+ \\
+\psi_-
+\end{array}
+\right) = 0.
+\end{align}
+%
+突然だが、こんな組み合わせを取ってみよう。
+\begin{align}
+\psi_L &= \frac{1}{\sqrt{2}} (\psi_+ - \psi_-), \\
+\psi_R &= \frac{1}{\sqrt{2}} (\psi_+ + \psi_-).
+\end{align}
+%
+すると、2成分ずつに分けたディラック方程式は、$\psi_{L,R}$で以下のように書くことができる。
+\begin{align}
+(i\partial_t - i \partial_i \sigma^i) \psi_L - m \psi_R &= 0, \\
+(i\partial_t + i \partial_i \sigma^i) \psi_R - m \psi_L &= 0.
+\end{align}
+$\psi_L$と$\psi_R$が交じる式になっているが、$m=0$とすると、
+\begin{align}
+(i\partial_t - i \partial_i \sigma^i) \psi_L &= 0, \\
+(i\partial_t + i \partial_i \sigma^i) \psi_R &= 0.
+\end{align}
+となって、$\psi_L$と$\psi_R$が分離する！\footnote{
+式(\ref{eq:dirac matrix weyl})で与えられているWeyl representationのガンマ行列をとると、ディラックスピノルの4成分の上下2成分ずつが、
+\begin{align}
+\left(\begin{array}{c}
+\psi_L \\
+\psi_R
+\end{array}\right)
+\end{align}
+というように2つのワイルスピノルで分かれた形で書かれる。}
+
+
+\subsubsection{２つのワイルスピノルの物理的意味}
+運動量固有状態（平面波）についてみてみよう。
+$\psi_L$に対し、$z$軸正の向きに進む粒子を考えて、
+\begin{align}
+\psi_L \propto \exp( -iEt + i E z )
+\end{align}
+とおく（質量0の粒子を考えているので$E = |\vec p|$であることに注意！）と、
+\begin{align}
+\sigma^3 \psi_L = - \psi_L
+\end{align}
+が満たされることが分かる。\ref{sec:spin}章の議論を思い出すと、これはスピンが下向き（$z$軸負方向）に決まったことをあらわしている！
+運動量の向きを変えて同じような議論ができるが、スピンと運動量が反対の向きになるという事情は変わらない。
+
+\textbf{ヘリシティ} (helicity)という量を運動量とスピンから定義するのが便利。
+\begin{align}
+h = \frac{\vec S \cdot \vec p}{|\vec p|}
+\end{align}
+$\psi_L$はヘリシティ$-1/2$。
+
+同様に、$\psi_R$に対し、
+\begin{align}
+\psi_R \propto \exp( -iEt + i E z )
+\end{align}
+とおくと、
+\begin{align}
+\sigma^3 \psi_R = + \psi_R
+\end{align}
+$\psi_R$のスピンは上向きに決まった！運動量の向きを変えると、必ずスピンは運動量と同じ向きになる。
+$\psi_R$はヘリシティ$+1/2$。
+
+粒子の速度が光速より遅いと追い越すことができる。そうすると、ヘリシティが反転してみえる。
+粒子の速度が光速だと追い越せない。ヘリシティは反転できない。
+
+
+
+\subsubsection{ローレンツ群の表現としてのワイルスピノル}
+ディラック方程式に出てきた4成分スピノルは、ディラックスピノルと呼ばれる。
+質量$0$のディラックスピノルが２つのワイルスピノルに分離できたことからも分かるように、
+ディラックスピノルは既約表現ではない。
+
+\begin{align}
+\sigma^{ij} = \left(
+\begin{array}{cc}
+\epsilon_{ijk} \sigma^k & 0 \\
+0 & \epsilon_{ijk} \sigma^k
+\end{array}
+\right)
+, \qquad
+\sigma^{0i} = -\sigma^{i0} = \left(
+\begin{array}{cc}
+0 & i\sigma^i \\
+i\sigma^i & 0
+\end{array}
+\right)
+\end{align}
+
+$\psi_{L,R}$と$\psi_\pm$の間の関係（基底変換）はこんなだった。
+\begin{align}
+\left(\begin{array}{c}
+\psi_+ \\
+\psi_-
+\end{array}\right)
+=
+U
+\left(\begin{array}{c}
+\psi_L \\
+\psi_R
+\end{array}\right)
+\end{align}
+%
+ちなみに$U$は、こんな行列。
+\begin{align}
+U = \frac{1}{\sqrt 2}\left(
+\begin{array}{cc}
+I_2 & I_2 \\
+-I_2 & I_2
+\end{array}
+\right)
+\end{align}
+
+ということで基底変換してみよう。
+\begin{align}
+U^{-1} \sigma^{ij} U
+&=
+\left(
+\begin{array}{cc}
+\epsilon_{ijk} \sigma^k & 0 \\
+0 & \epsilon_{ijk} \sigma^k
+\end{array}
+\right), \\
+%
+U^{-1} \sigma^{0i} U
+&=
+\left(
+\begin{array}{cc}
+-i\sigma^i & 0 \\
+0 & i \sigma^i
+\end{array}
+\right).
+\end{align}
+ブロック対角化できた！
+この基底で上二成分が$(1/2,0)$のワイルスピノル、
+下二成分が$(0,1/2)$のワイルスピノル。となっており、それぞれ既約表現。
+
+
+\subsubsection{ディラックスピノル}
+つまり、4成分のディラックスピノルは、AスピンBスピンの言葉でいうと、
+\begin{align}
+\left( \frac{1}{2}, 0 \right) \oplus \left( 0, \frac{1}{2} \right)
+\end{align}
+となり、２つの既役表現の直和として書ける。
+
+\subsection{カイラリティ、ヘリシティ、パリティ}
+
+カイラリティはローレンツ群の表現を区別するのに使う。
+\begin{itemize}
+\item $(1/2,0)$は左手型(left-handed)
+\item $(0,1/2)$は右手型(right-handed)
+\end{itemize}
+
+
+質量0の粒子に対しては、ヘリシティとカイラリティは1対1。
+\begin{itemize}
+\item 質量0ヘリシティ$-1/2$：左手型(left-handed)
+\item 質量0ヘリシティ$+1/2$：右手型(right-handed)
+\end{itemize}
+
+
+ローレンツ変換の性質から、
+\begin{align}
+P^{-1} J_i P = J_i, \qquad
+P^{-1} K_i P = -K_i.
+\end{align}
+%
+これを使うと、パリティで$A$スピンと$B$スピンが入れ替わることが分かる。
+\begin{align}
+P^{-1} A_i P = B_i, \qquad
+P^{-1} B_i P = A_i.
+\end{align}
+%
+つまり、パリティ変換で$(1/2,0)$と$(0,1/2)$は入れ替わる！
+つまり、パリティ変換でleft-handed Weyl spinorとright-handed Weyl spinorは入れ替わる！
+
+自然界ではパリティ対称性は破れている。原子核のベータ崩壊を引き起こす弱い相互作用(weak interaction)は左手型のクォークやレプトンと相互作用するが、右手型のクォークやレプトンとは相互作用しない。
+
+
+\subsection{ローレンツ群のまとめ}
+ローレンツ群の性質は回転群の性質と良く似ているので、比較をまとめた。
+実は三次元回転群$SO(3)$より、四次元回転群$SO(4)$の方が良く似ている。詳しくは、教科書（物理学におけるリー代数―アイソスピンから統一理論へ 、ジョージャイ、など）を参考にしてください。
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c||c|c|}
+\hline
+        & （三次元）回転群 & （四次元）ローレンツ群 \\\hline\hline
+群の定義 & $R R^T = I_3$ & $g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta} $ \\\hline
+代数 & $[J_i, J_j] = i\epsilon_{ijk} J_k$ & \begin{tabular}{c} $[J_i, J_j] = i\epsilon_{ijk} J_k$ \\ $[J_i, K_j] = i\epsilon_{ijk} K_k$ \\ $[K_i, K_j] = -i\epsilon_{ijk} J_k$ \end{tabular} \\\hline
+既約表現 & スピンで指定 & ２つの``スピン''（Aスピン、Bスピン）で指定 \\\hline
+表現の具体例 & \begin{tabular}{c}スピン0\\ スピン1/2\\ ... \end{tabular} & \begin{tabular}{c} スカラー\\ 左手型ワイルスピノル\\右手型ワイルスピノル\\ ディラックスピノル\\ ... \end{tabular} \\\hline
+\end{tabular}
+\caption{回転群とローレンツ群の比較}
+\end{table}
+% 2022.5.30ここまで
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{電磁場中のディラック(Dirac)方程式}
+電磁場中の電子のふるまいについて、相対論的効果を取り入れて議論できるのが、ディラック方程式の醍醐味のひとつ。何が起きるかみてみよう！
+
+\subsection{ゲージ対称性について復習}
+電磁場をディラック方程式に入れたいが、いったいどうやればいいのか。
+まず、電磁気学がゲージ対称性もつゲージ理論であることを復習し、
+さらに、ゲージ対称性を利用することにより荷電粒子の従う方程式を簡単に導いてみよう。
+
+ゲージ対称性（ゲージ理論）はめちゃくちゃ大事な考え方。
+$\beta$崩壊を引き起こす弱い相互作用はゲージ理論で記述される。
+また、クォークを3つひとまとめにして陽子や中性子を作る強い相互作用もゲージ理論で記述される。
+重力も一種のゲージ理論。\cite{kazama, fukaya}
+
+\subsubsection{古典電磁気学のゲージ対称性}
+電磁気学からゲージ対称性を見出してみよう。
+電磁気学では電場$\vec E$とか磁場$\vec B$の振る舞いが記述される。
+マクスウェル方程式の一部[式(\ref{eq:bianchi})]を満たす解を構成するために、
+電磁場をスカラーポテンシャル$\phi$とかベクトルポテンシャル$\vec A$の微分として書くと色々便利なのだった。
+\begin{align}
+\vec E = -\vec\nabla\phi - \frac{\partial\vec A}{\partial t}, \qquad
+\vec B = \vec \nabla \times \vec A.
+\end{align}
+%
+上の定義からすぐわかるように、任意の関数$\lambda(t,\vec x)$を使い、
+\begin{align}
+\phi \to \phi + \frac{\partial \lambda}{\partial t}, \qquad
+\vec A \to \vec A - \vec \nabla \lambda.
+\end{align}
+という風に$\phi$と$\vec A$を取り替えても、同じ電磁場が得られる。
+異なる$\phi$と$\vec A$が得られたが、電磁場$\vec E$と$\vec B$はあくまで一緒なので、物理が全く同じ状況を記述する方法を複数見つけたことになる。
+物理の記述にある種の冗長性がある。こういうのを、ゲージ対称性がある、と言い、上で定義したような$\phi$と$\vec A$の変換をゲージ変換と呼ぶのだった。
+（なぜわざわざ冗長なやり方で物理を記述するのだろうか？ゲージ場の量子論まで学ぶといろいろ見えてくるが、それはこの講義の範囲を越えるので割愛）
+
+特殊相対論のテンソルの形式で書くと、簡潔にかける。
+ゲージ変換は任意の関数$\lambda(t,\vec x)$に対して、
+\begin{align}
+A_\mu \to A_\mu + \partial_\mu \lambda
+\end{align}
+に対して、
+\begin{align}
+F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu
+\qquad\to \qquad
+\partial_\mu ( A_\nu + \partial_\nu \lambda) - \partial_\nu (A_\mu + \partial_\mu \lambda)
+= \partial_\mu A_\nu - \partial_\nu A_\mu
+= F_{\mu\nu}.
+\end{align}
+ということで、$F_{\mu\nu}$は不変。つまり電磁場は不変。
+
+\subsubsection{電磁場中の古典粒子}
+電磁場中の荷電粒子の運動方程式は次のようなものだった。
+\begin{align}
+m \ddot{\vec x} = e (\vec E + \dot{\vec x} \times \vec B).
+\end{align}
+以下のラグランジアンから運動方程式が得られることを見てみよう。
+\begin{align}
+L = \frac{1}{2}m \dot{\vec x}^2 - e\phi + e \vec A \dot{\vec x}.
+\end{align}
+オイラーラグランジュ方程式は
+\begin{align}
+\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} &= \frac{\partial L}{\partial x_i}\nonumber\\
+\frac{d}{dt}( m \dot x_i + e A_i ) &=  - e\partial_i \phi + e \dot x_j \partial_i A_j \nonumber\\
+m\ddot x_i + e \dot x_j \partial_j A_i + e \dot A_i &= - e\partial_i \phi + e \dot x_j \partial_i A_j \nonumber\\
+m\ddot x_i &= e( -\partial_i \phi - \dot A_i) + e \dot x_j (\partial_i A_j - \partial_j A_i).
+\end{align}
+確かに荷電粒子の運動方程式がえられた。
+
+
+さて、ラグランジアンをルジャンドル変換することにより、ハミルトニアンが次のように書けることも分かる。
+\begin{align}
+H = \frac{1}{2m}( \vec p - e \vec A  )^2 + e \phi.
+\end{align}
+%
+どうも、電磁場なしのハミルトニアンに対して、以下の置き換えルールを適用すれば、電磁場中のハミルトニアンが得られるようだ。
+\begin{align}
+\vec p \to \vec p - e \vec A, \qquad
+H \to H - e \phi. \label{eq:classical charged particle}
+\end{align}
+
+\subsubsection{電磁場中の量子力学}
+量子力学では、式(\ref{eq:classical charged particle})を参考にして、
+次のような演算子の「置き換えルール」を採用すると上手く行く。
+\begin{align}
+-i \vec\nabla \to -i \vec\nabla - e \vec A, \qquad
+i \frac{\partial}{\partial t} \to i \frac{\partial}{\partial t} - e \phi.
+\end{align}
+%
+ハミルトニアンは次のようになる。
+\begin{align}
+H
+&= \frac{1}{2m}(i\vec \nabla + e\vec A)^2 + e\phi \nonumber\\
+&= -\frac{1}{2m}(\vec \nabla -i e\vec A)^2 + e\phi \label{eq:hamiltonian NRQM}
+\end{align}
+
+\subsubsection{量子力学とゲージ対称性}
+違う論理を使って、式(\ref{eq:hamiltonian NRQM})のハミルトニアンにたどり着くこともできる。
+波動関数$\psi$の位相を回転されるような
+\begin{align}
+\psi \to e^{i\lambda} \psi
+\end{align}
+変換に対して対称性があることを要求してみよう。
+そうすると、スカラーポテンシャルとベクトルポテンシャルを導入して、それらが変換のもとで以下のように振る舞うことが要求される。
+\begin{align}
+\phi \to \phi + \frac{\partial\lambda}{\partial t}, \qquad
+\vec A \to \vec A - \vec\nabla \lambda.
+\end{align}
+この考え方はとても便利。これはゲージ対称性を原理として話を始めていることになる。
+マックスウェル方程式とも良く馴染むし、むしろこうやって議論する方が自然。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{電磁場中のディラック(Dirac)方程式と$g$因子}
+さて、前の章で、
+\begin{align}
+\psi(x) \to e^{ie\lambda(x) }\psi(x)
+\end{align}
+というゲージ変換に対する共変性を要求すれば、必然的にスカラーポテンシャルとベクトル・ポテンシャルを導入することになり、電磁場との相互作用が入ることが分かった。
+この手続きにより、ディラック方程式に電磁場を導入してみよう。
+具体的な手続きとしては、以下のような微分演算子の置き換えを行えばいい。
+\begin{align}
+%\partial_\mu \to \partial_\mu - ieA_\mu.
+i\partial^\mu \to i\partial^\mu - eA^\mu.
+\end{align}
+結果として、電磁場中のディラック方程式は次のようになる。
+
+\begin{itembox}[l]{電磁場中のディラック方程式}
+\begin{align}
+(i\gamma_\mu \partial^\mu - e \gamma_\mu A^\mu - m)\psi = 0. \label{eq:dirac eq with Amu}
+\end{align}
+\end{itembox}
+式(\ref{eq:dirac eq with Amu})は、次のような変換に対して共変。
+\begin{align}
+\psi(x) \to e^{ie\lambda(x)}\psi(x), \qquad
+A_{\mu}(x) \to A_{\mu} - \partial_\mu \lambda(x).
+\end{align}
+
+%\subsubsection{非相対論的極限と磁気双極子モーメント}
+非相対論的極限（$v \ll c$）での電磁場との相互作用を計算してみよう。
+ディラックスピノルの上2成分を$\psi_+$、下2成分を$\psi_-$と名付けてみる。
+つまり、次のように分解する。
+\begin{align}
+\psi = \left(\begin{array}{c}
+\psi_+ \\
+\psi_-
+\end{array}\right)
+\end{align}
+ガンマ行列は次のように書けた。
+\begin{align}
+\gamma^0 = \left(\begin{array}{cc}
+1 & 0 \\
+0 &-1 
+\end{array}\right), \qquad
+\gamma^i = \left(\begin{array}{cc}
+0 & \sigma_i \\
+-\sigma_i & 0
+\end{array}\right).
+\end{align}
+%
+ディラック方程式を$\psi_+$と$\psi_-$で書くと、
+\begin{align}
+\left(
+\begin{array}{cc}
+ i\partial_t - e \phi - m                   & (i\vec\nabla + e \vec A ) \cdot \vec\sigma\\
+-(i\vec\nabla + e \vec A ) \cdot \vec\sigma & -i\partial_t + e \phi - m
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\psi_+ \\
+\psi_-
+\end{array}
+\right)
+= 0.
+\end{align}
+%
+式を整理するために次のような$\tilde \psi_+$と$\tilde\psi_-$を定義してみよう。
+\begin{align}
+\tilde\psi_+ = e^{imt} \psi_+, \qquad
+\tilde\psi_- = e^{imt} \psi_-.
+\end{align}
+%
+ディラック方程式を$\tilde\psi_+$と$\tilde\psi_-$で書くと、
+\begin{align}
+\left(
+\begin{array}{cc}
+ i\partial_t - e \phi                       & (i\vec\nabla + e \vec A ) \cdot \vec\sigma\\
+-(i\vec\nabla + e \vec A ) \cdot \vec\sigma & -i\partial_t + e \phi - 2m
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\tilde\psi_+ \\
+\tilde\psi_-
+\end{array}
+\right)
+= 0.
+\label{eq:eq:dirac eq with Amu matrix}
+\end{align}
+%
+非相対論的な極限、つまり電子の運動エネルギーが静止エネルギーに比べて小さい極限を考えてみよう。
+$|m\tilde\psi_-| \gg |( i\partial_t - e \phi) \tilde\psi_-|$に違いない。ということは、
+\begin{align}
+(  i \vec\nabla + e\vec A) \cdot \vec\sigma \tilde\psi_+ + 2m \tilde\psi_- &\simeq 0.
+\end{align}
+
+%
+これを式(\ref{eq:eq:dirac eq with Amu matrix})の一行目に代入すると、
+%これを式(\ref{eq:dirac eq with Amu 1b})に代入すると、
+\begin{align}
+(i\partial_t - e \phi) \tilde\psi_+ + ( i \vec\nabla + e\vec A) \cdot \vec\sigma \left[
+-\frac{1}{2m} (  i \vec\nabla + e\vec A) \cdot \vec\sigma \tilde\psi_+
+ \right] &= 0.
+\end{align}
+%
+左辺の第二項がゴチャゴチャしている。ちょっと整理してみよう。
+特にこの関係式を使う。
+%\begin{align}
+%\sigma_i \sigma_j \times ( -i\partial_i + eA_i  )( i\partial_j - eA_j )
+%&=
+%(\delta_{ij} + i\epsilon_{ijk}\sigma_k) \times ( -i\partial_i + eA_i  )( i\partial_j - eA_j ) \nonumber\\
+%&=
+%(\vec \nabla + i e \vec A)^2 + i\epsilon_{ijk} \partial_k (ieA_i \partial_j + ie \partial_i A_j ) \nonumber\\
+%&=
+%(\vec \nabla + i e \vec A)^2 - e\epsilon_{ijk} \sigma_k (\partial_i A_j )
+%\end{align}
+\begin{align}
+\sigma_i \sigma_j \times ( i\partial_i + eA_i  )( i\partial_j + eA_j )
+&=
+(\delta_{ij} + i\epsilon_{ijk}\sigma_k) \times ( i\partial_i + eA_i  )( i\partial_j + eA_j ) \nonumber\\
+&=
+-(\vec \nabla - i e \vec A)^2 + i\epsilon_{ijk} \sigma_k (ieA_i \partial_j + ie \partial_i A_j ) \nonumber\\
+&=
+-(\vec \nabla - i e \vec A)^2 - e\epsilon_{ijk} \sigma_k (\partial_i A_j )
+\end{align}
+%
+結局まとめると、
+\begin{align}
+i\frac{\partial\tilde\psi_+}{\partial t}
+=
+-\frac{1}{2m} (\vec \nabla - i e \vec A )^2 \tilde\psi_+
+- \frac{e}{2m} \vec\sigma \cdot (\vec \nabla \times \vec A)\tilde\psi_+
+- e\phi \tilde\psi_+.
+\end{align}
+電荷を持った粒子のシュレーディンガー方程式と比較してみよう。右辺第一項と第三項と同じものは式(\ref{eq:hamiltonian NRQM})のハミルトニアンにある。
+新しいのは右辺第二項の$\sigma \cdot (\nabla \times A)$を含む項。
+
+今、$\tilde\psi_+$はディラックスピノルの上二成分を取り出したもの。
+\ref{sec:spin}章の議論を思い出そう。一番上の成分は角運動量（つまりスピン）が$J_z = + 1/2$の成分、二番目の成分は$J_z = -1/2$の成分であった。なので、このパウリ行列$\vec\sigma$はスピン演算子$\vec s$を用いて、$\vec\sigma = 2\vec s$と読み替えてよい。
+$\nabla \times A$は磁場。結局、以下のようなハミルトニアンが得られたことになる。
+\begin{align}
+H = \frac{1}{2 m}( \vec p - e \vec A)^2 - \frac{e}{m} \vec s \cdot \vec B - e \phi
+\end{align}
+面白いのは右辺の第2項。磁場とスピンの相互作用項が生まれている！
+
+磁場とスピンの相互作用項は$g$因子というパラメーターを使って、
+\begin{align}
+H = -\frac{ge}{2m} \vec s \cdot \vec B.
+\end{align}
+と書かれることが多い。
+ディラック方程式を使うと$g=2$が得られたことになる。
+% 2022.6.7ここまで
+
+\subsection{$g$因子の測定値と比較してみよう}
+ディラック方程式によると、ディラックスピノルで記述される荷電粒子の$g$因子は$2$になるはず。この計算はどれくらい上手くいっているのだろう？
+Particle Data Group\footnote{\url{https://pdglive.lbl.gov/Particle.action?node=S003&init=0}}などを見ると、実験で測定された様々な粒子に関数$g$因子の値が分かる。
+
+\subsubsection{電子とミュー粒子}
+例えば、電子とミュー粒子の$g$因子は次のような値。
+\begin{align}
+g_e &= 2.00231930436182 \pm 
+      0.00000000000052, \\
+g_\mu &= 2.0023318412 \pm 
+        0.0000000004.
+\end{align}
+0.1~\%くらいの精度で$g$因子は2とみなせる。どうやらだいたい上手くいっているようだ。
+
+しかし、これで満足していいのか？
+電子の$g$因子は$10^{-13}$程度の精度で測られていて、ミュー粒子の$g$因子は$10^{-10}$程度の精度で測られていて、あらゆる自然科学の中でも屈指の精密測定。$g$の2からのずれは$0.002$程度であるものの、実験精度がそれより何桁も小さいので、$g-2$が0でないことは確立している。どう解釈したらいいだろう？ディラック方程式が上手くいっていない？
+
+
+このズレは異常磁気モーメントと呼ばれていて、ディラック方程式の限界を示していると見ることもできる。
+ディラック方程式で$g$因子を計算するときには、電磁場を外場とみなしていた。（つまり、電磁場がディラックスピノルで記述される粒子の影響を受けないと思って計算している。）
+でももちろんこれは近似にすぎない。電磁場はもちろん荷電粒子の影響を受ける。その影響を量子論的に記述する必要がある。電磁場も量子化しなくてはいけない。ちゃんと計算するには、場の量子論が必要。（例えばPeskin-Schroederの教科書の6.3章など）
+
+詳細は場の量子論の教科書にゆずるが、場の量子論（正確には量子電磁気学、quantum electrodynamics）を使うと、
+摂動計算により、異常磁気モーメントが微細構造定数$\alpha = e^2/4\pi$の級数として書ける。特に、$\alpha$の一次の項が一番主要な項で、
+\begin{align}
+\frac{g-2}{2} = \frac{\alpha}{2\pi}
+\end{align}
+と書ける。これを計算したのが、シュウィンガー(Schwinger)\cite{Schwinger:1948iu}\footnote{
+シュヴィンガー(Julian Schwinger)の墓にはこの公式が刻んである。"Schwinger gravestone"で画像検索してみよう
+\url{https://www.google.com/search?q=schwinger+gravestone&tbm=isch}}。
+$\alpha \approx 1/137$とすると、数値的に上手くいってるのが分かると思います。
+\footnote{
+ちなみに、電気の異常磁気モーメントは量子電磁力学の検証にとって非常に重要。
+さらに、ミュー粒子の磁気双極子モーメントは素粒子現象論のホットトピックの一つ\cite{muong-2}。
+以下のようなページを参照のこと。\\
+\url{http://comet.phys.sci.osaka-u.ac.jp/research/r000.html}\\
+\url{https://g-2.kek.jp/portal/index.html}\\}
+
+\subsubsection{陽子}
+陽子の磁気双極子モーメントはもっとずれている！最新の測定値はこんな感じ。
+\begin{align}
+\frac{\mu_p}{e\hbar/2m_p} = 2.79284734463 \pm 0.00000000082
+\end{align}
+ちなみに、1933年に陽子の磁気双極子モーメントをはじめて測定したシュテルン(Stern)は1943年にこの業績でノーベル賞を貰っている。\footnote{
+\url{https://link.springer.com/article/10.1007/BF01330773}\\
+\url{https://link.springer.com/article/10.1007/BF01330774}\\
+\url{https://www.nobelprize.org/prizes/physics/1943/summary/}
+}
+SternがPauliにディスられたエピソードが『スピンはめぐる』に載っていて興味深い。
+\begin{quote}
+『さっき，シュテルンたちが陽子の磁気能率を測定した話をしましたね．
+ところがそのころ或る日，パウリがシュテルンの研究室を訪ねたことがあったそうです．
+そのときパウリはシュテルンに向かって，いまどんなことをやっているか，と聞いたそうです．
+そこでシュテルンは，いま陽子の磁気能率をはかっている，と答えました．
+そしたらパウリ曰く，いまごろそんなことやったって意味ないじゃないか，あんたはディラックの理論を知らんのか，
+ディラック方程式からそれは$\displaystyle\frac{e\hbar}{2m_p}$になるにきまっている，と．』
+（「スピンはめぐる」より一部抜粋）
+\end{quote}
+
+\subsection{ディラック方程式の限界}
+これまで相対論的に量子力学を記述しようとしてディラック方程式を調べてきた。
+ディラック方程式は色々上手く行く点もあるが、同時に限界も見えてきた。
+まず、そもそも、スピン$1/2$は相対論＋量子力学の必然ではありえない。スピン$0$\footnote{Pauli \& Weisskopf
+\url{https://link.springer.com/chapter/10.1007/978-3-322-90270-2_36}
+\url{https://inspirehep.net/literature/25368}}
+とか$1$の粒子いるし。
+さらに、相対論では静止質量もエネルギーに過ぎないので、それを運動エネルギーなどに転換できる。原子核反応における質量欠損はその例となっているが、$\mu^- \to e^- \bar \nu_e \nu_\mu$などの重い素粒子が複数の軽い素粒子に崩壊することもできるようになっている。こういった粒子数が代わる反応は、あきらかにディラック方程式では扱えない。さらに、前の章で見たように$g$因子の2からのズレが説明できない。
+ということでディラック方程式に対する不満のまとめ。
+\begin{itemize}
+\item スピン1/2以外の粒子も扱える必要がある。
+\item 粒子数が代わる反応を扱えるようになるために、多粒子系を扱える枠組みが必要。
+\item $g$因子を測定したら$2$からズレている。
+\end{itemize}
+上記の不満を解決しつつ相対論的な量子力学をつくるには場の量子論を導入しなければならない。
+残りの章で、場の量子論の初歩的なことを学んでいく。
+
+
+
+
+
+
+\section{一次元弦の量子論}
+場を量子論的に扱うことについて、（非相対論的な）一次元弦の量子論で練習してみよう。
+%「第二量子化」という言い方をされることもある。\footnote{以下の講義ノートも参照のこと。\url{https://www.gakushuin.ac.jp/~881791/qmbj/}}
+一次元弦は連成振動子の多自由度極限としてあらわれる。
+
+
+\subsection{連成ばねの古典力学と連続極限}
+場は、質点系の自由度が大きなときに、自然とあらわれる。このことを古典力学を例にみてみよう。
+
+\subsubsection{連成ばねについて復習}
+質量$m$の質点を$n$個用意し、ばね定数$m\omega^2$のばねで連結し輪にしてみよう。
+各質点の釣り合いの位置からの変位を$z_j~(j=1,2,\cdots,n)$と書く。
+このとき、$z_{n+1} = z_1$と便宜的に決めておくと、$z_j$に関する運動方程式が簡単に書ける。
+\begin{align}
+m \ddot z_j = m \omega^2 (z_{j-1} - z_j) + m \omega^2 (z_{j+1} - z_j),\qquad(j=1,\cdots, n) \label{eq:EOM connected HO}
+\end{align}
+行列の形で書くと、より見やすい。
+\begin{align}
+m \left(\begin{array}{c}
+\ddot z_1 \\
+\ddot z_2 \\
+\vdots \\
+\ddot z_n \\
+\end{array}\right)
+%
+=
+m \omega^2 \left(\begin{array}{cccc}
+2  & -1 &        & -1 \\
+-1 & 2  & \ddots & \\
+   & \ddots & \ddots & -1 \\
+-1 &    &    -1  & 2 \\
+\end{array}\right)
+\left(\begin{array}{c}
+z_1 \\
+z_2 \\
+\vdots \\
+z_n \\
+\end{array}\right)
+\end{align}
+
+この運動方程式の一般解を求めてみよう。見通しを良くするため、座標を
+\begin{align}
+\vec z \equiv
+\left(\begin{array}{c}
+z_1 \\
+z_2 \\
+\vdots \\
+z_n
+\end{array}\right)
+\end{align}
+とベクトルでまとめておく。さらに、以下で定義される、右辺の行列の$n$個の固有ベクトルを使うのが便利。
+\begin{align}
+\vec u_k &= 
+\sqrt{\frac{1}{n}} \left(\begin{array}{c}
+1 \\
+\exp(2\pi ik/n) \\
+\exp(4\pi ik/n) \\
+\vdots \\
+\exp((2n-2)\pi ik/n)
+\end{array}\right) \label{eq:eigenvector connected HO}
+\end{align}
+$n$が偶数のとき、$k = -n/2+1, \cdots, n/2$。
+$n$が奇数のとき、$k = -(n-1)/2, \cdots, (n-1)/2$とする。
+$\vec z$を、時間に依存する係数$\alpha_k$を用いて、固有ベクトルで分解してみよう。
+\begin{align}
+\vec z = \sum_k A_k(t) \vec u_k + h.c.
+\end{align}なので、
+$h.c.$はそれまでの項の複素共役を意味する。$\vec z$は実なので$h.c.$を加えることで右辺も実となった。
+$\alpha_k(t)$の時間発展について、次の運動方程式が成立する。
+\begin{align}
+\ddot A_k = -\omega_k^2 A_k, \qquad
+\omega_k = \sqrt{4 \omega^2 \sin^2 \frac{\pi k}{n}}
+\end{align}
+この系には、$n$個の固有振動モードがあり、$\omega_k$は各モードの振動数と理解できる。
+%
+結局一般解は、
+\begin{align}
+\vec z = \sum_k \alpha_k e^{-i\omega_k t} \vec u_k+ h.c.
+\end{align}
+と書ける。$\alpha_k$は初期条件に応じて決まる複素数の定数である。
+
+\subsubsection{連続極限としての古典場}
+上で考えた連成ばねで、$n$が十分1より大きい状況を考えてみよう。
+固有振動数$\omega_k$の最大値は（$n$によらず）$2\omega$。
+$|k| \ll n$のモードの固有振動数を見てみよう。以下のように近似できる。
+\begin{align}
+\omega_k \simeq 2\pi |k| \times \frac{\omega}{n}
+\end{align}
+さて、$|k| \ll n$のモードについて、次のことがすぐ分かる。
+\begin{itemize}
+\item $\omega_k$は$\omega$よりずっと小さい
+\item $\omega_k$の値は$\omega/n$で決まるので、$\omega$と$n$をそれぞれ定数倍しても同じになる。
+\end{itemize}
+振動数が小さい、は、エネルギーが小さい、と同じ。
+$\omega/n$を一定に保ってしまえば、$n$や$\omega$の値が変わっても見分けがつかなくなる。
+低エネルギーの自由度を議論するのに便利な「有効理論」が作れそうだ！
+
+$m$, $n$, そして$\omega$を次のように書き換えてみよう。
+\begin{align}
+m = \rho \Delta x, \qquad
+n = \frac{L}{\Delta x}, \qquad
+\omega = \frac{v}{\Delta x}.
+\end{align}
+%
+$L$、$v$、$\rho$を固定しながら、$\Delta x$を小さく（$N$を大きく）しよう。
+この系は、$n$個の質点を長さ$\Delta x$のばねでつなぎ全体の長さが$L$となった弦とみなせる。$\rho$はこの弦の単位長さあたりの質量である。また、$v$は波が伝わる速度であることもこのあと分かる。
+
+また、質点のラベル$k$の代わりに弦の中の``位置''を定義しよう。
+\begin{align}
+x = j \Delta x, \qquad
+\end{align}
+
+そうすると、運動方程式は、
+\begin{align}
+\rho \frac{\partial}{\partial t^2} z(x) = \rho v^2 \frac{z(x+\Delta x) - 2 z(x) + z(x-\Delta x)}{\Delta x^2}
+\end{align}
+と書けるので、$\Delta x$を0にもっていく極限で、
+\begin{align}
+\frac{\partial^2 z}{\partial t^2} = v^2 \frac{\partial^2 z}{\partial x^2}
+\end{align}
+速度$v$で伝わる波を記述している。
+
+この方程式の固有振動の解としては以下のようなものがえられる。
+\begin{align}
+z(x,t) &\propto \sin\left( \frac{2 \pi k (x-vt)}{L} \right), \\
+z(x,t) &\propto \cos\left( \frac{2 \pi k (x-vt)}{L} \right).
+\end{align}
+%
+固有振動数は
+\begin{align}
+\frac{2\pi |k| v}{L}
+\end{align}
+なので、確かに、質点系の低エネルギー解と一緒。
+$v$を光速と同定すれば、一次元のクラインゴルドン方程式と見ることもできる。スカラー場の量子論の予感！
+
+
+
+\subsubsection{古典場の解析力学}
+連続極限で場があらわれることをみたが、のちのちのために古典場の解析力学を整理しておこう。
+まず、ラグランジアンの連続極限とっておこう。
+\begin{align}
+L
+&= \sum_j \left( \frac{1}{2} m \dot z_k^2 - \frac{1}{2} m \omega^2 (z_j - z_{j+1})^2 \right) \nonumber\\
+&= \Delta x \sum_j \left( \frac{1}{2} \frac{m}{\Delta x} \dot z_j^2 - \frac{1}{2} \frac{m}{\Delta x} (\omega \Delta x)^2 \left( \frac{z_j - z_{j+1}}{\Delta x} \right)^2 \right) \nonumber\\
+&\to \int_0^L dx \left[ \frac{1}{2}\rho {\dot z}^2 - \frac{1}{2} \rho v^2 \left( \frac{\partial z}{\partial x} \right)^2 \right].
+\end{align}
+このラグランジアンを使って、オイラーラグランジュ方程式を計算してみると、
+\begin{align}
+\frac{d}{dt} \frac{\delta L}{\delta \dot z(x)} &= \frac{\delta L}{\delta z(x)}, \nonumber\\
+\rho\ddot z(t,x) &= \rho v^2 \frac{\partial^2 z}{\partial x^2}.
+\end{align}
+となり、確かに連続極限をとって得た運動方程式があらわれる。
+
+ここからハミルトン形式にうつるために、場$z(t,x)$の共役運動量はどのように定義するのがよいか考えてみよう。
+$p_j$は
+\begin{align}
+p_j = m \dot z_j = \Delta x \times \rho \dot z_j
+\end{align}
+と書き直せるので$\Delta x \to 0$の極限で無限小の量になってしまい、便利ではなさそう。
+かわりに、$\pi_j$を次のように定義してみる。
+\begin{align}
+\pi_j \equiv \frac{p_j}{\Delta x} = \rho \dot z_j
+\end{align}
+これなら、$\Delta x \to 0$でも有限の量になり、都合がよい！
+
+$\pi_j$の定義は、汎関数微分を使うと綺麗に書けて筋が良いのが分かる。汎関数微分の定義は、
+\begin{align}
+\frac{\delta X}{\delta f(x_0)} = \lim_{\epsilon \to 0} \frac{X[f(x) + \epsilon \delta(x-x_0)]-X[f(x)]}{\epsilon}
+\end{align}
+例えば、
+\begin{align}
+X = \int dx f(x) g(x), \qquad
+\frac{\delta X}{\delta f(x)} = g(x).
+\end{align}
+% 2022.6.20ここまで
+%
+$\pi_j$の定義を計算してみると、
+\begin{align}
+\pi_j
+&= \frac{1}{\Delta x}\frac{\partial L}{\partial \dot z_j} \nonumber\\
+&= \frac{1}{\Delta x} \lim_{\epsilon \to 0} \frac{L(\{z_i\}, \{\dot z_i + \epsilon \delta_{ij} \}) - L(\{z_i\}, \{\dot z_i\}) }{\epsilon} \nonumber\\
+&= \frac{1}{\Delta x} \lim_{\epsilon \to 0} \frac{L(\{z_i\}, \{\dot z_i + \epsilon \delta_{ij}/\Delta x \}) - L(\{z_i\}, \{\dot z_i\}) }{\epsilon}.
+\end{align}
+%
+ここで、$\epsilon \delta_{ij}/\Delta x \to \delta(x-x_0)$に注目すると、連続極限で、
+\begin{align}
+\pi_j = \frac{1}{\Delta x}\frac{\partial L}{\partial \dot z_j}
+\qquad\rightarrow\qquad
+\pi(x) = \frac{\delta L}{\delta \dot z(x)}
+\end{align}
+
+ポアソン括弧を連続極限を使って考えてみる。$[z_i, p_j] = \delta_{ij}$であるから、
+\begin{align}
+[z_i, \pi_j] = \frac{\delta_{ij}}{\Delta x}
+\end{align}
+素朴に考えると$\Delta x \to 0$で発散してしまってよく分からない。
+実はもう少しよい見方がある。
+\begin{align}
+\Delta x \sum_{j'} \frac{\delta_{j j'}}{\Delta x} = 1
+\end{align}
+という式が容易に確かめられるが、連続極限で離散和は以下のような積分になる。
+\begin{align}
+\Delta x \sum_{j'} \qquad\to\qquad \int dx'
+\end{align}
+すなわち、$\delta_{jj'}$の連続極限は、
+\begin{align}
+\frac{ \delta_{jj'} }{\Delta x} \qquad\to\qquad \delta(x-x')
+\end{align}
+と理解してよい、連続極限$\Delta x\to 0$におけるポアソン括弧はデルタ関数を使って、
+\begin{align}
+[z_j, \pi_{j'}] = \frac{\delta_{kk'}}{\Delta x}
+\qquad\rightarrow\qquad
+[z(x), \pi(x')] = \delta(x-x')
+\end{align}
+となる。
+ポアソン括弧は
+\begin{align}
+[A,B] =
+\int_0^L dx \left[ \frac{\delta A}{\delta z(x)} \frac{\delta B}{\delta \pi(x)} - \frac{\delta A}{\delta \pi(x)} \frac{\delta B}{\delta z(x)} \right]
+\end{align}
+
+
+ハミルトニアンを導出してみよう。
+\begin{align}
+H
+&= \int_0^L dx \pi \dot z - L \nonumber\\
+&= \int_0^L dx \left[ \frac{1}{2\rho} \pi^2 + \frac{1}{2} \rho v^2 \left( \frac{\partial z}{\partial x} \right)^2 \right]
+\end{align}
+ハミルトン方程式は、
+\begin{align}
+\dot z &= [H, z] = \frac{\pi}{\rho}, \\
+\dot \pi &= [H, \pi] = -\rho v^2 \frac{\partial^2 z}{\partial x^2}.
+\end{align}
+確かにこの方程式は、オイラーラグランジュ方程式と矛盾しない。
+
+まとめとして、多自由度の質点系と古典場の系を比較してみよう。
+\begin{itemize}
+\item 離散的な自由度に関する和が積分におきかわった
+\item 微分が汎関数微分におきかわった
+\item クロネッカーのデルタがデルタ関数におきかわった
+\end{itemize}
+といった違いを認めると、やっていることはほぼ変わらないのが分かると思う。
+
+
+\subsection{連成ばねの量子力学と連続極限}
+古典場の理論が、古典力学の質点系の自由度が大きな極限としてあらわれることをみた。
+次に、連成調和振動子の量子論について多自由度極限をとってみる。極限として、量子場の理論があらわれることをみる。
+なお、一貫してハイゼンベルク描像をとり議論する。
+
+\subsubsection{調和振動子について復習}
+調和振動子のラグランジアンは次のように与えられる。
+\begin{align}
+L = \frac{1}{2} m\dot z^2 - \frac{1}{2} m \omega^2 z^2.
+\end{align}
+共役運動量は
+\begin{align}
+p = \frac{\partial L}{\partial \dot z}
+\end{align}
+ハミルトニアンは、
+\begin{align}
+H = p \dot x - L = \frac{1}{2m} p^2 + \frac{1}{2} m\omega^2 z^2.
+\end{align}
+%
+正準量子化しよう。$c$数と演算子は区別して、$\hat z$、$\hat p$、$\hat H$のように書くことにしよう。演算子の交換関係は以下のように与えられる。
+\begin{align}
+[\hat z, \hat p] = i.
+\end{align}
+ハミルトニアン演算子は$\hat z$と$\hat p$を使って
+\begin{align}
+\hat H = \frac{1}{2m} \hat p^2 + \frac{1}{2} m\omega^2 \hat z^2. \label{eq:hamiltonian harmonic oscillator}
+\end{align}
+と書ける。
+
+ハイゼンベルク描像をとると、演算子の時間発展は次のようなハイゼンベルク方程式で記述される。
+\begin{align}
+\dot {\hat z} = i[\hat H, \hat z], \qquad
+\dot {\hat p} = i[\hat H, \hat p]. \label{eq:heisenberg eq harmonic oscillator}
+\end{align}
+式(\ref{eq:hamiltonian harmonic oscillator})
+と式(\ref{eq:heisenberg eq harmonic oscillator})を使うと、
+\begin{align}
+\dot {\hat z} &= i[\hat H, \hat z] = i[\frac{\hat p^2}{2m}, \hat z] = i\frac{\hat p}{m} [\hat p,\hat z] = \frac{\hat p}{m}, \\
+\dot {\hat p} &= i[\hat H, \hat p] = i[\frac{1}{2}m\omega^2 \hat z^2, \hat p] = i m \omega^2 \hat z [\hat z,\hat p] = -m\omega^2 \hat z
+\end{align}
+が得られる。上の二つの方程式から、$\hat z$に関する次の運動方程式を得る。
+\begin{align}
+\ddot{\hat z} = -\omega^2 \hat z
+\end{align}
+この運動方程式は、古典的な調和振動子の運動方程式$\ddot z = -\omega^2 z$の$z$を演算子$\hat z$に置き換えたものになっている。
+一般解は、演算子の係数を用いることで、
+\begin{align}
+\hat z(t) = \hat\alpha e^{-i\omega t} + \hat\alpha^\dagger e^{i\omega t} \label{eq:z harmonic oscillator}
+\end{align}
+とあらわせる。$\hat\alpha$は時間に依らない演算子。ハイゼンベルク方程式により、
+\begin{align}
+\hat p(t) = m \dot{\hat z}(t) = -im\omega \alpha e^{-i\omega t} + im\omega \label{eq:p harmonic oscillator} \alpha^\dagger e^{i\omega t}
+\end{align}
+%
+式(\ref{eq:z harmonic oscillator})と式(\ref{eq:p harmonic oscillator})から交換関係を計算してみよう。
+\begin{align}
+[\hat z(t), \hat p(t)] = 2im\omega [\hat\alpha, \hat\alpha^\dagger]
+\end{align}
+%
+$\hat\alpha$は
+\begin{align}
+[\hat a, \hat a^\dagger] &= 1.
+\end{align}
+をみたす演算子$\hat a$を使って、
+\begin{align}
+\hat\alpha = \frac{1}{ \sqrt{2m\omega} }\hat a, \qquad
+\end{align}
+と書ける。
+これを、式(\ref{eq:z harmonic oscillator})、式(\ref{eq:p harmonic oscillator})に代入すると、
+\begin{align}
+\hat z(t) &= \sqrt{\frac{1}{2m\omega}} \left( \hat a e^{-i\omega t} + \hat a^\dagger e^{i\omega t}  \right), \\
+\hat p(t) &= \sqrt{\frac{m\omega}{2}} \left( -i\hat a e^{-i\omega t} + i\hat a^\dagger e^{i\omega t}  \right).
+\end{align}
+がえられる。
+
+さらに、ハミルトニアンを$\hat a$と$\hat a^\dagger$で書き直せる。
+\begin{align}
+\hat H
+&= \frac{\omega}{2}(\hat a \hat a^\dagger + \hat a^\dagger \hat a) \nonumber\\
+&= \omega \hat a^\dagger \hat a + \frac{1}{2}\omega
+\end{align}
+%
+さらにさらに、$\hat a, \hat a^\dagger$と$\hat H$の交換関係も計算できる。
+\begin{align}
+[\hat H, \hat a] = -\omega \hat a, \qquad
+[\hat H, \hat a^\dagger] = \omega \hat a^\dagger.
+\end{align}
+$\hat a$がかかるとエネルギーが$\omega$減り、$\hat a^\dagger$がかかるとエネルギーが$\omega$増える。
+
+最低エネルギー状態$|0\rangle$は次のように書ける。
+\begin{align}
+\hat a|0\rangle = 0.
+\end{align}
+第$n$励起状態は
+\begin{align}
+|n\rangle = (\hat a^\dagger)^n |0\rangle
+\end{align}
+%
+エネルギー固有値は
+\begin{align}
+\hat H|n\rangle = \omega\left(n + \frac{1}{2}\right) |n\rangle
+\end{align}
+
+
+\subsubsection{連成ばねの正準量子化}
+バネ定数$m\omega^2$で連結された質量$m$の質点を$n$個繋げてみよう。
+\begin{align}
+L = \sum_{j=1}^n \left( \frac{1}{2} m \dot z_j^2 - \frac{1}{2} m\omega^2 (z_j - z_{j+1})^2 \right)
+\end{align}
+$z_{n+1} = z_1$とする。（周期境界条件）
+%
+座標$x_j$の共役運動量は、
+\begin{align}
+p_j = \frac{\partial L}{\partial x_j} = m z_j
+\end{align}
+%
+ハミルトニアンは、
+\begin{align}
+H = \sum_j \left( \frac{1}{2m} p_j^2 + \frac{1}{2} m\omega^2 (z_j - z_{j+1})^2 \right)
+\end{align}
+
+さて正準量子化を行う。交換関係は
+\begin{align}
+[\hat z_i, \hat p_j] = i\delta_{ij}
+\end{align}
+であり、ハミルトニアンは
+\begin{align}
+\hat H = \sum_j \left( \frac{1}{2m} \hat p_j^2 + \frac{1}{2} m\omega^2 (\hat z_j - \hat z_{j+1})^2 \right)
+\end{align}
+である。ハイゼンベルク方程式は
+\begin{align}
+\dot{\hat z}_j = i[\hat H, \hat z_j], \qquad
+\dot{\hat p}_j = i[\hat H, \hat p_j].
+\end{align}
+である。ハイゼンベルク方程式を用いて、以下のような運動方程式をえる。
+\begin{align}
+\ddot{\hat z}_j = m\omega^2 ({\hat z}_{j-1} - {\hat z}_j) + m\omega^2 ({\hat z}_{j+1} - {\hat z}_j)
+\end{align}
+これは、古典的な系の運動方程式(\ref{eq:EOM connected HO})の座標を演算子に置き換えたものとなっている。
+方程式の形が同じなので、式(\ref{eq:eigenvector connected HO})で与えられた固有ベクトルを用いて、
+\begin{align}
+\vec {\hat z}(t) = \sum_k \hat \alpha_k e^{-i\omega_k t} \vec u_k + h.c.
+\end{align}
+と書ける。また、
+\begin{align}
+\vec {\hat p}(t) &= \sum_k \left[ -i m \omega \hat\alpha_k e^{-i\omega_k t} \vec u_k + h.c. \right]
+\end{align}
+$\hat\alpha_k$のみたすべき性質をみるために、$[\hat z_i, \hat p_j] = i$をフーリエ変換してみよう。
+\begin{align}
+[{\vec u_k}^\dagger \vec {\hat z}, \vec{\hat p}^T \vec u_{k'}] = i {\vec u_k}^\dagger \vec u_{k'} \label{eq:commutator FT renketsu bane}
+\end{align}
+両辺はそれぞれ
+\begin{align}
+式(\ref{eq:commutator FT renketsu bane})の左辺 &= im\omega[ \hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k} e^{i\omega_k t} , -\hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k} e^{i\omega_k t} ], \\
+式(\ref{eq:commutator FT renketsu bane})の右辺 &= i\delta_{kk'}.
+\end{align}
+と評価される。式(\ref{eq:commutator FT renketsu bane})は$t$に依らず満たされるので、次の交換関係が得られる。
+\begin{align}
+[\hat\alpha_k, \hat\alpha_{k'}^\dagger] &= \frac{1}{2m\omega_k} \delta_{kk'}, \\
+[\hat\alpha_k, \hat\alpha_{k'}] = [\hat\alpha_k^\dagger, \hat\alpha_{k'}^\dagger] &= 0.
+\end{align}
+$\hat a_k \equiv \sqrt{2m\omega_k} \hat\alpha_k$を定義すると、
+\begin{align}
+[\hat a_k, \hat a_{k'}^\dagger] &= \delta_{kk'}, \\
+[\hat a_k, \hat a_{k'}] = [\hat a_k^\dagger, \hat a_{k'}^\dagger] &= 0.
+\end{align}
+を用いて、
+\begin{align}
+{\hat z}_j(t) = \sum_k \frac{1}{\sqrt{2m\omega_k}} \left[ \hat a_k \exp\left( \frac{2\pi i jk}{n} \right) + \hat a_k^\dagger \exp\left( -\frac{2\pi i jk}{n} \right) \right]
+\end{align}
+と書ける。
+
+\subsubsection{連続極限としての量子場}
+古典連成ばねの時と同様に
+\begin{align}
+m = \rho \Delta x, \qquad
+n = \frac{L}{\Delta x}, \qquad
+\omega = \frac{v}{\Delta x}
+\end{align}
+という置き換えをしてみよう。古典連成ばね系で$\Delta x \to 0$の連続極限をとると、古典スカラー場があらわれるのを見た。
+量子連成ばね系で$\Delta x \to 0$の連続極限をってみよう。
+古典論のときは古典スカラー場があらわれたが、
+今回は、スカラー場の量子論があらわれるはずだ。
+古典力学のときと同じように$\hat p_j = m \dot \hat z_j = \Delta x \times \rho \dot {\hat z}_j$なので、
+\begin{align}
+\hat \pi_j \equiv \frac{\hat p_j}{\Delta x} = \rho \dot {\hat z}_j
+\end{align}
+というのを定義しておくのが良い。
+
+$z_j$との交換関係は、
+\begin{align}
+[\hat z_j, \hat \pi_{j'}] = \frac{i \delta_{j j'}}{\Delta x}
+\end{align}
+であるが、連続極限において$\displaystyle\frac{ \delta_{jj'} }{\Delta x} \to \delta(x-x')$となることを思い出すと、$\Delta x\to 0$の極限で、
+\begin{align}
+[\hat z_j, \hat \pi_{j'}] = \frac{i \delta_{kk'}}{\Delta x}
+\qquad\rightarrow\qquad
+[\hat z(x), \hat \pi(x')] = i \delta(x-x')
+\end{align}
+となる。また、ハイゼンベルク方程式も、連続極限において
+\begin{align}
+\dot{\hat z}_j =\frac{1}{\rho} \hat \pi_j \qquad\to\qquad \dot{\hat z}(x) =\frac{1}{\rho} \hat \pi(x), \\
+\dot{\hat \pi}_j = \rho v^2 \frac{ \hat z_{j+1} - 2\hat z_j + \hat z_{j-1}  }{\Delta x^2} \qquad\to\qquad \dot{\hat \pi}(x) = \rho v^2 \frac{\partial^2}{\partial x^2}\hat z(x)
+\end{align}
+となる。
+こうして場の演算子が自然とあらわれ、かつ、正準量子化の手続きが使えそうなことが見える。
+
+
+\subsection{一次元弦の量子論}
+質点の量子力学をスタート地点として連続極限をとることにより、量子場があらわれるさまをみた。しかし、いちいち連続極限をとるのは面倒。ここでは、古典場のラグランジアンをスタート地点として、正準量子化をへて量子場を導出してみよう。
+
+
+\subsubsection{一次元弦の正準量子化}
+有限自由度の量子力学のとき、正準量子化は、
+\begin{itemize}
+\item まずラグランジアン$L$を書く。
+\item 共役運動量$p_j = \partial L / \partial x_j$に対して、$[x_j, p_{j'}] = i \delta_{jj'}$という交換関係を要求する。
+\item ハミルトニアンを$H = p \dot q - L$として、$x_j$と$p_j$で書く。
+\end{itemize}
+という手続きで行われた。
+
+場の理論になってもやることは、結局一緒。つまり、
+\begin{itemize}
+\item まずラグランジアン密度${\cal L}$を書く。
+\item 共役運動量$\pi(x) = \partial {\cal L} / \partial \phi(x)$に対して、$[\phi(x), \pi(y)] = i \delta(x-y)$という交換関係を要求する。
+\item ハミルトニアン見るとを${\cal H} = \pi \dot \phi - {\cal L}$として、$\phi(x)$と$\pi(x)$で書く。
+\end{itemize}
+
+
+
+共役運動量の定義や場の交換関係がどのように置き換わりそうかが分かったので、
+古典場のラグランジアンをスタート地点として、正準量子化してみよう。
+次のラグランジアンからはじめる。
+\begin{align}
+L = \int_0^L dx \left[ \frac{1}{2}\rho \left( \frac{\partial z}{\partial t} \right)^2 - \frac{1}{2} \rho v^2 \left( \frac{\partial\rho}{\partial x} \right)^2 \right]
+\end{align}
+%
+$\phi$の共役運動量は汎関数微分で定義される。
+\begin{align}
+\pi(x) = \frac{\delta L}{\delta \dot z(x)} = \frac{\partial{\cal L}}{\partial \dot z(x)}
+= \rho \dot z(x).
+\end{align}
+%
+ハミルトニアン$H$とハミルトニアン密度${\cal H}$は、
+\begin{align}
+H &= \int_0^L dx (\pi \dot z) - L = \int_0^L dx {\cal H}, \\
+{\cal H} &= \frac{1}{2\rho} \pi^2 + \frac{1}{2}\rho v^2 \left( \frac{\partial z}{\partial x}\right)^2
+\end{align}
+
+正準量子化しよう。
+$\hat z$と$\hat \pi$の交換関係はデルタ関数で与えられる。
+\begin{align}
+[\hat z(x), \hat \pi(y)] = i\delta(x-y)
+\end{align}
+ハミルトニアンは次のとおり。
+\begin{align}
+\hat H = \int_0^L dx \left[ \frac{1}{2\rho} \hat\pi^2 + \frac{1}{2} \rho v^2 \left( \frac{\partial\hat z}{\partial x} \right)^2 \right].
+\end{align}
+%
+ハイゼンベルク方程式は
+\begin{align}
+\dot{\hat z} &= i [\hat H, \hat z] = \frac{1}{\rho}\hat\pi, \\
+\dot{\hat\pi} &= i [\hat H, \hat \pi] = -\rho v^2 \frac{\partial}{\partial x^2} \hat z.
+\end{align}
+$\hat\pi$を消去すると、
+\begin{align}
+\ddot {\hat z}(x,t) = -v^2 \frac{\partial^2}{\partial x^2} {\hat z}(x,t).
+\end{align}
+%
+一般的な解は、
+\begin{align}
+\hat z(t,x) = \sum_{k=-\infty}^\infty \hat\alpha_k \exp\left( -i\omega_k t + \frac{2\pi ik x}{L} \right) + h.c.
+\end{align}
+また、
+\begin{align}
+\hat \pi(t,x) = \rho \dot{\hat z}(t,x)= -i \rho \sum_{k=-\infty}^\infty \omega_k \hat\alpha_k \exp\left( -i\omega_k t + \frac{2\pi ik x}{L} \right) + h.c.
+\end{align}
+$\hat\alpha_k$のみたすべき性質をみるために、$[\hat z(t,x), \hat \pi(t,y)] = i\delta(x-y)$をフーリエ変換してみよう。
+\begin{align}
+\int_0^L dx \int_0^L dy e^{-2\pi i k x/L} e^{2\pi i k' y/L} [\hat z(t,x), \hat \pi(t,y)] =
+\int_0^L dx \int_0^L dy e^{-2\pi i k x/L} e^{2\pi i k' y/L} i\delta(x-y)
+\label{eq:commutator FT 1Dstring}
+\end{align}
+両辺はそれぞれ
+\begin{align}
+式(\ref{eq:commutator FT 1Dstring})の左辺 &= -i\rho L^2[ \hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k}^\dagger e^{i\omega_{-k} t},  \omega_{k'} \hat\alpha_{k'} e^{-i\omega_{k'} t} - \omega_{-k'} \hat\alpha_{-k'}^\dagger e^{i\omega_{-k'} t} ], \\
+式(\ref{eq:commutator FT 1Dstring})の右辺 &= iL \delta_{k,k'}
+\end{align}
+と評価される。式(\ref{eq:commutator FT 1Dstring})は$t$に依らず満たされるので、次の交換関係が得られる。
+\begin{align}
+[\hat\alpha_k, \hat\alpha_{k'}^\dagger] &= \frac{\delta_{k,k'}}{2\omega_k \rho L}, \\
+[\hat\alpha_k, \hat\alpha_{k'}] = [\hat\alpha_k^\dagger, \hat\alpha_{k'}^\dagger] &= 0.
+\end{align}
+$\hat a_k \equiv \sqrt{2\omega_k \rho L} \hat\alpha_k$を定義すると、
+\begin{align}
+[\hat a_k, \hat a_{k'}^\dagger] &= \delta_{kk'}, \\
+[\hat a_k, \hat a_{k'}] = [\hat a_k^\dagger, \hat a_{k'}^\dagger] &= 0.
+\end{align}
+$\hat z$と$\hat \pi$を$\hat a$と$\hat a^\dagger$で書ける。
+\begin{align}
+\hat z &= \sum_j \left( \frac{1}{\sqrt{2\omega_j \rho L}} \hat a_k \exp\left( \frac{2\pi ijx}{L} \right) + \frac{1}{\sqrt{2\omega_j \rho L}} \hat a_k^\dagger \exp\left( -\frac{2\pi ijx}{L} \right) \right), \label{eq:z a adagger}\\
+\hat \pi &= \sum_j \left( i \sqrt{ \frac{\rho \omega_j}{2L} } \hat a_k \exp\left( \frac{2\pi ijx}{L} \right) - i \sqrt{ \frac{\rho \omega_j}{2L} } \hat a_k^\dagger \exp\left( -\frac{2\pi ijx}{L} \right) \right). \label{eq:pi a adagger}
+\end{align}
+
+\subsubsection{$L \to \infty$極限}
+$L$を無限大にする極限をとってみよう。この極限では、運動量固有値が連続的になるので、
+\begin{align}
+\sum_j \to \frac{L}{2\pi} \int dk
+\end{align}
+のような置き換えができる。
+%
+生成消滅演算子の交換関係もデルタ関数で書けるようになる。
+\begin{align}
+[\sqrt{L} \hat a_j, \sqrt{L} \hat a_{j'} ] = L \delta_{jj'} \to (2\pi) \delta(k-k').
+\end{align}
+%
+式(\ref{eq:z a adagger}, \ref{eq:z a adagger})を以下のように書き換えてみる。
+\begin{align}
+\hat z &= \frac{1}{\sqrt\rho} \frac{1}{L} \sum_k \left( \frac{1}{\sqrt{2\omega_k}} \sqrt{L} \hat a_k \exp\left( \frac{2\pi ikx}{L} \right) + \frac{1}{\sqrt{2\omega_k L}} \sqrt{L} \hat a_k^\dagger \exp\left( -\frac{2\pi ikx}{L} \right) \right), \\
+\hat \pi &= \sqrt{\rho} \frac{1}{L} \sum_k \left( i \sqrt{ \frac{\omega_k}{2} } \sqrt{L} \hat a_k \exp\left( \frac{2\pi ikx}{L} \right) - i \sqrt{ \frac{\omega_k}{2} } \sqrt{L} \hat a_k^\dagger \exp\left( -\frac{2\pi ikx}{L} \right) \right).
+\end{align}
+%
+$L$無限大極限の$\hat z$と$\hat \pi$は次のように書けるのが分かる。
+\begin{align}
+\hat z &= \frac{1}{\sqrt\rho} \int \frac{dk}{2\pi} \left( \frac{1}{\sqrt{2\omega_k}} \hat a_k \exp\left( ikx \right) + \frac{1}{\sqrt{2\omega_k}} \hat a_k^\dagger \exp\left( -ikx \right) \right), \\
+\hat \pi &= \sqrt{\rho} \int \frac{dk}{2\pi} \left( i \sqrt{ \frac{\omega_k}{2} } \hat a_k \exp\left( ikx \right) - i \sqrt{ \frac{\omega_k}{2} } \hat a_k^\dagger \exp\left( -ikx \right) \right), \\
+[\hat a_k, \hat a_{k'}^\dagger] &= (2\pi) \delta(k-k').
+\end{align}
+
+
+\subsection{有効理論という考え方}
+上でみた、一次元古典スカラー場の理論は、
+連成ばねの低エネルギー有効理論とみなすこともできる。有効理論という考え方\underline{\textbf{めっちゃ大事}}。
+
+物理は自然科学なので実験でチェックされるもの。つまり、次のような性質を持っている。
+\begin{itemize}
+\item 全ての実験にはエラーバーがついている。　→　ある理論が実験結果をうまく説明しているとしても、理論の予言値と実験の観測値のずれの大きさがエラーバーより小さいだけかもしれない。
+\item これまでに人類が行った実験の数は有限。　→　ある理論が今まで行われた実験結果をうまく説明しているとしても、人類が今までやってない実験で、理論と実験のずれが見つかるかもしれない。
+\end{itemize}
+%
+つまり、物理の理論は「有効理論」だと思うべき。その意味は、
+\begin{itemize}
+\item （少なくとも）一定の条件を満たすときに、現実世界を十分な精度で近似するもの。
+\end{itemize}
+ということで、理論が有効な範囲を意識することはめっちゃ大事。
+具体例はこんな感じ。
+\begin{itemize}
+\item ニュートン力学：$v\ll c$かつマクロスコピック（量子論的効果無視できる）なら良い近似
+\item 非相対論的量子力学：$v\ll c$なら良い近似
+\item 特殊相対論：マクロスコピック（量子論的効果無視できる）なら良い近似
+\end{itemize}
+%
+ある理論から適用範囲の狭い有効理論は演繹的に導出できるが、適用範囲の広い理論に行くには論理的飛躍が必要。
+\begin{itemize}
+\item 例：古典力学から量子力学にいくには、いきなりc数を演算子にするなどの論理的飛躍が必要だった。
+\item 例2：量子力学から場の量子論にいくにも論理的飛躍が必要。
+\item 例3：超対称性粒子まだ見つかってないけど、いつかは見つかるかも？？
+\end{itemize}
+
+
+\section{ローレンツ不変な自由スカラー場の量子論}
+連成ばねの極限として古典スカラー場があらわれるように、多自由度の調和振動子の極限として量子スカラー場があらわれることをみた。さらに、場の量子論における正準量子化の仕方が自然と定まることもみた。
+この章では、ローレンツ不変な古典スカラー場のラグランジアンの正準量子化してみる。スピン0の粒子の特殊相対論的なハミルトニアンがえられることをみてみよう。
+
+\subsection{相互作用しないスピン0粒子ってどんな感じ？}
+場の量子論をやるまえに、どんな結果が得られたら良いのか当たりをつけておこう。
+相互作用しないスピン0の粒子を考えてみる。どんな量子系になっているだろうか。
+相互作用が無視できる系なので、どうなるかは検討が付けられる。
+%\footnote{
+%相互作用が無い系はつまらないと思うかもしれない。しかし自由場の系は解けるので大事。人類にできるのは、ごく少数の解ける系の除くと、解ける系の近傍を摂動論を使うか、解けない系を数値計算で頑張って解くか、二択。
+%}
+
+この系にはどんな状態が存在するだろうか。
+まず、粒子が一つもない状態、すなわち最もエネルギーが低い状態である、真空$|0\rangle$が存在しているはずだ。
+粒子が１ついる状態、２ついる状態、３ついる状態\dots がないといけない。
+粒子は運動量$\vec p$を持ち、その場合のエネルギーは$\sqrt{m^2 + \vec p^2}$だ。そして、運動量が等しい同種粒子は区別がつかない。スピン0の粒子はボゾンなのでボーズ統計に従うだろう。\footnote{
+スピン整数の粒子がボゾンで半整数の粒子がフェルミオンとなるのは場の量子論の議論から決まる。
+本講義の範囲を超えるので詳しく説明しないが、例えばWeinbergの教科書のsection 5などを参照してください。
+}
+ということは、生成消滅演算子のセット$\hat a_p,~\hat a_p^\dagger$があるはずで、それらは
+\begin{align}
+\hat a_p |0\rangle &= 0, \\
+[\hat a_p, \hat a_q^\dagger] &= (2\pi)^3 \delta^{(3)}(p-q), \\
+[\hat a_p, \hat a_q] = [\hat a_p^\dagger, \hat a_q^\dagger] &= 0.
+\end{align}
+を満たす。
+粒子の数を数える演算子は
+\begin{align}
+\hat N = \int \frac{d^3 p}{(2\pi)^3} \hat a_p^\dagger \hat a_p
+\end{align}
+と書けるだろう。
+%
+生成演算子により粒子が１つ存在する状態は、
+\begin{align}
+\hat a_p^\dagger |0\rangle
+\end{align}
+と表せる。$\hat N \hat a_p^\dagger |0\rangle = \hat a_p^\dagger |0\rangle$がすぐ分かる。
+
+
+ハミルトニアンは、粒子の数を数えてエネルギーをかければよいので、こうなるはず。
+\begin{align}
+\hat H &= \int \frac{d^3 p}{(2\pi)^3} \sqrt{m^2 + \vec p^2} \hat a_p^\dagger \hat a_p. \label{eq:hamiltonian spin 0}
+\end{align}
+運動量演算子も
+\begin{align}
+\hat {\vec P} &= \int \frac{d^3 p}{(2\pi)^3} \vec p \hat a_p^\dagger \hat a_p. \label{eq:momentum spin 0}
+\end{align}
+となるはず。
+
+この生成消滅演算子、ハミルトニアン、運動量演算子が出てくれば勝ち。
+これらが出てくることを具体的に見ていこう。
+% 2022.7.4ここまで
+
+
+\subsection{自由実スカラー場の正準量子化}
+まず、スカラー場$\phi$のラグランジアンを次のように与えてみよう。
+$\phi$は古典場としては実数の値を取るものとする。
+\begin{align}
+{\cal L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2\phi
+\end{align}
+なぜこんなラグランジアンを採用するのだろうか？
+\begin{itemize}
+\item スカラー場の微分を含み、
+\item ローレンツ不変で、
+\item $\phi$の二次の項からなる
+\end{itemize}
+ラグランジアンはこの形！
+
+微分を含む項は、
+\begin{align}
+\frac{1}{2}(\partial_\mu \phi)^2
+=
+\frac{1}{2}\left( \frac{\partial\phi}{\partial t} \right)^2
+- \frac{1}{2}\left( \frac{\partial\phi}{\partial x} \right)^2
+- \frac{1}{2}\left( \frac{\partial\phi}{\partial y} \right)^2
+- \frac{1}{2}\left( \frac{\partial\phi}{\partial z} \right)^2
+\end{align}
+と書ける。
+\begin{align}
+{\cal L} =
+ \frac{1}{2} \rho \left( \frac{\partial z}{\partial t} \right)^2
+ -  \frac{1}{2} \rho v^2 \left( \frac{\partial z}{\partial x} \right)^2.
+\end{align}
+と比較してみよう。$\sqrt{\rho} z$を$\phi$に、$v$を$1 (=c)$に置き換え、空間を1次元から3次元にしたものになっている。
+ということは、連成ばねの系は実は質量0のスカラー場と繋がっていたのだった。
+（質量を持つスカラー場と繋がるような連成ばねの系も工夫すると作ることができる。山口さんの相対論的量子力学の講義ノートを参照のこと。\url{http://www-het.phys.sci.osaka-u.ac.jp/~yamaguch/j/class.html}）
+
+%運動方程式はクラインゴルドン方程式になる。
+%\begin{align}
+%(\partial^2 + m^2) \phi = 0.
+%\end{align}
+%
+%最終的に式(\ref{eq:hamiltonian spin 0})のハミルトニアンが出れば結果オーライ。
+
+\subsubsection{正準量子化}
+相互作用のない実スカラー場のラグランジアン密度は以下のように与えられる。
+\begin{align}
+{\cal L} = \frac{1}{2} \dot\phi^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2}m^2 \phi^2
+\end{align}
+%
+$\phi$の共役運動量は
+\begin{align}
+\pi = \frac{\delta {\cal L}}{\delta \phi} = \dot\phi
+\end{align}
+よって、ハミルトニアン密度およびハミルトニアンを$\phi$と$\pi$で書くと
+\begin{align}
+{\cal H} &= \pi \dot\phi - {\cal L} = \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}m^2 \phi^2, \\
+H &= \int d^3x {\cal H}
+\end{align}
+のように与えられる。
+
+さて、正準量子化しよう。ハミルトニアン演算子と、場の同時刻交換関係は以下のように与えられる。
+\begin{align}
+\hat H &= \int d^3x \left[ \frac{1}{2} \hat\pi^2 + \frac{1}{2}(\nabla\hat\phi)^2 + \frac{1}{2} m^2 \hat\phi^2 \right], \\
+[\hat\phi(t,\vec x), \hat\pi(t,\vec y)] &= i\delta^{(3)}(\vec x - \vec y).
+\end{align}
+%
+ハイゼンベルク描像では、場の演算子の時間発展は以下のハイゼンベルク方程式に従う。
+\begin{align}
+\dot{\hat \phi} &= i[\hat H, \hat\phi] = \hat\pi, \\
+\dot{\hat \pi} &= i[\hat H, \hat\pi] = \nabla^2\hat\phi - m^2 \hat\phi.
+\end{align}
+%
+$\hat\pi$を消去すると$\hat\phi$の従う運動方程式として以下を得る。
+\begin{align}
+\ddot{\hat\phi} = \nabla^2 \hat\phi-m^2 \hat\phi.
+\end{align}
+$\hat\phi^\dagger = \hat\phi$を満たす一般解は次のようになる。
+\begin{align}
+\hat\phi(t,\vec x) = \int \frac{d^3 p}{(2\pi)^3} \hat \alpha_{\vec p} e^{i\vec p \vec x - iE_p t}+ h.c.
+\end{align}
+係数の演算子$\hat\alpha_{\vec p}$時間によらない。
+$\hat\phi(t,\vec x)$と$\hat\pi(t,\vec x)$のフーリエ変換は次のように与えられる。
+\begin{align}
+\int d^3 x e^{-i\vec p \vec x} \hat\phi(t,\vec x) &= \hat \alpha_{\vec p} e^{-iE_p t} + \hat \alpha_{-\vec p}^\dagger e^{iE_p t}, \\
+\int d^3 x e^{-i\vec p \vec x} \hat\pi(t,\vec x) &= -iE_p {\hat \alpha}_{\vec p} e^{-iE_p t} + iE_p {\hat \alpha}_{-\vec p}^\dagger e^{iE_p t}.
+\end{align}
+%
+$\hat\alpha_{\vec p}$のみたすべき性質を見るために、$[\hat\phi(t,\vec x), \hat\pi(t,\vec y)]$をフーリエ変換してみよう。
+\begin{align}
+\int d^3x d^3 y e^{-i\vec p \vec x} e^{i\vec q \vec y} [\hat\phi(t,\vec x), \hat\pi(t,\vec y)] &= \int d^3x d^3 y e^{-i\vec p \vec x} e^{i\vec q \vec y} i \delta^{(3)}(\vec x - \vec y) \label{eq:commutator FT QFT}
+ \end{align}
+両辺はそれぞれ
+\begin{align}
+式(\ref{eq:commutator FT QFT})の左辺
+&= iE_p [\hat \alpha_{\vec p} e^{-iE_p t} + \hat \alpha_{-\vec p}^\dagger e^{iE_p t}, - {\hat \alpha}_{\vec q} e^{-iE_q t} + {\hat \alpha}_{-\vec q}^\dagger e^{iE_q t}], \\
+式(\ref{eq:commutator FT QFT})の右辺
+&= i\delta^{(3)}(\vec p - \vec q)
+\end{align}
+と評価される。
+式(\ref{eq:commutator FT QFT})は$t$に依らず満たされるので、次の交換関係が得られる。
+\begin{align}
+[\hat \alpha_{\vec p}, \hat \alpha_{\vec q}^\dagger] &= \frac{1}{2E_p} (2\pi)^3 \delta^{(3)}(\vec p - \vec q), \\
+[\hat \alpha_{\vec p}, \hat \alpha_{\vec q}] = [\hat \alpha_{\vec p}^\dagger, \hat \alpha_{\vec q}^\dagger] &= 0.
+\end{align}
+$\hat a_{\vec p} \equiv  \sqrt{2E_p} \hat \alpha_{\vec p}$を定義すると、
+\begin{align}
+[\hat a_{\vec p}, \hat a_{\vec q}^\dagger] &= (2\pi)^3 \delta^{(3)}(\vec p - \vec q), \\
+[\hat a_{\vec p}, \hat a_{\vec q}] = [\hat a_{\vec p}^\dagger, \hat a_{\vec q}^\dagger] &= 0.
+\end{align}
+%
+$\hat \phi$と$\hat\pi$は$\hat a$と$\hat a^\dagger$を使って書ける。
+\begin{align}
+\hat\phi(t,\vec x) &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_{\vec p}}}\left[ {\hat a}_{\vec p}(t) e^{i\vec p \vec x - iE_{\vec p} t}+ h.c. \right], \label{eq:phi QFT}\\
+\hat\pi(t,\vec x) &= \int \frac{d^3 p}{(2\pi)^3} \sqrt{ \frac{E_{\vec p}}{2}  }\left[ -i{\hat a}_{\vec p}(t) e^{i\vec p \vec x - iE_{\vec p} t}+ h.c. \right] \label{eq:pi QFT}
+\end{align}
+
+
+\subsubsection{ハミルトニアン}
+$\hat\phi$や$\hat\pi$を生成消滅演算子$\hat a,~\hat a^\dagger$を使って書けたので、ハミルトニアン$\hat H$を$\hat a,~\hat a^\dagger$で書いてみよう。
+\begin{align}
+\hat H
+= \int d^3x \left[ \frac{1}{2} \hat\pi^2 + \frac{1}{2}(\nabla\hat\phi)^2 + \frac{1}{2} m^2 \hat\phi^2 \right].
+\end{align}
+%
+時刻$t=0$として、右辺の項はそれぞれ、
+\begin{align}
+\int d^3x \frac{1}{2}\hat \pi^2
+&=
+\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{ \sqrt{E_p E_q} }{2}\left(
+	 -\hat a_p \hat a_q e^{i(\vec p + \vec q)\vec x}
+	 +\hat a_p \hat a_q^\dagger  e^{i(\vec p - \vec q)\vec x}
+ 	 +\hat a_p^\dagger \hat a_q  e^{i(-\vec p + \vec q)\vec x}
+ 	 -\hat a_p^\dagger \hat a_q^\dagger e^{-i(\vec p + \vec q)\vec x}
+	 \right) \nonumber\\
+&=
+\int \frac{d^3 p}{(2\pi)^3} \frac{E_p}{2}\left(
+	 -\hat a_p \hat a_{-p}
+	 +\hat a_p \hat a_p^\dagger
+ 	 +\hat a_p^\dagger \hat a_p
+ 	 -\hat a_p^\dagger \hat a_{-p}^\dagger
+	 \right), \\
+%
+\int d^3x \frac{1}{2} (\nabla\pi)^2
+&=
+\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{\vec p \vec q}{2\sqrt{E_p E_q}}\left(
+	 -\hat a_p \hat a_q e^{i(\vec p + \vec q)\vec x}
+	 +\hat a_p \hat a_q^\dagger  e^{i(\vec p - \vec q)\vec x}
+ 	 +\hat a_p^\dagger \hat a_q  e^{i(-\vec p + \vec q)\vec x}
+ 	 -\hat a_p^\dagger \hat a_q^\dagger e^{-i(\vec p + \vec q)\vec x}
+	 \right) \nonumber\\
+&=
+\int \frac{d^3 p}{(2\pi)^3} \frac{p^2}{2E_p}\left(
+	 \hat a_p \hat a_{-p}
+	 +\hat a_p \hat a_p^\dagger
+ 	 +\hat a_p^\dagger \hat a_p
+ 	 +\hat a_p^\dagger \hat a_{-p}^\dagger
+	 \right), \\
+%
+\int d^3x \frac{m^2}{2}\phi^2
+&=
+\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{m^2}{2\sqrt{E_p E_q} }\left(
+	 \hat a_p \hat a_q e^{i(\vec p + \vec q)\vec x}
+	 +\hat a_p \hat a_q^\dagger  e^{i(\vec p - \vec q)\vec x}
+ 	 +\hat a_p^\dagger \hat a_q  e^{i(-\vec p + \vec q)\vec x}
+ 	 +\hat a_p^\dagger \hat a_q^\dagger e^{-i(\vec p + \vec q)\vec x}
+	 \right) \nonumber\\
+&=
+\int \frac{d^3 p}{(2\pi)^3} \frac{m^2}{2E_p}\left(
+	 \hat a_p \hat a_{-p}
+	 +\hat a_p \hat a_q^\dagger
+ 	 +\hat a_p^\dagger \hat a_q
+ 	 +\hat a_p^\dagger \hat a_{-p}^\dagger
+	 \right).
+\end{align}
+%
+全部足して次のようなハミルトニアンを得る。
+\begin{align}
+\hat H
+&= \int \frac{d^3 p}{(2\pi)^3} \frac{E_p}{2}( \hat a_p^\dagger \hat a_p + \hat a_p \hat a_p^\dagger ) \nonumber\\
+&= \int \frac{d^3 p}{(2\pi)^3} E_p \hat a_p^\dagger \hat a_p + \int \frac{d^3 p}{(2\pi)^3} \frac{E_p}{2} \delta^{(3)}(0)
+\end{align}
+最終行の一つめの項はまさに欲しかったもの！
+二つめの項はなんだろう？なんだか発散しているのが気になるけど、定数なので落としてしまってよい。なぜなら物理的に意味のあるのはある状態と別のある状態のエネルギー差なのだから。\footnote{
+重力があるとこうもいかなくなってくる。実際、ダークエネルギーの大きさは謎。ちなみに超対称性というのを入れると、ボゾンとフェルミオンでキャンセルしあって上手いこと消えたりする。が、今の所、超対称性の証拠は残念ながら見つかっていない。}
+
+ハミルトニアンとの交換関係を計算してみよう。
+\begin{align}
+[\hat H, \hat a_p]
+&=\int \frac{d^3 q}{(2\pi)^3} E_p [\hat a_q^\dagger \hat a_q, \hat a_p] \nonumber\\
+&=-\int \frac{d^3 q}{(2\pi)^3} E_p \hat a_q (2\pi)^3 \delta^3(\vec p - \vec q) \nonumber\\
+&=-E_p \hat a_p
+\end{align}
+同様にして、
+\begin{align}
+[\hat H, \hat a_p^\dagger] = E_p \hat a_p^\dagger.
+\end{align}
+%
+ということは、$\hat H |\psi \rangle = E_\psi |\psi\rangle$のとき、
+\begin{align}
+\hat H  \hat a_{\vec p} |\psi\rangle &= (\hat a_{\vec p} \hat H + [\hat H, \hat a_{\vec p}]) |\psi\rangle = (E_\psi - E_p)  \hat a_{\vec p} |\psi\rangle, \\
+\hat H  \hat a_{\vec p}^\dagger |\psi\rangle &= (\hat a_{\vec p}^\dagger \hat H + [\hat H, \hat a_{\vec p}^\dagger]) |\psi\rangle = (E_\psi + E_p)  \hat a_{\vec p}^\dagger |\psi\rangle
+\end{align}
+つまり、$\hat a_p$を作用させるとエネルギー固有値が$E_p$減り、$\hat a_p^\dagger$を作用させるとエネルギー固有値が$E_p$増えることが分かる。
+% 2022.7.11ここまで
+
+\subsection{ネーターの定理と保存量}
+対称性があればそれに対応する保存量があること、という事情は場の量子論でも同じである。
+
+とりあえず古典場で議論する。
+運動方程式が、次の無限小変換のもとで不変だとしよう。
+\begin{align}
+\phi_i \to \phi_i + \epsilon G_i(\phi(x))
+\end{align}
+%
+例えば、この変換のもとでラグランジアン密度が不変であれば、運動方程式も変わらない。
+より一般には、ある$X(\phi(x))^\mu$が存在して、
+\begin{align}
+{\cal L} \to {\cal L} + \epsilon \partial_\mu X^\mu(\phi)
+\end{align}
+と変換されればよい。２つ目の項は積分すると表面積分になる。（電磁気のガウスの法則を思い出そう。あれの４次元版をやればよい）
+運動方程式を導出するときには表面項は影響がないので、２つ目の項は考えなくてよい。
+%
+ということで、
+\begin{align}
+\sum_i \left( \frac{\partial {\cal L}}{\partial \phi_i} G_i
++ \frac{\partial {\cal L}}{\partial \partial_\mu \phi_i} \partial_\mu G_i \right) &= \partial_\mu X^\mu
+\end{align}
+が成立する。
+\begin{align}
+\sum_i \left[
+\frac{\partial {\cal L}}{\partial \phi_i} G_i
++ \partial_\mu \left( \frac{\partial {\cal L}}{\partial \partial_\mu \phi_i} G_i \right)
+- \left( \partial_\mu \frac{\partial {\cal L}}{\partial \partial_\mu \phi_i} \right) G_i \right] &= \partial_\mu X^\mu
+\end{align}
+%
+ということは運動方程式が満たされれていると、
+\begin{align}
+\partial_\mu \left[ \sum_i \frac{\partial {\cal L}}{\partial \partial_\mu \phi_i} G_i - X^\mu \right] = 0.
+\end{align}
+%
+保存するカレントが作れた。対称性があると、それに対応する保存カレントがある。これがネーター(Noether)の定理。
+
+\subsubsection{複素スカラー場}
+自由複素スカラー場を考えてみよう。
+\begin{align}
+{\cal L} = \partial_\mu \Phi^\dagger \partial^\mu \Phi - m^2 \Phi \Phi^\dagger
+\end{align}
+%
+次の対称性を見出すことができる。
+\begin{align}
+\Phi \to \Phi + i \epsilon \Phi, \qquad \Phi^\dagger \to \Phi^\dagger - i \epsilon \Phi^\dagger.
+\end{align}
+%
+$G$と$X^\mu$を読み取ると、
+\begin{align}
+\qquad G_\Phi = i \Phi, \qquad G_{\Phi^\dagger} = i\Phi^\dagger, \qquad X^\mu = 0.
+\end{align}
+%
+保存カレントは、
+\begin{align}
+j^\mu = i\Phi \partial^\mu \Phi^\dagger - i\Phi^\dagger \partial^\mu \Phi.
+\end{align}
+
+\subsubsection{時間空間並進（ハミルトニアン、運動量演算子）}
+自由実スカラー場を考えてみよう。
+\begin{align}
+{\cal L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2 \phi^2.
+\end{align}
+%
+次の並進対称性を見出すことができる。
+\begin{align}
+\phi \to \phi + \epsilon a^\mu \partial_\mu \phi
+\end{align}
+%
+$G$と$X^\mu$を読み取ると、
+\begin{align}
+G_\phi = a^\mu \partial_\mu \phi, \qquad
+X^\mu = a^\mu {\cal L}.
+\end{align}
+%
+対応する保存カレントは
+\begin{align}
+j^\mu = (\partial^\mu \phi) a^\nu (\partial_\nu \phi) - a^\mu {\cal L}
+\end{align}
+とあたえられる。$\partial_\mu j^\nu = 0$がみたされるが、$a^\mu$はどんな定数ベクトルでも良かったことに着目すると、
+\begin{align}
+\partial_\mu T^{\mu\nu} = 0
+\end{align}
+がみたされるテンソルとして、
+\begin{align}
+T^{\mu\nu} = (\partial^\mu \phi) (\partial^\nu \phi) - g^{\mu\nu} {\cal L}.
+\end{align}
+と書ける。
+\begin{align}
+T^{00}
+&= \frac{1}{2} \dot\phi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}m^2 \phi^2
+= \frac{1}{2} \pi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}m^2 \phi^2, \\
+T^{0i}
+&= \dot\phi \partial^i\phi = \pi \partial^i \phi.
+\end{align}
+である。$\partial^i = -\partial_i$に注意すると、保存するベクトル$P^\mu$は、$\phi$と$\pi$を使って、
+\begin{align}
+P^0 &= \int d^3x \left[ \frac{1}{2} \pi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}m^2 \phi^2 \right], \\
+\vec P &= -\int d^3x \pi \vec\nabla \phi
+\end{align}
+と書ける。
+
+式(\ref{eq:phi quantization}, \ref{eq:pi quantization})を使うと、運動量演算子が生成消滅演算子を使って書くことができる。
+\begin{align}
+\hat{\vec P}
+&= -\int d^3x \hat \pi \vec \nabla \hat \phi \nonumber\\
+%
+%&= -\int d^3x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \sqrt{\frac{E_p}{4 E_q}} \vec q
+%\left( -i a_p e^{i\vec p \vec x} + i a_p^\dagger e^{-i\vec p \vec x } \right)
+%\left( i a_q e^{i\vec q \vec x} - ia_q^\dagger e^{-i\vec q \vec x } \right) \nonumber\\
+%
+%&= - \int \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \sqrt{\frac{E_p}{4 E_q}} \vec q
+%(2\pi)^3\left(
+%a_{\vec p} a_{\vec q} \delta^3(\vec p + \vec q)
+%- a_{\vec p} a_{\vec q}^\dagger \delta^3(\vec p - \vec q)
+%- a_{\vec p}^\dagger a_{\vec q} \delta^3(\vec p - \vec q)
+%+ a_{\vec p}^\dagger a_{\vec q}^\dagger \delta^3(\vec p + \vec q)
+%\right) \nonumber\\
+%
+%&= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{2} \vec p
+%\left(
+%a_{\vec p} a_{-\vec p}
+%+ a_{\vec p} a_{\vec p}^\dagger
+%+ a_{\vec p}^\dagger a_{\vec p}
+%+ a_{\vec p}^\dagger a_{-\vec p}^\dagger
+%\right) \nonumber\\
+%
+&= \int \frac{d^3 p}{(2\pi)^3} \vec p \hat a_{\vec p}^\dagger \hat a_{\vec p}.
+\end{align}
+%
+運動量演算子と生成消滅演算子の交換関係は以下のようになる。
+\begin{align}
+[\hat{\vec P}, \hat a_{\vec q}] = -\vec q \hat a_{\vec q}, \qquad
+[\hat{\vec P}, \hat a_{\vec q}^\dagger] = \vec q \hat a_{\vec q}^\dagger.
+\end{align}
+
+
+
+%\subsubsection{角運動量演算子}
+
+% 2022.7.25ここまで
+
+\subsection{局所因果律と異時刻交換関係}
+正準量子化で同時刻交換関係が要求されている。
+\begin{align}
+[\hat \phi(t,\vec x), \hat \phi(t,\vec y)]  = 0.
+\end{align}
+異なる時刻だとどうなるんだろう？式(\ref{eq:phi QFT})を使って、異なる時刻、空間の$\hat\phi$の交換関係を計算してみよう。
+\begin{align}
+[\hat\phi(t,\vec x), \hat\phi(0,\vec 0)]
+&=
+\int \frac{d^3 p}{(2\pi)^3}
+\int \frac{d^3 p}{(2\pi)^3}
+\frac{ [\hat a_p, \hat a_q^\dagger] \exp\left( i\vec p \vec x - i E_p t  \right)
++ [\hat a_p^\dagger, \hat a_q] \exp\left( -i\vec p \vec x + i E_p t  \right)
+}{2\sqrt{E_pE_q}} \nonumber\\
+&=
+\int \frac{d^3 p}{(2\pi)^3 2E_p}
+\left[ \exp\left( i\vec p \vec x - i E_p t  \right)
+- \exp\left( -i\vec p \vec x + i E_p t \right)
+\right] \label{eq:commutation relation different time}
+\end{align}
+
+
+右辺がローレンツ不変性なことをみてみよう。ローレンツ変換が次のように与えられたとする。
+\begin{align}
+E' &= \gamma E + \gamma\beta p_z, \\
+p'_x &= p_x, \\
+p'_y &= p_y, \\
+p'_z &= \gamma\beta E + \gamma p_z.
+\end{align}
+すると、
+\begin{align}
+\frac{\partial p'_z}{\partial p_z}
+&= \gamma\beta \frac{\partial E}{\partial p_z} + \gamma \nonumber\\
+&= \gamma\beta \frac{p_z}{E} + \gamma \nonumber\\
+&= \frac{E'}{E}.
+\end{align}
+ということで、
+\begin{align}
+\frac{d^3 p}{(2\pi)^3 2E_p} = \frac{d^3 p'}{(2\pi)^3 2E'_{p'}}
+\end{align}
+
+また、
+\begin{align}
+\vec p \vec x -  E_p t = -p_\mu x^\mu = -p'_\mu {x'}^\mu = \vec p' \vec x' -  E'_p t'.
+\end{align}
+
+ということで、確かに、式(\ref{eq:commutation relation different time})はローレンツ不変（ローレンツ変換しても同じ形が保たれる）であることが分かる。
+
+ローレンツスカラー場の交換関係なのでローレンツ不変になるべくしてなっている。
+
+\subsubsection{space-likeな点}
+２つの座標の関係がspace-likeなときは、ローレンツ変換をうまく使うと計算がずっと簡単になる。
+時刻が同じになるような座標をとることができる。その座標系で計算すると、
+\begin{align}
+\Delta = \int \frac{d^3 p}{(2\pi)^3 2E_p} ( e^{-ip_z z} - e^{ip_z z}) = 0.
+\end{align}
+これは、結局、同時刻交換関係とローレンツ変換で関係づいているということ。
+この結果は直感的。$\phi$が観測量だと思うと、space-likeな二点の$\phi$は同時対角化できる。space-likeな二点は因果関係を持つことができないということに対応している。
+局所因果律(microcausality)とも呼ばれる。
+
+\subsubsection{time-likeな点}
+一方、座標の関係がtime-likeなときは、交換関係は$0$にならない。$t\neq 0$として、
+\begin{align}
+\Delta = \int \frac{d^3 p}{(2\pi)^3 2E_p} ( e^{-iE_p t} - e^{iE_p t})
+= \frac{m K_1(imt)}{4\pi^2 it} \label{eq:commutator at different t QFT}
+\end{align}
+$K_1$は第2種変形ベッセル関数。
+導出は付録\ref{sec:commutator at different t}を参照されたい。
+
+
+
+
+\subsection{局所因果律と反粒子}
+複素スカラー場を考えてみよう。
+\begin{align}
+{\cal L} = (\partial_\mu \Phi) (\partial_\mu \Phi)^* - m^2 \Phi \Phi^*
+\end{align}
+場の演算子の同時刻交換関係は次のようになる。
+\begin{align}
+[\hat\Phi(t,\vec x), \hat\Phi(t,\vec y)] = [\hat\Phi(t,\vec x), \hat\Phi^*(t,\vec y)] &= 0, \\
+[\hat\Phi(t,\vec x), \dot{\hat\Phi}^*(t,\vec y)] = [\hat\Phi^*(t,\vec x), \dot{\hat\Phi}^*(t,\vec y)] &= i\delta^3(\vec x - \vec y)
+\end{align}
+ハイゼンベルク方程式により$\hat\Phi$の共役運動量は$\hat{\dot\Phi}^*$を関係づくことを使った。生成消滅演算子を使うと
+\begin{align}
+\hat\Phi(t,\vec x) &= \int \frac{d^3 p}{(2\pi)^3} \frac{1}{\sqrt{2E_p}} \left( a_p e^{i\vec p \vec x - i E_p t} + b_p^\dagger e^{-i\vec p \vec x + i E_p t} \right).
+\end{align}
+と書けることになる。
+$a_p^\dagger$で作れる粒子と、$b_p^\dagger$で作れる粒子の二種類が出てきた。二つの粒子は反対の"電荷"を持つ。これが\textbf{反粒子}。
+場の交換関係を計算してみよう。
+\begin{align}
+[\hat\Phi(t,\vec x), \hat\Phi^*(0,\vec 0)]
+&=
+\int \frac{d^3 p}{(2\pi)^3}
+\int \frac{d^3 q}{(2\pi)^3}
+\frac{ [\hat a_p, \hat a_q^\dagger] \exp\left( i\vec p \vec x - i E_p t  \right)
++ [\hat b_p^\dagger, \hat b_q] \exp\left( -i\vec p \vec x + i E_p t  \right)
+}{2\sqrt{E_pE_q}}.
+\end{align}
+space-like($t^2 < r^2$)なときには、$[\hat\Phi(t,\vec x), \hat\Phi^*(0,\vec 0)] = 0$が満たされる。このとき、$[a,a^\dagger]$が寄与する第一項と$[b^\dagger,b]$が寄与する第二項がキャンセルしあっている。
+これは、反粒子の存在が場の同時刻交換関係およびtime-likeな二点の交換関係をキープする上で非常に重要であることを示しており、反粒子の存在により局所因果律が保たれていることを示している。
+$\Phi$は電荷$+1$を持つ場合、ローレンツ不変性を守るために$+1$の粒子の生成演算子と$-1$の粒子の消滅演算子が必要！
+つまりこれは反粒子が必要なことを意味している。
+（反粒子は自分自身であってもよい。が、その場合には保存電荷が持てなくなる。）
+
+% 2022.8.1ここまで
+
+\subsection{相互作用のある場の量子論にむけて}
+さて、ここまで相互作用のないスカラー場の量子化について議論してきた。しかし粒子の散乱など、なんらかの物理的な過程を記述するには相互作用が必要である。ここでは、相互作用のある場の量子論を考えると、どんなことがおきるか概観する。詳細は場の量子論の教科書を参照していただきたい。
+
+相互作用を入れた場の量子論では、計算の途中で発散する項があらわれる。もちろん、物理的に意味のある量は有限の値を持つはずなので、発散する量をなんとか有限な量にする処理（正則化とくりこみ）が必要になる。朝永振一郎が、場の量子論が出来ていく課程で発散の処理に悩まされる様子を日記に記している。
+\begin{quote}
+『計算すすめたら積分が発散した，おかしい．こういうことをやっているのだ．$U$〔中間子〕が直接に$e$〔電子〕と$\nu$〔中性微子〕にこわれずに，$U$は一度$p$〔陽子〕と$n$〔中性子〕を作り，それをさらに$e$と$\nu$にこわれると考えようというのだ．ところが中間状態の$p$，$n$の状態がやたらにたくさんあって，積分が発散してしまうのである．こういう種類の発散は今まで一度も出てきていない．自己エネルギー的の発散ならめずらしくないが，どうもおかしい．』（滞独日記（朝永振一郎）より一部抜粋（1938年12月14日の日記））
+\end{quote}
+
+
+
+\subsubsection*{電子磁気双極子モーメント}
+場の量子論の成功例として最も顕著なものの一つは電子の磁気双極子モーメントの計算だろう。
+量子電磁気学(quantum electrodynamics)を使うと、色んな量が微細構造定数$\alpha (\simeq 1/137)$のべき級数として計算できる。
+\begin{align}
+a_e = \frac{g_e-2}{2} =
+c_1 \frac{\alpha}{\pi} +
+c_2 \left(\frac{\alpha}{\pi}\right)^2 +  
+c_3 \left(\frac{\alpha}{\pi}\right)^3 +  
+c_4 \left(\frac{\alpha}{\pi}\right)^4 +  
+c_5 \left(\frac{\alpha}{\pi}\right)^5 + {\cal O}((\alpha/\pi)^6)
+\end{align}
+https://doi.org/10.1103/PhysRev.73.416,
+Sommerfield/Petermann, 1957-1958],
+http://arxiv.org/abs/hep-ph/9602417,
+http://arxiv.org/abs/hep-ph/0507249,
+1205.5368
+
+
+
+\begin{comment}
+\subsection{相互作用が入ったときの因果律}
+Schr\"odinger pictureの時間発展は、
+\begin{align}
+i \frac{\partial}{\partial t} |\psi\rangle = (H_0 + V) |\psi\rangle
+\end{align}
+%
+interaction pictureの状態と相互作用項は、
+\begin{align}
+|\psi \rangle_I &\equiv e^{iH_0 t} |\psi\rangle, \\
+V_I &\equiv e^{iH_0t} V e^{-iH_0 t}
+\end{align}
+%
+時間発展は次のように記述される。
+\begin{align}
+i \frac{\partial}{\partial t} |\psi\rangle_I = V_I(t) |\psi\rangle_I
+\end{align}
+%
+解いた結果
+\begin{align}
+|\psi (t)\rangle_I
+=
+\left[ T \exp\left( -i \int_0^t dt' V_I(t') \right) \right]
+|\psi (0)\rangle_I
+\end{align}
+
+
+time-likeな点どうしのtime orderingはローレンツ変換で変わらない。
+しかし、space-likeな点どうしのtime orderingはローレンツ変換で変わってしまう！
+
+
+\begin{align}
+V_I(t) = \int d^3x {\cal V}(t', \vec x)
+\end{align}
+と書けて、さらに${\cal V}(t,\vec x)$が、
+\begin{itemize}
+\item ${\cal V}(t,\vec x)$はローレンツスカラー
+\item $x$と$y$がspace-likeなとき、${\cal V}(x)$と${\cal V}(y)$が可換($[{\cal V}(x), {\cal V}(y)] = 0$)
+\end{itemize}
+であれば状態間の遷移がローレンツ不変な形で記述できる。
+なので、相互作用項を量子場で作っておくのがよい。例えば、
+\begin{align}
+{\cal L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2 \phi^2 - \frac{\lambda}{4!} \phi^4
+\end{align}
+とか。
+\end{comment}
+
+
+\begin{comment}
+\subsection{量子場と因果律}
+これまでの量子力学のハイゼンベルク描像をみてみよう。$t$は演算子のラベルで、$x,y,z$は演算子。もうこの時点で扱いが違う。じゃあ、$t,x,y,z$をラベルに持つ演算子を考えればいいんじゃない？これって量子場。(Srednicki第1章をみよ)
+また、クラスター分解原理（遠くの物理のことは忘れてOKという性質。）や$S$行列のローレンツ不変性が保証されるというのもある(Weinberg第4,5章をみよ)
+ということで場の量子論を勉強しよう。
+\footnote{
+相対論的量子力学として場の量子論は必然か？
+Weinbergの教科書\cite{Weinberg:1995mt}の第4章より。
+``The great advantage of this formalism is that if we express the Hamiltonian as a sum of products of creation and annihilation operators, with suitable non-singular coefficients, then the S-matrix will automatically satisfy a crucial physical requirement, the cluster decomposition principle\cite{Wichmann:1963aba}, which says in effect that distant experiments yield uncorrelated result. \dots There have been many attempts to formulate a relativistically invariant theory that would not be a local field theory, \dots \cite{Bakamjian:1953kh} but such efforts have always run into trouble in sectors with more that tow particles: either the three-particle S-matrix is not Lorentz-invariant, or else it violates the cluster decomposition principle.''
+}
+\end{comment}
+
+
+\begin{comment}
+\section{相互作用のある場の量子論について}
+本講義の範囲を超えるので詳しく述べられないが、相互作用のある場の量子論について概観してみよう。
+
+
+\subsection{場の量子論スゴイその２：ハドロンの質量スペクトル}
+http://arxiv.org/abs/1203.1204
+
+\subsection{場の量子論スゴイその３：標準模型}
+小林益川機構、ヒッグス機構
+
+
+%\subsection{相互作用をいれてみよう：スカラー粒子の崩壊}
+%最後に相互作用のある場の理論の計算で簡単なものをやってみよう。
+%より系統的な議論は、場の量子論の教科書を参考にしてほしい。
+%
+%\begin{align}
+%{\cal L}_{int.} = -\kappa \phi \chi_1 \chi_2.
+%\end{align}
+\end{comment}
+
+
+\begin{comment}
+相互作用表示のハミルトニアン。
+\begin{align}
+H_{int.}(t) &= \int d^3x {\cal H}_{int.}, \\
+{\cal H}_{int.} &= \kappa \phi \chi_1 \chi_2
+\end{align}
+
+
+\begin{align}
+H_{int.}(t) = \int d^3x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q_1}{(2\pi)^3} \frac{d^3 q_2}{(2\pi)^3} \frac{1}{\sqrt{8 E_p E_{q_1} E_{q_2}}}
+a_p b_{q_1}^\dagger c_{q_2}^\dagger e^{i(\vec p - \vec q_1 - \vec q_2) \vec x} e^{-i(E_p - E_{q_1} - E_{q_2}) t}
+\end{align}
+
+
+\begin{align}
+|i\rangle = \int \frac{d^3 p}{(2\pi)^3} f(p) a_p |0\rangle
+\end{align}
+
+\begin{align}
+P = \langle i | T \exp\left( i\int_0^T dt' {\cal H}_{int.}(t') \right) \left( \frac{dq_1^3}{(2\pi)^3} \frac{dq_2^3}{(2\pi)^3} b_{q_1}^\dagger b_{q_2}^\dagger |0\rangle \langle 0 | b_{q_1} b_{q_2} \right) T \exp\left( -i\int_0^T dt' {\cal H}_{int.}(t') \right) |i\rangle 
+\end{align}
+\end{comment}
+
+
+
+%\subsubsection{フェルミオン}
+%\subsubsection{ゲージ場の量子論}
+
+
+\appendix
+\section{$SU(2)$リー代数について}
+有限次元の$n\times n$行列、$A_1$、$A_2$、$A_3$が交換関係
+\begin{align}
+[A_1, A_2] = iA_3, \quad
+[A_2, A_3] = iA_1, \quad
+[A_3, A_1] = iA_2.
+\end{align}
+を満たすとする。
+$A_1$、$A_2$、$A_3$がエルミートな行列に限定した場合、量子力学の回転群の時の議論が使える。その場合の解は、
+\begin{align}
+A_i = U
+\left(\begin{array}{cccc}
+J_i^{(s_1)} &&& \\
+& J_i^{(s_2)} && \\
+&& \ddots & \\
+&&& J_i^{(s_n)}
+\end{array}\right)
+U^\dagger
+\end{align}
+と書けるはずだ。$U$は適当なユニタリ行列であり、$J_i^{(s)}$はスピン$s$の回転の生成子である$(2s+1)\times (2s+1)$行列。
+
+（ユニタリとは限らない）正則行列$P$を用いて
+\begin{align}
+A_i = P
+\left(\begin{array}{cccc}
+J_i^{(s_1)} &&& \\
+& J_i^{(s_2)} && \\
+&& \ddots & \\
+&&& J_i^{(s_n)}
+\end{array}\right)
+P^{-1}
+\end{align}
+と書くと、これは非エルミートな解となっている。このように書けない非エルミートな解があるだろうか？
+ここでは、かならずこの形になることを行列の具体的な計算で示す。\footnote{佐藤がPhysics Stack Exchangeでも質問してみたところ、リー群、リー代数の定理を使った返答が帰ってきた。
+\url{https://physics.stackexchange.com/questions/711278/non-hermitian-solution-for-su2-lie-algebra}
+ただし、佐藤はリー群、リー代数の深い知識が無いのでちゃんと理解できていない。誰か教えてください…。}
+
+
+%有限次元の$n \times n$である$A_1$、$A_2$、$A_3$が次の交換関係を満たすとしよう。
+%\begin{align}
+%A_1 A_2 - A_2 A_1 = i A_3, \qquad
+%A_2 A_3 - A_3 A_2 = i A_1, \qquad
+%A_3 A_1 - A_1 A_3 = i A_2. 
+%\end{align}
+%今、$A_{1,2,3}$がエルミートかどうかは知らないとする。
+
+$A_3$は、ある正則行列$P$を用いて、ジョルダン標準形である$\tilde A_3$に変形できる。
+\begin{align}
+\tilde A_3 = P^{-1} A_3 P,
+\end{align}
+%
+次のような行列$\tilde A_{\pm}$を定義してみよう。
+\begin{align}
+\tilde A_+ = P(A_1 + i A_2)P^{-1}, \qquad
+\tilde A_- = P(A_1 - i A_2)P^{-1}.
+\end{align}
+%
+次のような関係を示すことができる。
+\begin{align}
+\tilde A_3 \tilde A_+ - \tilde A_+ \tilde A_3 &= \tilde A_+ \label{eq:[a3,a+]}, \\
+\tilde A_3 \tilde A_- - \tilde A_- \tilde A_3 &= -\tilde A_-, \label{eq:[a3,a-]}\\
+\tilde A_+ \tilde A_- &= \tilde A^2 - \tilde A_3^2 + \tilde A_3, \label{eq:A+ A-} \\
+\tilde A_- \tilde A_+ &= \tilde A^2 - \tilde A_3^2 - \tilde A_3, \label{eq:A- A+} \\
+[\tilde A^2, \tilde A_i] &= 0. \label{eq:casimir}
+\end{align}
+ここで、$\tilde A^2$は次のように定義されている。
+\begin{align}
+\tilde A^2 \equiv \tilde A_1^2 + \tilde A_2^2 + \tilde A_3^2
+\end{align}
+
+%\subsection*{Eigenvectors}
+各ジョルダン細胞に対して、$\tilde A_3$はひとつ固有ベクトルを持つ。
+\begin{align}
+\tilde A_3 v_i = \lambda_i v_i.
+\end{align}
+%
+この固有ベクトルに対して、次のような関係式を示せる。
+\begin{align}
+\tilde A_3 \tilde A_+ v_i = 
+(\tilde A_+ \tilde A_3 + \tilde A_+) v_i = 
+(\lambda_i + 1) \tilde A_+ v_i, \\
+%
+\tilde A_3 \tilde A_- v_i = 
+(\tilde A_- \tilde A_3 + \tilde A_-) v_i = 
+(\lambda_i - 1) \tilde A_- v_i.
+\end{align}
+%
+これは、$\tilde A_\pm v_i \neq 0$であれば、$\tilde A_\pm v_i$が固有値$\lambda_i \pm 1$を持つ固有ベクトルであることを示している。
+$n$は有限の値なので、どんな固有ベクトル$v_i$にたいしても、次の関係式を満たすある自然数$m_+$と$m_-$が存在する。
+\begin{align}
+(\tilde A_+)^{m_+} v_i = 0, \qquad
+(\tilde A_+)^{m_-} v_i = 0.
+\end{align}
+%
+$v_{\rm max}$と$v_{\rm min}$を定義しよう。
+\begin{align}
+v_{\rm max} \equiv (\tilde A_+)^{m_+-1} v_i = 0, \qquad
+v_{\rm min} \equiv (\tilde A_-)^{m_--1} v_i = 0.
+\end{align}
+%
+$v_{\rm max}$と$v_{\rm min}$は$\tilde A_3$の固有ベクトルであり、その固有値をそれぞれ$\lambda_{\rm max}$と$\lambda_{\rm min}$と呼ぶことにしょう。すなわち、
+\begin{align}
+\tilde A_3 v_{\rm max} = \lambda_{\rm max} v_{\rm max}, \qquad
+\tilde A_3 v_{\rm min} = \lambda_{\rm min} v_{\rm min}.
+\end{align}
+%
+式(\ref{eq:A- A+})と$A_+ v_{\rm max} = 0$を使うと、
+\begin{align}
+\tilde A^2 v_{\rm max} = (\tilde A_3^2 + \tilde A_3) v_{\rm max} = (\lambda_{\rm max}^2 + \lambda_{\rm max} ) v_{\rm max} .
+\end{align}
+%
+同様に、式(\ref{eq:A+ A-})と$A_- v_{\rm min} = 0$を使うと、
+\begin{align}
+\tilde A^2 v_{\rm min} = (\tilde A_3^2 - \tilde A_3) v_{\rm max} = (\lambda_{\rm min}^2 + \lambda_{\rm min} ) v_{\rm max} .
+\end{align}
+%
+すなわち、$v_{\rm max}$と$v_{\rm min}$は$\tilde A^2$の固有ベクトル。
+次の関係式を満たす$N$が存在する。
+\begin{align}
+v_{\rm min} \propto (\tilde A_-)^{N-1} v_{\rm max}.
+\end{align}
+%
+また、式(\ref{eq:casimir})を使うと、
+\begin{align}
+\lambda_{\rm max}^2 + \lambda_{\rm max} &= \lambda_{\rm min}^2 - \lambda_{\rm min}, \\
+\lambda_{\rm min} &= \lambda_{\rm max} - N + 1.
+\end{align}
+%
+この関係式を解くことにより、
+\begin{align}
+\lambda_{\rm max} = -\lambda_{\rm min} = \frac{N-1}{2}.
+\end{align}
+を得る。
+%
+ここまでで、次の性質をみたす固有ベクトル$v_k~(k = 1,~2,~\cdots, N (=2\lambda_{\rm max}+1))$の集合を得た。
+\begin{align}
+\tilde A_3 v_k &= (\lambda_{\rm max} - k + 1) v_k \label{eq:a3 v}, \\
+\tilde A^2 v_k &= \lambda_{\rm max}(\lambda_{\rm max} + 1) v_k, \\
+\tilde A_+ v_k &\propto v_{k-1} \label{eq:A+ v}, \\
+\tilde A_- v_k &\propto v_{k+1} \label{eq:A- v}.
+\end{align}
+%
+$v_k$たちはノルムが1のベクトルだとしよう。
+%
+交換関係を使って、次の関係式が示せる。
+\begin{align}
+\tilde A_+ \tilde A_- v_k &= (\tilde A^2 - \tilde A_3 + \tilde A_3 ) v_k = k(2\lambda_{\rm max} - k +1) v_k \label{eq:A+ A- v}, \\
+\tilde A_- \tilde A_+ v_{k+1} &= (\tilde A^2 - \tilde A_3 - \tilde A_3 ) v_k = k(2\lambda_{\rm max} - k +1) v_k \label{eq:A- A+ v}.
+\end{align}
+%
+式(\ref{eq:A+ v}, \ref{eq:A- v}, \ref{eq:A+ A- v}, \ref{eq:A- A+ v})を満たすには次の関係式が満たされている。
+\begin{align}
+\tilde A_- v_k &= z_k \sqrt{k(2\lambda_{\rm max} - k +1) } v_{k+1}, \label{eq:a+ v} \\
+\tilde A_+ v_{k+1} &= z_k^{-1} \sqrt{k(2\lambda_{\rm max} - k +1) } v_k. \label{eq:a- v}
+\end{align}
+%
+$z_k$は未知の複素数。$v'_i \equiv r_i v_i$を定義すると、
+\begin{align}
+\tilde A_- v'_k &= \frac{r_k z_k}{r_{k+1}} \sqrt{k(2\lambda_{\rm max} - k +1) } v'_{k+1},\\
+\tilde A_+ v'_{k+1} &= \frac{r_{k+1}}{r_k z_k} \sqrt{k(2\lambda_{\rm max} - k +1) } v'_k.
+\end{align}
+を得る。
+%
+すなわち、$r_k z_k / r_{k+1} = 1$を満たすような$r_k$を定義できる。これは$P$を次のように変更することに相当する。
+\begin{align}
+P \to P \left(\begin{array}{ccc}
+r_1 & & \\
+    & \ddots & \\
+    & & r_N
+\end{array} \right).
+\end{align}
+%
+ここからは、式(\ref{eq:a+ v}, \ref{eq:a- v})において$z_i=1$が満たされるように$P$が選ばれているとする。
+この$v_i$の基底では、$\tilde A_i$は
+\begin{align}
+\tilde A_i = \left(\begin{array}{cc}
+J_i^{(\lambda_{\rm max})} & \cdots \\
+0 & \ddots
+\end{array}\right)
+\end{align}
+と書かれる。
+$J_3^{(\lambda_{\rm max})}$はスピン(or角運動量)$\lambda_{\rm max}$表現の$z$軸まわり回転の生成子。
+
+
+%\subsection*{Jordan block}
+大きさが$2\times 2$以上のジョルダン細胞があったとしよう。
+これは次のような性質を満たすベクトル$u_k$（ただし$v_k$とは直交）の存在を意味する。
+\begin{align}
+\tilde A_3 u_k = (\lambda_{\rm max} - k + 1) u_k + v_k. \label{eq:a3 u1}
+\end{align}
+%
+式(\ref{eq:[a3,a+]})を使うと、次の式が示せる。
+\begin{align}
+\tilde A_3 \tilde A_\pm u_k = (\lambda_{\rm max} - k + 1 \pm 1) \tilde A_{\pm} u_k + \tilde A_{\pm} v_k. \label{eq:a3 a+ u}
+\end{align}
+%
+ということは次の性質を持つ$u_{k\pm 1}$が存在する。
+\begin{align}
+%\tilde A_3 u_{k\pm 1} = (\lambda_{\rm max} - k + 1 \pm 1) u_{k\pm 1} + v_{k \pm 1}.
+\tilde A_3 u_{k\pm 1} &= (\lambda_{\rm max} - k + 1 \pm 1) u_{k \pm 1} + v_{k \pm 1}. \label{eq:a3 u2} 
+\end{align}
+%
+どんな$x$に対しても、次の関係が満たされることに注意。
+\begin{align}
+\tilde A_3 (u_{k\pm 1} + x v_{k\pm 1}) &= (\lambda_{\rm max} - k + 1 \pm 1) (u_{k \pm 1} + x v_{k\pm 1}) + v_{k \pm 1}. \label{eq:a3 u2'} 
+\end{align}
+%
+式(\ref{eq:a3 a+ u}, \ref{eq:a3 u2}, \ref{eq:a3 u2'})を比較すると、
+$u_{k\pm 1}$は$\tilde A_\pm u_k$と$v_{k \pm 1}$の線型結合であるはず。
+$\tilde A_\pm u_k$の係数は式(\ref{eq:a+ v}, \ref{eq:a- v})から決定できるが、$v_{k\pm 1}$の係数は分からない。
+ということで、未知の数$x_k$と$y_k$を用いて、
+\begin{align}
+\tilde A_- u_k &= \sqrt{k(2\lambda_{\rm max} - k +1) } u_{k+1} + x_k v_{k+1}, \label{eq:a- u}\\
+\tilde A_+ u_{k+1} &= \sqrt{k(2\lambda_{\rm max} - k +1) } u_k + y_k v_k.\label{eq:a+ u}
+\end{align}
+と書ける。
+
+式(\ref{eq:a3 v}, \ref{eq:a3 u1}, \ref{eq:a3 u2})を使うと、, $v_k, u_k$の基底で$\tilde A_3$は次のように書ける。
+\begin{align}
+\tilde A_3 = \left(\begin{array}{ccc}
+J_3^{(\lambda_{\rm max})} & I & \cdots \\
+0 & J_3^{(\lambda_{\rm max})} & \cdots \\
+0 & 0 & \ddots
+\end{array}\right), \label{eq:a3 matrix}
+\end{align}
+ただし$J_3^{(\lambda_{\rm max})}$はスピン(or角運動量)$\lambda_{\rm max}$表現における$z$軸まわり回転の生成子。
+%
+式(\ref{eq:a+ v}, \ref{eq:a- v}, \ref{eq:a+ u}, \ref{eq:a- u})を使うと、$v_k, u_k$基底では、$\tilde A_\pm$は次のように書ける。
+\begin{align}
+\tilde A_+ = \left(\begin{array}{ccc}
+J_+^{(\lambda_{\rm max})} & X_+ & \cdots \\
+0 & J_+^{(\lambda_{\rm max})} & \cdots \\
+0 & 0 & \ddots
+\end{array}\right), \qquad
+\tilde A_- = \left(\begin{array}{ccc}
+J_-^{(\lambda_{\rm max})} & X_- & \cdots \\
+0 & J_-^{(\lambda_{\rm max})} & \cdots \\
+0 & 0 & \ddots
+\end{array}\right).
+\end{align}
+%
+これを使うと次のような式をえる。
+\begin{align}
+[\tilde A_+, \tilde A_-]
+=
+\left(\begin{array}{ccc}
+[J_+^{(\lambda_{\rm max})}, J_-^{(\lambda_{\rm max})}] & Z & \cdots \\
+0 & [J_+^{(\lambda_{\rm max})}, J_-^{(\lambda_{\rm max})}] & \cdots \\
+0 & 0 & \ddots
+\end{array}\right)
+\end{align}
+ただし
+\begin{align}
+Z = J_+^{(\lambda_{\rm max})} X_- + X_+ J_-^{(\lambda_{\rm max})} - J_-^{(\lambda_{\rm max})} X_+ - X_- J_+^{(\lambda_{\rm max})}.
+\end{align}
+
+容易に次の式が示せる。
+\begin{align}
+{\rm tr}Z = 0.
+\end{align}
+式(\ref{eq:a3 matrix})と比較すると
+\begin{align}
+[\tilde A_+, \tilde A_-] \neq \tilde 2 A_3.
+\end{align}
+となり矛盾する。つまり式(\ref{eq:a3 u1})を満たす$u_k$は存在せず、
+ジョルダン細胞の大きさは$1\times 1$。$\tilde A_3$は対角化可能。
+
+
+
+
+\section{スカラー場の異時刻交換関係}\label{sec:commutator at different t}
+ここでは、式(\ref{eq:commutator at different t QFT})の導出を行う。
+詳細は「演習場の量子論」（柏太郎）の第二章の演習問題1.1なども参照されたい。
+%一方、座標の関係がtime-likeなときは、交換関係は$0$にならない。$t\neq 0$として、
+%\begin{align}
+%\Delta = \int \frac{d^3 p}{(2\pi)^3 2E_p} ( e^{-iE_p t} - e^{iE_p t})
+%= \frac{m K_1(imt)}{4\pi^2 it}
+%\end{align}
+%$K_1$は第2種変形ベッセル関数。
+%導出は省略。
+%（${\rm Im}[K_1(it)/it] = (\pi/2) J_1(t)/t$）
+%
+スカラー場の異時刻交換関係は
+\begin{align}
+\Delta(t,r) = [\hat\phi(t,r \vec e_x), \hat\phi(0,\vec 0)] = \Delta^{(+)}(t,r) - \Delta^{(+)*}(t,r)
+\end{align}
+と書ける。ここで、$\Delta^{(+)}(t,r)$は
+\begin{align}
+\Delta^{(+)}(t,r)
+&= \int_0^\infty dp \int_{-1}^1 d\cos\theta \int_0^{2\pi} d\phi \frac{p^2}{(2\pi)^3 2 \sqrt{m^2 + p^2}} \exp\left( -i \sqrt{m^2 + p^2} t + i p r  \right)
+\end{align}
+と定義される。
+$\theta$と$\phi$に関して積分すると
+\begin{align}
+\Delta^{(+)}(t,r)
+&= \frac{1}{4\pi^2 r} \int_0^\infty \frac{p dp}{\sqrt{m^2 + p^2}} \sin(pr) \exp\left( -i \sqrt{m^2 + p^2} t \right)
+\end{align}
+が得られる。ここでおもむろに$I(t,r)$を
+\begin{align}
+I(t,r) \equiv \int_{-\infty}^\infty \frac{dp}{\sqrt{m^2 + p^2}} \exp\left( -i \sqrt{m^2 + p^2} t + ipr \right)
+\end{align}
+と定義すると、
+\begin{align}
+\Delta^{(+)}(t,r)
+&= -\frac{1}{8\pi^2 r} \frac{\partial I}{\partial r} 
+\end{align}
+と書ける。
+
+積分変数を$p$から$\chi$に変更する。
+\begin{align}
+p = m \sinh \chi
+\end{align}
+$p$と$\chi$の関係について
+\begin{align}
+\sqrt{p^2 + m^2} = m \cosh \chi, \qquad
+d\chi = \frac{dp}{\sqrt{p^2+ m^2}}
+\end{align}
+が成り立つので、
+\begin{align}
+I(t,r) = \int_{-\infty}^\infty d\chi \exp\left( -im(t\cosh\chi - r\sinh\theta) \right)
+\end{align}
+と書ける。$t\cosh\chi - r\sinh\theta$は加法定理を使ってひとつの$\sinh$または$\cosh$に書き直せる。
+
+結果、$t>0$かつ$t^2>r^2$のとき、ベッセル関数に関するMehlerの公式\footnote{\url{https://mathworld.wolfram.com/MehlersBesselFunctionFormula.html}}を使うと、
+\begin{align}
+I(t,r) = \int_{-\infty}^\infty d\tilde\chi \exp\left( -im\sqrt{t^2-r^2} \cosh \tilde\chi \right)
+= -\pi ( Y_0(m\sqrt{t^2-r^2})-iJ_0(m\sqrt{t^2-r^2}) )
+\end{align}
+と
+$t<0$かつ$t^2>r^2$のとき、
+\begin{align}
+I(t,r) = \int_{-\infty}^\infty d\tilde\chi \exp\left( im\sqrt{t^2-r^2} \cosh \tilde\chi \right)
+= -\pi ( Y_0(m\sqrt{t^2-r^2})+iJ_0(m\sqrt{t^2-r^2}) )
+\end{align}
+が得られる。また、修正ベッセル関数に関する積分公式\footnote{\url{https://mathworld.wolfram.com/ModifiedBesselFunctionoftheSecondKind.html}}を用いると、
+$t^2<r^2$のとき、
+\begin{align}
+I(t,r) = \int_{-\infty}^\infty d\tilde\chi \exp\left( -im\sqrt{r^2-t^2} \sinh \tilde\chi \right)
+= 2 K_0(m\sqrt{r^2-t^2})
+\end{align}
+である。
+
+$\Delta = 2i{\rm Im}\Delta^{(+)}$なので、
+$t^2 > r^2$のとき、
+\begin{align}
+\Delta(t,r) = {\rm sgn}(t) \times \frac{m^2}{4\pi} \frac{J_1(m\sqrt{t^2-r^2})}{m\sqrt{t^2-r^2})}.
+\end{align}
+である。（$dJ_0(z)/dz = -J_1(z)$を用いた。）また、$t^2 < r^2$のとき、
+\begin{align}
+\Delta(t,r) = 0.
+\end{align}
+
+
+
+\begin{thebibliography}{99}
+%\cite{Dreiner:2008tw}
+\bibitem{Dreiner:2008tw}
+H.~K.~Dreiner, H.~E.~Haber and S.~P.~Martin,
+``Two-component spinor techniques and Feynman rules for quantum field theory and supersymmetry,''
+%Phys. Rept. \textbf{494}, 1-196 (2010)
+%doi:10.1016/j.physrep.2010.05.002
+\href{https://doi.org/10.1016/j.physrep.2010.05.002}{Phys. Rept. \textbf{494}, 1-196 (2010)}
+%[arXiv:0812.1594 [hep-ph]].
+[\href{https://arxiv.org/abs/0812.1594}{arXiv:0812.1594 [hep-ph]}].
+%456 citations counted in INSPIRE as of 28 Mar 2022
+
+%\cite{Dirac:1928hu}
+\bibitem{Dirac:1928hu}
+P.~A.~M.~Dirac,
+``The quantum theory of the electron,''
+\href{https://doi.org/10.1098/rspa.1928.0023}{Proc. Roy. Soc. Lond. A \textbf{117}, 610-624 (1928)}
+%doi:10.1098/rspa.1928.0023
+%1237 citations counted in INSPIRE as of 15 Apr 2022
+
+%\cite{Nielsen:1983rb}
+\bibitem{Nielsen:1983rb}
+H.~B.~Nielsen and M.~Ninomiya,
+``ADLER-BELL-JACKIW ANOMALY AND WEYL FERMIONS IN CRYSTAL,''
+%Phys. Lett. B \textbf{130}, 389-396 (1983)
+%doi:10.1016/0370-2693(83)91529-0
+\href{https://doi.org/10.1016/0370-2693(83)91529-0}{Phys. Lett. B \textbf{130}, 389-396 (1983)}
+%738 citations counted in INSPIRE as of 28 Mar 2022
+
+\bibitem{kazama}
+風間洋一, ``ゲージ対称性と現代物理学'',
+\url{http://hep1.c.u-tokyo.ac.jp/~kazama/gaugesym(suuri-kagaku).pdf}
+
+\bibitem{fukaya}
+深谷英則, ``なぜ、量子重力は(QCDに比べて)難しいのか？'',
+\href{http://www2.yukawa.kyoto-u.ac.jp/~soken.editorial/sokendenshi/vol25/sokendenshi_2016_25_2.html}
+{素粒子論研究・電子版 \textbf{25} (2016) No.~2}
+
+%\cite{Schwinger:1948iu}
+\bibitem{Schwinger:1948iu}
+J.~S.~Schwinger,
+``On Quantum electrodynamics and the magnetic moment of the electron,''
+\href{https://doi.org/10.1103/PhysRev.73.416}{Phys. Rev. \textbf{73}, 416-417 (1948)}
+%doi:10.1103/PhysRev.73.416
+%885 citations counted in INSPIRE as of 08 Jun 2022
+
+\bibitem{muong-2}
+遠藤基, 岩本祥, 北原鉄平,
+``此のたびのミューオン異常磁気能率〜おぼろげながら，しかしはっきりと浮かんできたミューオン$g-2$アノマリー〜'',
+\href{http://www.jahep.org/hepnews/2021/40-2-2-g2.pdf}{高エネルギーニュース \textbf{40} (2021) No.~2}
+
+%\cite{Weinberg:1995mt}
+\bibitem{Weinberg:1995mt}
+S.~Weinberg,
+``The Quantum theory of fields. Vol. 1: Foundations,''
+%359 citations counted in INSPIRE as of 27 Apr 2022
+
+%\cite{Wichmann:1963aba}
+\bibitem{Wichmann:1963aba}
+E.~H.~Wichmann and J.~H.~Crichton,
+``Cluster Decomposition Properties of the $S$ Matrix,''
+Phys. Rev. \textbf{132}, no.6, 2788-2799 (1963)
+%doi:10.1103/PhysRev.132.2788
+%42 citations counted in INSPIRE as of 27 Apr 2022
+
+%\cite{Bakamjian:1953kh}
+\bibitem{Bakamjian:1953kh}
+B.~Bakamjian and L.~H.~Thomas,
+``Relativistic particle dynamics. 2,''
+Phys. Rev. \textbf{92}, 1300-1310 (1953)
+%doi:10.1103/PhysRev.92.1300
+%408 citations counted in INSPIRE as of 27 Apr 2022
+
+\end{thebibliography}
+
+
+
+
+%\bibliography{ref}
+%\bibliographystyle{utphys}
+
+\end{document}
