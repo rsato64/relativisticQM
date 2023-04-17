@@ -100,7 +100,9 @@ $1~{\rm GeV} = 10^9~{\rm eV}$であり、$1~{\rm eV} = 1.60 \times 10^{-19}~{\rm
 c &= 2.99 \times 10^{8}~{\rm m}/{\rm s}.
 \end{align}
 相対論的量子力学をやると、いろんなところに$\hbar$と$c$が出てきてすごく面倒。思い切って$\hbar = c = 1$という単位系を採用してしまおう。
-これまでは$[質量]$、$[長さ]$、$[時間]$の3つの次元があったが、$\hbar = 1$と$c = 1$を採用したせいで、3つの次元に
+これまでは$[質量]$、$[長さ]$、$[時間]$の3つの次元があったが、$\hbar = 1$と$c = 1$を採用したせいで、3つの次元に関係がつく。
+たとえば、$c=1$により$[長さ]$と$[時間]$が同じ次元であることが分かる。また、$\hbar/c^2 = 1.17 \times 10^{-51}~{\rm kg}~{\rm s}$であるから、$[質量]$の次元は$[時間]$の次元の逆数。
+まとめると、
 \begin{align}
 [質量] = \frac{1}{[長さ]} = \frac{1}{[時間]}
 \end{align}
@@ -433,9 +435,11 @@ x^\mu = g^{\mu\nu} x_\nu
 = \sum_\nu \frac{\partial x'^\nu}{\partial x^\mu} \frac{\partial}{\partial x'^\nu}
 = \sum_\nu \Lambda^\nu_{~\mu} \frac{\partial}{\partial x'^\nu}.
 \end{align}
-両辺に逆行列をかけて、
+両辺に、$\Lambda^\nu_{~\mu} (\Lambda^{-1})^\mu_{~\lambda} = \delta^\nu_\lambda$をみたす逆行列$(\Lambda^{-1})^\mu_{~\lambda}$をかけて$\mu$で和をとってみよう。すると、
 \begin{align}
-\frac{\partial}{\partial x'^\mu} = \sum_\nu (\Lambda^{-1})^\nu_{~\mu} \frac{\partial}{\partial x^\nu}
+\sum_\mu \frac{\partial}{\partial x^\mu} (\Lambda^{-1})^\mu_{~\lambda}
+&= \sum_{\nu,\mu} \Lambda^\nu_{~\mu} (\Lambda^{-1})^\mu_{~\lambda} \frac{\partial}{\partial x'^\nu} \nonumber\\
+&= \frac{\partial}{\partial x'^\lambda}.
 \end{align}
 を得た。
 ところで、式(\ref{eq:g Lam Lam = g})の両辺に$g^{\lambda\alpha} (\Lambda^{-1})^\beta_{~\rho}$をかけて変形してみよう。
