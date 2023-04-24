@@ -497,14 +497,15 @@ j^\mu \to j'^\mu = \Lambda^\mu_{~\nu} j^\nu
 
 
 \subsection{マックスウェル方程式（特殊相対論風に）}
-マックスウェル方程式を思い出してみよう。
+マックスウェル方程式を思い出してみよう。真空の誘電率$\varepsilon_0$と透磁率$\mu_0$は光速$c$と$\varepsilon_0 \mu_0 = 1/c^2$という関係で結ばれているが、
+自然単位系をとって$c=1$としているため、$\varepsilon_0 = \mu_0 = 1$とするのが便利。このとき、
 \begin{align}
 \vec\nabla \cdot \vec B = 0, \qquad
 \vec\nabla \times \vec E + \frac{\partial}{\partial t}\vec B = 0, \label{eq:bianchi}\\
 \vec\nabla \cdot \vec E = \rho, \qquad
 \vec\nabla \times \vec B - \frac{\partial}{\partial t} \vec E = \vec j. \label{eq:maxwell}
 \end{align}
-真空中の誘電率と透磁率は$1$に取った。これを特殊相対論っぽくいい感じで書き直してみよう。
+これを特殊相対論っぽくいい感じで書き直してみよう。
 
 式(\ref{eq:bianchi})を満たすような電場と磁場は、
 スカラーポテンシャル$\phi(t,\vec x)$とベクトルポテンシャル$\vec A(t,\vec x)$を導入することにより、（少なくとも局所的に）次のように書ける。
@@ -577,11 +578,33 @@ F^{31} &= -\partial_z A_x + \partial_x A_z = -B_y
 \partial_0 F^{02} + \partial_1 F^{12} + \partial_3 F^{32} &= j^2, \\
 \partial_0 F^{03} + \partial_1 F^{13} + \partial_2 F^{23} &= j^3
 \end{align}
-%
+
 また、式(\ref{eq:bianchi})を次のように書き直すこともできる。
 \begin{align}
-\epsilon^{\mu\nu\lambda\rho} \partial_\mu F_{\nu\lambda}  = 0.
+\epsilon^{\mu\nu\lambda\rho} \partial_\mu F_{\nu\lambda}  = 0. \label{eq:maxwell bianchi}
 \end{align}
+$\epsilon^{\mu\nu\lambda\rho}$は次のような性質を持つ完全反対称テンソルである。
+\begin{align}
+\epsilon^{0123} = 1, \qquad
+\epsilon_{0123} = -1, \\
+\epsilon_{\mu\nu\rho\sigma}
+= -\epsilon_{\nu\mu\rho\sigma}
+= -\epsilon_{\mu\rho\nu\sigma}
+= -\epsilon_{\mu\nu\sigma\rho}.
+\end{align}
+これにより$\epsilon_{\mu\nu\rho\sigma}$の各成分が決まる。たとえば、$\epsilon_{0012} = 0$、$\epsilon^{1230} = -1$など。\footnote{
+$\epsilon_{\mu\nu\rho\sigma}$は、ローレンツ変換に対して、
+\begin{align}
+\Lambda_{\alpha}^{~\mu}
+\Lambda_{\beta}^{~\nu}
+\Lambda_{\gamma}^{~\rho}
+\Lambda_{\delta}^{~\sigma}
+\epsilon_{\mu\nu\rho\sigma}
+=
+\pm \epsilon_{\alpha\beta\gamma\delta}.
+\end{align}
+という性質を持つ。この性質を使うことにより、式(\ref{eq:maxwell bianchi})がローレンツ変換で不変であると分かる。
+}
 
 ローレンツ変換を考えてみよう。
 4元ベクトルポテンシャルのローレンツ変換は、
