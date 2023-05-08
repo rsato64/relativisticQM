@@ -767,7 +767,7 @@ E = \sqrt{m^2 + \vec p^2} , \qquad -\sqrt{m^2 + \vec p^2}
 
 さて、おもむろに、$\psi$を使って$\rho$と$\vec j$を次のように定義してみよう。
 \begin{align}
-\rho &= \frac{i}{2m} [ \frac{\partial\psi^*}{\partial t} \psi - \psi^* \frac{\partial\psi}{\partial t} ], \\
+\rho &= -\frac{i}{2m} [ \frac{\partial\psi^*}{\partial t} \psi - \psi^* \frac{\partial\psi}{\partial t} ], \\
 \vec j &= \frac{i}{2m} [ (\vec\nabla\psi^*) \psi - \psi^* (\vec\nabla\psi) ].
 \end{align}
 %
@@ -775,15 +775,24 @@ E = \sqrt{m^2 + \vec p^2} , \qquad -\sqrt{m^2 + \vec p^2}
 計算してみよう。
 \begin{align}
 \frac{\partial \rho}{\partial t}
-=& \frac{i}{2m} [ \frac{\partial^2\psi^*}{\partial t^2} \psi - \psi^* \frac{\partial^2\psi}{\partial t^2} ] \nonumber\\
-=& \left( \frac{i}{2m} \nabla^2 \psi \right) \psi^* - \left( \frac{i}{2m} \nabla^2 \psi^* \right) \psi \nonumber\\
-=& \vec\nabla \cdot \left[ \left( \frac{i}{2m} \vec\nabla \psi \right) \psi^* - \left( \frac{i}{2m} \vec\nabla \psi^* \right) \psi \right]
+=& -\frac{i}{2m} [ \frac{\partial^2\psi^*}{\partial t^2} \psi - \psi^* \frac{\partial^2\psi}{\partial t^2} ] \nonumber\\
+=& -\left( \frac{i}{2m} \nabla^2 \psi^* \right) \psi + \left( \frac{i}{2m} \nabla^2 \psi \right) \psi^* \nonumber\\
+=& \vec\nabla \cdot \left[ -\left( \frac{i}{2m} \vec\nabla \psi^* \right) \psi + \left( \frac{i}{2m} \vec\nabla \psi \right) \psi^* \right]
 \end{align}
-確かに式(\ref{eq:KG eq consv})が満たされている。
+確かに式(\ref{eq:KG eq consv})が満たされている。\footnote{
+四元ベクトルとして$j^\mu = (\rho, \vec j)$と定義すると、
+\begin{align}
+j^\mu = -\frac{i}{2m}[\psi \partial^\mu \psi^* - \psi^* \partial^\mu \psi  ]
+\end{align}
+というように簡潔に書ける。このとき、確率保存の式は$\partial_\mu j^\mu = 0$と書ける。
+}
 
 一見良さそうだが、この$\rho$は、非相対論的な場合(\ref{eq:probability density NR})と異なり、$\rho \geq 0$が保証されていない。（positive-definiteではない、とも言う。）
-つまり、負になってしまうこともありうる。具体的には$\psi = e^{-iEt}$みたいな解を考えて$E$が負だと$\rho$も負になってしまう。
-確率が負になってしまったらおかしい。確率密度と解釈するのはなんか無理そう…。
+つまり、負になってしまうこともありうる。例えば、$\psi = \psi_0 e^{-iEt}$という解を考えてみると、
+\begin{align}
+\rho = \frac{E}{m} |\psi_0|^2
+\end{align}
+となる。さきにみたようにクラインゴルドン方程式には$E$が負となる解もあり、このとき、$\rho$も負になってしまう。確率が負になってしまったらおかしい。確率密度と解釈するのはなんか無理そう…。
 
 % 2022.4.11ここまで
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
