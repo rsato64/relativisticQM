@@ -1425,7 +1425,7 @@ $\Lambda$が与えられたとき、式(\ref{eq:dirac matrix lorentz inv})をみ
 と書いて、$|\omega^{\mu}_{~\nu}| \ll 1$をみたすようなもの。この無限小に対する適切な$U(\Lambda)$を探す。
 
 \subsubsection{無限小ローレンツ変換の性質}
-式(\ref{eq:lorentz 2}) ($g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta}$) の両辺の$\omega$の一次の項を比較すると、
+式(\ref{eq:g Lam Lam = g}) ($g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta}$) の両辺の$\omega$の一次の項を比較すると、
 \begin{align}
 g_{\mu\alpha} \omega^\mu_{~\nu} g^\alpha_{~\beta} + g_{\mu\alpha} g^\mu_{~\nu} \omega^\alpha_{~\beta} &= 0
 \end{align}
@@ -1441,6 +1441,17 @@ g_{\mu\alpha} \omega^\mu_{~\nu} g^\alpha_{~\beta} + g_{\mu\alpha} g^\mu_{~\nu} \
 となり、6成分だ。
 あらわに書くとこんな感じ。
 \begin{align}
+\omega_{\mu\nu}
+= 
+\left(\begin{array}{cccc}
+0 & \eta_1 & \eta_2 & \eta_3 \\
+-\eta_1 & 0 & -\theta_3 & \theta_2 \\
+-\eta_2 & \theta_3 & 0 & -\theta_1 \\
+-\eta_3 & -\theta_2 & \theta_1 & 0
+\end{array}\right)
+\end{align}
+のちの目的のために、$\omega^\mu_{~\nu}$も計算しておく。同じように行列の形で書くと、
+\begin{align}
 \omega^\mu_{~\nu}
 = 
 \left(\begin{array}{cccc}
@@ -1451,6 +1462,8 @@ g_{\mu\alpha} \omega^\mu_{~\nu} g^\alpha_{~\beta} + g_{\mu\alpha} g^\mu_{~\nu} \
 \end{array}\right)
 \end{align}
 $\omega_{1,2,3}$は$x,y,z$軸方向のローレンツブースト、$\theta_{1,2,3}$は空間の回転の自由度に対応する。
+これはあとで確認する。
+
 
 \subsubsection{無限小ローレンツ変換に対応する$U(\Lambda)$}
 次に無限小ローレンツ変換に対する$U(\Lambda)$の形を考察してみよう。恒等変換($\Lambda = 1$もしくは$\delta\omega_{\mu\nu} = 0$)に対し、$U(\Lambda) = I_4$なので、
@@ -1706,7 +1719,10 @@ e^{i\theta/2} &&& \\
 \end{align}
 式(\ref{eq:rotation gamma 1})がチェックできた。やったね。
 式(\ref{eq:rotation gamma 2})も同じような計算でチェックできるし、
-$U(\Lambda)$は$\gamma^0, \gamma^3$と交換するので式(\ref{eq:rotation gamma 0}, \ref{eq:rotation gamma 3})も成り立つ。\footnote{時間のある人は示してみてください}
+$U(\Lambda)$は$\gamma^0, \gamma^3$と交換するので式(\ref{eq:rotation gamma 0}, \ref{eq:rotation gamma 3})も成り立つ。\footnote{時間のある人は示してみてください}\footnote{
+$\theta = 2\pi$に対し$U(\Lambda) = -1$となることも分かる。つまり、360度回転でもとに戻らない！$\theta = 4\pi$で$U(\Lambda) = 1$となり、720度回転でもとに戻ることも分かる。
+\url{https://www.youtube.com/watch?v=zAHS0kY7hlo}も参照されたい。
+}
 
 
 \subsubsection{$z$軸方向のブースト}
