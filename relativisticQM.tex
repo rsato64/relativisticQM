@@ -3651,10 +3651,6 @@ $L$無限大極限の$\hat z$と$\hat \pi$は次のように書けるのが分�
 これらが出てくることを具体的に見ていこう。
 % 2022.7.4ここまで
 
-
-\subsection{自由実スカラー場の正準量子化}
-
-\subsubsection{場の演算子}
 この章では場の演算子
 \begin{align}
 \hat\phi(t,\vec x)
@@ -3668,7 +3664,18 @@ $L$無限大極限の$\hat z$と$\hat \pi$は次のように書けるのが分�
 
 
 
-\subsubsection{ラグランジアン}
+\subsection{正準量子化}
+ハイゼンベルク描像を取った際の正準量子化の手続きを復習しておこう。
+\begin{enumerate}
+\item ラグランジアン$L(\{q_i \}, \{\dot q_i\})$を書く。
+\item 共役運動量$p_i \equiv \partial L / \partial \dot q_i$を定義し、ハミルトニアン$H(\{p_i\}, \{q_i\}) = \sum_i p_i \dot q_i - L$を導く。
+\item 同時刻交換関係$[\hat q_i(t), \hat p(t)] = i\delta_{ij}$を満たす演算子$\hat q$、$\hat p$を導入し、ハミルトニアン$\hat H = H(\hat p, \hat q)$を得る。
+\item 演算子の時間発展をハミルトン方程式$\dot{\hat q}(t) = i[\hat H, \hat q]$のより与える。
+\end{enumerate}
+場の量子論でもやることは同じ。以下、同様の手順に従い、自由スカラー場の量子論を構成していく。
+
+
+\subsubsection{自由スカラー場のラグランジアン}
 まず、スカラー場$\phi$のラグランジアンを次のように与えてみよう。
 $\phi$は古典場としては実数の値を取るものとする。
 \begin{align}
@@ -3701,19 +3708,13 @@ $\phi$は古典場としては実数の値を取るものとする。
 ということは、連成ばねの系は実は質量0のスカラー場と繋がっていたのだった。
 （質量を持つスカラー場と繋がるような連成ばねの系も工夫すると作ることができる。山口さんの相対論的量子力学の講義ノートを参照のこと。\url{http://www-het.phys.sci.osaka-u.ac.jp/~yamaguch/j/class.html}）
 
-%運動方程式はクラインゴルドン方程式になる。
-%\begin{align}
-%(\partial^2 + m^2) \phi = 0.
-%\end{align}
-%
-%最終的に式(\ref{eq:hamiltonian spin 0})のハミルトニアンが出れば結果オーライ。
-
-\subsubsection{正準量子化}
 相互作用のない実スカラー場のラグランジアン密度は以下のように与えられる。
 \begin{align}
 {\cal L} = \frac{1}{2} \dot\phi^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2}m^2 \phi^2
 \end{align}
-%
+
+
+\subsubsection{共役運動量とハミルトニアン}
 $\phi$の共役運動量は
 \begin{align}
 \pi = \frac{\delta {\cal L}}{\delta \phi} = \dot\phi
@@ -3725,18 +3726,23 @@ H &= \int d^3x {\cal H}
 \end{align}
 のように与えられる。
 
+\subsubsection{演算子への置き換え}
 さて、正準量子化しよう。ハミルトニアン演算子と、場の同時刻交換関係は以下のように与えられる。
 \begin{align}
 \hat H &= \int d^3x \left[ \frac{1}{2} \hat\pi^2 + \frac{1}{2}(\nabla\hat\phi)^2 + \frac{1}{2} m^2 \hat\phi^2 \right], \\
 [\hat\phi(t,\vec x), \hat\pi(t,\vec y)] &= i\delta^{(3)}(\vec x - \vec y).
 \end{align}
-%
+
+\subsubsection{ハイゼンベルク方程式}
 ハイゼンベルク描像では、場の演算子の時間発展は以下のハイゼンベルク方程式に従う。
 \begin{align}
 \dot{\hat \phi} &= i[\hat H, \hat\phi] = \hat\pi, \\
 \dot{\hat \pi} &= i[\hat H, \hat\pi] = \nabla^2\hat\phi - m^2 \hat\phi.
 \end{align}
-%
+
+
+\subsection{生成消滅演算子}
+\subsubsection{場を生成消滅演算子で書こう}
 $\hat\pi$を消去すると$\hat\phi$の従う運動方程式として以下を得る。
 \begin{align}
 \ddot{\hat\phi} = \nabla^2 \hat\phi-m^2 \hat\phi.
@@ -3782,7 +3788,7 @@ $\hat \phi$と$\hat\pi$は$\hat a$と$\hat a^\dagger$を使って書ける。
 \end{align}
 
 
-\subsubsection{ハミルトニアン}
+\subsubsection{ハミルトニアンを生成消滅演算子で書こう}
 $\hat\phi$や$\hat\pi$を生成消滅演算子$\hat a,~\hat a^\dagger$を使って書けたので、ハミルトニアン$\hat H$を$\hat a,~\hat a^\dagger$で書いてみよう。
 \begin{align}
 \hat H
