@@ -3676,18 +3676,30 @@ $L$無限大極限の$\hat z$と$\hat \pi$は次のように書けるのが分�
 
 
 \subsubsection{自由スカラー場のラグランジアン}
-まず、スカラー場$\phi$のラグランジアンを次のように与えてみよう。
-$\phi$は古典場としては実数の値を取るものとする。
+場としてスカラー場$\phi(\vec x,t)$を導入する。（この段階では$\phi$はあくまで古典場。）
+特に$\phi$は実数の値を取るとしよう。$\phi$は実スカラー場と呼ばれる。
+ベクトルやスピノルの添え字を持たないスカラー場は場の中では一番単純なもの。ローレンツ変換$x \to x' = \Lambda x$に対し、
 \begin{align}
-{\cal L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2\phi
+\phi(x) \to \phi'(x') = \phi(x)
 \end{align}
-なぜこんなラグランジアンを採用するのだろうか？
+と振る舞う。
+
+次にラグランジアンを与えよう。一般に\footnote{非局所的な項を持たないとすると}ラグランジアン$L$はラグランジアン密度${\cal L}$の積分のかたちで書ける。
+\begin{align}
+L = \int d^3x {\cal L}[\phi(x), \partial_\mu \phi(x)]
+\end{align}
+ラグランジアン密度の方がより基本的な量ということになる。\footnote{ラグランジアン密度のことを単にラグランジアンと言ってしまう場合がほとんどである。}
+ここでは、$\phi$のラグランジアン密度は次のように与えることにしよう。
+\begin{align}
+{\cal L} = \frac{1}{2}(\partial_\mu \phi)^2 - \frac{1}{2}m^2\phi^2 \label{eq:Lagrangian free scalar}
+\end{align}
+なぜこんなラグランジアン密度を採用するのだろうか？
 \begin{itemize}
 \item スカラー場の微分を含み、
 \item ローレンツ不変で、
 \item $\phi$の二次の項からなる
 \end{itemize}
-ラグランジアンはこの形！
+ラグランジアン密度はこの形！
 
 微分を含む項は、
 \begin{align}
@@ -3708,37 +3720,75 @@ $\phi$は古典場としては実数の値を取るものとする。
 ということは、連成ばねの系は実は質量0のスカラー場と繋がっていたのだった。
 （質量を持つスカラー場と繋がるような連成ばねの系も工夫すると作ることができる。山口さんの相対論的量子力学の講義ノートを参照のこと。\url{http://www-het.phys.sci.osaka-u.ac.jp/~yamaguch/j/class.html}）
 
-相互作用のない実スカラー場のラグランジアン密度は以下のように与えられる。
-\begin{align}
-{\cal L} = \frac{1}{2} \dot\phi^2 - \frac{1}{2} (\nabla \phi)^2 - \frac{1}{2}m^2 \phi^2
-\end{align}
-
 
 \subsubsection{共役運動量とハミルトニアン}
-$\phi$の共役運動量は
+$\phi$の共役運動量を議論しよう。質点の力学で$p_i = \partial L / \partial \dot q_i$とやっていた。離散的な添え字$i$が連続的な``添え字''$\vec x$に化けたとみなすことができる。いま、ラグランジアン$L$は$\phi$と$\phi$の微分の汎関数だから、汎関数微分として、
 \begin{align}
-\pi = \frac{\delta {\cal L}}{\delta \phi} = \dot\phi
+\pi(\vec x, t) = \frac{\delta L}{\delta \dot \phi(\vec x,t)}
 \end{align}
-よって、ハミルトニアン密度およびハミルトニアンを$\phi$と$\pi$で書くと
+とするのがよさそう。ラグランジアン$L$がラグランジアン密度${\cal L}$の積分で書けていることから、
 \begin{align}
-{\cal H} &= \pi \dot\phi - {\cal L} = \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}m^2 \phi^2, \\
-H &= \int d^3x {\cal H}
+\pi(\vec x, t) = \frac{\delta L}{\delta \dot\phi(\vec x,t)} = \frac{\partial {\cal L}(\vec x, t)}{\partial \dot\phi(\vec x, t)}
 \end{align}
-のように与えられる。
+となることも分かる。今のラグランジアン（式\ref{eq:Lagrangian free scalar}）を使うと
+\begin{align}
+\pi(\vec x, t) = \dot\phi(\vec x, t)
+\end{align}
+となる。
+
+次にハミルトニアンがどうなるか考えてみよう。質点の力学では$H = \sum_i p_i \dot q_i - L$であった。ここから察するに、
+\begin{align}
+H = \left[ \int d^3 x \pi(\vec x, t) \dot\phi(\vec x,t) \right]- L
+\end{align}
+と書くことができるはずだ。ハミルトニアン密度
+\begin{align}
+{\cal H} &= \pi \dot\phi - {\cal L} = \frac{1}{2}\pi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}{2}m^2 \phi^2
+\end{align}
+を用いて、
+\begin{align}
+H &= \int d^3x {\cal H} \label{eq:Hamiltonian free scalar}
+\end{align}
+と書くこともできる。
+
+さて、もともとのラグランジアン（式\ref{eq:Lagrangian free scalar}）からは、クラインゴルドン方程式
+\begin{align}
+\partial^2 \phi - m^2 \phi = 0
+\end{align}
+が導出できる。
+ハミルトニアン（\ref{eq:Hamiltonian free scalar}）を用いて、ハミルトン方程式
+\begin{align}
+\dot\phi(\vec x,t) &= \frac{\delta H}{\delta\dot\pi(\vec x,t)} = \pi(\vec x ,t), \\
+\dot\pi(\vec x,t) &= -\frac{\delta H}{\delta\dot\phi(\vec x,t)} = \nabla^2 \phi(\vec x,t) - m^2 \phi(\vec x,t).
+\end{align}
+をたてると、クラインゴルドン方程式と同等のものになることが分かる。\footnote{時間のある人は示してみてください}
+
+
 
 \subsubsection{演算子への置き換え}
-さて、正準量子化しよう。ハミルトニアン演算子と、場の同時刻交換関係は以下のように与えられる。
+さて、正準量子化しよう。
+まず、場の演算子$\hat\phi(\vec x,t)$と、その共役運動量$\hat\pi(\vec x ,t)$が導入される。とくに、もともとの$\phi$は実数値をとる実スカラー場であったことから、
 \begin{align}
-\hat H &= \int d^3x \left[ \frac{1}{2} \hat\pi^2 + \frac{1}{2}(\nabla\hat\phi)^2 + \frac{1}{2} m^2 \hat\phi^2 \right], \\
+\hat\phi(\vec x,t) = \hat\phi^\dagger(\vec x,t)
+\end{align}
+である。
+$\hat\phi$と$\hat\pi$は次のような同時刻交換関係を満たすものである。
+\begin{align}
 [\hat\phi(t,\vec x), \hat\pi(t,\vec y)] &= i\delta^{(3)}(\vec x - \vec y).
 \end{align}
-
-\subsubsection{ハイゼンベルク方程式}
-ハイゼンベルク描像では、場の演算子の時間発展は以下のハイゼンベルク方程式に従う。
+%
+次に、
+古典場で与えられたハミルトニアン（\ref{eq:Hamiltonian free scalar}）から、
+ハミルトニアン演算子$\hat H$が次のように与えられる。
+\begin{align}
+\hat H &= \int d^3x \left[ \frac{1}{2} \hat\pi^2 + \frac{1}{2}(\nabla\hat\phi)^2 + \frac{1}{2} m^2 \hat\phi^2 \right].
+\end{align}
+%
+ハイゼンベルク描像では、演算子の時間発展はハイゼンベルク方程式に従う。古典場のハミルトン方程式が、以下の場の演算子に対するハイゼンベルク方程式に置き換わった。
 \begin{align}
 \dot{\hat \phi} &= i[\hat H, \hat\phi] = \hat\pi, \\
 \dot{\hat \pi} &= i[\hat H, \hat\pi] = \nabla^2\hat\phi - m^2 \hat\phi.
 \end{align}
+
 
 
 \subsection{生成消滅演算子}
@@ -3751,7 +3801,7 @@ $\hat\phi^\dagger = \hat\phi$を満たす一般解は次のようになる。
 \begin{align}
 \hat\phi(t,\vec x) = \int \frac{d^3 p}{(2\pi)^3} \hat \alpha_{\vec p} e^{i\vec p \vec x - iE_p t}+ h.c.
 \end{align}
-係数の演算子$\hat\alpha_{\vec p}$時間によらない。
+$\hat\alpha_{\vec p}$は時間によらない係数である。ただし、$\hat\phi$が演算子なので$\hat\alpha$も演算子である。
 $\hat\phi(t,\vec x)$と$\hat\pi(t,\vec x)$のフーリエ変換は次のように与えられる。
 \begin{align}
 \int d^3 x e^{-i\vec p \vec x} \hat\phi(t,\vec x) &= \hat \alpha_{\vec p} e^{-iE_p t} + \hat \alpha_{-\vec p}^\dagger e^{iE_p t}, \\
