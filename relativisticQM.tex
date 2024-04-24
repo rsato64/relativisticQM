@@ -434,7 +434,7 @@ x^\mu = g^{\mu\nu} x_\nu
 \end{align}
 
 \end{itembox}
-
+% 2024.4.15 (第1回)
 
 
 
@@ -482,7 +482,7 @@ g_{\mu\rho} \Lambda^\mu_{~\alpha} g^{\lambda\alpha}  &= (\Lambda^{-1})^\lambda_{
 \begin{align}
 \frac{\partial \rho}{\partial t} + \vec\nabla \cdot \vec j = 0
 \end{align}
-これは、空間全体で電荷は保存しており、いきなり電荷が現れたり消えたりすることないということ意味する重要な式である。そのため、ローレンツしても、
+これは、空間全体で電荷は保存しており、いきなり電荷が現れたり消えたりすることないということ意味する重要な式である。そのため、ローレンツ変換しても、
 \begin{align}
 \frac{\partial \rho'}{\partial t'} + \vec\nabla' \cdot \vec j' = 0
 \end{align}
@@ -531,7 +531,7 @@ $\nabla \times (\nabla \times A) = -\nabla^2 A + \nabla (\nabla A) $を使った
 -\nabla^2 \phi - \frac{\partial}{\partial t} \vec \nabla \cdot \vec A &= \rho, \\
 -\nabla^2 \vec A + \vec \nabla (\vec \nabla \cdot \vec A) + \frac{\partial}{\partial t}\vec\nabla\phi + \frac{\partial^2}{\partial t^2} \vec A &= \vec j.
 \end{align}
-をえる。
+を得る。
 もうちょっと整理すると、
 \begin{align}
 -\left(\nabla^2 - \frac{\partial^2}{\partial t^2}\right)\phi + \frac{\partial}{\partial t} \left( -\frac{\partial}{\partial t}\phi - \vec \nabla \cdot \vec A \right) &= \rho, \label{eq:EM eom1}\\
@@ -672,16 +672,16 @@ A^\mu \to A'^\mu = A^\mu + \partial^\mu \lambda
 量子力学では、波動関数$\psi$を使い、$|\psi|^2$を粒子をその場所に見出す確率の密度と解釈することができた。
 $\psi$の時間発展はシュレーディンガー（Schr\"odinger）方程式で記述できる。
 \begin{align}
-i\frac{\partial}{\partial t} \psi = H \psi.
+i\frac{\partial}{\partial t} \psi = {\hat H} \psi.
 \end{align}
-$H$はハミルトニアンである。
-古典的なハミルトニアン$H(x,p)$が得られたとき、上のシュレーディンガー方程式に出てくる演算子としてのハミルトニアンは、
+$\hat H$はハミルトニアン演算子である。
+古典的なハミルトニアン$H(x,p)$が得られたとき、上のシュレーディンガー方程式に出てくるハミルトニアン演算子は、
 \begin{align}
-H = H\left( x, p= -i\frac{\partial}{\partial x} \right)
+\hat H = H\left( x, p= -i\frac{\partial}{\partial x} \right)
 \end{align}
 という古典ハミルトニアンの中の$p$を$-i(\partial/\partial x)$に置き換えるような操作で得られた。とくに、$H = p^2/2m + V(x)$のとき、シュレーディンガー方程式のハミルトニアンは、
 \begin{align}
-H = -\frac{1}{2m}\nabla^2 + V
+\hat H = -\frac{1}{2m}\nabla^2 + V
 \end{align}
 
 シュレーディンガー方程式をみると、左辺には時間の一階微分。右辺には空間の二階微分。
@@ -767,6 +767,7 @@ E = \sqrt{m^2 + \vec p^2} , \qquad -\sqrt{m^2 + \vec p^2}
 \end{align}
 \textbf{エネルギーが正の解にくわえて、 負となる解もある！}
 （あとで分かるように負エネルギー解の存在は、反粒子の存在と関係している）
+% 2024.4.22 (第2回)
 
 \subsection{確率解釈できるか？}
 クラインゴルドン方程式に従う$\psi$は確率解釈できるだろうか？
