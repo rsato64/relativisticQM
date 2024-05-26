@@ -1068,7 +1068,7 @@ $\psi$は4成分。これがディラック(Dirac)方程式だ。
 この点はちょっとした手直しで改善できる。
 式(\ref{eq:dirac equation})の両辺に左から$\beta$をかけると、
 \begin{align}
-(i\beta\partial_t + i \beta\alpha_x \partial_x + i \beta\alpha_y \partial_y + i \beta\alpha_z \partial_z) \psi = m \psi
+(i\beta\partial_t + i \beta\alpha_x \partial_x + i \beta\alpha_y \partial_y + i \beta\alpha_z \partial_z) \psi = m \psi \label{eq:dirac equation2}
 \end{align}
 と書ける。
 
@@ -1146,17 +1146,21 @@ $\psi$は4成分。これがディラック(Dirac)方程式だ。
 
 \subsection{連続の方程式をチェックしよう}
 せっかくディラック方程式が導出できたので、連続の方程式を満たすことを確認しよう。
-$\rho = \psi^\dagger \psi$であることから、
+$\rho = \psi^\dagger \psi$であることから、式(\ref{eq:dirac equation})のディラック方程式を使うことにより、
 \begin{align}
 \frac{\partial}{\partial t} (\psi^\dagger \psi)
 &= \frac{\partial\psi^\dagger}{\partial t}\psi + \psi^\dagger \frac{\partial\psi}{\partial t} \nonumber\\
-&= -i \psi^\dagger ( -i\alpha_x \partial_x \psi -i\alpha_x \partial_y \psi -i\alpha_x \partial_z \psi +  m\beta \psi)
-+ ( i \partial_x \psi^\dagger \alpha_x + i \partial_y \psi^\dagger \alpha_y + i \partial_z \psi^\dagger \alpha_z + m \psi^\dagger \beta) \psi \nonumber\\
+&=
+( -\partial_x \psi^\dagger \alpha_x - \partial_y \psi^\dagger \alpha_y - \partial_z \psi \alpha_z + i m\psi^\dagger \beta) \psi
++ \psi^\dagger ( -\alpha_x \partial_x \psi -\alpha_x \partial_y \psi -\alpha_x \partial_z \psi -i m\beta \psi)
+\nonumber\\
+%+ ( i \partial_x \psi^\dagger \alpha_x + i \partial_y \psi^\dagger \alpha_y + i \partial_z \psi^\dagger \alpha_z + m \psi^\dagger \beta) \psi \nonumber\\
 &=
 - \partial_x ( \psi^\dagger \alpha_x \psi )
 - \partial_y ( \psi^\dagger \alpha_y \psi )
 - \partial_z ( \psi^\dagger \alpha_z \psi )
 \end{align}
+が示せる。
 %
 ということで、
 \begin{align}
