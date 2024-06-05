@@ -1257,7 +1257,7 @@ p_z u_1 - (E+m) u_3 = 0, \\
 +
 u_2 \left(\begin{array}{cc}
 0 \\ 1 \\ 0 \\ -p_z/(E+m)
-\end{array}\right) \right] \times \exp(ip_z z - i Et)
+\end{array}\right) \right] \times \exp(ip_z z - i Et) \label{eq:positive energy solution}
 \end{align}
 $u_1$と$u_2$は好きな値にとれるので、独立な解が２つある！
 
@@ -1292,7 +1292,7 @@ u_1 \\ u_2 \\ 0 \\ 0
 +
 u_4 \left(\begin{array}{cc}
 0 \\ p_z/(|E|+m) \\ 0 \\ 1
-\end{array}\right) \right] \times \exp(ip_z z - i Et)
+\end{array}\right) \right] \times \exp(ip_z z - i Et) \label{eq:negative energy solution}
 \end{align}
 $u_3$と$u_4$は好きな値にとれるので、この場合も独立な解が２つある！
 
@@ -1568,8 +1568,8 @@ i\sigma^i & 0
 \subsection{スピノルの有限ローレンツ変換}
 無限小ローレンツ変換について式(\ref{eq:dirac matrix lorentz inv})がみたされるようにした。
 \begin{align}
-\left[ \frac{i}{4}\delta\omega_{\alpha\beta} \sigma^{\alpha\beta}, \gamma^\mu \right] = 
-\delta\omega^\mu_{~\nu} \gamma^\nu
+\left[ \frac{i}{4}\omega_{\alpha\beta} \sigma^{\alpha\beta}, \gamma^\mu \right] = 
+\omega^\mu_{~\nu} \gamma^\nu
 \end{align}
 それはいいけど、ちゃんと有限のローレンツ変換についても式(\ref{eq:dirac matrix lorentz inv})ってみたされるの？
 
@@ -1582,25 +1582,41 @@ i\sigma^i & 0
 \begin{align}
 {\Lambda'}^\mu_{~\nu} - {\Lambda}^\mu_{~\nu} = \omega^\mu_{~\lambda} \Lambda^\lambda_{~\nu} + {\cal O}(\omega^2)
 \end{align}
-%
-ということで、ローレンツ変換に対する微分方程式ができる。
+左辺と$\omega^\mu_{~\lambda}$はそれぞれ微小量であるから、$\Delta \Lambda^\mu_{~\nu}$、$\omega^\mu_{~\lambda} = \Omega^\mu_{~\lambda} \Delta\tau$とおきかえることができる。ここで、$\Omega_{\mu\nu}$は反対称テンソル。これより、
 \begin{align}
-\frac{d}{d\tau} {\Lambda}^\mu_{~\nu}(\tau) = \omega^\mu_{~\lambda} {\Lambda}^\mu_{~\nu}(\tau)
+\frac{\Delta \Lambda^\mu_{~\nu}}{\Delta \tau} = \Omega^\mu_{~\lambda} \Lambda^\lambda_{~\nu}
+\end{align}
+$\Delta \tau \to 0$の極限で、以下のローレンツ変換に対する微分方程式ができる。
+\begin{align}
+\frac{d}{d\tau} {\Lambda}^\mu_{~\nu}(\tau) = \Omega^\mu_{~\lambda} {\Lambda}^\mu_{~\nu}(\tau)
 \end{align}
 これにより、連続パラメーター$\tau$でパラメトライズできる一連のローレンツ変換ができる。
 この微分方程式の解は、
 \begin{align}
 \Lambda^\mu_{~\nu}
-&= [\exp(\tau\omega)]^\mu_{~\nu} \nonumber\\
-&= \delta^\mu_{~\nu} + \tau \omega^\mu_{~\nu} + \frac{1}{2} \tau^2 \omega^\mu_{~\lambda}\omega^\lambda_{~\nu} + \cdots.
+&= [\exp(\tau\Omega)]^\mu_{~\nu} \nonumber\\
+&= \delta^\mu_{~\nu} + \tau \Omega^\mu_{~\nu} + \frac{1}{2} \tau^2 \Omega^\mu_{~\lambda}\Omega^\lambda_{~\nu} + \cdots.
 \end{align}
 みたいな感じで指数関数にまとまる。
 
-$U(\Lambda)$も指数関数で
+$U(\Lambda)$についても同様に、
 \begin{align}
-U(\Lambda) &= \exp\left( -\frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right).
+\frac{d}{d\tau} U(\Lambda(\tau)) = -\frac{i}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} U(\Lambda(\tau))
 \end{align}
-とかける。これが、式(\ref{eq:dirac matrix lorentz inv})をみたすことを確認するには、この公式も便利だよ。\footnote{
+という微分方程式が導出できる。解は、
+\begin{align}
+U(\Lambda(\tau)) &= \exp\left( -\frac{i\tau}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} \right).
+\end{align}
+とかける。
+
+$\tau$の値は$\Omega_{\mu\nu}$に吸収して新しい$\Omega_{\mu\nu}$と思いなおすことができる。
+ということで、一般に、有限ローレンツ変換は適当な反対称テンソル$\Omega_{\mu\nu}$を用いて、
+\begin{align}
+\Lambda^\mu_{~\nu} &= [\exp(\Omega)]^\mu_{~\nu} = \delta^\mu_\nu + \Omega^\mu_{~\nu} + \frac{1}{2!}\Omega^\mu_{~\alpha}\Omega^\alpha_{~\nu} + \cdots, \\
+U(\Lambda) &= \exp\left( -\frac{i}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} \right).
+\end{align}
+と書ける。
+これが、式(\ref{eq:dirac matrix lorentz inv})をみたすことを確認するには、この公式も便利。\footnote{
 いわゆるCampbell-Baker-Hausdorfの公式。
 %\url{https://en.wikipedia.org/wiki/Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula#An_important_lemma_and_its_application_to_a_special_case_of_the_Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula}
 \url{http://www2.yukawa.kyoto-u.ac.jp/~akio.tomiya/filebox/Campbell-Baker-Hausdorff.pdf}などを参照のこと。
@@ -1675,11 +1691,10 @@ $z$軸まわりに角度$\theta$回転させると、
 \end{align}
 %
 さて、$U(\Lambda)$を評価してみよう。
-%\textcolor{magenta}{(符号チェック)}
 \begin{align}
 U(\Lambda)
 =
-\exp\left( -\frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right)
+\exp\left( -\frac{i}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} \right)
 =
 \exp\left( i \theta \sigma_{12} \right)
 =
@@ -1803,7 +1818,7 @@ $z$軸方向のブーストも計算してみよう。
 \begin{align}
 U(\Lambda)
 =
-\exp\left( -\frac{i}{4} \delta\omega_{\mu\nu} \sigma^{\mu\nu} \right)
+\exp\left( -\frac{i}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} \right)
 =
 \exp\left( i \eta \sigma_{03} \right)
 =
@@ -1874,11 +1889,11 @@ U(\Lambda)^{-1} \gamma^0 U(\Lambda) = \cosh\eta \gamma^0 + \sinh\eta \gamma^3
 
 というわけで、たしかに
 \begin{align}
-\Lambda^\mu_{~\nu} = [\exp(\omega)]^\mu_{~\nu}
+\Lambda^\mu_{~\nu} = [\exp(\Omega)]^\mu_{~\nu}
 \end{align}
 に対し、
 \begin{align}
-U(\Lambda) = \exp\left( -\frac{i}{4} \omega^{\mu\nu} \sigma^{\mu\nu} \right)
+U(\Lambda) = \exp\left( -\frac{i}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} \right)
 \end{align}
 とおくと、
 \begin{align}
@@ -1902,26 +1917,27 @@ U(\Lambda)^{-1} \gamma^\mu U(\Lambda) = \Lambda^\mu_{~\nu} \gamma^\nu
 \begin{align}
 \phi'(x) - \phi(x)
 \simeq \theta \times -(x^1 \partial^2 - x^2 \partial^1) \phi \nonumber\\
-\simeq \theta \times i( ix^1 \partial^2 - ix^2 \partial^1) \phi
+\simeq i\theta \times ( ix^1 \partial^2 - ix^2 \partial^1) \phi
 \end{align}
-角運動量演算子が出てきたのがわかる。
+運動量演算子が$p^\mu = i \partial^\mu$と書けていたことを思い出すと、$ix^1 \partial^2 - ix^2 \partial^1$は角運動量演算子の$z$成分であることがわかる。
 
-スピノルについても同じ計算をやってみよう。
+スピノルについても同じ計算をやってみよう。$\psi'(x') = U(\Lambda) \psi(x)$であるから、
 \begin{align}
-\psi'(x') &= U(\Lambda) \psi(x), \\
 \psi'(x) &= U(\Lambda) \psi(\Lambda^{-1} x), \nonumber\\
  &\simeq \left( I_4  - \frac{i}{4} \omega_{\mu\nu} \sigma^{\mu\nu} \right) \psi(x^\mu - \omega^{\mu}_{~\nu} x^\nu), \nonumber\\
 &\simeq \psi(x) + \left( - \omega^{\mu}_{~\nu} x^\nu \partial_\mu - \frac{i}{4} \omega_{\mu\nu} \sigma^{\mu\nu} \right) \psi(x) \nonumber\\
-&\simeq \psi(x) + \omega_{\mu\nu} \left( - x^\nu \partial^\mu - \frac{i}{4} \sigma^{\mu\nu} \right) \psi(x) \nonumber\\
+&\simeq \psi(x) + \omega_{\mu\nu} \left( - x^\nu \partial^\mu - \frac{i}{4} \sigma^{\mu\nu} \right) \psi(x)
 \end{align}
 %
+$\omega_{12} = -\omega_{21} = -\theta$とすると、
 \begin{align}
 \psi'(x) - \psi(x)
 &\simeq
-\theta \times i \left( ix^1 \partial^2 - ix^2 \partial^1 + \frac{1}{2}\sigma^{12} \right) \psi
+i\theta \times  \left( ix^1 \partial^2 - ix^2 \partial^1 + \frac{1}{2}\sigma^{12} \right) \psi
 \end{align}
 %
-微分が入っている項は軌道角運動量と解釈できる。$\sigma^{12}$も角運動量。これがスピン。
+微分が入っている項は軌道角運動量と解釈できる。$\sigma^{12}$は軌道角運動量ではない角運動量。つまり、スピン角運動量！
+$\sigma^{12}$の形をあらわに書くと、
 \begin{align}
 \frac{1}{2}\sigma^{12} = \frac{1}{2} \left(\begin{array}{cccc}
 1 &&&\\
@@ -1930,7 +1946,9 @@ U(\Lambda)^{-1} \gamma^\mu U(\Lambda) = \Lambda^\mu_{~\nu} \gamma^\nu
 &&& -1
 \end{array}\right)
 \end{align}
-この形を見ると$c_1$成分と$c_1'$は$J_z = +1/2$を持ち、$c_2$成分と$c_2'$成分は$J_z = -1/2$を持つことが分かる。
+ここでディラック方程式の平面波解を思い出そう。
+式(\ref{eq:positive energy solution})で与えられた正エネルギー解のうち、$u_1$に比例する成分は$J_z = +1/2$、$u_2$に比例する成分は$J_z = -1/2$を持つことが分かる。
+また、式(\ref{eq:negative energy solution})で与えられた負エネルギー解のうち、$u_3$に比例する成分は$J_z = +1/2$、$u_4$に比例する成分は$J_z = -1/2$を持つことが分かる。
 特に、静止している($p_z = 0$)解を考えたとしても角運動量を持っていることが分かり、これはスピン角運動量と解釈できる。
 つまり、ディラック方程式はスピン$1/2$を表すことができている！
 
