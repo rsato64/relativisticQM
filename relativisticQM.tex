@@ -2086,6 +2086,14 @@ R = \exp\left( i \theta_1 J_1 + i \theta_2 J_2 + i\theta_3 J_3 \right)
 [J_3, J_1] = i J_2. \label{eq:SO3 algebra}
 \end{align}
 \end{itembox}
+レヴィ＝チビタ(Levi-Civita)記号$\epsilon_{ijk}$\footnote{
+$\epsilon_{123} = \epsilon_{231} = \epsilon_{312} = 1$、
+$\epsilon_{132} = \epsilon_{321} = \epsilon_{213} = -1$。
+$i,~j,~k$に同じ数字が入っているときは0。}を使って、
+\begin{align}
+[J_i, J_j] = i\epsilon_{ijk} J_k
+\end{align}
+と書くと、式がひとまとめになって便利。
 この交換関係が超重要。\textbf{Lie代数}ともよばれる。以下のような重要な性質がある。
 \begin{itemize}
 \item ベクトル空間。足し算とスカラー倍が定義されている。
@@ -2122,7 +2130,7 @@ R' = \exp\left( i \theta_1 J'_1 + i \theta_2 J'_2 + i\theta_3 J'_3 \right)
 
 表現行列はうまいユニタリ変換を選ぶとブロック対角化できるものがある。このような表現を可約表現と呼ぶ。ブロック対角化できるようなユニタリ変換を探せないものを既約表現と呼ぶ。定義により、全ての可約表現は既約表現のいくつかの直和で書ける。そのため、既約表現を分類できれば、ありうる表現の種類は全て分かることになる。
 
-\subsection{回転群の既約表現}
+\subsection{交換関係$[J_i, J_j] = i\epsilon_{ijk} J_k$を満たす、三つ組みの行列$J_i$を分類してみよう}
 さて、回転群の表現行列を考えると、無限小回転から生成子が出てきたので、生成子も行列として書くことができる。
 次のような行列を定義してみよう。
 \begin{align}
@@ -2192,9 +2200,9 @@ $n$は自然数なので、結局、以下を得る。
 n = 2\lambda_{\rm max}, \qquad
 \lambda_{\rm min} = -\lambda_{\rm max}.
 \end{align}
-こんな感じでスピン$j(=\lambda_{\rm max})$の表現が得られるのが分かる。
 
-スピン$j$の表現について、$J_3$を対角化する基底をとってみよう。
+実は、$J_1$、$J_2$、$J_3$の行列表示は、スピン$j(=\lambda_{\rm max})$の角運動量演算子の行列表示と同じ形をしていることが分かる。
+以下で、具体的にみてみよう。$j=\lambda_{\rm max}$とし、$J_3$を対角化する基底をとってみよう。
 \begin{align}
 J_3 = \left(\begin{array}{cccc}
 j &&& \\
@@ -2212,11 +2220,11 @@ j(j+1) &&& \\
 & j(j+1) && \\
 && \ddots & \\
 &&& j(j+1)
-\end{array}\right)
+\end{array}\right) \label{eq:J3 spin j}
 \end{align}
 %
-$J_- J_+ = J_1^2 + J_2^2 + J_3^3 - J_3^2 - J_3$と
-$J_+ J_- = J_1^2 + J_2^2 + J_3^3 - J_3^2 + J_3$を使うと、
+$J_- J_+ = J_1^2 + J_2^2 + J_3^2 - J_3^2 - J_3$と
+$J_+ J_- = J_1^2 + J_2^2 + J_3^2 - J_3^2 + J_3$を使うと、
 \begin{align}
 J_+ J_-
 & = \left(\begin{array}{ccccccc}
@@ -2261,7 +2269,7 @@ J_1 &= \frac{1}{2} \left(\begin{array}{ccccc}
 & \sqrt{2(2j-1)} &0& \ddots & \\
 && \ddots &\ddots& \sqrt{2j} \\
 &&& \sqrt{2j} &0
-\end{array}\right), \\
+\end{array}\right), \label{eq:J1 spin j}\\
 %
 J_2 &= \frac{i}{2} \left(\begin{array}{ccccc}
 0& -\sqrt{2j} &&& \\
@@ -2269,10 +2277,99 @@ J_2 &= \frac{i}{2} \left(\begin{array}{ccccc}
 & \sqrt{2(2j-1)} &0& \ddots & \\
 && \ddots &\ddots& -\sqrt{2j} \\
 &&& \sqrt{2j} &0
-\end{array}\right).
+\end{array}\right). \label{eq:J2 spin j}
 \end{align}
+ということで、$J_1$、$J_2$、$J_3$の形は$j = \lambda_{\rm max}$を指定することで決まることが分かった。
+また、式(\ref{eq:J1 spin j})、(\ref{eq:J2 spin j})、(\ref{eq:J3 spin j})で与えられた具体的な行列の形は、スピン$j$の角運動量演算子の行列表示と同じであることも分かる。
 
-ということで、回転群の表現はスピン(or角運動量)の値を指定すると、一意に決まることが分かる。
+
+\subsection{$2\pi$回して元に戻るか？：$SO(3)$と$SU(2)$}
+スピン$1$の$J_3$を対角化する基底をとると、
+\begin{align}
+J_3 = \left(\begin{array}{ccc}
+1 && \\
+& 0 & \\
+&& -1 
+\end{array}\right)
+\end{align}
+と書ける。$z$軸まわりに$2\pi$回転させる行列を計算してみると、
+\begin{align}
+\exp\left( 2\pi i J_3 \right)
+= \left(\begin{array}{ccc}
+\exp(2\pi i) && \\
+& \exp(2\pi i \times 0) & \\
+&& \exp(-2\pi i) 
+\end{array}\right)
+= \left(\begin{array}{ccc}
+1 && \\
+& 1 & \\
+&& 1
+\end{array}\right)
+\end{align}
+単位行列があらわれた。つまり、なにもしないのと同じになったので辻褄があっている。
+
+スピン$1/2$だとどうだろう。$J_3$を対角化する基底では、
+\begin{align}
+J_3 = \left(\begin{array}{ccc}
+1/2 & \\
+& -1/2  \\
+\end{array}\right)
+\end{align}
+と書ける。
+$z$軸まわりに$2\pi$回転させる行列を計算してみると、
+\begin{align}
+\exp\left( 2\pi i J_3 \right)
+= \left(\begin{array}{ccc}
+\exp(\pi i) & \\
+& \exp(-\pi i) \\
+\end{array}\right)
+= \left(\begin{array}{ccc}
+-1 & \\
+& -1 \\
+\end{array}\right)
+\end{align}
+\textbf{単位行列にならない！}
+
+さて、一般のスピンについてどうなるか、同じような計算が簡単にできる。結果をまとめると、
+\begin{itemize}
+\item スピン$j$が\textbf{整数}(0, 1, \dots)のとき、$\exp(2\pi i J_3) = I_{2j+1}$で\textbf{単位行列になる。}
+\item スピン$j$が\textbf{半整数}($1/2$, $3/2$, \dots)のとき、$\exp(2\pi i J_3) = -I_{2j+1}$で\textbf{単位行列にならない。}
+\end{itemize}
+もう一度、表現の定義を思い出すと、回転の操作ひとつに対して行列がひとつ定まっておく必要があった。
+つまり、0度回転と360度回転は回転の操作として同じなのだから、同じ行列が対応していないと表現の定義と矛盾する。
+この観点からすると、スピン整数は文句なしに$SO(3)$の表現となっている。
+一方、スピン半整数はそうなっていない。しかし、スピン半整数の方も360度回転で元に戻るという大域的な性質をのぞ
+
+スピン$1/2$の$J_1$、$J_2$、$J_3$を使って、$2\times 2$行列の$U$を
+\begin{align}
+U =
+\exp\left( i\theta_1 J_1 + i\theta_2 J_2 + i\theta_3 J_3  \right)
+=
+\exp\left( \frac{i}{2}\left(\begin{array}{cc}
+\theta_3 & \theta_1 - i \theta_2 \\
+\theta_1 + i \theta_2 & -\theta_3
+\end{array}\right)\right)
+\end{align}
+と計算してみる。すると、$U$は、$\det U = 1$のユニタリ行列であることが分かる。
+さらに、$\theta_1$、$\theta_2$、$\theta_3$を適当にとることによって、任意の$2\times 2$で行列式が$1$のユニタリ行列を表せることも分かる。
+スピン$1/2$の$U$は$SU(2)$という群を表している！スピン半整数、整数ともに$SU(2)$の表現になっている。
+
+$SO(3)$と$SU(2)$は密接な関係がある。\footnote{
+$SU(2)$は$SO(3)$の普遍被覆群である、という言い方がある。$SU(2)$の中心(center)は$Z_2$であるが、$SO(3)$は$SU(2)/Z_2$と同一視できる。
+}
+まとめると、
+\begin{itemize}
+\item $SO(3)$のLie代数と$SU(2)$のLie代数は、どちらも$[J_i, J_j] = i\epsilon_{ijk} = J_k$。群の単位元近くの構造はLie代数で決まるから、$SO(3)$と$SU(2)$は局所的には同じ。
+\item $SO(3)$と$SU(2)$は大局的な構造が違う。
+	\begin{itemize}
+	\item $SO(3)$は360度回転するともとにもどる。
+	\item $SU(2)$は``720度回転''するともとにもどる。\footnote{\url{https://www.youtube.com/watch?v=ZT1rUfULy1E}も参照のこと。}
+	\end{itemize}
+\item $SO(3)$の表現は、整数スピン。
+\item $SU(2)$の表現は、整数スピンおよび半整数スピン。
+\end{itemize}
+
+
 
 
 
