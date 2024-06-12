@@ -4719,6 +4719,75 @@ Z = J_+^{(\lambda_{\rm max})} X_- + X_+ J_-^{(\lambda_{\rm max})} - J_-^{(\lambd
 
 
 
+\section{$SO(3)$と$SU(2)$}
+単位ベクトル$\vec n = (n_1,n_2,n_3)$を回転軸として$\Theta$回転させる操作を考えて、$SU(2)$と$SO(3)$を比較しよう。
+
+\subsection{$SU(2)$}
+一般の$\det U = 1$をみたす$2\times 2$ユニタリ行列$U$は、
+$w_1^2 + w_2^2 + w_3^2 + w_4^2 = 1$をみたす4つの実パラメーターを用いて、
+\begin{align}
+U = \left(\begin{array}{cc}
+w_4 + i w_3 & iw_1 + w_2 \\
+iw_1 - w_2 & w_4 - iw_3
+\end{array}\right)
+\end{align}
+と書くことができる。このため、$SU(2)$のなす空間は三次元超球面($S^3$)に等しいことが分かる。
+$U$を次のように書いてみよう。
+\begin{align}
+U &= \exp\left( i \Theta X \right), \\
+X &= \frac{1}{2}n_1 \sigma_1 + \frac{1}{2}n_2 \sigma_2 + \frac{1}{2}n_3 \sigma_3
+\end{align}
+ここで、$n_1^2 + n_2^2 + n_3^2 = 1$が満たされているとする。すると、
+\begin{align}
+X^2 = \frac{1}{4} I_2
+\end{align}
+が示せる。これを用いて、
+\begin{align}
+U
+&= I_2 + i \Theta X + \frac{1}{2!}(i\Theta)^2 X^2  + \frac{1}{3!}(i\Theta)^3 X^3 + \cdots \nonumber\\
+&= I_2 \cos\frac{\Theta}{2} + i X \sin\frac{\Theta}{2} \nonumber\\
+&= \left(\begin{array}{cc}
+	\cos(\Theta/2) + i n_3 \sin(\Theta/2) & (in_1 + n_2) \sin(\Theta/2) \\
+	(in_1 - n_2) \sin(\Theta/2) & \cos(\Theta/2) - i n_3 \sin(\Theta/2) \\
+\end{array}\right)
+\end{align}
+
+よって、$(w_1,w_2,w_3,w_4)$と$\Theta,~(n_1,n_2,n_3)$の対応づけは、
+\begin{align}
+w_1 = n_1\sin(\Theta/2), \qquad
+w_2 = n_2\sin(\Theta/2), \qquad
+w_3 = n_3\sin(\Theta/2), \qquad
+w_4 = \cos(\Theta/2)
+\end{align}
+
+\subsection{$SU(2)$}
+
+$\det R=1$をみたす$3\times 3$実直行行列は、
+\begin{align}
+R &= \exp\left( i \Theta Y \right), \\
+(Y)_{ij} &= i \epsilon_{ijk} n_k
+\end{align}
+と書ける。$n_1^2 + n_2^2 + n_3^2 = 1$を用いると、
+\begin{align}
+(Y^2)_{ij} &= \delta_{ij} - n_i n_j
+\end{align}
+を示せる。これを用いて、
+\begin{align}
+R &= I_3 + i\Theta Y + \frac{1}{2!}(i\Theta)^2 Y^2 + \frac{1}{3!} (i\Theta)^3 Y^3 + \cdots \nonumber\\
+R_{ij} &= \delta_{ij} - \sin\Theta \epsilon_{ijk} n_k + (\cos\Theta - 1) (\delta_{ij} - n_i n_j) \nonumber\\
+%&= \cos\Theta \delta_{ij} - \sin\Theta \epsilon_{ijk} n_k + (1-\cos\Theta) n_i n_j \nonumber\\
+&= \cos\Theta (\delta_{ij} -n_i n_j)- \sin\Theta \epsilon_{ijk} n_k +  n_i n_j
+\end{align}
+
+
+\subsection{$SO(3)$と$SU(2)$を比べてみよう}
+適当な、$n_1$、$n_2$、$n_3$を決めた時、
+$SO(3)$は$\Theta = 0$から$\Theta$を増やしていくと$\Theta=2\pi$ではじめて$R=I_3$に戻ってくるのが分かる。
+一方、$SU(2)$は$\Theta = 0$から$\Theta$を増やしていくと$\Theta=4\pi$でやっと$U=I_2$に戻ってくる。$\Theta = 2\pi$のときは$U = -I_2$である。
+
+$SU(2)$のなす空間は$S^3$とみなせるが、$SO(3)$のなす空間は超球面$S^3:w_1^2 + w_2^2 + w_3^2 + w_4^2 = 1$について$(w_1,w_2,w_3,w_4) = (-w_1,-w_2, -w_3, -w_4)$を同一視したものとみなせる。$S^3/Z_2$という書き方もよくされる。
+
+
 
 \section{スカラー場の異時刻交換関係}\label{sec:commutator at different t}
 ここでは、式(\ref{eq:commutator at different t QFT})の導出を行う。
