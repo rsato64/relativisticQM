@@ -1460,10 +1460,10 @@ g_{\mu\alpha} \omega^\mu_{~\nu} g^\alpha_{~\beta} + g_{\mu\alpha} g^\mu_{~\nu} \
 \omega_{\mu\nu}
 = 
 \left(\begin{array}{cccc}
-0 & \eta_1 & \eta_2 & \eta_3 \\
--\eta_1 & 0 & -\theta_3 & \theta_2 \\
--\eta_2 & \theta_3 & 0 & -\theta_1 \\
--\eta_3 & -\theta_2 & \theta_1 & 0
+0 & -\eta_1 & -\eta_2 & -\eta_3 \\
+\eta_1 & 0 & -\theta_3 & \theta_2 \\
+\eta_2 & \theta_3 & 0 & -\theta_1 \\
+\eta_3 & -\theta_2 & \theta_1 & 0
 \end{array}\right)
 \end{align}
 のちの目的のために、$\omega^\mu_{~\nu}$も計算しておく。同じように行列の形で書くと、
@@ -1471,10 +1471,10 @@ g_{\mu\alpha} \omega^\mu_{~\nu} g^\alpha_{~\beta} + g_{\mu\alpha} g^\mu_{~\nu} \
 \omega^\mu_{~\nu}
 = 
 \left(\begin{array}{cccc}
-0 & \eta_1 & \eta_2 & \eta_3 \\
-\eta_1 & 0 & \theta_3 & -\theta_2 \\
-\eta_2 & -\theta_3 & 0 & \theta_1 \\
-\eta_3 & \theta_2 & -\theta_1 & 0
+0 & -\eta_1 & -\eta_2 & -\eta_3 \\
+-\eta_1 & 0 & \theta_3 & -\theta_2 \\
+-\eta_2 & -\theta_3 & 0 & \theta_1 \\
+-\eta_3 & \theta_2 & -\theta_1 & 0
 \end{array}\right)
 \end{align}
 $\omega_{1,2,3}$は$x,y,z$軸方向のローレンツブースト、$\theta_{1,2,3}$は空間の回転の自由度に対応する。
@@ -1762,10 +1762,10 @@ $z$軸方向のブーストも計算してみよう。
 \Lambda^{\mu}_{~\nu}
 &=
 \exp\left(\begin{array}{cccc}
-0 & 0 & 0 & \eta \\
+0 & 0 & 0 & -\eta \\
 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 \\
-\eta & 0 & 0 & 0
+-\eta & 0 & 0 & 0
 \end{array}\right) \nonumber\\
 %
 =&
@@ -1780,10 +1780,10 @@ $z$軸方向のブーストも計算してみよう。
 \left( \eta + \frac{\eta^3}{3!} + \frac{\eta^5}{5!} + \cdots \right) \times
 \left(
 \begin{array}{cccc}
-0 & 0 & 0 & 1 \\
+0 & 0 & 0 & -1 \\
 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 \\
-1 & 0 & 0 & 0
+-1 & 0 & 0 & 0
 \end{array}
 \right)
 +
@@ -1799,19 +1799,19 @@ $z$軸方向のブーストも計算してみよう。
 %
 =&
 \left(\begin{array}{cccc}
-\cosh\eta &&& \sinh\eta \\
+\cosh\eta &&& -\sinh\eta \\
 & 1 &&\\
 & & 1 &\\
-\sinh\eta &&& \cosh\eta
+-\sinh\eta &&& \cosh\eta
 \end{array}\right)
 \end{align}
 ちなみに、$\eta$は擬ラピディティ(pseudo-rapidity)とか呼ばれたりするパラメーター。
 ということで、こういう関係が成立しているはずだ。
 \begin{align}
-\Lambda^0_{~\nu} \gamma^\nu &= \cosh\eta \gamma^0 + \sinh\eta \gamma^3, \label{eq:boost gamma 0} \\
+\Lambda^0_{~\nu} \gamma^\nu &= \cosh\eta \gamma^0 - \sinh\eta \gamma^3, \label{eq:boost gamma 0} \\
 \Lambda^1_{~\nu} \gamma^\nu &= \gamma^1, \label{eq:boost gamma 1}\\
 \Lambda^2_{~\nu} \gamma^\nu &= \gamma^2, \label{eq:boost gamma 2}\\
-\Lambda^3_{~\nu} \gamma^\nu &= \sinh\eta \gamma^0 + \cosh\eta \gamma^3 \label{eq:boost gamma 3}
+\Lambda^3_{~\nu} \gamma^\nu &= -\sinh\eta \gamma^0 + \cosh\eta \gamma^3 \label{eq:boost gamma 3}
 \end{align}
 %
 さて、$U(\Lambda)$を評価してみよう。
@@ -1823,10 +1823,10 @@ U(\Lambda)
 \exp\left( i \eta \sigma_{03} \right)
 =
 \left(\begin{array}{cccc}
-\cosh\eta/2 & & \sinh\eta/2 & \\
-& \cosh\eta/2 & & -\sinh\eta/2 \\
-\sinh\eta/2 & & \cosh\eta/2 & \\
-& -\sinh\eta/2 & & \cosh\eta/2 \\
+\cosh\eta/2 & & -\sinh\eta/2 & \\
+& \cosh\eta/2 & & \sinh\eta/2 \\
+-\sinh\eta/2 & & \cosh\eta/2 & \\
+& \sinh\eta/2 & & \cosh\eta/2 \\
 \end{array}\right)
 \end{align}
 
@@ -1835,10 +1835,10 @@ U(\Lambda)
 U(\Lambda)^{-1} \gamma^0 U(\Lambda)
 &=
 \left(\begin{array}{cccc}
-\cosh\eta/2 & & -\sinh\eta/2 & \\
-& \cosh\eta/2 & & +\sinh\eta/2 \\
--\sinh\eta/2 & & \cosh\eta/2 & \\
-& +\sinh\eta/2 & & \cosh\eta/2 \\
+\cosh\eta/2 & & \sinh\eta/2 & \\
+& \cosh\eta/2 & & -\sinh\eta/2 \\
+\sinh\eta/2 & & \cosh\eta/2 & \\
+& -\sinh\eta/2 & & \cosh\eta/2 \\
 \end{array}\right)
 %
 \left(\begin{array}{cccc}
@@ -1849,40 +1849,40 @@ U(\Lambda)^{-1} \gamma^0 U(\Lambda)
 \end{array}\right)
 %
 \left(\begin{array}{cccc}
+\cosh\eta/2 & & -\sinh\eta/2 & \\
+& \cosh\eta/2 & & \sinh\eta/2 \\
+-\sinh\eta/2 & & \cosh\eta/2 & \\
+& \sinh\eta/2 & & \cosh\eta/2 \\
+\end{array}\right) \nonumber\\
+%
+&=
+\left(\begin{array}{cccc}
 \cosh\eta/2 & & \sinh\eta/2 & \\
 & \cosh\eta/2 & & -\sinh\eta/2 \\
 \sinh\eta/2 & & \cosh\eta/2 & \\
 & -\sinh\eta/2 & & \cosh\eta/2 \\
-\end{array}\right) \nonumber\\
-%
-&=
-\left(\begin{array}{cccc}
-\cosh\eta/2 & & -\sinh\eta/2 & \\
-& \cosh\eta/2 & & +\sinh\eta/2 \\
--\sinh\eta/2 & & \cosh\eta/2 & \\
-& +\sinh\eta/2 & & \cosh\eta/2 \\
 \end{array}\right)
 %
 \left(\begin{array}{cccc}
-\cosh\eta/2 & & \sinh\eta/2 & \\
-& \cosh\eta/2 & & -\sinh\eta/2 \\
--\sinh\eta/2 & & -\cosh\eta/2 & \\
-& \sinh\eta/2 & & -\cosh\eta/2 \\
+\cosh\eta/2 & & -\sinh\eta/2 & \\
+& \cosh\eta/2 & & \sinh\eta/2 \\
+\sinh\eta/2 & & -\cosh\eta/2 & \\
+& -\sinh\eta/2 & & -\cosh\eta/2 \\
 \end{array}\right) \nonumber\\
 %
 &=
 \left(\begin{array}{cccc}
-x&&y&\\
-&x&&-y\\
--y&&-x&\\
-&y&&-x
+x&&-y&\\
+&x&&y\\
+y&&-x&\\
+&-y&&-x
 \end{array}\right) \nonumber\\
 \end{align}
 }
-$x = \cosh^2\eta / 2 + \sinh^2 \eta/2 = \cosh\eta$と$y = 2\sinh\eta\cosh\eta = \sinh\eta$
+$x = \cosh^2\eta / 2 + \sinh^2 \eta/2 = \cosh\eta$と$y = 2\sinh(\eta/2)\cosh(\eta/2) = \sinh\eta$
 ということで、
 \begin{align}
-U(\Lambda)^{-1} \gamma^0 U(\Lambda) = \cosh\eta \gamma^0 + \sinh\eta \gamma^3
+U(\Lambda)^{-1} \gamma^0 U(\Lambda) = \cosh\eta \gamma^0 - \sinh\eta \gamma^3
 \end{align}
 式(\ref{eq:boost gamma 0})が確かに満たされている。
 式(\ref{eq:boost gamma 1}, \ref{eq:boost gamma 2}, \ref{eq:boost gamma 3})もチェックできる。\footnote{時間のある人は示してみてください}
@@ -2401,10 +2401,10 @@ g_{\mu\alpha} \omega^\mu_{~\beta} + g_{\mu\beta} \omega^\mu_{~\alpha} = 0. \labe
 \omega^\mu_{~\nu}
 =
 \left(\begin{array}{cccc}
-0 & \eta_1 & \eta_2 & \eta_3 \\
-\eta_1 & 0 & \theta_3 & -\theta_2 \\
-\eta_2 & -\theta_3 & 0 & \theta_1 \\
-\eta_3 & \theta_2 & -\theta_1 & 0
+0 & -\eta_1 & -\eta_2 & -\eta_3 \\
+-\eta_1 & 0 & \theta_3 & -\theta_2 \\
+-\eta_2 & -\theta_3 & 0 & \theta_1 \\
+-\eta_3 & \theta_2 & -\theta_1 & 0
 \end{array}\right) \label{eq:Lorentz small rotation2}
 \end{align}
 [式(\ref{eq:SO3 small rotation2})と式(\ref{eq:Lorentz small rotation2})を比較]\\
@@ -2440,24 +2440,24 @@ $J_i$は回転の生成子。$K_i$は$i$軸方向のローレンツブースト�
 \end{array}\right), \\
 %
 (K_1)^\mu_{~\nu} &= \left(\begin{array}{cccc}
-0 & -i & 0 & 0 \\
--i & 0 & 0 & 0 \\
+0 & i & 0 & 0 \\
+i & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 \\
 \end{array}\right), \\
 %
 (K_2)^\mu_{~\nu} &= \left(\begin{array}{cccc}
-0 & 0 & -i & 0 \\
+0 & 0 & i & 0 \\
 0 & 0 & 0 & 0 \\
--i & 0 & 0 & 0 \\
+i & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 \\
 \end{array}\right), \\
 %
 (K_3)^\mu_{~\nu} &= \left(\begin{array}{cccc}
-0 & 0 & 0 & -i \\
+0 & 0 & 0 & i \\
 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 \\
--i & 0 & 0 & 0 \\
+i & 0 & 0 & 0 \\
 \end{array}\right)
 \end{align}
 
@@ -2561,15 +2561,76 @@ K_i = \frac{i}{2}\sigma_i.
 これは確かに$2\times 2 = 4$成分。また、回転群の表現としては$1/2 \times 1/2 = 0 +1$となっているので、確かに4成分ベクトルっぽい。\footnote{
 $J_i$と$K_i$を具体的に構成してベクトルになっていることをチェックすることもできるけど省略。腕試しにやってみるのもよいかも。}
 
-\subsection{質量0のフェルミオンとワイルスピノル}
-ローレンツ群の既役表現の作り方を学んだ。
-結局、4成分のディラックスピノルは、どんな表現だったのか？
-ワイルスピノルというのがでてきたが、ディラックスピノルの関係は？
-それを考えるために、質量0のフェルミオンを一旦考えてみよう。
+
+
+\subsection{ディラック方程式のスピノルはなんだったのか}
+ローレンツ群の既約表現の作り方を学んだ。
+結局、ディラック方程式にあらわれる4成分のスピノルは、どんな表現だったのか？
+ワイルスピノルというのがでてきたが、それとの関係は？
+
+\subsubsection{ローレンツ群の表現としてのディラックスピノル}
+ワイルスピノルと区別するために、ディラック方程式に出てきた4成分スピノルを、ディラックスピノルと呼ぶことにしよう。
+
+$U(\Lambda) \simeq I_4 - (i/4) \omega_{\mu\nu} \sigma^{\mu\nu}$を思い出そう。
+ディラックスピノルに対する回転の生成子$J_i^{(D)}~(i=1,2,3)$およびローレンツブーストの生成子$K_i^{(D)}~(i=1,2,3)$を導入し、
+微小ローレンツ変換が、$U(\Lambda) = I_4  + \sum_k i \theta_k J_k^{(D)} + i \sum_k \eta K_k^{(D)}$と書けるとすると、
+\begin{align}
+J_i^{(D)} &= \frac{1}{2} \epsilon_{ijk} \sigma^{jk} = \left(\begin{array}{cc}
+\sigma_i & 0 \\
+0 & \sigma_i
+\end{array}\right), \\
+K_i^{(D)} &= \sigma^{0i} = \left(\begin{array}{cc}
+0 & i\sigma^i \\
+i\sigma^i & 0
+\end{array}\right).
+\end{align}
+実はこの生成子は、ユニタリ変換によって基底を変えてみると、すごく見やすい形になる。
+
+唐突だが、ディラックスピノルについてこんな基底変換をしてみよう。
+\begin{align}
+\psi &\to \psi' = U \psi, \\
+U &= \frac{1}{\sqrt 2}\left(
+\begin{array}{cc}
+I_2 & I_2 \\
+-I_2 & I_2
+\end{array}
+\right)
+\end{align}
+すると、この基底におけるローレンツ変換の生成子はこんな形だ。
+\begin{align}
+U^{-1} J_i^{(D)} U
+&=
+\left(
+\begin{array}{cc}
+\sigma^i & 0 \\
+0 & \sigma^i
+\end{array}
+\right), \\
+%
+U^{-1} K_i^{(D)} U
+&=
+\left(
+\begin{array}{cc}
+-i\sigma^i & 0 \\
+0 & i \sigma^i
+\end{array}
+\right).
+\end{align}
+ブロック対角化できた！つまり、ディラックスピノルは2つの既約表現の直和として書くことができる可約表現であることが分かる。
+前のsubsectionで得られた結果を比較すると、上二成分が$(1/2,0)$のワイルスピノル、下二成分が$(0,1/2)$のワイルスピノルであることが分かる。
+つまり、4成分のディラックスピノルは、AスピンBスピンの言葉でいうと、
+\begin{align}
+\left( \frac{1}{2}, 0 \right) \oplus \left( 0, \frac{1}{2} \right)
+\end{align}
+と書ける。
+
+
+
+
+
 
 \subsubsection{質量0の時のディラック方程式}
 実は、ワイルスピノルは質量$0$のフェルミオンを記述する。確認してみよう。
-ディラック方程式で$m=0$としてみると、
 \begin{align}
 (i \gamma^\mu \partial_\mu -m )\psi = 0
 \end{align}
@@ -2648,82 +2709,7 @@ $\psi_R$はヘリシティ$+1/2$。
 
 
 
-\subsubsection{ローレンツ群の表現としてのワイルスピノル}
-ディラック方程式に出てきた4成分スピノルは、ディラックスピノルと呼ばれる。
-質量$0$のディラックスピノルが２つのワイルスピノルに分離できたことからも分かるように、
-ディラックスピノルは既約表現ではない。
 
-\begin{align}
-\sigma^{ij} = \left(
-\begin{array}{cc}
-\epsilon_{ijk} \sigma^k & 0 \\
-0 & \epsilon_{ijk} \sigma^k
-\end{array}
-\right)
-, \qquad
-\sigma^{0i} = -\sigma^{i0} = \left(
-\begin{array}{cc}
-0 & i\sigma^i \\
-i\sigma^i & 0
-\end{array}
-\right)
-\end{align}
-
-$\psi_{L,R}$と$\psi_\pm$の間の関係（基底変換）はこんなだった。
-\begin{align}
-\left(\begin{array}{c}
-\psi_+ \\
-\psi_-
-\end{array}\right)
-=
-U
-\left(\begin{array}{c}
-\psi_L \\
-\psi_R
-\end{array}\right)
-\end{align}
-%
-ちなみに$U$は、こんな行列。
-\begin{align}
-U = \frac{1}{\sqrt 2}\left(
-\begin{array}{cc}
-I_2 & I_2 \\
--I_2 & I_2
-\end{array}
-\right)
-\end{align}
-
-ということで基底変換してみよう。
-\begin{align}
-U^{-1} \sigma^{ij} U
-&=
-\left(
-\begin{array}{cc}
-\epsilon_{ijk} \sigma^k & 0 \\
-0 & \epsilon_{ijk} \sigma^k
-\end{array}
-\right), \\
-%
-U^{-1} \sigma^{0i} U
-&=
-\left(
-\begin{array}{cc}
--i\sigma^i & 0 \\
-0 & i \sigma^i
-\end{array}
-\right).
-\end{align}
-ブロック対角化できた！
-この基底で上二成分が$(1/2,0)$のワイルスピノル、
-下二成分が$(0,1/2)$のワイルスピノル。となっており、それぞれ既約表現。
-
-
-\subsubsection{ディラックスピノル}
-つまり、4成分のディラックスピノルは、AスピンBスピンの言葉でいうと、
-\begin{align}
-\left( \frac{1}{2}, 0 \right) \oplus \left( 0, \frac{1}{2} \right)
-\end{align}
-となり、２つの既役表現の直和として書ける。
 
 \subsection{カイラリティ、ヘリシティ、パリティ}
 
