@@ -3785,7 +3785,7 @@ $L$無限大極限の$\hat z$と$\hat \pi$は次のように書けるのが分�
 
 \begin{enumerate}
 \item これまで習った量子力学と比較してみよう。ハイゼンベルク描像では演算子$\hat q(t)$は時刻$t$のみを引数として持つ演算子であった。一方、場の演算子$\hat\phi$は、時刻$t$と空間座標$\vec x$を引数に持ち、同等に扱っていることになる。この方が特殊相対論すなわちローレンツ対称性と相性がよさそうだ。
-\item 古典電磁気学をすでに知っているので古典場が存在することは知っている。すると、光電効果やコンプトン散乱から電磁気学に量子論的な効果を組み入れる必要があるのは明らかなので、場を量子化してみようというのは自然な発送ではないだろうか。（ここでは電磁場の量子論は議論しないが、スカラー場の量子論は場の量子論として一番簡単なもの）
+\item 古典電磁気学をすでに知っているので古典場が存在することは知っている。すると、光電効果やコンプトン散乱から電磁気学に量子論的な効果を組み入れる必要があるのは明らかなので、場を量子化してみようというのは自然な発想ではないだろうか。（ここでは電磁場の量子論は議論しないが、スカラー場の量子論は場の量子論として一番簡単なもの）
 \end{enumerate}
 
 
@@ -3975,14 +3975,14 @@ $\hat\phi$や$\hat\pi$を生成消滅演算子$\hat a,~\hat a^\dagger$を使っ�
 \begin{align}
 \int d^3x \frac{1}{2}\hat \pi^2
 &=
-\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{ \sqrt{E_p E_q} }{2}\left(
+\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{ \sqrt{E_p E_q} }{4}\left(
 	 -\hat a_p \hat a_q e^{i(\vec p + \vec q)\vec x}
 	 +\hat a_p \hat a_q^\dagger  e^{i(\vec p - \vec q)\vec x}
  	 +\hat a_p^\dagger \hat a_q  e^{i(-\vec p + \vec q)\vec x}
  	 -\hat a_p^\dagger \hat a_q^\dagger e^{-i(\vec p + \vec q)\vec x}
 	 \right) \nonumber\\
 &=
-\int \frac{d^3 p}{(2\pi)^3} \frac{E_p}{2}\left(
+\int \frac{d^3 p}{(2\pi)^3} \frac{E_p}{4}\left(
 	 -\hat a_p \hat a_{-p}
 	 +\hat a_p \hat a_p^\dagger
  	 +\hat a_p^\dagger \hat a_p
@@ -3991,14 +3991,14 @@ $\hat\phi$や$\hat\pi$を生成消滅演算子$\hat a,~\hat a^\dagger$を使っ�
 %
 \int d^3x \frac{1}{2} (\nabla\pi)^2
 &=
-\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{\vec p \vec q}{2\sqrt{E_p E_q}}\left(
+\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{\vec p \vec q}{4\sqrt{E_p E_q}}\left(
 	 -\hat a_p \hat a_q e^{i(\vec p + \vec q)\vec x}
 	 +\hat a_p \hat a_q^\dagger  e^{i(\vec p - \vec q)\vec x}
  	 +\hat a_p^\dagger \hat a_q  e^{i(-\vec p + \vec q)\vec x}
  	 -\hat a_p^\dagger \hat a_q^\dagger e^{-i(\vec p + \vec q)\vec x}
 	 \right) \nonumber\\
 &=
-\int \frac{d^3 p}{(2\pi)^3} \frac{p^2}{2E_p}\left(
+\int \frac{d^3 p}{(2\pi)^3} \frac{p^2}{4E_p}\left(
 	 \hat a_p \hat a_{-p}
 	 +\hat a_p \hat a_p^\dagger
  	 +\hat a_p^\dagger \hat a_p
@@ -4007,14 +4007,14 @@ $\hat\phi$や$\hat\pi$を生成消滅演算子$\hat a,~\hat a^\dagger$を使っ�
 %
 \int d^3x \frac{m^2}{2}\phi^2
 &=
-\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{m^2}{2\sqrt{E_p E_q} }\left(
+\int d^3 x \frac{d^3 p}{(2\pi)^3} \frac{d^3 q}{(2\pi)^3} \frac{m^2}{4\sqrt{E_p E_q} }\left(
 	 \hat a_p \hat a_q e^{i(\vec p + \vec q)\vec x}
 	 +\hat a_p \hat a_q^\dagger  e^{i(\vec p - \vec q)\vec x}
  	 +\hat a_p^\dagger \hat a_q  e^{i(-\vec p + \vec q)\vec x}
  	 +\hat a_p^\dagger \hat a_q^\dagger e^{-i(\vec p + \vec q)\vec x}
 	 \right) \nonumber\\
 &=
-\int \frac{d^3 p}{(2\pi)^3} \frac{m^2}{2E_p}\left(
+\int \frac{d^3 p}{(2\pi)^3} \frac{m^2}{4E_p}\left(
 	 \hat a_p \hat a_{-p}
 	 +\hat a_p \hat a_q^\dagger
  	 +\hat a_p^\dagger \hat a_q
@@ -4154,7 +4154,7 @@ P^0 &= \int d^3x \left[ \frac{1}{2} \pi^2 + \frac{1}{2}(\nabla\phi)^2 + \frac{1}
 \end{align}
 と書ける。
 
-式(\ref{eq:phi quantization}, \ref{eq:pi quantization})を使うと、運動量演算子が生成消滅演算子を使って書くことができる。
+式(\ref{eq:phi QFT}, \ref{eq:pi QFT})を使うと、生成消滅演算子を使って運動量演算子を書くことができる。
 \begin{align}
 \hat{\vec P}
 &= -\int d^3x \hat \pi \vec \nabla \hat \phi \nonumber\\
