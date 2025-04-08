@@ -1075,8 +1075,8 @@ $\psi$は4成分。これがディラック(Dirac)方程式だ。
 次のような行列$\gamma^0,~\gamma^1,~\gamma^2,~\gamma^3$を定義してみよう。
 \begin{align}
 \gamma^0 \equiv \beta = \left(\begin{array}{cc}
-1 & 0 \\
-0 & -1
+I_2 & 0 \\
+0 & -I_2
 \end{array}\right), \qquad
 \gamma^i \equiv \beta \alpha_i = \left(\begin{array}{cc}
 0 & \sigma_i \\
@@ -1098,8 +1098,8 @@ $\psi$は4成分。これがディラック(Dirac)方程式だ。
 例えば、
 \begin{align}
 \beta' = \left(\begin{array}{cc}
- & 1 \\
-1 & 
+ & I_2 \\
+I_2 & 
 \end{array}\right), \qquad
 \alpha'_i = \left(\begin{array}{cc}
 -\sigma_i &  \\
@@ -1111,8 +1111,8 @@ $\psi$は4成分。これがディラック(Dirac)方程式だ。
 これを使うと、
 \begin{align}
 \gamma^0 = \left(\begin{array}{cc}
-0 & 1 \\
-1 & 0 \\
+0 & I_2 \\
+I_2 & 0 \\
 \end{array}\right), \qquad
 \gamma^i = \left(\begin{array}{cc}
 0 & \sigma_i \\
@@ -3116,616 +3116,8 @@ SternがPauliにディスられたエピソードが『スピンはめぐる』�
 残りの章で、場の量子論の初歩的なことを学んでいく。
 
 
-
-
-
-
-\section{一次元弦の量子論}
-場を量子論的に扱うことについて、（非相対論的な）一次元弦の量子論で練習してみよう。
-%「第二量子化」という言い方をされることもある。\footnote{以下の講義ノートも参照のこと。\url{https://www.gakushuin.ac.jp/~881791/qmbj/}}
-一次元弦は連成振動子の多自由度極限としてあらわれる。
-
-
-\subsection{連成ばねの古典力学と連続極限}
-場は、質点系の自由度が大きなときに、自然とあらわれる。このことを古典力学を例にみてみよう。
-
-\subsubsection{連成ばねについて復習}
-質量$m$の質点を$n$個用意し、ばね定数$m\omega^2$のばねで連結し輪にしてみよう。
-各質点の釣り合いの位置からの変位を$z_j~(j=1,2,\cdots,n)$と書く。
-このとき、$z_{n+1} = z_1$と便宜的に決めておくと、$z_j$に関する運動方程式が簡単に書ける。
-\begin{align}
-m \ddot z_j = m \omega^2 (z_{j-1} - z_j) + m \omega^2 (z_{j+1} - z_j),\qquad(j=1,\cdots, n) \label{eq:EOM connected HO}
-\end{align}
-行列の形で書くと、より見やすい。
-\begin{align}
-m \left(\begin{array}{c}
-\ddot z_1 \\
-\ddot z_2 \\
-\vdots \\
-\ddot z_n \\
-\end{array}\right)
-%
-=
-m \omega^2 \left(\begin{array}{cccc}
-2  & -1 &        & -1 \\
--1 & 2  & \ddots & \\
-   & \ddots & \ddots & -1 \\
--1 &    &    -1  & 2 \\
-\end{array}\right)
-\left(\begin{array}{c}
-z_1 \\
-z_2 \\
-\vdots \\
-z_n \\
-\end{array}\right)
-\end{align}
-
-この運動方程式の一般解を求めてみよう。見通しを良くするため、座標を
-\begin{align}
-\vec z \equiv
-\left(\begin{array}{c}
-z_1 \\
-z_2 \\
-\vdots \\
-z_n
-\end{array}\right)
-\end{align}
-とベクトルでまとめておく。さらに、以下で定義される、右辺の行列の$n$個の固有ベクトルを使うのが便利。
-\begin{align}
-\vec u_k &= 
-\sqrt{\frac{1}{n}} \left(\begin{array}{c}
-1 \\
-\exp(2\pi ik/n) \\
-\exp(4\pi ik/n) \\
-\vdots \\
-\exp((2n-2)\pi ik/n)
-\end{array}\right) \label{eq:eigenvector connected HO}
-\end{align}
-$n$が偶数のとき、$k = -n/2+1, \cdots, n/2$。
-$n$が奇数のとき、$k = -(n-1)/2, \cdots, (n-1)/2$とする。
-$\vec z$を、時間に依存する係数$\alpha_k$を用いて、固有ベクトルで分解してみよう。
-\begin{align}
-\vec z = \sum_k A_k(t) \vec u_k + h.c.
-\end{align}なので、
-$h.c.$はそれまでの項の複素共役を意味する。$\vec z$は実なので$h.c.$を加えることで右辺も実となった。
-$\alpha_k(t)$の時間発展について、次の運動方程式が成立する。
-\begin{align}
-\ddot A_k = -\omega_k^2 A_k, \qquad
-\omega_k = \sqrt{4 \omega^2 \sin^2 \frac{\pi k}{n}}
-\end{align}
-この系には、$n$個の固有振動モードがあり、$\omega_k$は各モードの振動数と理解できる。
-%
-結局一般解は、
-\begin{align}
-\vec z = \sum_k \alpha_k e^{-i\omega_k t} \vec u_k+ h.c.
-\end{align}
-と書ける。$\alpha_k$は初期条件に応じて決まる複素数の定数である。
-
-\subsubsection{連続極限としての古典場}
-上で考えた連成ばねで、$n$が十分1より大きい状況を考えてみよう。
-固有振動数$\omega_k$の最大値は（$n$によらず）$2\omega$。
-$|k| \ll n$のモードの固有振動数を見てみよう。以下のように近似できる。
-\begin{align}
-\omega_k \simeq 2\pi |k| \times \frac{\omega}{n}
-\end{align}
-さて、$|k| \ll n$のモードについて、次のことがすぐ分かる。
-\begin{itemize}
-\item $\omega_k$は$\omega$よりずっと小さい
-\item $\omega_k$の値は$\omega/n$で決まるので、$\omega$と$n$をそれぞれ定数倍しても同じになる。
-\end{itemize}
-振動数が小さい、は、エネルギーが小さい、と同じ。
-$\omega/n$を一定に保ってしまえば、$n$や$\omega$の値が変わっても見分けがつかなくなる。
-低エネルギーの自由度を議論するのに便利な「有効理論」が作れそうだ！
-
-$m$, $n$, そして$\omega$を次のように書き換えてみよう。
-\begin{align}
-m = \rho \Delta x, \qquad
-n = \frac{L}{\Delta x}, \qquad
-\omega = \frac{v}{\Delta x}.
-\end{align}
-%
-$L$、$v$、$\rho$を固定しながら、$\Delta x$を小さく（$N$を大きく）しよう。
-この系は、$n$個の質点を長さ$\Delta x$のばねでつなぎ全体の長さが$L$となった弦とみなせる。$\rho$はこの弦の単位長さあたりの質量である。また、$v$は波が伝わる速度であることもこのあと分かる。
-
-また、質点のラベル$k$の代わりに弦の中の``位置''を定義しよう。
-\begin{align}
-x = j \Delta x, \qquad
-\end{align}
-
-そうすると、運動方程式は、
-\begin{align}
-\rho \frac{\partial}{\partial t^2} z(x) = \rho v^2 \frac{z(x+\Delta x) - 2 z(x) + z(x-\Delta x)}{\Delta x^2}
-\end{align}
-と書けるので、$\Delta x$を0にもっていく極限で、
-\begin{align}
-\frac{\partial^2 z}{\partial t^2} = v^2 \frac{\partial^2 z}{\partial x^2}
-\end{align}
-速度$v$で伝わる波を記述している。
-
-この方程式の固有振動の解としては以下のようなものがえられる。
-\begin{align}
-z(x,t) &\propto \sin\left( \frac{2 \pi k (x-vt)}{L} \right), \\
-z(x,t) &\propto \cos\left( \frac{2 \pi k (x-vt)}{L} \right).
-\end{align}
-%
-固有振動数は
-\begin{align}
-\frac{2\pi |k| v}{L}
-\end{align}
-なので、確かに、質点系の低エネルギー解と一緒。
-$v$を光速と同定すれば、一次元のクラインゴルドン方程式と見ることもできる。スカラー場の量子論の予感！
-
-
-
-\subsubsection{古典場の解析力学}
-連続極限で場があらわれることをみたが、のちのちのために古典場の解析力学を整理しておこう。
-まず、ラグランジアンの連続極限とっておこう。
-\begin{align}
-L
-&= \sum_j \left( \frac{1}{2} m \dot z_k^2 - \frac{1}{2} m \omega^2 (z_j - z_{j+1})^2 \right) \nonumber\\
-&= \Delta x \sum_j \left( \frac{1}{2} \frac{m}{\Delta x} \dot z_j^2 - \frac{1}{2} \frac{m}{\Delta x} (\omega \Delta x)^2 \left( \frac{z_j - z_{j+1}}{\Delta x} \right)^2 \right) \nonumber\\
-&\to \int_0^L dx \left[ \frac{1}{2}\rho {\dot z}^2 - \frac{1}{2} \rho v^2 \left( \frac{\partial z}{\partial x} \right)^2 \right].
-\end{align}
-このラグランジアンを使って、オイラーラグランジュ方程式を計算してみると、
-\begin{align}
-\frac{d}{dt} \frac{\delta L}{\delta \dot z(x)} &= \frac{\delta L}{\delta z(x)}, \nonumber\\
-\rho\ddot z(t,x) &= \rho v^2 \frac{\partial^2 z}{\partial x^2}.
-\end{align}
-となり、確かに連続極限をとって得た運動方程式があらわれる。
-
-ここからハミルトン形式にうつるために、場$z(t,x)$の共役運動量はどのように定義するのがよいか考えてみよう。
-$p_j$は
-\begin{align}
-p_j = m \dot z_j = \Delta x \times \rho \dot z_j
-\end{align}
-と書き直せるので$\Delta x \to 0$の極限で無限小の量になってしまい、便利ではなさそう。
-かわりに、$\pi_j$を次のように定義してみる。
-\begin{align}
-\pi_j \equiv \frac{p_j}{\Delta x} = \rho \dot z_j
-\end{align}
-これなら、$\Delta x \to 0$でも有限の量になり、都合がよい！
-
-$\pi_j$の定義は、汎関数微分を使うと綺麗に書けて筋が良いのが分かる。汎関数微分の定義は、
-\begin{align}
-\frac{\delta X}{\delta f(x_0)} = \lim_{\epsilon \to 0} \frac{X[f(x) + \epsilon \delta(x-x_0)]-X[f(x)]}{\epsilon}
-\end{align}
-例えば、
-\begin{align}
-X = \int dx f(x) g(x), \qquad
-\frac{\delta X}{\delta f(x)} = g(x).
-\end{align}
-% 2022.6.20ここまで
-%
-$\pi_j$の定義を計算してみると、
-\begin{align}
-\pi_j
-&= \frac{1}{\Delta x}\frac{\partial L}{\partial \dot z_j} \nonumber\\
-&= \frac{1}{\Delta x} \lim_{\epsilon \to 0} \frac{L(\{z_i\}, \{\dot z_i + \epsilon \delta_{ij} \}) - L(\{z_i\}, \{\dot z_i\}) }{\epsilon} \nonumber\\
-&= \frac{1}{\Delta x} \lim_{\epsilon \to 0} \frac{L(\{z_i\}, \{\dot z_i + \epsilon \delta_{ij}/\Delta x \}) - L(\{z_i\}, \{\dot z_i\}) }{\epsilon}.
-\end{align}
-%
-ここで、$\epsilon \delta_{ij}/\Delta x \to \delta(x-x_0)$に注目すると、連続極限で、
-\begin{align}
-\pi_j = \frac{1}{\Delta x}\frac{\partial L}{\partial \dot z_j}
-\qquad\rightarrow\qquad
-\pi(x) = \frac{\delta L}{\delta \dot z(x)}
-\end{align}
-
-ポアソン括弧を連続極限を使って考えてみる。$[z_i, p_j] = \delta_{ij}$であるから、
-\begin{align}
-[z_i, \pi_j] = \frac{\delta_{ij}}{\Delta x}
-\end{align}
-素朴に考えると$\Delta x \to 0$で発散してしまってよく分からない。
-実はもう少しよい見方がある。
-\begin{align}
-\Delta x \sum_{j'} \frac{\delta_{j j'}}{\Delta x} = 1
-\end{align}
-という式が容易に確かめられるが、連続極限で離散和は以下のような積分になる。
-\begin{align}
-\Delta x \sum_{j'} \qquad\to\qquad \int dx'
-\end{align}
-すなわち、$\delta_{jj'}$の連続極限は、
-\begin{align}
-\frac{ \delta_{jj'} }{\Delta x} \qquad\to\qquad \delta(x-x')
-\end{align}
-と理解してよい、連続極限$\Delta x\to 0$におけるポアソン括弧はデルタ関数を使って、
-\begin{align}
-[z_j, \pi_{j'}] = \frac{\delta_{kk'}}{\Delta x}
-\qquad\rightarrow\qquad
-[z(x), \pi(x')] = \delta(x-x')
-\end{align}
-となる。
-ポアソン括弧は
-\begin{align}
-[A,B] =
-\int_0^L dx \left[ \frac{\delta A}{\delta z(x)} \frac{\delta B}{\delta \pi(x)} - \frac{\delta A}{\delta \pi(x)} \frac{\delta B}{\delta z(x)} \right]
-\end{align}
-
-
-ハミルトニアンを導出してみよう。
-\begin{align}
-H
-&= \int_0^L dx \pi \dot z - L \nonumber\\
-&= \int_0^L dx \left[ \frac{1}{2\rho} \pi^2 + \frac{1}{2} \rho v^2 \left( \frac{\partial z}{\partial x} \right)^2 \right]
-\end{align}
-ハミルトン方程式は、
-\begin{align}
-\dot z &= [H, z] = \frac{\pi}{\rho}, \\
-\dot \pi &= [H, \pi] = -\rho v^2 \frac{\partial^2 z}{\partial x^2}.
-\end{align}
-確かにこの方程式は、オイラーラグランジュ方程式と矛盾しない。
-
-まとめとして、多自由度の質点系と古典場の系を比較してみよう。
-\begin{itemize}
-\item 離散的な自由度に関する和が積分におきかわった
-\item 微分が汎関数微分におきかわった
-\item クロネッカーのデルタがデルタ関数におきかわった
-\end{itemize}
-といった違いを認めると、やっていることはほぼ変わらないのが分かると思う。
-
-
-\subsection{連成ばねの量子力学と連続極限}
-古典場の理論が、古典力学の質点系の自由度が大きな極限としてあらわれることをみた。
-次に、連成調和振動子の量子論について多自由度極限をとってみる。極限として、量子場の理論があらわれることをみる。
-なお、一貫してハイゼンベルク描像をとり議論する。
-
-\subsubsection{調和振動子について復習}
-調和振動子のラグランジアンは次のように与えられる。
-\begin{align}
-L = \frac{1}{2} m\dot z^2 - \frac{1}{2} m \omega^2 z^2.
-\end{align}
-共役運動量は
-\begin{align}
-p = \frac{\partial L}{\partial \dot z}
-\end{align}
-ハミルトニアンは、
-\begin{align}
-H = p \dot x - L = \frac{1}{2m} p^2 + \frac{1}{2} m\omega^2 z^2.
-\end{align}
-%
-正準量子化しよう。$c$数と演算子は区別して、$\hat z$、$\hat p$、$\hat H$のように書くことにしよう。演算子の交換関係は以下のように与えられる。
-\begin{align}
-[\hat z, \hat p] = i.
-\end{align}
-ハミルトニアン演算子は$\hat z$と$\hat p$を使って
-\begin{align}
-\hat H = \frac{1}{2m} \hat p^2 + \frac{1}{2} m\omega^2 \hat z^2. \label{eq:hamiltonian harmonic oscillator}
-\end{align}
-と書ける。
-
-ハイゼンベルク描像をとると、演算子の時間発展は次のようなハイゼンベルク方程式で記述される。
-\begin{align}
-\dot {\hat z} = i[\hat H, \hat z], \qquad
-\dot {\hat p} = i[\hat H, \hat p]. \label{eq:heisenberg eq harmonic oscillator}
-\end{align}
-式(\ref{eq:hamiltonian harmonic oscillator})
-と式(\ref{eq:heisenberg eq harmonic oscillator})を使うと、
-\begin{align}
-\dot {\hat z} &= i[\hat H, \hat z] = i[\frac{\hat p^2}{2m}, \hat z] = i\frac{\hat p}{m} [\hat p,\hat z] = \frac{\hat p}{m}, \\
-\dot {\hat p} &= i[\hat H, \hat p] = i[\frac{1}{2}m\omega^2 \hat z^2, \hat p] = i m \omega^2 \hat z [\hat z,\hat p] = -m\omega^2 \hat z
-\end{align}
-が得られる。上の二つの方程式から、$\hat z$に関する次の運動方程式を得る。
-\begin{align}
-\ddot{\hat z} = -\omega^2 \hat z
-\end{align}
-この運動方程式は、古典的な調和振動子の運動方程式$\ddot z = -\omega^2 z$の$z$を演算子$\hat z$に置き換えたものになっている。
-一般解は、演算子の係数を用いることで、
-\begin{align}
-\hat z(t) = \hat\alpha e^{-i\omega t} + \hat\alpha^\dagger e^{i\omega t} \label{eq:z harmonic oscillator}
-\end{align}
-とあらわせる。$\hat\alpha$は時間に依らない演算子。ハイゼンベルク方程式により、
-\begin{align}
-\hat p(t) = m \dot{\hat z}(t) = -im\omega \alpha e^{-i\omega t} + im\omega \label{eq:p harmonic oscillator} \alpha^\dagger e^{i\omega t}
-\end{align}
-%
-式(\ref{eq:z harmonic oscillator})と式(\ref{eq:p harmonic oscillator})から交換関係を計算してみよう。
-\begin{align}
-[\hat z(t), \hat p(t)] = 2im\omega [\hat\alpha, \hat\alpha^\dagger]
-\end{align}
-%
-$\hat\alpha$は
-\begin{align}
-[\hat a, \hat a^\dagger] &= 1.
-\end{align}
-をみたす演算子$\hat a$を使って、
-\begin{align}
-\hat\alpha = \frac{1}{ \sqrt{2m\omega} }\hat a, \qquad
-\end{align}
-と書ける。
-これを、式(\ref{eq:z harmonic oscillator})、式(\ref{eq:p harmonic oscillator})に代入すると、
-\begin{align}
-\hat z(t) &= \sqrt{\frac{1}{2m\omega}} \left( \hat a e^{-i\omega t} + \hat a^\dagger e^{i\omega t}  \right), \\
-\hat p(t) &= \sqrt{\frac{m\omega}{2}} \left( -i\hat a e^{-i\omega t} + i\hat a^\dagger e^{i\omega t}  \right).
-\end{align}
-がえられる。
-
-さらに、ハミルトニアンを$\hat a$と$\hat a^\dagger$で書き直せる。
-\begin{align}
-\hat H
-&= \frac{\omega}{2}(\hat a \hat a^\dagger + \hat a^\dagger \hat a) \nonumber\\
-&= \omega \hat a^\dagger \hat a + \frac{1}{2}\omega
-\end{align}
-%
-さらにさらに、$\hat a, \hat a^\dagger$と$\hat H$の交換関係も計算できる。
-\begin{align}
-[\hat H, \hat a] = -\omega \hat a, \qquad
-[\hat H, \hat a^\dagger] = \omega \hat a^\dagger.
-\end{align}
-$\hat a$がかかるとエネルギーが$\omega$減り、$\hat a^\dagger$がかかるとエネルギーが$\omega$増える。
-
-最低エネルギー状態$|0\rangle$は次のように書ける。
-\begin{align}
-\hat a|0\rangle = 0.
-\end{align}
-第$n$励起状態は
-\begin{align}
-|n\rangle = (\hat a^\dagger)^n |0\rangle
-\end{align}
-%
-エネルギー固有値は
-\begin{align}
-\hat H|n\rangle = \omega\left(n + \frac{1}{2}\right) |n\rangle
-\end{align}
-
-
-\subsubsection{連成ばねの正準量子化}
-バネ定数$m\omega^2$で連結された質量$m$の質点を$n$個繋げてみよう。
-\begin{align}
-L = \sum_{j=1}^n \left( \frac{1}{2} m \dot z_j^2 - \frac{1}{2} m\omega^2 (z_j - z_{j+1})^2 \right)
-\end{align}
-$z_{n+1} = z_1$とする。（周期境界条件）
-%
-座標$x_j$の共役運動量は、
-\begin{align}
-p_j = \frac{\partial L}{\partial x_j} = m z_j
-\end{align}
-%
-ハミルトニアンは、
-\begin{align}
-H = \sum_j \left( \frac{1}{2m} p_j^2 + \frac{1}{2} m\omega^2 (z_j - z_{j+1})^2 \right)
-\end{align}
-
-さて正準量子化を行う。交換関係は
-\begin{align}
-[\hat z_i, \hat p_j] = i\delta_{ij}
-\end{align}
-であり、ハミルトニアンは
-\begin{align}
-\hat H = \sum_j \left( \frac{1}{2m} \hat p_j^2 + \frac{1}{2} m\omega^2 (\hat z_j - \hat z_{j+1})^2 \right)
-\end{align}
-である。ハイゼンベルク方程式は
-\begin{align}
-\dot{\hat z}_j = i[\hat H, \hat z_j], \qquad
-\dot{\hat p}_j = i[\hat H, \hat p_j].
-\end{align}
-である。ハイゼンベルク方程式を用いて、以下のような運動方程式をえる。
-\begin{align}
-\ddot{\hat z}_j = m\omega^2 ({\hat z}_{j-1} - {\hat z}_j) + m\omega^2 ({\hat z}_{j+1} - {\hat z}_j)
-\end{align}
-これは、古典的な系の運動方程式(\ref{eq:EOM connected HO})の座標を演算子に置き換えたものとなっている。
-方程式の形が同じなので、式(\ref{eq:eigenvector connected HO})で与えられた固有ベクトルを用いて、
-\begin{align}
-\vec {\hat z}(t) = \sum_k \hat \alpha_k e^{-i\omega_k t} \vec u_k + h.c.
-\end{align}
-と書ける。また、
-\begin{align}
-\vec {\hat p}(t) &= \sum_k \left[ -i m \omega \hat\alpha_k e^{-i\omega_k t} \vec u_k + h.c. \right]
-\end{align}
-$\hat\alpha_k$のみたすべき性質をみるために、$[\hat z_i, \hat p_j] = i$をフーリエ変換してみよう。
-\begin{align}
-[{\vec u_k}^\dagger \vec {\hat z}, \vec{\hat p}^T \vec u_{k'}] = i {\vec u_k}^\dagger \vec u_{k'} \label{eq:commutator FT renketsu bane}
-\end{align}
-両辺はそれぞれ
-\begin{align}
-式(\ref{eq:commutator FT renketsu bane})の左辺 &= im\omega[ \hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k} e^{i\omega_k t} , -\hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k} e^{i\omega_k t} ], \\
-式(\ref{eq:commutator FT renketsu bane})の右辺 &= i\delta_{kk'}.
-\end{align}
-と評価される。式(\ref{eq:commutator FT renketsu bane})は$t$に依らず満たされるので、次の交換関係が得られる。
-\begin{align}
-[\hat\alpha_k, \hat\alpha_{k'}^\dagger] &= \frac{1}{2m\omega_k} \delta_{kk'}, \\
-[\hat\alpha_k, \hat\alpha_{k'}] = [\hat\alpha_k^\dagger, \hat\alpha_{k'}^\dagger] &= 0.
-\end{align}
-$\hat a_k \equiv \sqrt{2m\omega_k} \hat\alpha_k$を定義すると、
-\begin{align}
-[\hat a_k, \hat a_{k'}^\dagger] &= \delta_{kk'}, \\
-[\hat a_k, \hat a_{k'}] = [\hat a_k^\dagger, \hat a_{k'}^\dagger] &= 0.
-\end{align}
-を用いて、
-\begin{align}
-{\hat z}_j(t) = \sum_k \frac{1}{\sqrt{2m\omega_k}} \left[ \hat a_k \exp\left( \frac{2\pi i jk}{n} \right) + \hat a_k^\dagger \exp\left( -\frac{2\pi i jk}{n} \right) \right]
-\end{align}
-と書ける。
-
-\subsubsection{連続極限としての量子場}
-古典連成ばねの時と同様に
-\begin{align}
-m = \rho \Delta x, \qquad
-n = \frac{L}{\Delta x}, \qquad
-\omega = \frac{v}{\Delta x}
-\end{align}
-という置き換えをしてみよう。古典連成ばね系で$\Delta x \to 0$の連続極限をとると、古典スカラー場があらわれるのを見た。
-量子連成ばね系で$\Delta x \to 0$の連続極限をってみよう。
-古典論のときは古典スカラー場があらわれたが、
-今回は、スカラー場の量子論があらわれるはずだ。
-古典力学のときと同じように$\hat p_j = m \dot \hat z_j = \Delta x \times \rho \dot {\hat z}_j$なので、
-\begin{align}
-\hat \pi_j \equiv \frac{\hat p_j}{\Delta x} = \rho \dot {\hat z}_j
-\end{align}
-というのを定義しておくのが良い。
-
-$z_j$との交換関係は、
-\begin{align}
-[\hat z_j, \hat \pi_{j'}] = \frac{i \delta_{j j'}}{\Delta x}
-\end{align}
-であるが、連続極限において$\displaystyle\frac{ \delta_{jj'} }{\Delta x} \to \delta(x-x')$となることを思い出すと、$\Delta x\to 0$の極限で、
-\begin{align}
-[\hat z_j, \hat \pi_{j'}] = \frac{i \delta_{kk'}}{\Delta x}
-\qquad\rightarrow\qquad
-[\hat z(x), \hat \pi(x')] = i \delta(x-x')
-\end{align}
-となる。また、ハイゼンベルク方程式も、連続極限において
-\begin{align}
-\dot{\hat z}_j =\frac{1}{\rho} \hat \pi_j \qquad\to\qquad \dot{\hat z}(x) =\frac{1}{\rho} \hat \pi(x), \\
-\dot{\hat \pi}_j = \rho v^2 \frac{ \hat z_{j+1} - 2\hat z_j + \hat z_{j-1}  }{\Delta x^2} \qquad\to\qquad \dot{\hat \pi}(x) = \rho v^2 \frac{\partial^2}{\partial x^2}\hat z(x)
-\end{align}
-となる。
-こうして場の演算子が自然とあらわれ、かつ、正準量子化の手続きが使えそうなことが見える。
-
-
-\subsection{一次元弦の量子論}
-質点の量子力学をスタート地点として連続極限をとることにより、量子場があらわれるさまをみた。しかし、いちいち連続極限をとるのは面倒。ここでは、古典場のラグランジアンをスタート地点として、正準量子化をへて量子場を導出してみよう。
-
-
-\subsubsection{一次元弦の正準量子化}
-有限自由度の量子力学のとき、正準量子化は、
-\begin{itemize}
-\item まずラグランジアン$L$を書く。
-\item 共役運動量$p_j = \partial L / \partial x_j$に対して、$[x_j, p_{j'}] = i \delta_{jj'}$という交換関係を要求する。
-\item ハミルトニアンを$H = p \dot q - L$として、$x_j$と$p_j$で書く。
-\end{itemize}
-という手続きで行われた。
-
-場の理論になってもやることは、結局一緒。つまり、
-\begin{itemize}
-\item まずラグランジアン密度${\cal L}$を書く。
-\item 共役運動量$\pi(x) = \partial {\cal L} / \partial \phi(x)$に対して、$[\phi(x), \pi(y)] = i \delta(x-y)$という交換関係を要求する。
-\item ハミルトニアン見るとを${\cal H} = \pi \dot \phi - {\cal L}$として、$\phi(x)$と$\pi(x)$で書く。
-\end{itemize}
-
-
-
-共役運動量の定義や場の交換関係がどのように置き換わりそうかが分かったので、
-古典場のラグランジアンをスタート地点として、正準量子化してみよう。
-次のラグランジアンからはじめる。
-\begin{align}
-L = \int_0^L dx \left[ \frac{1}{2}\rho \left( \frac{\partial z}{\partial t} \right)^2 - \frac{1}{2} \rho v^2 \left( \frac{\partial\rho}{\partial x} \right)^2 \right]
-\end{align}
-%
-$\phi$の共役運動量は汎関数微分で定義される。
-\begin{align}
-\pi(x) = \frac{\delta L}{\delta \dot z(x)} = \frac{\partial{\cal L}}{\partial \dot z(x)}
-= \rho \dot z(x).
-\end{align}
-%
-ハミルトニアン$H$とハミルトニアン密度${\cal H}$は、
-\begin{align}
-H &= \int_0^L dx (\pi \dot z) - L = \int_0^L dx {\cal H}, \\
-{\cal H} &= \frac{1}{2\rho} \pi^2 + \frac{1}{2}\rho v^2 \left( \frac{\partial z}{\partial x}\right)^2
-\end{align}
-
-正準量子化しよう。
-$\hat z$と$\hat \pi$の交換関係はデルタ関数で与えられる。
-\begin{align}
-[\hat z(x), \hat \pi(y)] = i\delta(x-y)
-\end{align}
-ハミルトニアンは次のとおり。
-\begin{align}
-\hat H = \int_0^L dx \left[ \frac{1}{2\rho} \hat\pi^2 + \frac{1}{2} \rho v^2 \left( \frac{\partial\hat z}{\partial x} \right)^2 \right].
-\end{align}
-%
-ハイゼンベルク方程式は
-\begin{align}
-\dot{\hat z} &= i [\hat H, \hat z] = \frac{1}{\rho}\hat\pi, \\
-\dot{\hat\pi} &= i [\hat H, \hat \pi] = -\rho v^2 \frac{\partial}{\partial x^2} \hat z.
-\end{align}
-$\hat\pi$を消去すると、
-\begin{align}
-\ddot {\hat z}(x,t) = -v^2 \frac{\partial^2}{\partial x^2} {\hat z}(x,t).
-\end{align}
-%
-一般的な解は、
-\begin{align}
-\hat z(t,x) = \sum_{k=-\infty}^\infty \hat\alpha_k \exp\left( -i\omega_k t + \frac{2\pi ik x}{L} \right) + h.c.
-\end{align}
-また、
-\begin{align}
-\hat \pi(t,x) = \rho \dot{\hat z}(t,x)= -i \rho \sum_{k=-\infty}^\infty \omega_k \hat\alpha_k \exp\left( -i\omega_k t + \frac{2\pi ik x}{L} \right) + h.c.
-\end{align}
-$\hat\alpha_k$のみたすべき性質をみるために、$[\hat z(t,x), \hat \pi(t,y)] = i\delta(x-y)$をフーリエ変換してみよう。
-\begin{align}
-\int_0^L dx \int_0^L dy e^{-2\pi i k x/L} e^{2\pi i k' y/L} [\hat z(t,x), \hat \pi(t,y)] =
-\int_0^L dx \int_0^L dy e^{-2\pi i k x/L} e^{2\pi i k' y/L} i\delta(x-y)
-\label{eq:commutator FT 1Dstring}
-\end{align}
-両辺はそれぞれ
-\begin{align}
-式(\ref{eq:commutator FT 1Dstring})の左辺 &= -i\rho L^2[ \hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k}^\dagger e^{i\omega_{-k} t},  \omega_{k'} \hat\alpha_{k'} e^{-i\omega_{k'} t} - \omega_{-k'} \hat\alpha_{-k'}^\dagger e^{i\omega_{-k'} t} ], \\
-式(\ref{eq:commutator FT 1Dstring})の右辺 &= iL \delta_{k,k'}
-\end{align}
-と評価される。式(\ref{eq:commutator FT 1Dstring})は$t$に依らず満たされるので、次の交換関係が得られる。
-\begin{align}
-[\hat\alpha_k, \hat\alpha_{k'}^\dagger] &= \frac{\delta_{k,k'}}{2\omega_k \rho L}, \\
-[\hat\alpha_k, \hat\alpha_{k'}] = [\hat\alpha_k^\dagger, \hat\alpha_{k'}^\dagger] &= 0.
-\end{align}
-$\hat a_k \equiv \sqrt{2\omega_k \rho L} \hat\alpha_k$を定義すると、
-\begin{align}
-[\hat a_k, \hat a_{k'}^\dagger] &= \delta_{kk'}, \\
-[\hat a_k, \hat a_{k'}] = [\hat a_k^\dagger, \hat a_{k'}^\dagger] &= 0.
-\end{align}
-$\hat z$と$\hat \pi$を$\hat a$と$\hat a^\dagger$で書ける。
-\begin{align}
-\hat z &= \sum_j \left( \frac{1}{\sqrt{2\omega_j \rho L}} \hat a_k \exp\left( \frac{2\pi ijx}{L} \right) + \frac{1}{\sqrt{2\omega_j \rho L}} \hat a_k^\dagger \exp\left( -\frac{2\pi ijx}{L} \right) \right), \label{eq:z a adagger}\\
-\hat \pi &= \sum_j \left( i \sqrt{ \frac{\rho \omega_j}{2L} } \hat a_k \exp\left( \frac{2\pi ijx}{L} \right) - i \sqrt{ \frac{\rho \omega_j}{2L} } \hat a_k^\dagger \exp\left( -\frac{2\pi ijx}{L} \right) \right). \label{eq:pi a adagger}
-\end{align}
-
-\subsubsection{$L \to \infty$極限}
-$L$を無限大にする極限をとってみよう。この極限では、運動量固有値が連続的になるので、
-\begin{align}
-\sum_j \to \frac{L}{2\pi} \int dk
-\end{align}
-のような置き換えができる。
-%
-生成消滅演算子の交換関係もデルタ関数で書けるようになる。
-\begin{align}
-[\sqrt{L} \hat a_j, \sqrt{L} \hat a_{j'} ] = L \delta_{jj'} \to (2\pi) \delta(k-k').
-\end{align}
-%
-式(\ref{eq:z a adagger}, \ref{eq:z a adagger})を以下のように書き換えてみる。
-\begin{align}
-\hat z &= \frac{1}{\sqrt\rho} \frac{1}{L} \sum_k \left( \frac{1}{\sqrt{2\omega_k}} \sqrt{L} \hat a_k \exp\left( \frac{2\pi ikx}{L} \right) + \frac{1}{\sqrt{2\omega_k L}} \sqrt{L} \hat a_k^\dagger \exp\left( -\frac{2\pi ikx}{L} \right) \right), \\
-\hat \pi &= \sqrt{\rho} \frac{1}{L} \sum_k \left( i \sqrt{ \frac{\omega_k}{2} } \sqrt{L} \hat a_k \exp\left( \frac{2\pi ikx}{L} \right) - i \sqrt{ \frac{\omega_k}{2} } \sqrt{L} \hat a_k^\dagger \exp\left( -\frac{2\pi ikx}{L} \right) \right).
-\end{align}
-%
-$L$無限大極限の$\hat z$と$\hat \pi$は次のように書けるのが分かる。
-\begin{align}
-\hat z &= \frac{1}{\sqrt\rho} \int \frac{dk}{2\pi} \left( \frac{1}{\sqrt{2\omega_k}} \hat a_k \exp\left( ikx \right) + \frac{1}{\sqrt{2\omega_k}} \hat a_k^\dagger \exp\left( -ikx \right) \right), \\
-\hat \pi &= \sqrt{\rho} \int \frac{dk}{2\pi} \left( i \sqrt{ \frac{\omega_k}{2} } \hat a_k \exp\left( ikx \right) - i \sqrt{ \frac{\omega_k}{2} } \hat a_k^\dagger \exp\left( -ikx \right) \right), \\
-[\hat a_k, \hat a_{k'}^\dagger] &= (2\pi) \delta(k-k').
-\end{align}
-
-
-\subsection{有効理論という考え方}
-上でみた、一次元古典スカラー場の理論は、
-連成ばねの低エネルギー有効理論とみなすこともできる。有効理論という考え方\underline{\textbf{めっちゃ大事}}。
-
-物理は自然科学なので実験でチェックされるもの。つまり、次のような性質を持っている。
-\begin{itemize}
-\item 全ての実験にはエラーバーがついている。　→　ある理論が実験結果をうまく説明しているとしても、理論の予言値と実験の観測値のずれの大きさがエラーバーより小さいだけかもしれない。
-\item これまでに人類が行った実験の数は有限。　→　ある理論が今まで行われた実験結果をうまく説明しているとしても、人類が今までやってない実験で、理論と実験のずれが見つかるかもしれない。
-\end{itemize}
-%
-つまり、物理の理論は「有効理論」だと思うべき。その意味は、
-\begin{itemize}
-\item （少なくとも）一定の条件を満たすときに、現実世界を十分な精度で近似するもの。
-\end{itemize}
-ということで、理論が有効な範囲を意識することはめっちゃ大事。
-具体例はこんな感じ。
-\begin{itemize}
-\item ニュートン力学：$v\ll c$かつマクロスコピック（量子論的効果無視できる）なら良い近似
-\item 非相対論的量子力学：$v\ll c$なら良い近似
-\item 特殊相対論：マクロスコピック（量子論的効果無視できる）なら良い近似
-\end{itemize}
-%
-ある理論から適用範囲の狭い有効理論は演繹的に導出できるが、適用範囲の広い理論に行くには論理的飛躍が必要。
-\begin{itemize}
-\item 例：古典力学から量子力学にいくには、いきなりc数を演算子にするなどの論理的飛躍が必要だった。
-\item 例2：量子力学から場の量子論にいくにも論理的飛躍が必要。
-\item 例3：超対称性粒子まだ見つかってないけど、いつかは見つかるかも？？
-\end{itemize}
-
-
 \section{ローレンツ不変な自由スカラー場の量子論}
-連成ばねの極限として古典スカラー場があらわれるように、多自由度の調和振動子の極限として量子スカラー場があらわれることをみた。さらに、場の量子論における正準量子化の仕方が自然と定まることもみた。
+%連成ばねの極限として古典スカラー場があらわれるように、多自由度の調和振動子の極限として量子スカラー場があらわれることをみた。さらに、場の量子論における正準量子化の仕方が自然と定まることもみた。
 この章では、ローレンツ不変な古典スカラー場のラグランジアンの正準量子化してみる。スピン0の粒子の特殊相対論的なハミルトニアンがえられることをみてみよう。
 
 \subsection{相互作用しないスピン0粒子ってどんな感じ？}\label{sec:how spin 0 theory looks}
@@ -4778,6 +4170,614 @@ $SO(3)$は$\Theta = 0$から$\Theta$を増やしていくと$\Theta=2\pi$では�
 一方、$SU(2)$は$\Theta = 0$から$\Theta$を増やしていくと$\Theta=4\pi$でやっと$U=I_2$に戻ってくる。$\Theta = 2\pi$のときは$U = -I_2$である。
 
 $SU(2)$のなす空間は$S^3$とみなせるが、$SO(3)$のなす空間は超球面$S^3:w_1^2 + w_2^2 + w_3^2 + w_4^2 = 1$について$(w_1,w_2,w_3,w_4) = (-w_1,-w_2, -w_3, -w_4)$を同一視したものとみなせる。$S^3/Z_2$という書き方もよくされる。
+
+
+
+
+\section{一次元弦の量子論}
+場を量子論的に扱うことについて、（非相対論的な）一次元弦の量子論で練習してみよう。
+%「第二量子化」という言い方をされることもある。\footnote{以下の講義ノートも参照のこと。\url{https://www.gakushuin.ac.jp/~881791/qmbj/}}
+一次元弦は連成振動子の多自由度極限としてあらわれる。
+
+
+\subsection{連成ばねの古典力学と連続極限}
+場は、質点系の自由度が大きなときに、自然とあらわれる。このことを古典力学を例にみてみよう。
+
+\subsubsection{連成ばねについて復習}
+質量$m$の質点を$n$個用意し、ばね定数$m\omega^2$のばねで連結し輪にしてみよう。
+各質点の釣り合いの位置からの変位を$z_j~(j=1,2,\cdots,n)$と書く。
+このとき、$z_{n+1} = z_1$と便宜的に決めておくと、$z_j$に関する運動方程式が簡単に書ける。
+\begin{align}
+m \ddot z_j = m \omega^2 (z_{j-1} - z_j) + m \omega^2 (z_{j+1} - z_j),\qquad(j=1,\cdots, n) \label{eq:EOM connected HO}
+\end{align}
+行列の形で書くと、より見やすい。
+\begin{align}
+m \left(\begin{array}{c}
+\ddot z_1 \\
+\ddot z_2 \\
+\vdots \\
+\ddot z_n \\
+\end{array}\right)
+%
+=
+m \omega^2 \left(\begin{array}{cccc}
+2  & -1 &        & -1 \\
+-1 & 2  & \ddots & \\
+   & \ddots & \ddots & -1 \\
+-1 &    &    -1  & 2 \\
+\end{array}\right)
+\left(\begin{array}{c}
+z_1 \\
+z_2 \\
+\vdots \\
+z_n \\
+\end{array}\right)
+\end{align}
+
+この運動方程式の一般解を求めてみよう。見通しを良くするため、座標を
+\begin{align}
+\vec z \equiv
+\left(\begin{array}{c}
+z_1 \\
+z_2 \\
+\vdots \\
+z_n
+\end{array}\right)
+\end{align}
+とベクトルでまとめておく。さらに、以下で定義される、右辺の行列の$n$個の固有ベクトルを使うのが便利。
+\begin{align}
+\vec u_k &= 
+\sqrt{\frac{1}{n}} \left(\begin{array}{c}
+1 \\
+\exp(2\pi ik/n) \\
+\exp(4\pi ik/n) \\
+\vdots \\
+\exp((2n-2)\pi ik/n)
+\end{array}\right) \label{eq:eigenvector connected HO}
+\end{align}
+$n$が偶数のとき、$k = -n/2+1, \cdots, n/2$。
+$n$が奇数のとき、$k = -(n-1)/2, \cdots, (n-1)/2$とする。
+$\vec z$を、時間に依存する係数$\alpha_k$を用いて、固有ベクトルで分解してみよう。
+\begin{align}
+\vec z = \sum_k A_k(t) \vec u_k + h.c.
+\end{align}なので、
+$h.c.$はそれまでの項の複素共役を意味する。$\vec z$は実なので$h.c.$を加えることで右辺も実となった。
+$\alpha_k(t)$の時間発展について、次の運動方程式が成立する。
+\begin{align}
+\ddot A_k = -\omega_k^2 A_k, \qquad
+\omega_k = \sqrt{4 \omega^2 \sin^2 \frac{\pi k}{n}}
+\end{align}
+この系には、$n$個の固有振動モードがあり、$\omega_k$は各モードの振動数と理解できる。
+%
+結局一般解は、
+\begin{align}
+\vec z = \sum_k \alpha_k e^{-i\omega_k t} \vec u_k+ h.c.
+\end{align}
+と書ける。$\alpha_k$は初期条件に応じて決まる複素数の定数である。
+
+\subsubsection{連続極限としての古典場}
+上で考えた連成ばねで、$n$が十分1より大きい状況を考えてみよう。
+固有振動数$\omega_k$の最大値は（$n$によらず）$2\omega$。
+$|k| \ll n$のモードの固有振動数を見てみよう。以下のように近似できる。
+\begin{align}
+\omega_k \simeq 2\pi |k| \times \frac{\omega}{n}
+\end{align}
+さて、$|k| \ll n$のモードについて、次のことがすぐ分かる。
+\begin{itemize}
+\item $\omega_k$は$\omega$よりずっと小さい
+\item $\omega_k$の値は$\omega/n$で決まるので、$\omega$と$n$をそれぞれ定数倍しても同じになる。
+\end{itemize}
+振動数が小さい、は、エネルギーが小さい、と同じ。
+$\omega/n$を一定に保ってしまえば、$n$や$\omega$の値が変わっても見分けがつかなくなる。
+低エネルギーの自由度を議論するのに便利な「有効理論」が作れそうだ！
+
+$m$, $n$, そして$\omega$を次のように書き換えてみよう。
+\begin{align}
+m = \rho \Delta x, \qquad
+n = \frac{L}{\Delta x}, \qquad
+\omega = \frac{v}{\Delta x}.
+\end{align}
+%
+$L$、$v$、$\rho$を固定しながら、$\Delta x$を小さく（$N$を大きく）しよう。
+この系は、$n$個の質点を長さ$\Delta x$のばねでつなぎ全体の長さが$L$となった弦とみなせる。$\rho$はこの弦の単位長さあたりの質量である。また、$v$は波が伝わる速度であることもこのあと分かる。
+
+また、質点のラベル$k$の代わりに弦の中の``位置''を定義しよう。
+\begin{align}
+x = j \Delta x, \qquad
+\end{align}
+
+そうすると、運動方程式は、
+\begin{align}
+\rho \frac{\partial}{\partial t^2} z(x) = \rho v^2 \frac{z(x+\Delta x) - 2 z(x) + z(x-\Delta x)}{\Delta x^2}
+\end{align}
+と書けるので、$\Delta x$を0にもっていく極限で、
+\begin{align}
+\frac{\partial^2 z}{\partial t^2} = v^2 \frac{\partial^2 z}{\partial x^2}
+\end{align}
+速度$v$で伝わる波を記述している。
+
+この方程式の固有振動の解としては以下のようなものがえられる。
+\begin{align}
+z(x,t) &\propto \sin\left( \frac{2 \pi k (x-vt)}{L} \right), \\
+z(x,t) &\propto \cos\left( \frac{2 \pi k (x-vt)}{L} \right).
+\end{align}
+%
+固有振動数は
+\begin{align}
+\frac{2\pi |k| v}{L}
+\end{align}
+なので、確かに、質点系の低エネルギー解と一緒。
+$v$を光速と同定すれば、一次元のクラインゴルドン方程式と見ることもできる。スカラー場の量子論の予感！
+
+
+
+\subsubsection{古典場の解析力学}
+連続極限で場があらわれることをみたが、のちのちのために古典場の解析力学を整理しておこう。
+まず、ラグランジアンの連続極限とっておこう。
+\begin{align}
+L
+&= \sum_j \left( \frac{1}{2} m \dot z_k^2 - \frac{1}{2} m \omega^2 (z_j - z_{j+1})^2 \right) \nonumber\\
+&= \Delta x \sum_j \left( \frac{1}{2} \frac{m}{\Delta x} \dot z_j^2 - \frac{1}{2} \frac{m}{\Delta x} (\omega \Delta x)^2 \left( \frac{z_j - z_{j+1}}{\Delta x} \right)^2 \right) \nonumber\\
+&\to \int_0^L dx \left[ \frac{1}{2}\rho {\dot z}^2 - \frac{1}{2} \rho v^2 \left( \frac{\partial z}{\partial x} \right)^2 \right].
+\end{align}
+このラグランジアンを使って、オイラーラグランジュ方程式を計算してみると、
+\begin{align}
+\frac{d}{dt} \frac{\delta L}{\delta \dot z(x)} &= \frac{\delta L}{\delta z(x)}, \nonumber\\
+\rho\ddot z(t,x) &= \rho v^2 \frac{\partial^2 z}{\partial x^2}.
+\end{align}
+となり、確かに連続極限をとって得た運動方程式があらわれる。
+
+ここからハミルトン形式にうつるために、場$z(t,x)$の共役運動量はどのように定義するのがよいか考えてみよう。
+$p_j$は
+\begin{align}
+p_j = m \dot z_j = \Delta x \times \rho \dot z_j
+\end{align}
+と書き直せるので$\Delta x \to 0$の極限で無限小の量になってしまい、便利ではなさそう。
+かわりに、$\pi_j$を次のように定義してみる。
+\begin{align}
+\pi_j \equiv \frac{p_j}{\Delta x} = \rho \dot z_j
+\end{align}
+これなら、$\Delta x \to 0$でも有限の量になり、都合がよい！
+
+$\pi_j$の定義は、汎関数微分を使うと綺麗に書けて筋が良いのが分かる。汎関数微分の定義は、
+\begin{align}
+\frac{\delta X}{\delta f(x_0)} = \lim_{\epsilon \to 0} \frac{X[f(x) + \epsilon \delta(x-x_0)]-X[f(x)]}{\epsilon}
+\end{align}
+例えば、
+\begin{align}
+X = \int dx f(x) g(x), \qquad
+\frac{\delta X}{\delta f(x)} = g(x).
+\end{align}
+% 2022.6.20ここまで
+%
+$\pi_j$の定義を計算してみると、
+\begin{align}
+\pi_j
+&= \frac{1}{\Delta x}\frac{\partial L}{\partial \dot z_j} \nonumber\\
+&= \frac{1}{\Delta x} \lim_{\epsilon \to 0} \frac{L(\{z_i\}, \{\dot z_i + \epsilon \delta_{ij} \}) - L(\{z_i\}, \{\dot z_i\}) }{\epsilon} \nonumber\\
+&= \frac{1}{\Delta x} \lim_{\epsilon \to 0} \frac{L(\{z_i\}, \{\dot z_i + \epsilon \delta_{ij}/\Delta x \}) - L(\{z_i\}, \{\dot z_i\}) }{\epsilon}.
+\end{align}
+%
+ここで、$\epsilon \delta_{ij}/\Delta x \to \delta(x-x_0)$に注目すると、連続極限で、
+\begin{align}
+\pi_j = \frac{1}{\Delta x}\frac{\partial L}{\partial \dot z_j}
+\qquad\rightarrow\qquad
+\pi(x) = \frac{\delta L}{\delta \dot z(x)}
+\end{align}
+
+ポアソン括弧を連続極限を使って考えてみる。$[z_i, p_j] = \delta_{ij}$であるから、
+\begin{align}
+[z_i, \pi_j] = \frac{\delta_{ij}}{\Delta x}
+\end{align}
+素朴に考えると$\Delta x \to 0$で発散してしまってよく分からない。
+実はもう少しよい見方がある。
+\begin{align}
+\Delta x \sum_{j'} \frac{\delta_{j j'}}{\Delta x} = 1
+\end{align}
+という式が容易に確かめられるが、連続極限で離散和は以下のような積分になる。
+\begin{align}
+\Delta x \sum_{j'} \qquad\to\qquad \int dx'
+\end{align}
+すなわち、$\delta_{jj'}$の連続極限は、
+\begin{align}
+\frac{ \delta_{jj'} }{\Delta x} \qquad\to\qquad \delta(x-x')
+\end{align}
+と理解してよい、連続極限$\Delta x\to 0$におけるポアソン括弧はデルタ関数を使って、
+\begin{align}
+[z_j, \pi_{j'}] = \frac{\delta_{kk'}}{\Delta x}
+\qquad\rightarrow\qquad
+[z(x), \pi(x')] = \delta(x-x')
+\end{align}
+となる。
+ポアソン括弧は
+\begin{align}
+[A,B] =
+\int_0^L dx \left[ \frac{\delta A}{\delta z(x)} \frac{\delta B}{\delta \pi(x)} - \frac{\delta A}{\delta \pi(x)} \frac{\delta B}{\delta z(x)} \right]
+\end{align}
+
+
+ハミルトニアンを導出してみよう。
+\begin{align}
+H
+&= \int_0^L dx \pi \dot z - L \nonumber\\
+&= \int_0^L dx \left[ \frac{1}{2\rho} \pi^2 + \frac{1}{2} \rho v^2 \left( \frac{\partial z}{\partial x} \right)^2 \right]
+\end{align}
+ハミルトン方程式は、
+\begin{align}
+\dot z &= [H, z] = \frac{\pi}{\rho}, \\
+\dot \pi &= [H, \pi] = -\rho v^2 \frac{\partial^2 z}{\partial x^2}.
+\end{align}
+確かにこの方程式は、オイラーラグランジュ方程式と矛盾しない。
+
+まとめとして、多自由度の質点系と古典場の系を比較してみよう。
+\begin{itemize}
+\item 離散的な自由度に関する和が積分におきかわった
+\item 微分が汎関数微分におきかわった
+\item クロネッカーのデルタがデルタ関数におきかわった
+\end{itemize}
+といった違いを認めると、やっていることはほぼ変わらないのが分かると思う。
+
+
+\subsection{連成ばねの量子力学と連続極限}
+古典場の理論が、古典力学の質点系の自由度が大きな極限としてあらわれることをみた。
+次に、連成調和振動子の量子論について多自由度極限をとってみる。極限として、量子場の理論があらわれることをみる。
+なお、一貫してハイゼンベルク描像をとり議論する。
+
+\subsubsection{調和振動子について復習}
+調和振動子のラグランジアンは次のように与えられる。
+\begin{align}
+L = \frac{1}{2} m\dot z^2 - \frac{1}{2} m \omega^2 z^2.
+\end{align}
+共役運動量は
+\begin{align}
+p = \frac{\partial L}{\partial \dot z}
+\end{align}
+ハミルトニアンは、
+\begin{align}
+H = p \dot x - L = \frac{1}{2m} p^2 + \frac{1}{2} m\omega^2 z^2.
+\end{align}
+%
+正準量子化しよう。$c$数と演算子は区別して、$\hat z$、$\hat p$、$\hat H$のように書くことにしよう。演算子の交換関係は以下のように与えられる。
+\begin{align}
+[\hat z, \hat p] = i.
+\end{align}
+ハミルトニアン演算子は$\hat z$と$\hat p$を使って
+\begin{align}
+\hat H = \frac{1}{2m} \hat p^2 + \frac{1}{2} m\omega^2 \hat z^2. \label{eq:hamiltonian harmonic oscillator}
+\end{align}
+と書ける。
+
+ハイゼンベルク描像をとると、演算子の時間発展は次のようなハイゼンベルク方程式で記述される。
+\begin{align}
+\dot {\hat z} = i[\hat H, \hat z], \qquad
+\dot {\hat p} = i[\hat H, \hat p]. \label{eq:heisenberg eq harmonic oscillator}
+\end{align}
+式(\ref{eq:hamiltonian harmonic oscillator})
+と式(\ref{eq:heisenberg eq harmonic oscillator})を使うと、
+\begin{align}
+\dot {\hat z} &= i[\hat H, \hat z] = i[\frac{\hat p^2}{2m}, \hat z] = i\frac{\hat p}{m} [\hat p,\hat z] = \frac{\hat p}{m}, \\
+\dot {\hat p} &= i[\hat H, \hat p] = i[\frac{1}{2}m\omega^2 \hat z^2, \hat p] = i m \omega^2 \hat z [\hat z,\hat p] = -m\omega^2 \hat z
+\end{align}
+が得られる。上の二つの方程式から、$\hat z$に関する次の運動方程式を得る。
+\begin{align}
+\ddot{\hat z} = -\omega^2 \hat z
+\end{align}
+この運動方程式は、古典的な調和振動子の運動方程式$\ddot z = -\omega^2 z$の$z$を演算子$\hat z$に置き換えたものになっている。
+一般解は、演算子の係数を用いることで、
+\begin{align}
+\hat z(t) = \hat\alpha e^{-i\omega t} + \hat\alpha^\dagger e^{i\omega t} \label{eq:z harmonic oscillator}
+\end{align}
+とあらわせる。$\hat\alpha$は時間に依らない演算子。ハイゼンベルク方程式により、
+\begin{align}
+\hat p(t) = m \dot{\hat z}(t) = -im\omega \alpha e^{-i\omega t} + im\omega \label{eq:p harmonic oscillator} \alpha^\dagger e^{i\omega t}
+\end{align}
+%
+式(\ref{eq:z harmonic oscillator})と式(\ref{eq:p harmonic oscillator})から交換関係を計算してみよう。
+\begin{align}
+[\hat z(t), \hat p(t)] = 2im\omega [\hat\alpha, \hat\alpha^\dagger]
+\end{align}
+%
+$\hat\alpha$は
+\begin{align}
+[\hat a, \hat a^\dagger] &= 1.
+\end{align}
+をみたす演算子$\hat a$を使って、
+\begin{align}
+\hat\alpha = \frac{1}{ \sqrt{2m\omega} }\hat a, \qquad
+\end{align}
+と書ける。
+これを、式(\ref{eq:z harmonic oscillator})、式(\ref{eq:p harmonic oscillator})に代入すると、
+\begin{align}
+\hat z(t) &= \sqrt{\frac{1}{2m\omega}} \left( \hat a e^{-i\omega t} + \hat a^\dagger e^{i\omega t}  \right), \\
+\hat p(t) &= \sqrt{\frac{m\omega}{2}} \left( -i\hat a e^{-i\omega t} + i\hat a^\dagger e^{i\omega t}  \right).
+\end{align}
+がえられる。
+
+さらに、ハミルトニアンを$\hat a$と$\hat a^\dagger$で書き直せる。
+\begin{align}
+\hat H
+&= \frac{\omega}{2}(\hat a \hat a^\dagger + \hat a^\dagger \hat a) \nonumber\\
+&= \omega \hat a^\dagger \hat a + \frac{1}{2}\omega
+\end{align}
+%
+さらにさらに、$\hat a, \hat a^\dagger$と$\hat H$の交換関係も計算できる。
+\begin{align}
+[\hat H, \hat a] = -\omega \hat a, \qquad
+[\hat H, \hat a^\dagger] = \omega \hat a^\dagger.
+\end{align}
+$\hat a$がかかるとエネルギーが$\omega$減り、$\hat a^\dagger$がかかるとエネルギーが$\omega$増える。
+
+最低エネルギー状態$|0\rangle$は次のように書ける。
+\begin{align}
+\hat a|0\rangle = 0.
+\end{align}
+第$n$励起状態は
+\begin{align}
+|n\rangle = (\hat a^\dagger)^n |0\rangle
+\end{align}
+%
+エネルギー固有値は
+\begin{align}
+\hat H|n\rangle = \omega\left(n + \frac{1}{2}\right) |n\rangle
+\end{align}
+
+
+\subsubsection{連成ばねの正準量子化}
+バネ定数$m\omega^2$で連結された質量$m$の質点を$n$個繋げてみよう。
+\begin{align}
+L = \sum_{j=1}^n \left( \frac{1}{2} m \dot z_j^2 - \frac{1}{2} m\omega^2 (z_j - z_{j+1})^2 \right)
+\end{align}
+$z_{n+1} = z_1$とする。（周期境界条件）
+%
+座標$x_j$の共役運動量は、
+\begin{align}
+p_j = \frac{\partial L}{\partial x_j} = m z_j
+\end{align}
+%
+ハミルトニアンは、
+\begin{align}
+H = \sum_j \left( \frac{1}{2m} p_j^2 + \frac{1}{2} m\omega^2 (z_j - z_{j+1})^2 \right)
+\end{align}
+
+さて正準量子化を行う。交換関係は
+\begin{align}
+[\hat z_i, \hat p_j] = i\delta_{ij}
+\end{align}
+であり、ハミルトニアンは
+\begin{align}
+\hat H = \sum_j \left( \frac{1}{2m} \hat p_j^2 + \frac{1}{2} m\omega^2 (\hat z_j - \hat z_{j+1})^2 \right)
+\end{align}
+である。ハイゼンベルク方程式は
+\begin{align}
+\dot{\hat z}_j = i[\hat H, \hat z_j], \qquad
+\dot{\hat p}_j = i[\hat H, \hat p_j].
+\end{align}
+である。ハイゼンベルク方程式を用いて、以下のような運動方程式をえる。
+\begin{align}
+\ddot{\hat z}_j = m\omega^2 ({\hat z}_{j-1} - {\hat z}_j) + m\omega^2 ({\hat z}_{j+1} - {\hat z}_j)
+\end{align}
+これは、古典的な系の運動方程式(\ref{eq:EOM connected HO})の座標を演算子に置き換えたものとなっている。
+方程式の形が同じなので、式(\ref{eq:eigenvector connected HO})で与えられた固有ベクトルを用いて、
+\begin{align}
+\vec {\hat z}(t) = \sum_k \hat \alpha_k e^{-i\omega_k t} \vec u_k + h.c.
+\end{align}
+と書ける。また、
+\begin{align}
+\vec {\hat p}(t) &= \sum_k \left[ -i m \omega \hat\alpha_k e^{-i\omega_k t} \vec u_k + h.c. \right]
+\end{align}
+$\hat\alpha_k$のみたすべき性質をみるために、$[\hat z_i, \hat p_j] = i$をフーリエ変換してみよう。
+\begin{align}
+[{\vec u_k}^\dagger \vec {\hat z}, \vec{\hat p}^T \vec u_{k'}] = i {\vec u_k}^\dagger \vec u_{k'} \label{eq:commutator FT renketsu bane}
+\end{align}
+両辺はそれぞれ
+\begin{align}
+式(\ref{eq:commutator FT renketsu bane})の左辺 &= im\omega[ \hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k} e^{i\omega_k t} , -\hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k} e^{i\omega_k t} ], \\
+式(\ref{eq:commutator FT renketsu bane})の右辺 &= i\delta_{kk'}.
+\end{align}
+と評価される。式(\ref{eq:commutator FT renketsu bane})は$t$に依らず満たされるので、次の交換関係が得られる。
+\begin{align}
+[\hat\alpha_k, \hat\alpha_{k'}^\dagger] &= \frac{1}{2m\omega_k} \delta_{kk'}, \\
+[\hat\alpha_k, \hat\alpha_{k'}] = [\hat\alpha_k^\dagger, \hat\alpha_{k'}^\dagger] &= 0.
+\end{align}
+$\hat a_k \equiv \sqrt{2m\omega_k} \hat\alpha_k$を定義すると、
+\begin{align}
+[\hat a_k, \hat a_{k'}^\dagger] &= \delta_{kk'}, \\
+[\hat a_k, \hat a_{k'}] = [\hat a_k^\dagger, \hat a_{k'}^\dagger] &= 0.
+\end{align}
+を用いて、
+\begin{align}
+{\hat z}_j(t) = \sum_k \frac{1}{\sqrt{2m\omega_k}} \left[ \hat a_k \exp\left( \frac{2\pi i jk}{n} \right) + \hat a_k^\dagger \exp\left( -\frac{2\pi i jk}{n} \right) \right]
+\end{align}
+と書ける。
+
+\subsubsection{連続極限としての量子場}
+古典連成ばねの時と同様に
+\begin{align}
+m = \rho \Delta x, \qquad
+n = \frac{L}{\Delta x}, \qquad
+\omega = \frac{v}{\Delta x}
+\end{align}
+という置き換えをしてみよう。古典連成ばね系で$\Delta x \to 0$の連続極限をとると、古典スカラー場があらわれるのを見た。
+量子連成ばね系で$\Delta x \to 0$の連続極限をってみよう。
+古典論のときは古典スカラー場があらわれたが、
+今回は、スカラー場の量子論があらわれるはずだ。
+古典力学のときと同じように$\hat p_j = m \dot \hat z_j = \Delta x \times \rho \dot {\hat z}_j$なので、
+\begin{align}
+\hat \pi_j \equiv \frac{\hat p_j}{\Delta x} = \rho \dot {\hat z}_j
+\end{align}
+というのを定義しておくのが良い。
+
+$z_j$との交換関係は、
+\begin{align}
+[\hat z_j, \hat \pi_{j'}] = \frac{i \delta_{j j'}}{\Delta x}
+\end{align}
+であるが、連続極限において$\displaystyle\frac{ \delta_{jj'} }{\Delta x} \to \delta(x-x')$となることを思い出すと、$\Delta x\to 0$の極限で、
+\begin{align}
+[\hat z_j, \hat \pi_{j'}] = \frac{i \delta_{kk'}}{\Delta x}
+\qquad\rightarrow\qquad
+[\hat z(x), \hat \pi(x')] = i \delta(x-x')
+\end{align}
+となる。また、ハイゼンベルク方程式も、連続極限において
+\begin{align}
+\dot{\hat z}_j =\frac{1}{\rho} \hat \pi_j \qquad\to\qquad \dot{\hat z}(x) =\frac{1}{\rho} \hat \pi(x), \\
+\dot{\hat \pi}_j = \rho v^2 \frac{ \hat z_{j+1} - 2\hat z_j + \hat z_{j-1}  }{\Delta x^2} \qquad\to\qquad \dot{\hat \pi}(x) = \rho v^2 \frac{\partial^2}{\partial x^2}\hat z(x)
+\end{align}
+となる。
+こうして場の演算子が自然とあらわれ、かつ、正準量子化の手続きが使えそうなことが見える。
+
+
+\subsection{一次元弦の量子論}
+質点の量子力学をスタート地点として連続極限をとることにより、量子場があらわれるさまをみた。しかし、いちいち連続極限をとるのは面倒。ここでは、古典場のラグランジアンをスタート地点として、正準量子化をへて量子場を導出してみよう。
+
+
+\subsubsection{一次元弦の正準量子化}
+有限自由度の量子力学のとき、正準量子化は、
+\begin{itemize}
+\item まずラグランジアン$L$を書く。
+\item 共役運動量$p_j = \partial L / \partial x_j$に対して、$[x_j, p_{j'}] = i \delta_{jj'}$という交換関係を要求する。
+\item ハミルトニアンを$H = p \dot q - L$として、$x_j$と$p_j$で書く。
+\end{itemize}
+という手続きで行われた。
+
+場の理論になってもやることは、結局一緒。つまり、
+\begin{itemize}
+\item まずラグランジアン密度${\cal L}$を書く。
+\item 共役運動量$\pi(x) = \partial {\cal L} / \partial \phi(x)$に対して、$[\phi(x), \pi(y)] = i \delta(x-y)$という交換関係を要求する。
+\item ハミルトニアン見るとを${\cal H} = \pi \dot \phi - {\cal L}$として、$\phi(x)$と$\pi(x)$で書く。
+\end{itemize}
+
+
+
+共役運動量の定義や場の交換関係がどのように置き換わりそうかが分かったので、
+古典場のラグランジアンをスタート地点として、正準量子化してみよう。
+次のラグランジアンからはじめる。
+\begin{align}
+L = \int_0^L dx \left[ \frac{1}{2}\rho \left( \frac{\partial z}{\partial t} \right)^2 - \frac{1}{2} \rho v^2 \left( \frac{\partial\rho}{\partial x} \right)^2 \right]
+\end{align}
+%
+$\phi$の共役運動量は汎関数微分で定義される。
+\begin{align}
+\pi(x) = \frac{\delta L}{\delta \dot z(x)} = \frac{\partial{\cal L}}{\partial \dot z(x)}
+= \rho \dot z(x).
+\end{align}
+%
+ハミルトニアン$H$とハミルトニアン密度${\cal H}$は、
+\begin{align}
+H &= \int_0^L dx (\pi \dot z) - L = \int_0^L dx {\cal H}, \\
+{\cal H} &= \frac{1}{2\rho} \pi^2 + \frac{1}{2}\rho v^2 \left( \frac{\partial z}{\partial x}\right)^2
+\end{align}
+
+正準量子化しよう。
+$\hat z$と$\hat \pi$の交換関係はデルタ関数で与えられる。
+\begin{align}
+[\hat z(x), \hat \pi(y)] = i\delta(x-y)
+\end{align}
+ハミルトニアンは次のとおり。
+\begin{align}
+\hat H = \int_0^L dx \left[ \frac{1}{2\rho} \hat\pi^2 + \frac{1}{2} \rho v^2 \left( \frac{\partial\hat z}{\partial x} \right)^2 \right].
+\end{align}
+%
+ハイゼンベルク方程式は
+\begin{align}
+\dot{\hat z} &= i [\hat H, \hat z] = \frac{1}{\rho}\hat\pi, \\
+\dot{\hat\pi} &= i [\hat H, \hat \pi] = -\rho v^2 \frac{\partial}{\partial x^2} \hat z.
+\end{align}
+$\hat\pi$を消去すると、
+\begin{align}
+\ddot {\hat z}(x,t) = -v^2 \frac{\partial^2}{\partial x^2} {\hat z}(x,t).
+\end{align}
+%
+一般的な解は、
+\begin{align}
+\hat z(t,x) = \sum_{k=-\infty}^\infty \hat\alpha_k \exp\left( -i\omega_k t + \frac{2\pi ik x}{L} \right) + h.c.
+\end{align}
+また、
+\begin{align}
+\hat \pi(t,x) = \rho \dot{\hat z}(t,x)= -i \rho \sum_{k=-\infty}^\infty \omega_k \hat\alpha_k \exp\left( -i\omega_k t + \frac{2\pi ik x}{L} \right) + h.c.
+\end{align}
+$\hat\alpha_k$のみたすべき性質をみるために、$[\hat z(t,x), \hat \pi(t,y)] = i\delta(x-y)$をフーリエ変換してみよう。
+\begin{align}
+\int_0^L dx \int_0^L dy e^{-2\pi i k x/L} e^{2\pi i k' y/L} [\hat z(t,x), \hat \pi(t,y)] =
+\int_0^L dx \int_0^L dy e^{-2\pi i k x/L} e^{2\pi i k' y/L} i\delta(x-y)
+\label{eq:commutator FT 1Dstring}
+\end{align}
+両辺はそれぞれ
+\begin{align}
+式(\ref{eq:commutator FT 1Dstring})の左辺 &= -i\rho L^2[ \hat\alpha_k e^{-i\omega_k t} + \hat\alpha_{-k}^\dagger e^{i\omega_{-k} t},  \omega_{k'} \hat\alpha_{k'} e^{-i\omega_{k'} t} - \omega_{-k'} \hat\alpha_{-k'}^\dagger e^{i\omega_{-k'} t} ], \\
+式(\ref{eq:commutator FT 1Dstring})の右辺 &= iL \delta_{k,k'}
+\end{align}
+と評価される。式(\ref{eq:commutator FT 1Dstring})は$t$に依らず満たされるので、次の交換関係が得られる。
+\begin{align}
+[\hat\alpha_k, \hat\alpha_{k'}^\dagger] &= \frac{\delta_{k,k'}}{2\omega_k \rho L}, \\
+[\hat\alpha_k, \hat\alpha_{k'}] = [\hat\alpha_k^\dagger, \hat\alpha_{k'}^\dagger] &= 0.
+\end{align}
+$\hat a_k \equiv \sqrt{2\omega_k \rho L} \hat\alpha_k$を定義すると、
+\begin{align}
+[\hat a_k, \hat a_{k'}^\dagger] &= \delta_{kk'}, \\
+[\hat a_k, \hat a_{k'}] = [\hat a_k^\dagger, \hat a_{k'}^\dagger] &= 0.
+\end{align}
+$\hat z$と$\hat \pi$を$\hat a$と$\hat a^\dagger$で書ける。
+\begin{align}
+\hat z &= \sum_j \left( \frac{1}{\sqrt{2\omega_j \rho L}} \hat a_k \exp\left( \frac{2\pi ijx}{L} \right) + \frac{1}{\sqrt{2\omega_j \rho L}} \hat a_k^\dagger \exp\left( -\frac{2\pi ijx}{L} \right) \right), \label{eq:z a adagger}\\
+\hat \pi &= \sum_j \left( i \sqrt{ \frac{\rho \omega_j}{2L} } \hat a_k \exp\left( \frac{2\pi ijx}{L} \right) - i \sqrt{ \frac{\rho \omega_j}{2L} } \hat a_k^\dagger \exp\left( -\frac{2\pi ijx}{L} \right) \right). \label{eq:pi a adagger}
+\end{align}
+
+\subsubsection{$L \to \infty$極限}
+$L$を無限大にする極限をとってみよう。この極限では、運動量固有値が連続的になるので、
+\begin{align}
+\sum_j \to \frac{L}{2\pi} \int dk
+\end{align}
+のような置き換えができる。
+%
+生成消滅演算子の交換関係もデルタ関数で書けるようになる。
+\begin{align}
+[\sqrt{L} \hat a_j, \sqrt{L} \hat a_{j'} ] = L \delta_{jj'} \to (2\pi) \delta(k-k').
+\end{align}
+%
+式(\ref{eq:z a adagger}, \ref{eq:z a adagger})を以下のように書き換えてみる。
+\begin{align}
+\hat z &= \frac{1}{\sqrt\rho} \frac{1}{L} \sum_k \left( \frac{1}{\sqrt{2\omega_k}} \sqrt{L} \hat a_k \exp\left( \frac{2\pi ikx}{L} \right) + \frac{1}{\sqrt{2\omega_k L}} \sqrt{L} \hat a_k^\dagger \exp\left( -\frac{2\pi ikx}{L} \right) \right), \\
+\hat \pi &= \sqrt{\rho} \frac{1}{L} \sum_k \left( i \sqrt{ \frac{\omega_k}{2} } \sqrt{L} \hat a_k \exp\left( \frac{2\pi ikx}{L} \right) - i \sqrt{ \frac{\omega_k}{2} } \sqrt{L} \hat a_k^\dagger \exp\left( -\frac{2\pi ikx}{L} \right) \right).
+\end{align}
+%
+$L$無限大極限の$\hat z$と$\hat \pi$は次のように書けるのが分かる。
+\begin{align}
+\hat z &= \frac{1}{\sqrt\rho} \int \frac{dk}{2\pi} \left( \frac{1}{\sqrt{2\omega_k}} \hat a_k \exp\left( ikx \right) + \frac{1}{\sqrt{2\omega_k}} \hat a_k^\dagger \exp\left( -ikx \right) \right), \\
+\hat \pi &= \sqrt{\rho} \int \frac{dk}{2\pi} \left( i \sqrt{ \frac{\omega_k}{2} } \hat a_k \exp\left( ikx \right) - i \sqrt{ \frac{\omega_k}{2} } \hat a_k^\dagger \exp\left( -ikx \right) \right), \\
+[\hat a_k, \hat a_{k'}^\dagger] &= (2\pi) \delta(k-k').
+\end{align}
+
+
+\subsection{有効理論という考え方}
+上でみた、一次元古典スカラー場の理論は、
+連成ばねの低エネルギー有効理論とみなすこともできる。有効理論という考え方\underline{\textbf{めっちゃ大事}}。
+
+物理は自然科学なので実験でチェックされるもの。つまり、次のような性質を持っている。
+\begin{itemize}
+\item 全ての実験にはエラーバーがついている。　→　ある理論が実験結果をうまく説明しているとしても、理論の予言値と実験の観測値のずれの大きさがエラーバーより小さいだけかもしれない。
+\item これまでに人類が行った実験の数は有限。　→　ある理論が今まで行われた実験結果をうまく説明しているとしても、人類が今までやってない実験で、理論と実験のずれが見つかるかもしれない。
+\end{itemize}
+%
+つまり、物理の理論は「有効理論」だと思うべき。その意味は、
+\begin{itemize}
+\item （少なくとも）一定の条件を満たすときに、現実世界を十分な精度で近似するもの。
+\end{itemize}
+ということで、理論が有効な範囲を意識することはめっちゃ大事。
+具体例はこんな感じ。
+\begin{itemize}
+\item ニュートン力学：$v\ll c$かつマクロスコピック（量子論的効果無視できる）なら良い近似
+\item 非相対論的量子力学：$v\ll c$なら良い近似
+\item 特殊相対論：マクロスコピック（量子論的効果無視できる）なら良い近似
+\end{itemize}
+%
+ある理論から適用範囲の狭い有効理論は演繹的に導出できるが、適用範囲の広い理論に行くには論理的飛躍が必要。
+\begin{itemize}
+\item 例：古典力学から量子力学にいくには、いきなりc数を演算子にするなどの論理的飛躍が必要だった。
+\item 例2：量子力学から場の量子論にいくにも論理的飛躍が必要。
+\item 例3：超対称性粒子まだ見つかってないけど、いつかは見つかるかも？？
+\end{itemize}
+
+
 
 
 
