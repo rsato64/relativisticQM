@@ -1583,9 +1583,9 @@ i\sigma^i & 0
 \left[ \frac{i}{4}\omega_{\alpha\beta} \sigma^{\alpha\beta}, \gamma^\mu \right] = 
 \omega^\mu_{~\nu} \gamma^\nu
 \end{align}
-それはいいけど、ちゃんと有限のローレンツ変換についても式(\ref{eq:dirac matrix lorentz inv})ってみたされるの？
+無限小でない有限のローレンツ変換についても式(\ref{eq:dirac matrix lorentz inv})ってみたされるのだろうか？
 
-ローレンツ変換に続けて微小ローレンツ変換をやると、ちょびっと違うローレンツ変換ができる。
+ローレンツ変換に続けて微小ローレンツ変換をやると、ちょっとだけ違うローレンツ変換ができる。
 \begin{align}
 {\Lambda'}^\mu_{~\nu} = (\delta^\mu_{~\lambda} + \omega^\mu_{~\lambda} ) \Lambda^\lambda_{~\nu} + {\cal O}(\omega^2)
 \end{align}
@@ -1622,12 +1622,13 @@ U(\Lambda(\tau)) &= \exp\left( -\frac{i\tau}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} 
 とかける。
 
 $\tau$の値は$\Omega_{\mu\nu}$に吸収して新しい$\Omega_{\mu\nu}$と思いなおすことができる。
-ということで、一般に、有限ローレンツ変換は適当な反対称テンソル$\Omega_{\mu\nu}$を用いて、
+ということで、以下のようにして、有限ローレンツ変換を適当な反対称テンソル$\Omega_{\mu\nu}$を用いて、
 \begin{align}
 \Lambda^\mu_{~\nu} &= [\exp(\Omega)]^\mu_{~\nu} = \delta^\mu_\nu + \Omega^\mu_{~\nu} + \frac{1}{2!}\Omega^\mu_{~\alpha}\Omega^\alpha_{~\nu} + \cdots, \\
 U(\Lambda) &= \exp\left( -\frac{i}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} \right).
 \end{align}
-と書ける。
+と書くことができる。\footnote{
+このようにして書くことができるのは、恒等変換$U(\Lambda) = I_4$（すなわち$\Lambda^\mu_{~\nu} = \delta^\mu_{~\nu}$の場合）と連続的につながっているローレンツ変換の場合。そのような変換は、$\Lambda^0_{~0} \geq 1$、$\det \Lambda = 1$をみたし、本義ローレンツ変換などと呼ばれることもある。より一般の$g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta}$をみたすローレンツ変換は、本義ローレンツ変換、パリティ変換（$\Lambda^\mu_{~\nu} = {\rm diag}(1,-1,-1,-1)$）、時間反転変換（$\Lambda^\mu_{~\nu} = {\rm diag}(-1,1,1,1)$）の適当な組み合わせで書くことができる。}
 これが、式(\ref{eq:dirac matrix lorentz inv})をみたすことを確認するには、この公式も便利。\footnote{
 いわゆるCampbell-Baker-Hausdorfの公式。
 %\url{https://en.wikipedia.org/wiki/Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula#An_important_lemma_and_its_application_to_a_special_case_of_the_Baker%E2%80%93Campbell%E2%80%93Hausdorff_formula}
@@ -1637,7 +1638,7 @@ U(\Lambda) &= \exp\left( -\frac{i}{4} \Omega_{\mu\nu} \sigma^{\mu\nu} \right).
 Y + [X,Y] + \frac{1}{2!} [X,[X,Y]] + \frac{1}{3!} [X,[X,[X,Y]]] + \cdots &= e^{-X} Y e^X
 \end{align}
 % 2022.5.9ここまで
-
+%
 ためしに、$z$軸まわりの回転と$z$軸方向のローレンツブーストについて、$U(\Lambda)$を計算してみよう。
 
 
@@ -2741,27 +2742,43 @@ $\psi_R$はヘリシティ$+1/2$の粒子を表す。
 
 
 
-\subsection{カイラリティ、ヘリシティ、パリティ}
-カイラリティはローレンツ群の表現を区別するのに使う。
+\subsection{カイラリティとヘリシティのまとめ}
+ローレンツ群の既約表現として2成分のワイルスピノルがあることを見てきた。ワイルスピノルには次の2種類がある。
 \begin{itemize}
 \item $(1/2,0)$は左手型(left-handed)
 \item $(0,1/2)$は右手型(right-handed)
 \end{itemize}
+この左手型か右手型かという性質のことを\emph{カイラリティ}(chirality)と呼ぶ。
 
-
-質量0の粒子に対しては、ヘリシティとカイラリティは1対1。
+また、ヘリシティは粒子の運動量とスピンから定義される量である。
+すでに見たように、質量0の粒子に対しては、ヘリシティとカイラリティは次のような一対一対応がある。
 \begin{itemize}
 \item 質量0ヘリシティ$-1/2$：左手型(left-handed)
 \item 質量0ヘリシティ$+1/2$：右手型(right-handed)
 \end{itemize}
+ヘリシティとカイラリティは異なる概念であるので混同しないように注意してほしい。
+質量が0でない場合は、ヘリシティとカイラリティの一対一対応は崩れている。
 
-
-ローレンツ変換の性質から、
+\subsection{パリティ}
+ローレンツ変換の定義は$g_{\mu\nu} \Lambda^\mu_{~\alpha} \Lambda^\nu_{~\beta} = g_{\alpha\beta}$であったが、
+この中には連続的な変換として書けないものが存在する。そのうちの一つがパリティ変換である。
+\begin{align}
+P^\mu_{~\nu} = \left(\begin{array}{cccc}
+1 &&& \\
+& -1 && \\
+&& -1 & \\
+&&& -1
+\end{array}\right)
+\end{align}
+この操作により、空間が鏡に映したように反転する。
+連続的に書けるローレンツ変換は一般にはパリティ変換と可換ではない。
+生成子の行列の形をつかうと、
 \begin{align}
 P^{-1} J_i P = J_i, \qquad
 P^{-1} K_i P = -K_i.
 \end{align}
-%
+が示せる。
+
 これを使うと、パリティで$A$スピンと$B$スピンが入れ替わることが分かる。
 \begin{align}
 P^{-1} A_i P = B_i, \qquad
@@ -2769,12 +2786,11 @@ P^{-1} B_i P = A_i.
 \end{align}
 %
 つまり、パリティ変換で$(1/2,0)$と$(0,1/2)$は入れ替わる！
-つまり、パリティ変換でleft-handed Weyl spinorとright-handed Weyl spinorは入れ替わる！
-
-
-\subsubsection{自然界とパリティ対称性}
-電磁気学の法則も重力の法則もパリティ変換($\vec x \to - \vec x$)に対して形を変えない。すなわち、パリティ対称性がある。
-しかし、素粒子物理の知見によるとこの自然界の物理法則はパリティ対称性を破っている！具体的には、原子核のベータ崩壊を引き起こす弱い相互作用(weak interaction)は左手型のクォークやレプトンと相互作用するが、右手型のクォークやレプトンとは相互作用しない。
+つまり、パリティ変換でleft-handed Weyl spinorとright-handed Weyl spinorは入れ替わる！\footnote{
+電磁気学の法則も重力の法則もパリティ変換($\vec x \to - \vec x$)に対して形を変えない。すなわち、電磁気学と重力の法則にはパリティ対称性がある。
+しかし、素粒子物理の知見によるとこの自然界の物理法則はパリティ対称性を破っている！具体的には、原子核のベータ崩壊を引き起こす弱い相互作用(weak interaction)は左手型のクォークやレプトンと相互作用するが、右手型のクォークやレプトンとは相互作用しない。（より正確に言うと、$W$ボゾンとは相互作用しない。$Z$ボゾンとは右手型クォークおよびレプトンも相互作用するが、やはり左手型と$Z$ボゾンとの相互作用の強さと一致はしていない。）
+弱い相互作用がパリティ対称性を破り得る可能性は1956年に李政道(Tsung-Dao Lee)と楊振寧(Chen-Ning Yang)により指摘され、呉健雄(Chien-Shiung Wu)により実験的に確かめられた。この業績により李政道と楊振寧は1957年にノーベル賞を受賞している。\url{https://en.wikipedia.org/wiki/Wu_experiment}なども参照のこと。
+}
 
 
 \subsection{ローレンツ群のまとめ}
