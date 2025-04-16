@@ -156,6 +156,7 @@ y' = y, \qquad
 z' = \gamma z - \gamma\beta t.
 \end{align}
 という関係で結ばれる。これが\textbf{ローレンツ変換}である。（光速度$c$を1ととる単位系をとっていることに注意！）
+付録\ref{sec:lorentztransf}も参照のこと。
 ただし、$\gamma$と$\beta$は、相対速度$v$と光速度$c$を用いて、
 \begin{align}
 \beta \equiv v, \qquad
@@ -3873,6 +3874,150 @@ P = \langle i | T \exp\left( i\int_0^T dt' {\cal H}_{int.}(t') \right) \left( \f
 
 
 \appendix
+\section{ローレンツ変換の簡単なまとめ}\label{sec:lorentztransf}
+自然単位系($c=1$)を採用して、座標系$O$系から$(t,x,y,z)$から$O'$系$(t',x',y',z')$への変換を議論しよう。
+時間と空間の一様性からこの変換は一次変換のはずだ。（でなければ、時間もしくは空間の等しい間隔で並んだ点が返還後に等間隔にならない）
+時刻$t=0$における$O$系の原点と時刻$t'=0$における$O'$系の原点が一致しているとすると、
+一般の一次変換は次のように書ける。
+\begin{align}
+\left(\begin{array}{c}
+t'\\
+x'\\
+y'\\
+z'
+\end{array}\right)
+=
+\left(\begin{array}{cccc}
+\Lambda^0_{~0} & \Lambda^0_{~1} & \Lambda^0_{~2} & \Lambda^0_{~3} \\
+\Lambda^1_{~0} & \Lambda^1_{~1} & \Lambda^1_{~2} & \Lambda^1_{~3} \\
+\Lambda^2_{~0} & \Lambda^2_{~1} & \Lambda^2_{~2} & \Lambda^2_{~3} \\
+\Lambda^3_{~0} & \Lambda^3_{~1} & \Lambda^3_{~2} & \Lambda^3_{~3}
+\end{array}\right)
+%
+\left(\begin{array}{c}
+t\\
+x\\
+y\\
+z
+\end{array}\right)
+\end{align}
+%
+$O'$系は$O$系に対して$x$軸に沿って速度$\beta$で等速運動しているとし、$x$軸と$x'$軸は平行であるとしよう。
+$yz$軸および$y'z'$軸は相対速度と直交する方向であるから、$yz$平面（または$y'z'$平面）内で違う方向にとりなおしても同じ変換が得られるはずだ。
+このことから$yz$軸と$y'z'$軸の関係を適切にとれば（つまりお互いに平行になるようにとれば）以下のように簡単に書くことができる。
+\begin{align}
+\left(\begin{array}{c}
+t'\\
+x'\\
+y'\\
+z'
+\end{array}\right)
+=
+\left(\begin{array}{cccc}
+\Lambda^0_{~0} & \Lambda^0_{~1} & 0 & 0 \\
+\Lambda^1_{~0} & \Lambda^1_{~1} & 0 & 0 \\
+0 & 0 & \Lambda^2_{~2} & 0 \\
+0 & 0 & 0 & \Lambda^2_{~2}
+\end{array}\right)
+%
+\left(\begin{array}{c}
+t\\
+x\\
+y\\
+z
+\end{array}\right)
+\end{align}
+
+ここまでは$O$系から$O'$系への変換を考えてきたが、逆変換である$O'$系から$O$系への座標変換を考えてみよう。
+相対速度の大きさが同じで向きが逆向きの変換を考えればよい。この変換はたとえば$x$軸を反転させる操作で得ることができる。（$xy$平面で180度回転させてもよい）
+よって、$O'$系から$O$系への座標変換は次のようになるはずだ。
+\begin{align}
+\left(\begin{array}{c}
+t\\
+x\\
+y\\
+z
+\end{array}\right)
+=
+\left(\begin{array}{cccc}
+\Lambda^0_{~0} & -\Lambda^0_{~1} & 0 & 0 \\
+-\Lambda^1_{~0} & \Lambda^1_{~1} & 0 & 0 \\
+0 & 0 & \Lambda^2_{~2} & 0 \\
+0 & 0 & 0 & \Lambda^2_{~2}
+\end{array}\right)
+%
+\left(\begin{array}{c}
+t'\\
+x'\\
+y'\\
+z'
+\end{array}\right)
+\end{align}
+ここから以下の関係式が導ける。
+\begin{align}
+\Lambda^0_{~0} \Lambda^0_{~0} - \Lambda^0_{~1} \Lambda^1_{~0} = 1, \\
+\Lambda^0_{~0} \Lambda^0_{~1} - \Lambda^0_{~1} \Lambda^1_{~1} = 0, \\
+-\Lambda^1_{~0} \Lambda^0_{~0} + \Lambda^1_{~1} \Lambda^1_{~0} = 0, \\
+-\Lambda^1_{~0} \Lambda^0_{~1} + \Lambda^1_{~1} \Lambda^1_{~1} = 1, \\
+(\Lambda^2_{~2})^2 = 1
+\end{align}
+$yz$平面の反転や回転を含まないとすると$\Lambda^2_{~2} \geq 0$なので、整理すると以下を得る。
+\begin{align}
+\Lambda^0_{~0} = \Lambda^1_{~1}, \qquad
+\Lambda^2_{~2} = 1
+\end{align}
+
+$x$軸正方向に発射された光の軌跡は$t=x$である。
+O'系でみても光の速度が同じにみえる($t'=x'$)ことから、
+\begin{align}
+\Lambda^0_{~0} + \Lambda^0_{~1} = \Lambda^1_{~0} + \Lambda^1_{~1}
+\end{align}
+であり、
+\begin{align}
+\Lambda^0_{~1} = \Lambda^1_{~0}
+\end{align}
+が導ける。
+また、$y$軸正方向に発射された光の軌跡は$t=y$である。
+O'系でみても光の速度が同じに見える($t' = \sqrt{{x}'^2 +{y'}^2}$)ことから、
+\begin{align}
+\Lambda^0_{~0} =  \sqrt{ (\Lambda^1_{~0})^2 + (\Lambda^2_{~2})^2 } = \sqrt{ (\Lambda^1_{~0})^2 + 1 }
+\end{align}
+
+まとめると、
+\begin{align}
+\Lambda^1_{~0} = \Lambda^0_{~0} \beta
+\end{align}
+と書くと、
+\begin{align}
+\Lambda^0_{~0} = \frac{1}{\sqrt{1-\beta^2}} \equiv \gamma.
+\end{align}
+が得られる。まとめると、
+\begin{align}
+\left(\begin{array}{c}
+t'\\
+x'\\
+y'\\
+z'
+\end{array}\right)
+=
+\left(\begin{array}{cccc}
+\gamma & -\gamma\beta & 0 & 0 \\
+-\gamma\beta & \gamma & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{array}\right)
+%
+\left(\begin{array}{c}
+t\\
+x\\
+y\\
+z
+\end{array}\right)
+\end{align}
+
+
+
+
 \section{$SU(2)$リー代数について}
 有限次元の$n\times n$行列、$A_1$、$A_2$、$A_3$が交換関係
 \begin{align}
