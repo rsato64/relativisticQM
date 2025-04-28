@@ -900,9 +900,9 @@ $n\times n$の行列$\beta$, $\alpha_x$, $\alpha_y$, $\alpha_z$を使って
 \end{align}
 ${\rm tr} \alpha_x = 0$, ${\rm tr} \alpha_y = 0$, ${\rm tr} \alpha_z = 0$も同様に示せる。\footnote{時間のある人は示してみてください}
 $\beta^2 = I$かつ${\rm tr}\beta = 0$であることから、
-$\beta$は固有値$+1$が$n$個、$-1$が$n$個の、$2n \times 2n$行列であることが分かる。
-$n=1$($2\times 2$行列)では、式(\ref{eq:asq bsq})から式(\ref{eq:az b})の全てを満たすような$\beta,~\alpha_x,~\alpha_y,~\alpha_z$の組を上手く見つけられない。\footnote{時間のある人は示してみてください}
-ということで、$n=2$($4\times 4$行列)を考えてみよう。$\beta$を対角化して次の形にとる基底で考えてみる。
+$\beta$の固有値は、$+1$が$n/2$個、$-1$が$n/2$個である。さらに、$n$は偶数でなければならない。
+$n=2$では、式(\ref{eq:asq bsq})から式(\ref{eq:az b})の全てを満たすような$\beta,~\alpha_x,~\alpha_y,~\alpha_z$の組を上手く見つけられない。\footnote{時間のある人は示してみてください}
+ということで、$n=4$を考えてみよう。$\beta$を対角化して次の形にとる基底で考えてみる。
 \begin{align}
 \beta = \left(\begin{array}{cccc}
 1 &&& \\
@@ -1135,11 +1135,11 @@ I_2 & 0 \\
 \begin{align}
 \gamma^0 \gamma^0 = \beta^2 &= I_4, \\
 \gamma^0 \gamma^i + \gamma^i \gamma^0 &= \beta^2 \alpha_i + \beta \alpha_i \beta = \alpha_i - \alpha_i = 0,\\
-\gamma^i \gamma^j + \gamma^j \gamma^i &= \beta \alpha_i \beta \alpha_j + \beta \alpha_j \beta \alpha_i = -\alpha_i \alpha_j - \alpha_j \alpha_i = - 2\delta_{ij}.
+\gamma^i \gamma^j + \gamma^j \gamma^i &= \beta \alpha_i \beta \alpha_j + \beta \alpha_j \beta \alpha_i = -\alpha_i \alpha_j - \alpha_j \alpha_i = - 2\delta_{ij} I_4.
 \end{align}
 この関係式は、メトリックを使ってまとめることができる。
 \begin{align}
-\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2g^{\mu\nu}. \label{eq:dirac matrix anticommut}
+\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2g^{\mu\nu} I_4. \label{eq:dirac matrix anticommut}
 \end{align}
 簡潔に書けるようになっていい感じ。
 
@@ -3901,7 +3901,8 @@ y\\
 z
 \end{array}\right)
 \end{align}
-%
+
+\subsection{導出その1}
 $O'$系は$O$系に対して$x$軸に沿って速度$\beta$で等速運動しているとし、$x$軸と$x'$軸は平行であるとしよう。
 $yz$軸および$y'z'$軸は相対速度と直交する方向であるから、$yz$平面（または$y'z'$平面）内で違う方向にとりなおしても同じ変換が得られるはずだ。
 このことから$yz$軸と$y'z'$軸の関係を適切にとれば（つまりお互いに平行になるようにとれば）以下のように簡単に書くことができる。
@@ -4014,6 +4015,130 @@ y\\
 z
 \end{array}\right)
 \end{align}
+
+
+\subsection{導出その2}
+$O$系から$O'$系への座標変換を以下のように書く。
+\begin{align}
+\left(\begin{array}{c}
+t' \\
+\vec x'
+\end{array}\right)
+=
+\left(\begin{array}{cc}
+A & \vec B^T \\
+\vec C & D
+\end{array}\right)
+%
+\left(\begin{array}{c}
+t \\
+\vec x
+\end{array}\right)
+\end{align}
+%
+$O$系で時刻$t=0$に原点から方向$\vec n$へ発射された光の描く軌跡は以下のように書ける。
+\begin{align}
+\vec x = t\vec n
+\end{align}
+ここで$|\vec n|=1$である。
+この軌跡は$O'$系で次のようにみえる。
+\begin{align}
+%t' = (A + \vec B \cdot \vec n)t, \qquad
+%\vec x' = (\vec C + D \vec n)t
+\vec x' = \frac{\vec C + D \vec n}{A + \vec B \cdot \vec n} t'
+\end{align}
+%
+光の速度が$O'$系でも同じであるとすると、
+\begin{align}
+(A + \vec B \cdot \vec n)^2 = | \vec C + D \vec n |^2 \label{eq:lorenz speedoflight}
+\end{align}
+が満たされている。
+$|\vec n|=1$である任意の$\vec n$に対し、上の式が満たされるような$A,~\vec B,~\vec C,~D$を探す。
+
+ラグランジュ未定乗数$\lambda$を用いて、以下の$X$を定義してみる。
+\begin{align}
+X \equiv (A + \vec B \cdot \vec n)^2 - | \vec C + D \vec n |^2 + \lambda (\vec n^2 - 1)
+\end{align}
+$X$の値は$\vec n$に依らないことから、
+\begin{align}
+2 A \vec B + 2 \vec B (\vec B \cdot \vec n) - 2 D^T \vec C - 2 D^T D \vec n + 2 \lambda \vec n = 0.
+\end{align}
+を得る。上の式があらゆる方向の$\vec n$について満たされなければならないので、
+\begin{align}
+A \vec B &= D^T \vec C, \label{eq:lorentz ab}\\ 
+D^T D &= \lambda I_3 + \vec B \vec B^T \label{eq:lorentz d}
+\end{align}
+を満たす必要がある。式(\ref{eq:lorentz d})を満たす$D$は一般に以下のように書ける。
+\begin{align}
+D = O \left(d P_b + \sqrt{d^2 - \vec B^2} P_\perp \right), \qquad
+\lambda = d^2 - \vec B^2
+\end{align}
+$O$は$O^T O = I_3$を満たす。$d\geq 0$として一般性を失わない。$P_b$および$P_\perp$は以下のように定義した。
+\begin{align}
+P_b \equiv \frac{\vec B \vec B^T}{\vec B^2}, \qquad
+P_\perp \equiv I_3 - P_b
+\end{align}
+式(\ref{eq:lorentz ab})を満たす$\vec C$は次のように書ける。
+\begin{align}
+\vec C = \frac{A}{d} O \vec B
+\end{align}
+%
+式(\ref{eq:lorenz speedoflight})は任意の単位ベクトル$\vec n$について満たされるが、試しに$\vec n = \vec B/|\vec B|$としてみよう。
+すると、以下の式を得る。
+\begin{align}
+(A+b)^2 = \left( \frac{Ab}{d} + d \right)^2
+\end{align}
+これを$d$について解くと、
+\begin{align}
+d = \pm A, \pm b
+\end{align}
+$d = \pm b$の時は$\lambda = 0$になってしまい変換が可逆でない。
+変換の可逆性を要求すると、
+\begin{align}
+d = \pm A
+\end{align}
+%
+まとめると一般の変換行列は次のように書ける。
+\begin{align}
+\left(\begin{array}{cc}
+\pm 1 & \vec 0^T \\
+\vec 0 & O
+\end{array}\right)
+%
+\left(\begin{array}{cc}
+A & \vec B^T \\
+\vec B & A P_b + \sqrt{A^2-\vec B^2} P_\perp
+\end{array}\right)
+\end{align}
+
+左上が$+1$で右下が$O=I_3$の場合に注目する。
+$\vec x = 0$が描く軌跡は
+\begin{align}
+\vec x' = \frac{t}{A} \vec B
+\end{align}
+である。よって$O'$系の速度を$\vec \beta$とおくと、変換行列は
+\begin{align}
+A\left(\begin{array}{cc}
+1 & -\vec \beta^T \\
+-\vec\beta & P_b + \sqrt{1^2-\vec \beta^2} P_\perp
+\end{array}\right)
+\end{align}
+と書ける。速度が逆向きで$-\vec\beta$の場合は座標を回転もしくは反転されば得られる。
+\begin{align}
+A\left(\begin{array}{cc}
+1 & \vec \beta^T \\
+\vec\beta & P_b + \sqrt{1^2-\vec \beta^2} P_\perp
+\end{array}\right)
+\end{align}
+これが逆変換になっていることを要求すると、
+\begin{align}
+A^2 (1-\beta^2) = 1
+\end{align}
+$A \geq 0$を要求して、
+\begin{align}
+A = \gamma \equiv \frac{1}{\sqrt{1-\beta^2}}
+\end{align}
+を得る。
 
 
 
