@@ -3228,7 +3228,7 @@ SternがPauliにディスられたエピソードが『スピンはめぐる』�
 \item ラグランジアン$L(\{q_i \}, \{\dot q_i\})$を書く。
 \item 共役運動量$p_i \equiv \partial L / \partial \dot q_i$を定義し、ハミルトニアン$H(\{p_i\}, \{q_i\}) = \sum_i p_i \dot q_i - L$を導く。
 \item 同時刻交換関係$[\hat q_i(t), \hat p(t)] = i\delta_{ij}$を満たす演算子$\hat q$、$\hat p$を導入し、ハミルトニアン$\hat H = H(\hat p, \hat q)$を得る。
-\item 演算子の時間発展をハミルトン方程式$\dot{\hat q}(t) = i[\hat H, \hat q]$のより与える。
+\item 演算子の時間発展をハイゼンベルク方程式$\dot{\hat q}(t) = i[\hat H, \hat q]$により与える。
 \end{enumerate}
 場の量子論でもやることは同じ。以下、同様の手順に従い、自由スカラー場の量子論を構成していく。
 
@@ -3315,8 +3315,8 @@ H &= \int d^3x {\cal H} \label{eq:Hamiltonian free scalar}
 が導出できる。
 ハミルトニアン（\ref{eq:Hamiltonian free scalar}）を用いて、ハミルトン方程式
 \begin{align}
-\dot\phi(\vec x,t) &= \frac{\delta H}{\delta\dot\pi(\vec x,t)} = \pi(\vec x ,t), \\
-\dot\pi(\vec x,t) &= -\frac{\delta H}{\delta\dot\phi(\vec x,t)} = \nabla^2 \phi(\vec x,t) - m^2 \phi(\vec x,t).
+\dot\phi(\vec x,t) &= \frac{\delta H}{\delta\pi(\vec x,t)} = \pi(\vec x ,t), \\
+\dot\pi(\vec x,t) &= -\frac{\delta H}{\delta\phi(\vec x,t)} = \nabla^2 \phi(\vec x,t) - m^2 \phi(\vec x,t).
 \end{align}
 をたてると、クラインゴルドン方程式と同等のものになることが分かる。\footnote{時間のある人は示してみてください}
 
