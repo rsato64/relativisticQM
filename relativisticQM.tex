@@ -2818,7 +2818,7 @@ P^{-1} B_i P = A_i.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{電磁場中のディラック(Dirac)方程式}
+\section{電磁場中のディラック(Dirac)方程式}\label{sec:dirac eq with Amu}
 電磁場中の電子のふるまいについて、相対論的効果を取り入れて議論できるのが、ディラック方程式の醍醐味のひとつ。何が起きるかみてみよう！
 
 \subsection{ゲージ対称性について復習}
@@ -3732,19 +3732,36 @@ $\Phi$は電荷$+1$を持つ場合、ローレンツ不変性を守るために$
 
 % 2022.8.1ここまで
 
-\subsection{相互作用のある場の量子論にむけて}
-さて、ここまで相互作用のないスカラー場の量子化について議論してきた。しかし粒子の散乱など、なんらかの物理的な過程を記述するには相互作用が必要である。ここでは、相互作用のある場の量子論を考えると、どんなことがおきるか概観する。詳細は場の量子論の教科書を参照していただきたい。
+\section{相互作用のある場の量子論にむけて}
+さて、ここまで相互作用のないスカラー場の量子化について議論してきたが、当然、現実世界の物理現象を記述するために十分な道具が手に入ったとは言えない。
+粒子の散乱など、なんらかの物理的な過程を記述するには相互作用が必要である。
+この章では、相互作用のある場の量子論について概観する。詳細は場の量子論の教科書を参照していただきたい。
 
-相互作用を入れた場の量子論では、計算の途中で発散する項があらわれる。もちろん、物理的に意味のある量は有限の値を持つはずなので、発散する量をなんとか有限な量にする処理（正則化とくりこみ）が必要になる。朝永振一郎が、場の量子論が出来ていく課程で発散の処理に悩まされる様子を日記に記している。
+\subsection{摂動論：量子電磁力学と電子磁気双極子モーメント}
+相互作用を持つ場の理論も、まず、ラグランジアンを与えることから議論を始めることができる。
+この種の理論で、どの教科書でも扱われるのが、量子電磁力学（QED, quantum electrodynamics）だろう。
+これは、光子と電子を含む理論であり、電磁気学を場の量子論の言葉で書き直したものだということができる。
+また第\ref{sec:dirac eq with Amu}章では、外場として与えた電磁場$A_\mu$中の電子のディラック方程式を議論したが、
+この$A_\mu$も量子論のやり方で扱うようにした（さらに電子を表す$\psi$も波動関数ではなく量子場に置き換わった）理論と見ることもできるだろう。
+そのラグランジアンは光子の場$A_\mu$と電子の場$\psi$を用いて、
+\begin{align}
+	{\cal L} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \bar\psi ( i\gamma^\mu \partial_\mu + e \gamma^\mu A_\mu - m )\psi
+\end{align}
+である。
+この$e$が電子と光子の相互作用、つまり電磁相互作用の大きさを決める。$e^2 / 4\pi \simeq 1/137$であり、おおよそ$e\simeq 0.3$である。
+
+相互作用のある理論は基本的に解析的に解くことはできない。量子電磁力学では$e$が比較的小さいので、物理量を$e$の級数展開から計算する摂動論の計算が有効だ。
+このような計算では、$e$の次数が一番小さい項から計算し、$e$の次数が高い項を順に計算していくことになる。
+さて、このような計算をしていくと、困ったことが起きる。$e$の次数の高い項を計算しようとすると、途端に発散がおきてしまうのである。
+もちろん、物理的に意味のある量は有限の値を持つはずなので、発散する量をなんとか有限な量にする処理（正則化とくりこみ）が必要になる。朝永振一郎が、場の量子論が出来ていく課程で発散の処理に悩まされる様子を日記に記している。\footnote{のちに朝永はくりこみ理論とラムシフトの計算の業績により、1965年ノーベル物理学賞を、シュウィンガー、ファインマンとともに受賞する。\url{https://www-yukawa.phys.sci.osaka-u.ac.jp/topics/963}}
 \begin{quote}
-『計算すすめたら積分が発散した，おかしい．こういうことをやっているのだ．$U$〔中間子〕が直接に$e$〔電子〕と$\nu$〔中性微子〕にこわれずに，$U$は一度$p$〔陽子〕と$n$〔中性子〕を作り，それをさらに$e$と$\nu$にこわれると考えようというのだ．ところが中間状態の$p$，$n$の状態がやたらにたくさんあって，積分が発散してしまうのである．こういう種類の発散は今まで一度も出てきていない．自己エネルギー的の発散ならめずらしくないが，どうもおかしい．』（滞独日記（朝永振一郎）より一部抜粋（1938年12月14日の日記））
+『計算すすめたら積分が発散した、おかしい。こういうことをやっているのだ。$U$〔中間子〕が直接に$e$〔電子〕と$\nu$〔中性微子〕にこわれずに、$U$は一度$p$〔陽子〕と$n$〔中性子〕を作り、それをさらに$e$と$\nu$にこわれると考えようというのだ。ところが中間状態の$p$、$n$の状態がやたらにたくさんあって、積分が発散してしまうのである。こういう種類の発散は今まで一度も出てきていない。自己エネルギー的の発散ならめずらしくないが、どうもおかしい。ひるから散歩に行く。ヨハナ公園の池が半分凍って、あひるが、凝ってないところにおよいでいる。カラスがたくさんむれている。花だんが、モミの葉でしもよけしてある。公園をあるいているとニュートロン〔中性子〕だのニュートリノ〔中性微子〕だの、そんなものどうでもいいという気がしてきて困る。』（滞独日記（朝永振一郎）より一部抜粋（1938年12月14日の日記））
 \end{quote}
 
-
-
-\subsubsection*{電子磁気双極子モーメント}
-場の量子論の成功例として最も顕著なものの一つは電子の磁気双極子モーメントの計算だろう。
-量子電磁気学(quantum electrodynamics)を使うと、色んな量が微細構造定数$\alpha (\simeq 1/137)$のべき級数として計算できる。
+この、くりこみの処方を用いた場の量子論の計算は驚くべき成功を収めている。
+その例として最も顕著なものが、電子の磁気双極子モーメント$a_e$の計算だろう。
+量子電磁気学に摂動論を適用することで、$a_e$は微細構造定数$\alpha = e^2/4\pi$のべき級数として計算されている。
+2026年現在、$a_e$の値は、なんと$\alpha^5$の項まで計算されているのだ。
 \begin{align}
 a_e = \frac{g_e-2}{2} =
 c_1 \frac{\alpha}{\pi} +
@@ -3753,11 +3770,42 @@ c_3 \left(\frac{\alpha}{\pi}\right)^3 +
 c_4 \left(\frac{\alpha}{\pi}\right)^4 +  
 c_5 \left(\frac{\alpha}{\pi}\right)^5 + {\cal O}((\alpha/\pi)^6)
 \end{align}
-https://doi.org/10.1103/PhysRev.73.416,
-Sommerfield/Petermann, 1957-1958],
-http://arxiv.org/abs/hep-ph/9602417,
-http://arxiv.org/abs/hep-ph/0507249,
-1205.5368
+%https://doi.org/10.1103/PhysRev.73.416,
+%Sommerfield/Petermann, 1957-1958],
+%http://arxiv.org/abs/hep-ph/9602417,
+%http://arxiv.org/abs/hep-ph/0507249,
+%1205.5368
+$c_1$はSchwinger\cite{Schwinger:1948iu}によって計算され、$c_1 = 1/2$という値が得られている。
+$c_2$\cite{Sommerfield:1957zz, Petermann:1957hs}と
+$c_3$\cite{Laporta:1996mq}は解析的な式が知られており、
+$c_4$\cite{Kinoshita:2005zr}と
+$c_5$\cite{Aoyama:2012wj}は数値的に計算されている。
+実験によって\cite{Fan:2022eto}
+\begin{align}
+	a_e = 1.001~159~652~181\cdots
+\end{align}
+という値が得られており、理論計算\cite{Parker:2018vye, Morel:2020dww}と$10^{-12}$程度の精度で一致している。
+
+
+\subsection{標準模型}
+2026年現在、素粒子実験で測定されている素粒子の性質は、標準模型と呼ばれる模型により矛盾なく説明できることが分かっている。
+標準模型は場の量子論に基づいた模型である。模型を構成している場は
+\begin{itemize}
+\item クォークとレプトンをあらわすフェルミオン場
+\item 光子、$W$ボゾン、$Z$ボゾン、グルーオンをあらわすゲージ場
+\item ヒッグスボゾンをあらわすヒッグス場
+\end{itemize}
+があり、その相互作用には
+\begin{itemize}
+\item ゲージ相互作用
+\item ヒッグス場とフェルミオン場との湯川相互作用
+\item ヒッグス場の自己相互作用
+\end{itemize}
+が存在する。標準模型は、$W$ボゾン、$Z$ボゾン、クォーク、レプトンの質量を自発的対称性の破れからもたらすヒッグス機構と、
+CP対称性の破れをもたらす小林益川機構を内包している。
+標準模型は19個のパラメータを持ついささか複雑な（美しくない？）模型ではあるものの、
+素粒子実験の結果をほぼ完璧に説明することができ、2026年現在に至るまで大きな綻びは見せていない。
+その一方で、標準模型がこの世の全てを記述できるとは思われておらず、標準模型を越える物理を探索する研究が行われている。
 
 
 
@@ -5246,6 +5294,84 @@ B.~Bakamjian and L.~H.~Thomas,
 Phys. Rev. \textbf{92}, 1300-1310 (1953)
 %doi:10.1103/PhysRev.92.1300
 %408 citations counted in INSPIRE as of 27 Apr 2022
+
+%\cite{Schwinger:1948iu}
+\bibitem{Schwinger:1948iu}
+J.~S.~Schwinger,
+%``On Quantum electrodynamics and the magnetic moment of the electron,''
+Phys. Rev. \textbf{73}, 416-417 (1948)
+doi:10.1103/PhysRev.73.416
+%1248 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Sommerfield:1957zz}
+\bibitem{Sommerfield:1957zz}
+C.~M.~Sommerfield,
+%``Magnetic Dipole Moment of the Electron,''
+Phys. Rev. \textbf{107}, 328-329 (1957)
+doi:10.1103/PhysRev.107.328
+%230 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Petermann:1957hs}
+\bibitem{Petermann:1957hs}
+A.~Petermann,
+%``Fourth order magnetic moment of the electron,''
+Helv. Phys. Acta \textbf{30}, 407-408 (1957)
+doi:10.5169/seals-112823
+%240 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Laporta:1996mq}
+\bibitem{Laporta:1996mq}
+S.~Laporta and E.~Remiddi,
+%``The Analytical value of the electron (g-2) at order alpha**3 in QED,''
+Phys. Lett. B \textbf{379}, 283-291 (1996)
+doi:10.1016/0370-2693(96)00439-X
+[arXiv:hep-ph/9602417 [hep-ph]].
+%529 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Kinoshita:2005zr}
+\bibitem{Kinoshita:2005zr}
+T.~Kinoshita and M.~Nio,
+%``Improved alpha**4 term of the electron anomalous magnetic moment,''
+Phys. Rev. D \textbf{73}, 013003 (2006)
+doi:10.1103/PhysRevD.73.013003
+[arXiv:hep-ph/0507249 [hep-ph]].
+%151 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Aoyama:2012wj}
+\bibitem{Aoyama:2012wj}
+T.~Aoyama, M.~Hayakawa, T.~Kinoshita and M.~Nio,
+%``Tenth-Order QED Contribution to the Electron g-2 and an Improved Value of the Fine Structure Constant,''
+Phys. Rev. Lett. \textbf{109}, 111807 (2012)
+doi:10.1103/PhysRevLett.109.111807
+[arXiv:1205.5368 [hep-ph]].
+%491 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Fan:2022eto}
+\bibitem{Fan:2022eto}
+X.~Fan, T.~G.~Myers, B.~A.~D.~Sukra and G.~Gabrielse,
+%``Measurement of the Electron Magnetic Moment,''
+Phys. Rev. Lett. \textbf{130}, no.7, 071801 (2023)
+doi:10.1103/PhysRevLett.130.071801
+[arXiv:2209.13084 [physics.atom-ph]].
+%353 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Parker:2018vye}
+\bibitem{Parker:2018vye}
+R.~H.~Parker, C.~Yu, W.~Zhong, B.~Estey and H.~M{\"u}ller,
+%``Measurement of the fine-structure constant as a test of the Standard Model,''
+Science \textbf{360}, 191 (2018)
+doi:10.1126/science.aap7706
+[arXiv:1812.04130 [physics.atom-ph]].
+%852 citations counted in INSPIRE as of 15 Mar 2026
+
+%\cite{Morel:2020dww}
+\bibitem{Morel:2020dww}
+L.~Morel, Z.~Yao, P.~Clad{\'e} and S.~Guellati-Kh{\'e}lifa,
+%``Determination of the fine-structure constant with an accuracy of 81 parts per trillion,''
+Nature \textbf{588}, no.7836, 61-65 (2020)
+doi:10.1038/s41586-020-2964-7
+%572 citations counted in INSPIRE as of 15 Mar 2026
+
 
 \end{thebibliography}
 
