@@ -1,0 +1,340 @@
+\section{電磁場中のディラック(Dirac)方程式}\label{sec:dirac eq with Amu}
+電磁場中の電子のふるまいについて、相対論的効果を取り入れて議論できるのが、ディラック方程式の醍醐味のひとつ。何が起きるかみてみよう！
+
+\subsection{ゲージ対称性について復習}
+電磁場をディラック方程式に入れたいが、いったいどうやればいいのか。
+まず、電磁気学がゲージ対称性もつゲージ理論であることを復習し、
+さらに、ゲージ対称性を利用することにより荷電粒子の従う方程式を簡単に導いてみよう。
+
+ゲージ対称性（ゲージ理論）はめちゃくちゃ大事な考え方。
+$\beta$崩壊を引き起こす弱い相互作用はゲージ理論で記述される。
+また、クォークを3つひとまとめにして陽子や中性子を作る強い相互作用もゲージ理論で記述される。
+重力も一種のゲージ理論。\cite{kazama, fukaya}
+
+\subsubsection{古典電磁気学のゲージ対称性}
+電磁気学からゲージ対称性を見出してみよう。
+電磁気学では電場$\vec E$とか磁場$\vec B$の振る舞いが記述される。
+マクスウェル方程式の一部[式(\ref{eq:bianchi})]を満たす解を構成するために、
+電磁場をスカラーポテンシャル$\phi$とかベクトルポテンシャル$\vec A$の微分として書くと色々便利なのであった。
+\begin{align}
+\vec E = -\vec\nabla\phi - \frac{\partial\vec A}{\partial t}, \qquad
+\vec B = \vec \nabla \times \vec A.
+\end{align}
+%
+上の定義からすぐわかるように、任意の関数$\lambda(t,\vec x)$を使い、
+\begin{align}
+\phi \to \phi + \frac{\partial \lambda}{\partial t}, \qquad
+\vec A \to \vec A - \vec \nabla \lambda.
+\end{align}
+という風に$\phi$と$\vec A$を取り替えても、同じ電磁場が得られる。
+異なる$\phi$と$\vec A$が得られたが、電磁場$\vec E$と$\vec B$はあくまで一緒なので、物理が全く同じ状況を記述する方法を複数見つけたことになる。
+物理の記述にある種の冗長性がある。こういうのを、ゲージ対称性がある、と言い、上で定義したような$\phi$と$\vec A$の変換をゲージ変換と呼ぶのだった。
+（なぜわざわざ冗長なやり方で物理を記述するのだろうか？ゲージ場の量子論まで学ぶといろいろ見えてくるが、それはこの講義の範囲を越えるので割愛）
+
+特殊相対論のテンソルの形式で書くと、簡潔にかける。
+ゲージ変換は任意の関数$\lambda(t,\vec x)$に対して、
+\begin{align}
+A_\mu \to A_\mu + \partial_\mu \lambda
+\end{align}
+に対して、
+\begin{align}
+F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu
+\qquad\to \qquad
+\partial_\mu ( A_\nu + \partial_\nu \lambda) - \partial_\nu (A_\mu + \partial_\mu \lambda)
+= \partial_\mu A_\nu - \partial_\nu A_\mu
+= F_{\mu\nu}.
+\end{align}
+ということで、$F_{\mu\nu}$は不変。つまり電磁場は不変。
+
+\subsubsection{電磁場中の古典粒子}
+電磁場中の荷電粒子の運動方程式は次のようなものだった。
+\begin{align}
+m \ddot{\vec x} = e (\vec E + \dot{\vec x} \times \vec B).
+\end{align}
+以下のラグランジアンから運動方程式が得られることを見てみよう。
+\begin{align}
+L = \frac{1}{2}m \dot{\vec x}^2 - e\phi + e \vec A \cdot \dot{\vec x}.
+\end{align}
+オイラーラグランジュ方程式は
+\begin{align}
+\frac{d}{dt}\frac{\partial L}{\partial \dot x_i} &= \frac{\partial L}{\partial x_i}\nonumber\\
+\frac{d}{dt}( m \dot x_i + e A_i ) &=  - e\partial_i \phi + e \dot x_j \partial_i A_j \nonumber\\
+m\ddot x_i + e \dot x_j \partial_j A_i + e \partial_t A_i &= - e\partial_i \phi + e \dot x_j \partial_i A_j \nonumber\\
+m\ddot x_i &= e( -\partial_i \phi - \partial_t A_i) + e \dot x_j (\partial_i A_j - \partial_j A_i).
+\end{align}
+確かに荷電粒子の運動方程式がえられた。
+
+
+さて、ラグランジアンをルジャンドル変換することにより、ハミルトニアンが次のように書けることも分かる。
+\begin{align}
+H = \frac{1}{2m}( \vec p - e \vec A  )^2 + e \phi.
+\end{align}
+%
+どうも、電磁場なしのハミルトニアンに対して、以下の置き換えルールを適用すれば、電磁場中のハミルトニアンが得られるようだ。
+\begin{align}
+\vec p \to \vec p - e \vec A, \qquad
+H \to H - e \phi. \label{eq:classical charged particle}
+\end{align}
+
+\subsubsection{電磁場中の量子力学}
+量子力学では、式(\ref{eq:classical charged particle})を参考にして、
+次のような演算子の「置き換えルール」を採用すると上手く行く。
+\begin{align}
+-i \vec\nabla \to -i \vec\nabla - e \vec A, \qquad
+i \frac{\partial}{\partial t} \to i \frac{\partial}{\partial t} - e \phi.
+\end{align}
+%
+ハミルトニアンは次のようになる。
+\begin{align}
+H
+&= \frac{1}{2m}(i\vec \nabla + e\vec A)^2 + e\phi \nonumber\\
+&= -\frac{1}{2m}(\vec \nabla -i e\vec A)^2 + e\phi \label{eq:hamiltonian NRQM}
+\end{align}
+
+\subsubsection{量子力学とゲージ対称性}
+違う論理を使って、式(\ref{eq:hamiltonian NRQM})のハミルトニアンにたどり着くこともできる。
+波動関数$\psi$の位相を回転されるような
+\begin{align}
+\psi \to e^{-ie\lambda} \psi
+\end{align}
+変換に対して対称性があることを要求してみよう。
+そうすると、スカラーポテンシャルとベクトルポテンシャルを導入して、それらが変換のもとで以下のように振る舞うことが要求される。
+\begin{align}
+\phi \to \phi + \frac{\partial\lambda}{\partial t}, \qquad
+\vec A \to \vec A - \vec\nabla \lambda.
+\end{align}
+この考え方はとても便利。これはゲージ対称性を原理として話を始めていることになる。
+マックスウェル方程式とも良く馴染むし、むしろこうやって議論する方が自然。
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{電磁場中のディラック(Dirac)方程式と$g$因子}
+さて、前の章で、
+\begin{align}
+\psi(x) \to e^{-ie\lambda(x) }\psi(x)
+\end{align}
+というゲージ変換に対する共変性を要求すれば、必然的にスカラーポテンシャルとベクトル・ポテンシャルを導入することになり、電磁場との相互作用が入ることが分かった。
+この手続きにより、ディラック方程式に電磁場を導入してみよう。
+具体的な手続きとしては、以下のような微分演算子の置き換えを行えばいい。
+\begin{align}
+%\partial_\mu \to \partial_\mu - ieA_\mu.
+i\partial^\mu \to i\partial^\mu - eA^\mu.
+\end{align}
+結果として、電磁場中のディラック方程式は次のようになる。
+
+\begin{itembox}[l]{電磁場中のディラック方程式}
+\begin{align}
+(i\gamma_\mu \partial^\mu - e \gamma_\mu A^\mu - m)\psi = 0. \label{eq:dirac eq with Amu}
+\end{align}
+\end{itembox}
+式(\ref{eq:dirac eq with Amu})は、次のような変換に対して共変。
+\begin{align}
+\psi(x) \to e^{-ie\lambda(x)}\psi(x), \qquad
+A_{\mu}(x) \to A_{\mu} + \partial_\mu \lambda(x).
+\end{align}
+
+%\subsubsection{非相対論的極限と磁気双極子モーメント}
+非相対論的極限（$v \ll c$）での電磁場との相互作用を計算してみよう。
+ディラックスピノルの上2成分を$\psi_+$、下2成分を$\psi_-$と名付けてみる。
+つまり、次のように分解する。
+\begin{align}
+\psi = \left(\begin{array}{c}
+\psi_+ \\
+\psi_-
+\end{array}\right)
+\end{align}
+ガンマ行列は次のように書けた。
+\begin{align}
+\gamma^0 = \left(\begin{array}{cc}
+1 & 0 \\
+0 &-1 
+\end{array}\right), \qquad
+\gamma^i = \left(\begin{array}{cc}
+0 & \sigma_i \\
+-\sigma_i & 0
+\end{array}\right).
+\end{align}
+%
+ディラック方程式を$\psi_+$と$\psi_-$で書くと、
+\begin{align}
+\left(
+\begin{array}{cc}
+ i\partial_t - e \phi - m                   & (i\vec\nabla + e \vec A ) \cdot \vec\sigma\\
+-(i\vec\nabla + e \vec A ) \cdot \vec\sigma & -i\partial_t + e \phi - m
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\psi_+ \\
+\psi_-
+\end{array}
+\right)
+= 0.
+\end{align}
+%
+式を整理するために次のような$\tilde \psi_+$と$\tilde\psi_-$を定義してみよう。
+\begin{align}
+\tilde\psi_+ = e^{imt} \psi_+, \qquad
+\tilde\psi_- = e^{imt} \psi_-.
+\end{align}
+%
+ディラック方程式を$\tilde\psi_+$と$\tilde\psi_-$で書くと、
+\begin{align}
+\left(
+\begin{array}{cc}
+ i\partial_t - e \phi                       & (i\vec\nabla + e \vec A ) \cdot \vec\sigma\\
+-(i\vec\nabla + e \vec A ) \cdot \vec\sigma & -i\partial_t + e \phi - 2m
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\tilde\psi_+ \\
+\tilde\psi_-
+\end{array}
+\right)
+= 0.
+\label{eq:eq:dirac eq with Amu matrix}
+\end{align}
+%
+非相対論的な極限、つまり電子の運動エネルギーが静止エネルギーに比べて小さい極限を考えてみよう。
+$|m\tilde\psi_-| \gg |( i\partial_t - e \phi) \tilde\psi_-|$に違いない。ということは、
+\begin{align}
+(  i \vec\nabla + e\vec A) \cdot \vec\sigma \tilde\psi_+ + 2m \tilde\psi_- &\simeq 0.
+\end{align}
+
+%
+これを式(\ref{eq:eq:dirac eq with Amu matrix})の一行目に代入すると、
+%これを式(\ref{eq:dirac eq with Amu 1b})に代入すると、
+\begin{align}
+(i\partial_t - e \phi) \tilde\psi_+ + ( i \vec\nabla + e\vec A) \cdot \vec\sigma \left[
+-\frac{1}{2m} (  i \vec\nabla + e\vec A) \cdot \vec\sigma \tilde\psi_+
+ \right] &= 0.
+\end{align}
+%
+左辺の第二項がゴチャゴチャしている。ちょっと整理してみよう。
+特にこの関係式を使う。
+%\begin{align}
+%\sigma_i \sigma_j \times ( -i\partial_i + eA_i  )( i\partial_j - eA_j )
+%&=
+%(\delta_{ij} + i\epsilon_{ijk}\sigma_k) \times ( -i\partial_i + eA_i  )( i\partial_j - eA_j ) \nonumber\\
+%&=
+%(\vec \nabla + i e \vec A)^2 + i\epsilon_{ijk} \partial_k (ieA_i \partial_j + ie \partial_i A_j ) \nonumber\\
+%&=
+%(\vec \nabla + i e \vec A)^2 - e\epsilon_{ijk} \sigma_k (\partial_i A_j )
+%\end{align}
+\begin{align}
+\sigma_i \sigma_j \times ( i\partial_i + eA_i  )( i\partial_j + eA_j )
+&=
+(\delta_{ij} + i\epsilon_{ijk}\sigma_k) \times ( i\partial_i + eA_i  )( i\partial_j + eA_j ) \nonumber\\
+&=
+-(\vec \nabla - i e \vec A)^2 + i\epsilon_{ijk} \sigma_k (ieA_i \partial_j + ie \partial_i A_j ) \nonumber\\
+&=
+-(\vec \nabla - i e \vec A)^2 - e\epsilon_{ijk} \sigma_k (\partial_i A_j )
+\end{align}
+%
+結局まとめると、
+\begin{align}
+i\frac{\partial\tilde\psi_+}{\partial t}
+=
+-\frac{1}{2m} (\vec \nabla - i e \vec A )^2 \tilde\psi_+
+- \frac{e}{2m} \vec\sigma \cdot (\vec \nabla \times \vec A)\tilde\psi_+
++ e\phi \tilde\psi_+.
+\end{align}
+電荷を持った粒子のシュレーディンガー方程式と比較してみよう。右辺第一項と第三項と同じものは式(\ref{eq:hamiltonian NRQM})のハミルトニアンにある。
+新しいのは右辺第二項の$\sigma \cdot (\nabla \times A)$を含む項。
+
+今、$\tilde\psi_+$はディラックスピノルの上二成分を取り出したもの。
+\ref{sec:spin}章の議論を思い出そう。一番上の成分は角運動量（つまりスピン）が$J_z = + 1/2$の成分、二番目の成分は$J_z = -1/2$の成分であった。なので、このパウリ行列$\vec\sigma$はスピン演算子$\vec s$を用いて、$\vec\sigma = 2\vec s$と読み替えてよい。
+$\vec \nabla \times \vec A$は磁場。結局、以下のようなハミルトニアンが得られたことになる。
+\begin{align}
+H = \frac{1}{2 m}( \vec p - e \vec A)^2 - \frac{e}{m} \vec s \cdot \vec B + e \phi
+\end{align}
+面白いのは右辺の第2項。磁場とスピンの相互作用項が生まれている！
+
+磁場とスピンの相互作用項は$g$因子というパラメーターを使って、
+\begin{align}
+H = -\frac{ge}{2m} \vec s \cdot \vec B.
+\end{align}
+と書かれることが多い。
+ディラック方程式を使うと$g=2$が得られたことになる。
+% 2022.6.7ここまで
+
+\subsection{$g$因子の測定値と比較してみよう}
+ディラック方程式によると、ディラックスピノルで記述される荷電粒子の$g$因子は$2$になるはず。この計算はどれくらい上手くいっているのだろう？
+Particle Data Group\footnote{\url{https://pdglive.lbl.gov/Particle.action?node=S003&init=0}}などを見ると、実験で測定された様々な粒子の$g$因子の値が分かる。
+
+\subsubsection{電子とミュー粒子}
+例えば、電子の$g$因子は次のような値。
+\begin{align}
+g_e &= 2.00231930436182 \pm 
+      0.00000000000052
+\end{align}
+また、ミュー粒子と呼ばれる電荷$-1$の質量が約106 MeVの粒子\footnote{電子とミュー粒子はそれぞれレプトンと呼ばれるカテゴリーに属する素粒子である。他のレプトンの例は、タウ粒子やニュートリノである。}についても$g$因子を見てみよう。
+\begin{align}
+g_\mu &= 2.0023318412 \pm 
+        0.0000000004.
+\end{align}
+それぞれ0.1~\%くらいの精度で$g$因子は2とみなせる。どうやらだいたい上手くいっているようだ。
+
+しかし、これで満足していいのか？
+電子の$g$因子は$10^{-13}$程度の精度で測られていて、ミュー粒子の$g$因子は$10^{-10}$程度の精度で測られていて、あらゆる自然科学の中でも屈指の精密測定。$g$の2からのずれは$0.002$程度であるものの、実験精度がそれより何桁も小さいので、$g-2$が0でないことは確立している。どう解釈したらいいだろう？ディラック方程式が上手くいっていない？
+
+
+このズレは異常磁気モーメントと呼ばれていて、ディラック方程式の限界を示していると見ることもできる。
+ディラック方程式で$g$因子を計算するときには、電磁場を外場とみなしていた。（つまり、電磁場がディラックスピノルで記述される粒子の影響を受けないと思って計算している。）
+でももちろんこれは近似にすぎない。電磁場はもちろん荷電粒子の影響を受ける。その影響を量子論的に記述する必要がある。電磁場も量子化しなくてはいけない。ちゃんと計算するには、場の量子論が必要。（例えばPeskin-Schroederの教科書の6.3章など）
+
+詳細は場の量子論の教科書にゆずるが、場の量子論（正確には量子電磁気学、QED, quantum electrodynamics）を使うと、
+摂動計算を使うことにより、異常磁気モーメントが微細構造定数$\alpha = e^2/4\pi$の級数として展開して書ける。特に、$\alpha$の一次の項が一番主要な項で、
+\begin{align}
+\frac{g-2}{2} = \frac{\alpha}{2\pi}
+\end{align}
+と書ける。これを計算したのが、シュウィンガー(Schwinger)\cite{Schwinger:1948iu}\footnote{
+シュヴィンガー(Julian Schwinger)の墓にはこの公式が刻んである。"Schwinger gravestone"で画像検索してみよう
+\url{https://www.google.com/search?q=schwinger+gravestone&tbm=isch}}。
+$\alpha \approx 1/137$とすると、数値的に上手くいってるのが分かると思います。
+\footnote{
+ちなみに、電子の異常磁気モーメントは量子電磁力学の検証にとって非常に重要。
+さらに、ミュー粒子の磁気双極子モーメントは素粒子現象論のホットトピックの一つ\cite{muong-2}。
+以下のようなページを参照のこと。\\
+\url{http://comet.phys.sci.osaka-u.ac.jp/research/r000.html}\\
+\url{https://g-2.kek.jp/portal/index.html}\\}
+
+\subsubsection{陽子}
+陽子の磁気双極子モーメントはもっとずれている！最新の測定値はこんな感じ。
+\begin{align}
+\frac{\mu_p}{e\hbar/2m_p} = 2.79284734463 \pm 0.00000000082
+\end{align}
+ちなみに、1933年に陽子の磁気双極子モーメントをはじめて測定したシュテルン(Stern)は1943年にこの業績でノーベル賞を貰っている。\footnote{
+\url{https://link.springer.com/article/10.1007/BF01330773}\\
+\url{https://link.springer.com/article/10.1007/BF01330774}\\
+\url{https://www.nobelprize.org/prizes/physics/1943/summary/}
+}
+SternがPauliにディスられたエピソードが『スピンはめぐる』に載っていて興味深い。
+\begin{quote}
+『さっき，シュテルンたちが陽子の磁気能率を測定した話をしましたね．
+ところがそのころ或る日，パウリがシュテルンの研究室を訪ねたことがあったそうです．
+そのときパウリはシュテルンに向かって，いまどんなことをやっているか，と聞いたそうです．
+そこでシュテルンは，いま陽子の磁気能率をはかっている，と答えました．
+そしたらパウリ曰く，いまごろそんなことやったって意味ないじゃないか，あんたはディラックの理論を知らんのか，
+ディラック方程式からそれは$\displaystyle\frac{e\hbar}{2m_p}$になるにきまっている，と．』
+（「スピンはめぐる」より一部抜粋）
+\end{quote}
+
+\subsection{ディラック方程式の限界}
+これまで相対論的に量子力学を記述しようとしてディラック方程式を調べてきた。
+ディラック方程式は色々上手く行く点もあるが、同時に限界も見えてきた。
+まず、そもそも、スピン$1/2$は相対論＋量子力学の必然ではありえない。スピン$0$\footnote{Pauli \& Weisskopf
+\url{https://link.springer.com/chapter/10.1007/978-3-322-90270-2_36}
+\url{https://inspirehep.net/literature/25368}}
+とか$1$の粒子いるし。
+さらに、相対論では静止質量もエネルギーに過ぎないので、それを運動エネルギーなどに転換できる。原子核反応における質量欠損はその例となっているが、$\mu^- \to e^- \bar \nu_e \nu_\mu$などの重い素粒子が複数の軽い素粒子に崩壊することもできるようになっている。こういった粒子数が変わる反応は、あきらかにディラック方程式では扱えない。さらに、前の章で見たように$g$因子の2からのズレが説明できない。
+ということでディラック方程式に対する不満のまとめ。
+\begin{itemize}
+\item スピン1/2以外の粒子も扱える必要がある。
+\item 粒子数が変わる反応を扱えるようになるために、多粒子系を扱える枠組みが必要。
+\item $g$因子を測定したら$2$からズレている。
+\end{itemize}
+上記の不満を解決しつつ相対論的な量子力学をつくるには場の量子論を導入しなければならない。
+残りの章で、場の量子論の初歩的なことを学んでいく。
